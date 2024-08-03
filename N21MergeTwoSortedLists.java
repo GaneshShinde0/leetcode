@@ -14,6 +14,7 @@ class N21MergeTwoSortedLists {
         ListNode head= currNode;
         while(head1!=null&&head2!=null){
             if(head1.val<head2.val){
+                //We are creating new Node because incase head1's next value is not null there will be issues and new nodes next value will always be null
                 currNode.next=new ListNode(head1.val);
                 head1=head1.next;
             }else{
