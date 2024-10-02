@@ -1,0 +1,39 @@
+class Solution {
+    public int[] countPointsInitialSolution(int[][] points, int[][] queries) {
+        int[] count =new int[queries.length];
+        for(int i=0;i<queries.length;i++){
+            for(int[] point:points){
+                if(distance(point[0],point[1],queries[i][0],queries[i][1])<=queries[i][2]){
+                    count[i]++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public double distance(int x1, int y1, int x2, int y2){
+        return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+    }
+    // Optimized
+    public int[] countPoints(int[][] points, int[][] queries) {
+        int[] count = new int[queries.length];
+        
+        for (int i = 0; i < queries.length; i++) {
+            int x_center = queries[i][0];
+            int y_center = queries[i][1];
+            int radiusSquared = queries[i][2] * queries[i][2];  // Precompute radius^2
+            
+            for (int[] point : points) {
+                int x = point[0];
+                int y = point[1];
+                
+                // Calculate squared distance and compare it to the squared radius
+                if ((x - x_center) * (x - x_center) + (y - y_center) * (y - y_center) <= radiusSquared) {
+                    count[i]++;
+                }
+            }
+        }
+        
+        return count;
+    }
+}
