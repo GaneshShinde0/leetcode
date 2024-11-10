@@ -18,16 +18,28 @@ class Solution {
 
     private int dfs(int[][] grid, int i, int j,int area){
         grid[i][j]=0;
-        area = 1;
         for(int[] dir:directions){
             int newRow= dir[0]+i;
             int newCol = dir[1]+j;
             if(newRow>=0 && newCol>=0 && newRow<grid.length &&newCol<grid[0].length && grid[newRow][newCol]==1){
-                area = area+dfs(grid,newRow,newCol,area);
-                // System.out.println("I: "+i+", J: "+j+", Area: "+area);
+                area += dfs(grid, newRow, newCol, 1);
             }
         }
-        // System.out.println("Area: "+area);
+        return area;
+    }
+
+    private int dfsAlternate(int[][] grid, int i, int j) {
+        grid[i][j] = 0;
+        int area = 1;  
+        
+        for (int[] dir : directions) {
+            int newRow = i + dir[0];
+            int newCol = j + dir[1];
+            if (newRow >= 0 && newCol >= 0 && newRow < grid.length && newCol < grid[0].length && grid[newRow][newCol] == 1) {
+                area += dfsAlternate(grid, newRow, newCol); 
+            }
+        }
+        
         return area;
     }
 }
