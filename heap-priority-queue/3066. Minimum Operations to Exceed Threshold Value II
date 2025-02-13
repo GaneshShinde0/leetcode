@@ -1,0 +1,17 @@
+class Solution {
+
+    public int minOperations(int[] nums, int k) {
+        PriorityQueue<Long> minHeap = new PriorityQueue<Long>();
+        for(int i:nums) minHeap.add((long)i);
+        int numOperations = 0;
+
+        while (minHeap.peek() < k) {
+            long x = minHeap.remove();
+            long y = minHeap.remove();
+            minHeap.add(Math.min(x, y) * 2 + Math.max(x, y));
+
+            numOperations++;
+        }
+        return numOperations;
+    }
+}
