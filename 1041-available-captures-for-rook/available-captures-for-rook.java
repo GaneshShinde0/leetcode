@@ -14,7 +14,7 @@ class Solution {
             }
             if(flag) break;
         }
-        System.out.println("i: "+i+",j: "+j);
+        // System.out.println("i: "+i+",j: "+j);
         int res = 0;
         for(int x=i-1;x>=0;x--){
             if(board[x][j]=='.') continue;
