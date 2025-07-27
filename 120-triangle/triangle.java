@@ -6,7 +6,7 @@ class Solution {
                 Integer temp = Math.min(li.get(j),li.get(j+1))+triangle.get(i-1).get(j);
                 triangle.get(i-1).set(j,temp);
             }
-            System.out.println(triangle.get(i));
+            // System.out.println(triangle.get(i));
         }
         return (int) triangle.get(0).get(0);
     }
