@@ -13,8 +13,8 @@ class Solution {
         // System.out.println(set);
         return set.size();
     }
-
-    public int subarrayBitwiseORs(int[] arr) {
+    // Following is also slow
+    public int subarrayBitwiseORsOne(int[] arr) {
         Set<Integer> ans = new HashSet<>();
         Set<Integer> cur = new HashSet<>();
         cur.add(0);
@@ -27,6 +27,23 @@ class Solution {
             cur = cur2;
             ans.addAll(cur);
         }
+        return ans.size();
+    }
+
+    public int subarrayBitwiseORs(int[] arr) {
+        Set<Integer> ans = new HashSet<>();
+        Set<Integer> curr = new HashSet<>();
+
+        for (int x : arr) {
+            Set<Integer> next = new HashSet<>();
+            next.add(x);
+            for (int y : curr) {
+                next.add(x | y);
+            }
+            curr = next;
+            ans.addAll(curr);
+        }
+
         return ans.size();
     }
 }
