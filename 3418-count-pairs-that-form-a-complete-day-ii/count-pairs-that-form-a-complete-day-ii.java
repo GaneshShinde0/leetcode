@@ -4,7 +4,7 @@ class Solution {
         for(int i: hours){
             hoursInDay[i%24]++;
         }
-        System.out.println(Arrays.toString(hoursInDay));
+        // System.out.println(Arrays.toString(hoursInDay));
         long res = hoursInDay[0]*(hoursInDay[0]-1)/2;
         res += hoursInDay[12]*(hoursInDay[12]-1)/2;
         // System.out.println(res);
