@@ -26,7 +26,7 @@ class Solution {
             freq.put(b2, freq.getOrDefault(b2,0)-1);
             m = Math.min(b2,m);
         }
-        System.out.println(freq);
+        // System.out.println(freq);
 
         List<Integer> merge = new ArrayList<>();
         // Add all the elements in the list which are multiple of two
@@ -39,7 +39,7 @@ class Solution {
         }
 
         Collections.sort(merge);
-        System.out.println(merge);
+        // System.out.println(merge);
         long res = 0;
         // We can sort anything with anything ... Meaning there can be 
         // Multiple entries of same freq in both baskets.
