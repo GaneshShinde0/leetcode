@@ -5,7 +5,7 @@ class Solution {
         for(char c:s.toCharArray()){
             freq[c-'a']++;
         }
-        Arrays.sort(freq);
+        // Arrays.sort(freq);
         Set<Integer> set = new HashSet<>();
         for(int i:freq){
             int temp =i;
