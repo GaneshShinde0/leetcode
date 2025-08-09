@@ -22,6 +22,8 @@ class Solution {
                 b+=freqG[i]-freqSet[i];
             }
         }
-        return a+"A"+b+"B";
+        StringBuilder sb = new StringBuilder();
+        sb.append(a).append("A").append(b).append("B");
+        return sb.toString();
     }
 }
