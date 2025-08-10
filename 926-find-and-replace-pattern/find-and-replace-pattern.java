@@ -33,7 +33,7 @@ class Solution {
             }
             pat.append(hm.get(pattern.charAt(i)));
         }
-        System.out.println(pat.toString());
+        // System.out.println(pat.toString());
 
         for(String s: words){
             StringBuilder sb = new StringBuilder();
@@ -46,7 +46,7 @@ class Solution {
                 }
                 sb.append(hm.get(s.charAt(i)));
             }
-            System.out.println(hm);
+            // System.out.println(hm);
             if(sb.toString().equals(pat.toString())) li.add(s);
         }
         int[] src = new int[26];
