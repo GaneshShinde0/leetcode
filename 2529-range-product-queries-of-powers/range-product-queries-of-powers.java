@@ -17,7 +17,7 @@ class Solution {
                     temp[i][j]= (temp[i][j]*li.get(k))%MOD;
                 }
             }
-            System.out.println(Arrays.toString(temp[i]));
+            // System.out.println(Arrays.toString(temp[i]));
         }
 
         int[] res = new int[queries.length];
