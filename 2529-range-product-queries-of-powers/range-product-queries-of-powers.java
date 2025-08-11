@@ -28,34 +28,34 @@ class Solution {
     }
 
     public int[] productQueries(int n, int[][] queries) {
+        // Count the number of set bits to define array size
         int count = Integer.bitCount(n);
         long[] arr = new long[count];
-        long curr = 1;
-        int index = 0;
 
+        long curr = 1;
+        int idx = 0;
         while (n > 0) {
-            if ((n & 1) == 1) {
-                arr[index++] = curr;
+            if (n % 2 == 1) {
+                arr[idx++] = curr;
             }
             curr *= 2;
-            n >>= 1;
+            n /= 2;
         }
 
         int size = arr.length;
         long[][] temp = new long[size][size];
-        
         for (int i = 0; i < size; i++) {
-            temp[i][i] = arr[i] % MOD; // Initialize diagonal
-            for (int j = i + 1; j < size; j++) {
-                temp[i][j] = (temp[i][j - 1] * arr[j]) % MOD;
+            for (int j = 0; j < size; j++) {
+                temp[i][j] = 1;
+                for (int k = i; k <= j; k++) {
+                    temp[i][j] = (temp[i][j] * arr[k]) % MOD;
+                }
             }
         }
 
         int[] res = new int[queries.length];
         for (int i = 0; i < queries.length; i++) {
-            int l = queries[i][0];
-            int r = queries[i][1];
-            res[i] = (int)(temp[l][r] % MOD);
+            res[i] = (int) temp[queries[i][0]][queries[i][1]] % MOD;
         }
 
         return res;
