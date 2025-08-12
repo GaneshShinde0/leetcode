@@ -31,9 +31,10 @@ class Solution {
         long[] dp = new long[n+1];
         dp[0] = 1;
         for (int i = 1; Math.pow(i,x) <= n; i++) {
-            int num = (int)Math.pow(i,x);
+            int num = (int)Math.pow(i,x); // We have calculated one part... With next for loop we are searching for other part.
             for (int s = n; s >= num; s--) {
                 dp[s] += dp[s - num];
+                // System.out.println(Arrays.toString(dp));
             }
         }
         return (int) (dp[n] % 1_000_000_007);
