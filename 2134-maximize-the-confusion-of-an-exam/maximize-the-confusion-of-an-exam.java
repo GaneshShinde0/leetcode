@@ -18,6 +18,8 @@ class Solution {
                 }
                 l+=1;
             }
+
+            // We are Never reducing R; We are just cheking how many lefts can be incremented.
             res = Math.max(res, r-l+1);
         }
         return res;
