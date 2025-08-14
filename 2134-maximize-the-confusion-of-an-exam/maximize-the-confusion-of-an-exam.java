@@ -10,6 +10,10 @@ class Solution {
             }else{
                 falseCnt++;
             }
+            // Check If number of trues and false are greater than K.
+            // If less than K then simply res will be r-l+1;
+            // But as number of trues and falses are greater than K then we are checking for a shorter window. 
+            // At Every Single Index
             while(trueCnt>k&&falseCnt>k){
                 if(answerKey.charAt(l)=='T'){
                     trueCnt -= 1;
