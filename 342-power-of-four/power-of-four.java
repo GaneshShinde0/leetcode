@@ -1,5 +1,5 @@
 class Solution {
-    public boolean isPowerOfFour(int n) {
+    public boolean isPowerOfFourWithLoop(int n) {
         if(n==1) return true;
         if(n<=0) return false;
         long t= Math.abs(n);
@@ -9,4 +9,12 @@ class Solution {
         }
         return true;
     }
+
+
+    public boolean isPowerOfFour(int n) {
+        if(n<1) return false;
+        String s = Integer.toBinaryString(n);
+        return s.charAt(0)=='1'&&Integer.bitCount(n)==1&&s.length()%2==1;
+    }
+
 }
