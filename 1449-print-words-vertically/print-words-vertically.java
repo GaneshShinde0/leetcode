@@ -15,16 +15,17 @@ class Solution {
                     sb.append(arr[j].charAt(i));
                 }
             }
-            res.add(rtrim(sb.toString()));
+            res.add(rtrim(sb));
         }
         return res;
     }
 
-    private String rtrim(String s) {
-        int i = s.length()-1;
-        while (i >= 0 && Character.isWhitespace(s.charAt(i))) {
-            i--;
+    private String rtrim(StringBuilder sb) {
+        int end = sb.length();
+        while(end > 0 && sb.charAt(end - 1) == ' '){
+            end--;
         }
-        return s.substring(0,i+1);
+        
+        return sb.substring(0,end);
     }
 }
