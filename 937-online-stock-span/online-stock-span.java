@@ -1,7 +1,7 @@
-class StockSpanner {
+class StockSpannerNaive {
     List<Integer> li;
     int i;
-    public StockSpanner() {
+    public StockSpannerNaive() {
         li = new ArrayList<>();
         i=0;
     }
@@ -15,6 +15,43 @@ class StockSpanner {
             }else break;
         }
         return res;
+    }
+}
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner obj = new StockSpanner();
+ * int param_1 = obj.next(price);
+ */
+
+
+class Node{
+    int price;
+    int span;
+    Node next;
+    Node(int price, int span){
+        this.price = price;
+        this.span = span;
+        this.next = null;
+    }
+}
+class StockSpanner {
+    Node top;
+    public StockSpanner() {
+        top = null;
+    }
+    
+    public int next(int price) {
+        Node node;
+        int span = 1;
+        while(top!=null&&top.price<=price){
+            span+=top.span;
+            top=top.next;
+        }
+        node = new Node(price,span);
+        node.next = top;
+        top = node;
+        return top.span;
     }
 }
 
