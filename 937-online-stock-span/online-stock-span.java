@@ -1,10 +1,8 @@
 class StockSpanner {
     List<Integer> li;
-    Stack<Integer> stk;
     int i;
     public StockSpanner() {
         li = new ArrayList<>();
-        stk = new Stack<>();
         i=0;
     }
     
