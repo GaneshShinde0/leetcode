@@ -1,5 +1,5 @@
 class Solution {
-    public int myAtoiWrongOne(String s) {
+    public int myAtoiWrongOne_Initial(String s) {
         s=s.trim();
         if((s.contains("-")&&s.contains("+"))||s.length()==0) return 0;
         boolean isNegative=false;
@@ -74,5 +74,36 @@ class Solution {
         if (isNegative) return -1*Integer.parseInt(res);
         
         return Integer.parseInt(res);
+    }
+
+    public int myAtoiLC(String s) {
+        int i = 0;
+        int sign = 1;
+        int n = s.length();
+        while (i < n && s.charAt(i) == ' ') {
+            i++;
+        }
+        if (i < n && s.charAt(i) == '+') {
+            sign = 1;
+            i++;
+        } else if (i < n && s.charAt(i) == '-') {
+            sign = -1;
+            i++;
+        }
+
+        double ans = 0;
+        while (i < n && Character.isDigit(s.charAt(i))) {
+            double digit = s.charAt(i) - '0';
+            ans = ans * 10 + digit;
+            if (ans * sign <= Integer.MIN_VALUE) {
+                return Integer.MIN_VALUE;
+            }
+            if (ans * sign >= Integer.MAX_VALUE) {
+                return Integer.MAX_VALUE;
+            }
+            i++;
+        }
+        return (int) ans * sign;
+
     }
 }
