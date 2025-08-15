@@ -12,7 +12,7 @@ class Solution {
         }
         return cnt;
     }
-
+    // This DFS will visit all the rows and columns for particullar index.
     public void dfs(int[][] isConnected, int[] vis, int n, int u){
         vis[u]=1;
         for(int v=0;v<n;v++){
