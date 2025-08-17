@@ -1,5 +1,7 @@
 class Solution {
-    public int xorAfterQueries1(int[] nums, int[][] queries) {
+    private static final int MOD = 1000000007;
+    // Mine
+    public int xorAfterQueries(int[] nums, int[][] queries) {
         for(int[] query:queries){
             int idx = query[0];
             int r = query[1];
@@ -15,10 +17,8 @@ class Solution {
         }
         return res;
     }
-
-    private static final int MOD = 1_000_000_007;
-
-    public int xorAfterQueries(int[] nums, int[][] queries) {
+    // GPT
+    public int xorAfterQueriesGPT(int[] nums, int[][] queries) {
         int n = nums.length;
         // Step 1: For each index, track all multipliers
         List<List<Integer>> multipliers = new ArrayList<>(n);
