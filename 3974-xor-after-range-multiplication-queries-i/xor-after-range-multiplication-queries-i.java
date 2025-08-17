@@ -4,8 +4,10 @@ class Solution {
         for(int[] query:queries){
             int idx = query[0];
             int r = query[1];
-            for(int i=idx;i<=r;i+=query[2]){
-                nums[i]=(int) ((1l*nums[i]*query[3])%MOD);
+            int k =query[2];
+            int v = query[3];
+            for(int i=idx;i<=r;i+=k){
+                nums[i]=(int) ((1l*nums[i]*v)%MOD);
             }
         }
         int res =0;
