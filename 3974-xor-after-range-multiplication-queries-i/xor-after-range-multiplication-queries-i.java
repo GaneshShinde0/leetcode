@@ -5,8 +5,7 @@ class Solution {
             int idx = query[0];
             int r = query[1];
             for(int i=idx;i<=r;i+=query[2]){
-                long l =(1l*nums[i]*query[3])%MOD; 
-                nums[i]=(int) l;
+                nums[i]=(int) ((1l*nums[i]*query[3])%MOD);
             }
         }
         int res =0;
