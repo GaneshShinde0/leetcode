@@ -13,7 +13,7 @@ class Solution {
         }
         li.add(curr);
         long res =0;
-        System.out.println(li);
+        // System.out.println(li);
         for(Long i:li){
             res+=((i*(i+1))/2);
         }
