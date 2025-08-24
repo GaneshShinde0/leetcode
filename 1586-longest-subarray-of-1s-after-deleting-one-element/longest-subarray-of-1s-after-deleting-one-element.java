@@ -30,7 +30,7 @@ class Solution {
             if(li.get(0).get(0)==1) return li.get(0).get(1);
             else return li.get(1).get(1);
         }
-        System.out.println(li);
+        // System.out.println(li);
         return res;
     }
 }
