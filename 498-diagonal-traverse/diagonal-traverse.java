@@ -13,11 +13,11 @@ class Solution {
 
             // We need to figure out the head of this diagonal, the element in the first row and the last column 
             // Are the respective heads.
-
             int r = d<n?0:d-n+1;
             int c = d<n?d:n-1;
 
             // Iterate until one of the indices goes out of scope, take note of the index amth to go down the diagnonal.
+            // We are doing following thing [i+1,j−1]
             while(r<m&&c>-1){
                 temp.add(mat[r][c]);
                 ++r;
