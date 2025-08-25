@@ -13,6 +13,7 @@ class Solution {
 
             // We need to figure out the head of this diagonal, the element in the first row and the last column 
             // Are the respective heads.
+            // Basically we are considering first (n*n) mtrix, and then the remaining matrix;
             int r = d<n?0:d-n+1;
             int c = d<n?d:n-1;
 
