@@ -1,5 +1,30 @@
 class Solution {
-    public int[] findDiagonalOrder(int[][] matrix) {
+
+    public int[] findDiagonalOrder(int[][] mat) {
+        if(mat==null||mat.length==0) return new int[0];
+        int m=mat.length;
+        int n = mat[0].length;
+        int[] res = new int[m*n];
+        int r=0,c=0,k=0;
+        List<Integer> temp = new ArrayList<>();
+        for(int i=0;i<m+n-1;i++){
+            temp.clear();
+            r = i<n?0:i-n+1;
+            c = i<n?i:n-1;
+            while(r<m&&c>-1){
+                temp.add(mat[r][c]);
+                ++r;
+                --c;
+            }
+            if(i%2==0) Collections.reverse(temp);
+            for(int j=0;j<temp.size();j++){
+                res[k++]=temp.get(j);
+            }
+        }
+        return res;
+    }
+
+    public int[] findDiagonalOrder2(int[][] matrix) {
         
         // Check for empty matrices
         if (matrix == null || matrix.length == 0) {
