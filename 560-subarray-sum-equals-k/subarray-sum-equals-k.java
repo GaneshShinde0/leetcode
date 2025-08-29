@@ -17,17 +17,20 @@ class Solution {
         return res;
     }
 
-    public int subarraySum(int[] nums, int k){
-        HashMap<Integer, Integer> subNum = new HashMap<>();
-        subNum.put(0,1);
-        int total = 0, count =0;
+
+    public int subarraySum(int[] nums, int k) {
+        int total = 0;
+        int res = 0;
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        hm.put(0,1);
         for(int n:nums){
             total+=n;
-            if(subNum.containsKey(total-k)){
-                count+=subNum.get(total-k);
+            if(hm.containsKey(total-k)){
+                res+=hm.get(total-k);
             }
-            subNum.put(total,subNum.getOrDefault(total,0)+1);
+            hm.put(total,hm.getOrDefault(total,0)+1);
         }
-        return count;
+        return res;
     }
+
 }
