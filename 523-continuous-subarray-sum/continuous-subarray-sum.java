@@ -26,7 +26,7 @@ class Solution {
             if(hm.containsKey((k-currSum%k)%k) && (i-hm.get((k-currSum%k)%k)>1)) return true;
             hm.putIfAbsent((k-currSum%k)%k,i);
         }
-        System.out.println(hm);
+        // System.out.println(hm);
         return false;
     }
 }
