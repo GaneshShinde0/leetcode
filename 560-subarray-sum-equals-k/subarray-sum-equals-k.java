@@ -21,14 +21,14 @@ class Solution {
     public int subarraySum(int[] nums, int k) {
         int total = 0;
         int res = 0;
-        HashMap<Integer,Integer> hm = new HashMap<>();
+        HashMap<Integer, Integer> hm = new HashMap<>();
         hm.put(0,1);
         for(int n:nums){
             total+=n;
             if(hm.containsKey(total-k)){
                 res+=hm.get(total-k);
             }
-            hm.put(total,hm.getOrDefault(total,0)+1);
+            hm.put(total, hm.getOrDefault(total,0)+1);
         }
         return res;
     }
