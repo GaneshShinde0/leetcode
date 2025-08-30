@@ -17,7 +17,6 @@ class Solution {
                 res.get(temp).add(s);
             }
         }
-        System.out.println(hm);
         return res;
     }
 }
