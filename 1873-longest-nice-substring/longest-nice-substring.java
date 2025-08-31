@@ -37,12 +37,12 @@ class Solution {
                     isUpperPresent = (c >= 'a' && c <= 'z')&& (sub.indexOf(c-DIFF_IN_ASCII_VALUE)!=-1); 
                     isLowerPresent = (c >= 'A' && c <= 'Z')&& (sub.indexOf(c+DIFF_IN_ASCII_VALUE)!=-1);
                     temp = temp && (isUpperPresent||isLowerPresent);
-                    if(i==3)System.out.println("Current SubString: "+res+", Res Length: "+ res.length()+", Current SubString: "+s.substring(i,j+1)+" : Is Upper Present: "+isUpperPresent+", Is Lower Present: "+isLowerPresent);
+                    // if(i==3)System.out.println("Current SubString: "+res+", Res Length: "+ res.length()+", Current SubString: "+s.substring(i,j+1)+" : Is Upper Present: "+isUpperPresent+", Is Lower Present: "+isLowerPresent);
 
                 }
                 if ((temp)&& (res.length() < (j - i + 1))) {
                         res = s.substring(i, j+1);
-                        System.out.println("Current SubString: "+res+", Res Length: "+ res.length()+", Current SubString: "+s.substring(i,j+1)+" : Is Upper Prsent: "+isUpperPresent+", Is Lower Present: "+isLowerPresent);
+                        // System.out.println("Current SubString: "+res+", Res Length: "+ res.length()+", Current SubString: "+s.substring(i,j+1)+" : Is Upper Prsent: "+isUpperPresent+", Is Lower Present: "+isLowerPresent);
                     }
             }
         }
