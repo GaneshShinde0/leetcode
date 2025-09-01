@@ -67,8 +67,8 @@ class Solution {
                     temp = temp && (isUpperPresent||isLowerPresent);
                 }
                 if ((temp)&& (res.length() < (j - i + 1))) {
-                        res = s.substring(i, j+1);
-                    }
+                    res = s.substring(i, j+1);
+                }
             }
         }
         return res;
