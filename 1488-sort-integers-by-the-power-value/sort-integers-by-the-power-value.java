@@ -1,0 +1,30 @@
+class Solution {
+    public int getKth(int lo, int hi, int k) {
+        int n = hi-lo+1;
+        int[][] powArr = new int[n][2];
+        for(int i=lo;i<=hi;i++){
+            powArr[i-lo][0]=i;
+            powArr[i-lo][1]=calculatePower(i);
+        }
+        Arrays.sort(powArr,(a,b)->{
+            if(a[1]==b[1]){
+                return Integer.compare(a[0],b[0]);
+            }
+            return Integer.compare(a[1],b[1]);
+        });
+        for(int[] arr:powArr){
+            System.out.println(Arrays.toString(arr));
+        }
+        return powArr[k-1][0];
+    }
+
+    private int calculatePower(int x){
+        int pow = 1;
+        while(x!=1){
+            if(x%2==0)x/=2;
+            else x=3*x+1;
+            pow++;
+        }
+        return pow;
+    }
+}
