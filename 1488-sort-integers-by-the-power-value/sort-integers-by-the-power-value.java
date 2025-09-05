@@ -12,9 +12,6 @@ class Solution {
             }
             return Integer.compare(a[1],b[1]);
         });
-        for(int[] arr:powArr){
-            System.out.println(Arrays.toString(arr));
-        }
         return powArr[k-1][0];
     }
 
