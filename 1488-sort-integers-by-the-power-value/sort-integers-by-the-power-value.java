@@ -1,10 +1,16 @@
 class Solution {
+    private int[] memo = new int[3001];
     public int getKth(int lo, int hi, int k) {
         int n = hi-lo+1;
         int[][] powArr = new int[n][2];
         for(int i=lo;i<=hi;i++){
             powArr[i-lo][0]=i;
-            powArr[i-lo][1]=calculatePower(i);
+            if(memo[i]>0){
+                powArr[i-lo][1]= memo[i];
+            }else{
+                memo[i]=calculatePower(i);
+                powArr[i-lo][1] = memo[i];
+            }
         }
         Arrays.sort(powArr,(a,b)->{
             if(a[1]==b[1]){
