@@ -1,5 +1,5 @@
 class Solution {
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstringFirst(String s) {
         HashMap<Character,Integer> hm = new HashMap<>();
         int left = 0, right =0, res =0, n = s.length();
         for(;right<n;right++){
@@ -14,4 +14,48 @@ class Solution {
         }
         return res;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public int lengthOfLongestSubstring(String s) {
+        int res = 0;
+        int lastDouble =-1;
+        int n = s.length();
+        int[] lastIdx = new int[256];
+        Arrays.fill(lastIdx,-1);
+        int i=0;
+        for(; i<n; i++){
+            int prev = lastIdx[s.charAt(i)];
+            lastDouble = Math.max(prev,lastDouble);
+            res =Math.max(res, i-lastDouble);
+            lastIdx[s.charAt(i)]=i;
+        }
+        System.out.println(lastDouble);
+        // if(lastDouble==-1 && n!=0) return res+1;
+        // if(n==1) return 1;
+        // res =Math.max(res, i-lastDouble);
+        return res;
+    }
+
 }
