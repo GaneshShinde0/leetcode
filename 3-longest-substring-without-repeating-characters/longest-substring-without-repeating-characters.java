@@ -44,14 +44,12 @@ class Solution {
         int n = s.length();
         int[] lastIdx = new int[256];
         Arrays.fill(lastIdx,-1);
-        int i=0;
-        for(; i<n; i++){
-            int prev = lastIdx[s.charAt(i)];
-            lastDouble = Math.max(prev,lastDouble);
+        for(int i=0; i<n; i++){
+            lastDouble = Math.max(lastIdx[s.charAt(i)],lastDouble);
             res =Math.max(res, i-lastDouble);
             lastIdx[s.charAt(i)]=i;
         }
-        System.out.println(lastDouble);
+        // System.out.println(lastDouble);
         // if(lastDouble==-1 && n!=0) return res+1;
         // if(n==1) return 1;
         // res =Math.max(res, i-lastDouble);
