@@ -10,6 +10,10 @@ class Solution {
             leftHeight[i]=Math.max(height[i],leftHeight[i-1]);
             rightHeight[n-i-1]=Math.max(height[n-i-1],rightHeight[n-i]);
         }
+        
+        // for(int i=n-2;i>=0;i--){
+        //     rightHeight[i] = Math.max(height[i],rightHeight[i+1]);
+        // }
         for(int i=0;i<n;i++){
             res+=Math.min(leftHeight[i],rightHeight[i])-height[i];
         }
