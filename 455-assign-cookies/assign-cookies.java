@@ -5,7 +5,7 @@ class Solution {
         int childrens = g.length, chocolates = s.length;
         int currentChild = 0;
         int res =0;
-        for(int i=0;i<s.length;i++){
+        for(int i=0;i<chocolates;i++){
             if(currentChild<childrens && s[i]>=g[currentChild]){
                 res++;
                 currentChild++;
