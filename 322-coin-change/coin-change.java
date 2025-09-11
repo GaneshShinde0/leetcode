@@ -10,7 +10,7 @@ class Solution {
                 if(i-c>=0 ) dp[i]=Math.min(dp[i-c]+1,dp[i]);
             }
         }
-        System.out.println(Arrays.toString(dp));
+        // System.out.println(Arrays.toString(dp));
         return dp[amount]==amount+1?-1:dp[amount];
     }
 }
