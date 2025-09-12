@@ -40,8 +40,10 @@ class Solution {
         isPrime[1]=false;
         int res=0;
         for(int i=2;i<=Math.sqrt(n);i++){
-            for(int j=i*i;j<n;j+=i){
-                isPrime[j] = false;
+            if(isPrime[i]){
+                for(int j=i*i;j<n;j+=i){
+                    isPrime[j] = false;
+                }
             }
         }
         for(boolean b:isPrime){
