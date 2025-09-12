@@ -27,9 +27,10 @@ class Solution {
                 int newRow = row+dir[0];
                 int newCol = col+dir[1];
                 check |= dfs(board,word,newRow,newCol,i+1);
+                if(check) return true;
             }
             board[row][col]=temp;
         }
-        return check;
+        return false;
     }
 }
