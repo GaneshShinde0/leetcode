@@ -28,7 +28,7 @@ class Solution {
         }
         int[] res = new int[k];
         for(int i=0;i<k;i++){
-            res[i]=heap.poll().getKey();
+            res[i]=heap.poll().getKey(); // Objects.requireNonNull(heap.poll()).getKey();
         }
         return res;
     }
