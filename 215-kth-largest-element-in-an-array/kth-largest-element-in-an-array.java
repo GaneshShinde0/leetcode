@@ -10,7 +10,7 @@ class Solution {
         //     pq.poll();
         // }
 
-        System.out.println(pq);
+        // System.out.println(pq);
         return pq.peek();
     }
 }
