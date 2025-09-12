@@ -15,7 +15,7 @@ class Solution {
         return res;
     }
 
-    public int[] topKFrequent(int[] nums, int k) {
+    public int[] topKFrequentONLogN2(int[] nums, int k) {
         Map<Integer,Integer> counter = new HashMap<>();
         for(int num:nums){
             counter.put(num,counter.getOrDefault(num,0)+1);
@@ -31,5 +31,33 @@ class Solution {
             res[i]=heap.poll().getKey(); // Objects.requireNonNull(heap.poll()).getKey();
         }
         return res;
+    }
+
+    public int[] topKFrequent(int[] nums, int k){
+        int n = nums.length;
+        Map<Integer, Integer> counter = new HashMap<>();
+        for(int num: nums){
+            counter.put(num, counter.getOrDefault(num,0)+1);
+        }
+
+        List<Integer>[] freq = new ArrayList[n+1];
+        for(int i=0;i<n+1;i++){
+            freq[i]=new ArrayList<>();
+        }
+        for(Map.Entry<Integer,Integer> e: counter.entrySet()){
+            int i = e.getValue();
+            freq[i].add(e.getKey());
+        }
+        int[] res = new int[k];
+        int idx = k;
+        for(int i=freq.length-1;i>=0;i--){
+            for(int num:freq[i]){
+                res[--idx] = num;
+                if(idx == 0){
+                    return res;
+                }
+            }
+        }
+        return new int[0];
     }
 }
