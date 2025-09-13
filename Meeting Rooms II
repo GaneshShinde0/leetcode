@@ -1,0 +1,54 @@
+/**
+ * Definition of Interval:
+ * public class Interval {
+ *     public int start, end;
+ *     public Interval(int start, int end) {
+ *         this.start = start;
+ *         this.end = end;
+ *     }
+ * }
+ */
+
+class Solution {
+    public int minMeetingRoomsInitial(List<Interval> intervals) {
+        int maxEnd = 0;
+        for(int i=0;i<intervals.size();i++){
+            maxEnd = Math.max(maxEnd,intervals.get(i).end);
+        }
+        int[] meetingTracker = new int[maxEnd+1];
+        for(Interval i:intervals){
+            meetingTracker[i.start]++;
+            meetingTracker[i.end]--;
+        }
+        int res = 0;
+        for(int i=1;i<=maxEnd;i++){
+            meetingTracker[i]+=meetingTracker[i-1];
+            res = Math.max(meetingTracker[i], res);
+        }
+        return res;
+    }
+
+    public int minMeetingRooms(List<Interval> intervals) {
+        List<Integer> starts = new ArrayList<>();
+        List<Integer> ends = new ArrayList<>();
+        for(Interval i:intervals){
+            starts.add(i.start);
+            ends.add(i.end);-
+        }
+        Collections.sort(starts);
+        Collections.sort(ends);
+        int start = 0, end = 0,count =0,res=0, n = intervals.size();
+        for(int i=0;i<n;i++){
+            if(starts.get(start)<ends.get(end)){
+                start++;
+                count++;
+            }else{
+                end++;
+                count--;
+            }
+            res = Math.max(res, count);
+        }
+        return res;
+    }
+
+}
