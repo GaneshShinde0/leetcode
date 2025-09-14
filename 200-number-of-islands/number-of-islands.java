@@ -18,7 +18,6 @@ class Solution {
                 }
                 visited[i][j]=true;
             }
-            // System.out.println(Arrays.toString(visited[i]));
         }
         return res;
     }
