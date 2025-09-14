@@ -16,7 +16,6 @@ class Solution {
                     res++;
                     dfs(grid, visited,i,j,m,n);
                 }
-                visited[i][j]=true;
             }
         }
         return res;
