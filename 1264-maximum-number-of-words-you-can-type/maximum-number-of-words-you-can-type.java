@@ -19,12 +19,12 @@ class Solution {
         int n = text.length();
         int spaces = 0;
         char[] chars = brokenLetters.toCharArray();
-        Set<Character> set= new HashSet<>();
-        for(char c:chars) set.add(c);
-
+        // Set<Character> set= new HashSet<>();
+        // for(char c:chars) set.add(c);
         for(int i=0;i<n;i++){
             char curr = text.charAt(i);
-            if(set.contains(curr)){
+            // if(set.contains(curr)){
+            if(brokenLetters.indexOf(curr)!=-1){
                 res++;
                 while(i<n && text.charAt(i)!=' ') i++;
             }
