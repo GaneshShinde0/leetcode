@@ -6,7 +6,7 @@ class Solution {
             while(!stk.isEmpty()){
                 int temp = stk.peek();
                 int x = gcd(temp,num);
-                if(x==1) break;
+                if(x==1) break; // This makes sure elements are co-primes;
                 num *= temp/x;
                 stk.pop();
             }
