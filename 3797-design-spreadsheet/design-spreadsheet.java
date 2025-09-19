@@ -16,15 +16,18 @@ class Spreadsheet {
         formula = formula.replace("=","");
         String[] cells = formula.split("\\+");
         int n = cells.length;
-        int[] intCells = new int[n];
+        // int[] intCells = new int[n];
         int res = 0;
         for(int i=0;i<n;i++){
+            int temp = 0;
             if(cells[i].charAt(0)>='0' && cells[i].charAt(0)<='9'){
-                intCells[i]= Integer.parseInt(cells[i]);
+                // intCells[i]= Integer.parseInt(cells[i]);
+                temp= Integer.parseInt(cells[i]);
             }else{
-                intCells[i] = sheet[cells[i].charAt(0)-'A'][Integer.parseInt(cells[i].substring(1))];
+                // intCells[i] = sheet[cells[i].charAt(0)-'A'][Integer.parseInt(cells[i].substring(1))];
+                temp = sheet[cells[i].charAt(0)-'A'][Integer.parseInt(cells[i].substring(1))];
             }
-            res+=intCells[i];
+            res+=temp;//intCells[i];
         }
         return res;
     }
