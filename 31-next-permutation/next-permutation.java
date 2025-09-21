@@ -10,8 +10,7 @@ class Solution {
         }
         // There is no breaking point
         if(ind1==-1){
-            Arrays.sort(nums);
-            return;
+            reverse(nums,0);
         }else{
             for(int i=nums.length-1;i>=0;i--){
                 if(nums[i]>nums[ind1]){
@@ -19,10 +18,9 @@ class Solution {
                     break;
                 }
             }
+            swap(nums,ind1,ind2);
+            reverse(nums,ind1+1);
         }
-        swap(nums,ind1,ind2);
-        reverse(nums,ind1+1);
-
     }
     void swap(int[] nums, int i, int j){
         int temp = nums[i];
