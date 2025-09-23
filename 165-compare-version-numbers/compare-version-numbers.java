@@ -8,7 +8,7 @@ class Solution {
         for(;i<min;i++){
             int n1 = Integer.parseInt(v1[i]);
             int n2 = Integer.parseInt(v2[i]);
-            System.out.println("N1: "+n1+", N2: "+n2);
+            // System.out.println("N1: "+n1+", N2: "+n2);
             if(n1>n2) return 1;
             else if(n2>n1) return -1;
         }
