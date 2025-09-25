@@ -10,9 +10,7 @@ class Solution {
         Map<Integer,Integer> valToLbl= new HashMap<>();
         int i=0;
         int res = 0;
-        for(int[] arr:temp){
-            System.out.println(Arrays.toString(arr));
-        }
+        
         while(numWanted>0&&i<n){
             if(valToLbl.getOrDefault(temp[i][1],0)<useLimit){
                 valToLbl.put(temp[i][1],valToLbl.getOrDefault(temp[i][1],0)+1);
