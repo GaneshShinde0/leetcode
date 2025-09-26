@@ -36,8 +36,9 @@ class Solution {
         int n = nums.length;
         Arrays.sort(nums);
         for(int i=0;i<n-2;i++){
+            int k = i+2;
             for(int j=i+1;j<n-1 && nums[i]!=0;j++){
-                int k = binarySearch(nums,j+1,n-1,nums[i]+nums[j]);
+                k = binarySearch(nums,k,n-1,nums[i]+nums[j]);
                 count+=k-j-1;
             }
         }
