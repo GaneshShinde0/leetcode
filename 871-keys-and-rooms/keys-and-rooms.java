@@ -3,6 +3,7 @@ class Solution {
         Set<Integer> set = new HashSet<>();
         Queue<Integer> q = new LinkedList<>();
         q.add(0);
+        set.add(0);
         int n = rooms.size();
         while(!q.isEmpty()){
             List<Integer> li = rooms.get(q.poll());
@@ -13,9 +14,7 @@ class Solution {
                 }
             }
         }
-        for(int i=1;i<n;i++){
-            if(!set.contains(i)) return false;
-        }
-        return true;
+        
+        return set.size()==rooms.size();
     }
 }
