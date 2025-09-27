@@ -14,7 +14,6 @@ class Solution {
                 }
             }
         }
-        
         return set.size()==rooms.size();
     }
 }
