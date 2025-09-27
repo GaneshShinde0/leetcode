@@ -11,7 +11,7 @@ class Solution {
             edgeToWeight.get(equations.get(i).get(1)).put(equations.get(i).get(0),1/values[i]);
 
         }
-        System.out.println(edgeToWeight);
+        // System.out.println(edgeToWeight);
         double[] res = new double[queries.size()];
         // Solve each query
         for (int i = 0; i < queries.size(); i++) {
