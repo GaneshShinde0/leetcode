@@ -21,7 +21,7 @@ class Solution {
     public long getHours(int[] piles, int k){
         long hours = 0;
         for(int pile:piles){
-            hours += (pile+k-1)/k;
+            hours += Math.ceil((pile*1.0)/k);
         }
         return hours;
     }
