@@ -4,9 +4,6 @@ class Solution {
         Queue<Integer> q = new LinkedList<>();
         q.add(0);
         int n = rooms.size();
-        // for(int i:rooms.get(0)){
-        //     q.add(i);
-        // }
         while(!q.isEmpty()){
             List<Integer> li = rooms.get(q.poll());
             for(int j=0;j<li.size();j++){
@@ -16,7 +13,6 @@ class Solution {
                 }
             }
         }
-        System.out.println(set);
         for(int i=1;i<n;i++){
             if(!set.contains(i)) return false;
         }
