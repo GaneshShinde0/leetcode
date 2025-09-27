@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    public int maxLevelSum1(TreeNode root) {
+    public int maxLevelSum(TreeNode root) {
         if(root==null) return 1;
         Queue<TreeNode> q = new LinkedList<>();
         int res = 1;
@@ -39,7 +39,7 @@ class Solution {
         return res;
     }
 
-    public int maxLevelSum(TreeNode root) {
+    public int maxLevelSumDFS(TreeNode root) {
         List<Integer> levelSums = new ArrayList<>();
         dfs(root, 0, levelSums);
 
