@@ -20,15 +20,15 @@ class Solution {
             int size = q.size();
             for(int i=0;i<size;i++){
                 int[] current = q.poll();
-                System.out.println("Res: "+res+": "+Arrays.toString(current));
+                // System.out.println("Res: "+res+": "+Arrays.toString(current));
                 for(int[] dir:directions){
                     x = current[0]+dir[0];
                     y = current[1]+dir[1];
-                    System.out.println("X: "+x+", Y: "+y);
+                    // System.out.println("X: "+x+", Y: "+y);
                     if(x<0||y<0||x>=m||y>=n) continue;
-                    for(int k=0;k<m;k++){
-                        System.out.println(Arrays.toString(visited[k]));
-                    }
+                    // for(int k=0;k<m;k++){
+                    //     System.out.println(Arrays.toString(visited[k]));
+                    // }
                     if(!visited[x][y] && grid[x][y]==1){
                         visited[x][y]=true;
                         grid[x][y]=2;
@@ -38,9 +38,9 @@ class Solution {
                 }
             }
         }
-        for(int i=0;i<m;i++){
-            System.out.println(Arrays.toString(grid[i]));
-        }        
+        // for(int i=0;i<m;i++){
+        //     System.out.println(Arrays.toString(grid[i]));
+        // }        
         return -1;
     }
 
