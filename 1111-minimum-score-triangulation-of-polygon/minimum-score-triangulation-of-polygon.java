@@ -13,6 +13,7 @@ class Solution {
                     values[i]*values[j]*values[k]+
                     minScoreTriangulation(values,k,j,0));
         }
-        return dp[i][j]=res;
+        dp[i][j]=res;
+        return dp[i][j];
     }
 }
