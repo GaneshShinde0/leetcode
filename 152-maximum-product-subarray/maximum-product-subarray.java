@@ -71,7 +71,7 @@ class Solution {
     2. But If negative elements are odd then you have to remvoe one negative element and it is sure that it will be either right of max prefix product or left of max suffix product. So you need to modify anything in your code as you are getting prefix product in l and suffix product in r.
     3. If array also contains 0 then your l and r will become 0 at that point, then just update it to 1 or else you will keep multiplying wiht 0, to ge tthe product ahead making another subarray.
     */
-
+    // This is good solution.
     public int maxProduct(int[] nums){
         int n = nums.length;
         int l=1, r=1;
