@@ -31,7 +31,7 @@ class Solution {
     /*
     Approach 1 : For each index i keep updating the max and min. We are also keeping min because on multiplying with any negative number your min will become max and max will become min. So for every index i we will take max of (ith element prevMax*ith element, prevMin * ith Element).
     */
-    public int maxProduct(int[] nums){
+    public int maxProductApproach1(int[] nums){
         int max = nums[0], min = nums[0], ans = nums[0];
         for(int i=1;i<nums.length;i++){
             int temp = max; // Store max because before updating min, max will already be updated.
@@ -42,4 +42,50 @@ class Solution {
         }
         return ans;
     }
+    /*
+    Approach 2: Just the slight modification of previous approach. As we know that on multipying wiht negative number max will become min and min will become max, so why not as soon as we encounter negative element, we swap the max and min already.
+    */
+
+    public int maxProductApproach2(int[] nums){
+        int max = nums[0], min = nums[0], ans = nums[0];
+        int n = nums.length;
+        for(int i=1; i<n; i++){
+            // Swapping min and max
+            if(nums[i]<0){
+                int temp = max;
+                max = min;
+                min = temp;
+            }
+
+            max = Math.max(nums[i], max*nums[i]);
+            min = Math.min(nums[i], min*nums[i]);
+
+            ans = Math.max(ans, max);
+        }
+        return ans;
+    }
+
+    /*
+    Approach 3: Two pointer Approach:
+    1. Throgh intuition explanation we know that if all the elements are positive or negative elements are even then your answer will be product of complete array which you will get in variable and l and r at the last iteration.
+    2. But If negative elements are odd then you have to remvoe one negative element and it is sure that it will be either right of max prefix product or left of max suffix product. So you need to modify anything in your code as you are getting prefix product in l and suffix product in r.
+    3. If array also contains 0 then your l and r will become 0 at that point, then just update it to 1 or else you will keep multiplying wiht 0, to ge tthe product ahead making another subarray.
+    */
+
+    public int maxProduct(int[] nums){
+        int n = nums.length;
+        int l=1, r=1;
+        int ans = nums[0];
+        for(int i=0;i<n;i++){
+            // If any of l or r become 0 then update it to 1.
+            l = l==0?1:l;
+            r = r==0?1:r;
+
+            l*=nums[i];
+            r*=nums[n-1-i];
+            ans = Math.max(ans,Math.max(l,r));
+        }
+        return ans;
+    }
+
 }
