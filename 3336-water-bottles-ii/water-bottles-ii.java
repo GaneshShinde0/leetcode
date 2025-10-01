@@ -1,5 +1,5 @@
 class Solution {
-    public int maxBottlesDrunkInitial(int numBottles, int numExchange) {
+    public int maxBottlesDrunk(int numBottles, int numExchange) {
         int emptyBottles = numBottles, bottlesDrunk=numBottles;
         numBottles=0;
         while(emptyBottles>=numExchange||numBottles>0){
@@ -15,7 +15,8 @@ class Solution {
         }
         return bottlesDrunk;
     }
-    public int maxBottlesDrunk(int numBottles, int numExchange) {
+    // Takes 1 ms
+    public int maxBottlesDrunk1(int numBottles, int numExchange) {
         int emptyBottles = 0, bottlesDrunk=0;
         while(emptyBottles>=numExchange||numBottles>0){
             if(emptyBottles>=numExchange){
