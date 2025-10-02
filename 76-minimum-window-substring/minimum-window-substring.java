@@ -32,11 +32,11 @@ class Solution {
                 }
             }
         }
-        System.out.println(Arrays.toString(freqS));
-        System.out.println(Arrays.toString(freqT));
-        System.out.println("Left: "+left+", Right: "+right);
-        System.out.println("FinalLeft: "+finalLeft+", FinalRight: "+finalRight);
-        System.out.println("Res: "+res);
+        // System.out.println(Arrays.toString(freqS));
+        // System.out.println(Arrays.toString(freqT));
+        // System.out.println("Left: "+left+", Right: "+right);
+        // System.out.println("FinalLeft: "+finalLeft+", FinalRight: "+finalRight);
+        // System.out.println("Res: "+res);
         if(!checkFreq(freqS,freqT)) return "";
         return s.substring(finalLeft,finalRight+1);
     }
