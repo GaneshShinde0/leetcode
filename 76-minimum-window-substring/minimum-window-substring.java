@@ -1,5 +1,5 @@
 class Solution {
-    public String minWindow(String s, String t) {
+    public String minWindowInitial(String s, String t) {
         int left = 0, right = 0, n=s.length(),res=Integer.MAX_VALUE, tLength=t.length();
         int finalLeft =0,finalRight=0;
         int[] freqS = new int[128];
@@ -45,5 +45,28 @@ class Solution {
             if(freqT[i]>freqS[i]) return false;
         }
         return true;
+    }
+
+    public String minWindow(String s, String t) {
+        if (s.length() < t.length()) return "";
+
+        int[] freq = new int[128];
+        for (char c : t.toCharArray()) freq[c]++;
+
+        int required = t.length(), left = 0, minLen = Integer.MAX_VALUE, start = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            if (freq[s.charAt(right)]-- > 0) required--;
+
+            while (required == 0) {
+                if (minLen > right - left + 1) {
+                    minLen = right - left + 1;
+                    start = left;
+                }
+                if (++freq[s.charAt(left++)] > 0) required++;
+            }
+        }
+
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
     }
 }
