@@ -50,7 +50,7 @@ class Solution {
             }
         }
 
-        for(int j=0;j<n;j++){
+        for(int j=1;j<n-1;j++){
             for(int i:new int[]{0,m-1}){
                 minHeap.offer(new int[]{heightMap[i][j], i, j});
                 visited[i][j]= true;
