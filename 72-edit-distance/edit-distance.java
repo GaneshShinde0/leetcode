@@ -19,7 +19,7 @@ class Solution {
         int n = word2.length();
 
         int[][] dp = new int[m+1][n+1];
-        for(int[] arr:dp) Arrays.fill(arr,Integer.MAX_VALUE);
+        // for(int[] arr:dp) Arrays.fill(arr,Integer.MAX_VALUE);
         
         for(int i=0;i<m+1;i++){
             dp[i][n]=m-i;
@@ -33,6 +33,8 @@ class Solution {
                 if(word1.charAt(i)==word2.charAt(j)){
                     dp[i][j]=dp[i+1][j+1];
                 }else{
+                    // Following line will take care of insert, delete, replace
+                    // insert(i,j+1); delete(i+1,j); replace(i+1,j+1)
                     dp[i][j] = 1+Math.min(Math.min(dp[i+1][j],dp[i][j+1]),dp[i+1][j+1]);
                 }
             }
