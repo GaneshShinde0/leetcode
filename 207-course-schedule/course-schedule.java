@@ -23,7 +23,6 @@ class Solution {
             indegree[p[0]]++;
         }
 
-        ArrayList<Integer> ans = new ArrayList<>();
         Queue<Integer> q = new LinkedList<>();
 
         for(int i=0;i<n;i++){
