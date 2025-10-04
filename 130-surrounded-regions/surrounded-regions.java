@@ -24,13 +24,13 @@ class Solution {
     public void solve(char[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
-        for(int i=0;i<grid.length;i++){
+        for(int i=0;i<m;i++){
             if(grid[i][0]!='X')
             DFS(i,0,grid);
             if(grid[i][n-1]!='X')
             DFS(i,n-1,grid);
         }
-        for(int i=0;i<grid[0].length-1;i++){
+        for(int i=0;i<n-1;i++){
             if(grid[0][i]!='X')
             DFS(0,i,grid);
             if(grid[m-1][i]!='X')
