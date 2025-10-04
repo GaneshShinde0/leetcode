@@ -11,7 +11,7 @@ class Solution {
     //     return true;
     // }
 
-    public boolean canFinish(int n, int[][] prerequisites) {
+    public boolean canFinishInitial(int n, int[][] prerequisites) {
         int[] indegree = new int[n];
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for(int i=0;i<n;i++)adj.add(new ArrayList<Integer>());
@@ -39,5 +39,29 @@ class Solution {
             }
         }
         return count == n;
+    }
+    public boolean canFinish(int n, int[][] prerequisites) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<n;i++)adj.add(new ArrayList<>());
+        for(int[] p:prerequisites){
+            adj.get(p[0]).add(p[1]);
+        }
+        Set<Integer> visitSet = new HashSet<>();
+        for(int course =0;course<n;course++){
+            if(!dfs(visitSet,adj,course)) return false;
+        }
+        return true;
+    }
+
+    private boolean dfs(Set<Integer> visitSet,List<List<Integer>> adj, int course){
+        if(visitSet.contains(course)) return false;
+        if(adj.get(course).size()==0) return true;
+        visitSet.add(course);
+        for(int pre:adj.get(course)){
+            if(!dfs(visitSet,adj,pre))return false;
+        }
+        visitSet.remove(course);
+        adj.set(course,new ArrayList<>());
+        return true;
     }
 }
