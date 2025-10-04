@@ -13,7 +13,9 @@ class Solution {
             left>>=1;
             right>>=1;
             shift+=1;
+        // System.out.println("Left: "+left+",Right: "+right);
         }
+        // System.out.println("Left: "+left+",Right: "+right);
         return left<<shift;
     }
 
