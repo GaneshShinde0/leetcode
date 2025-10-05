@@ -66,7 +66,7 @@ class Solution {
         left = 0;
         right= n-1;
         c = 1;
-        System.out.println("Left: "+left+", Right: "+right);
+        // System.out.println("Left: "+left+", Right: "+right);
         while(left<=right){
             if(s.charAt(left)==s.charAt(right)){
                 right--;
