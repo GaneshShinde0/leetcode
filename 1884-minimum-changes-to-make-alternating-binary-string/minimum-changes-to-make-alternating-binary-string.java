@@ -1,6 +1,5 @@
 class Solution {
     public int minOperations(String s) {
-        StringBuilder sb = new StringBuilder();
         boolean turn = true;
         int count = 0,count2=0;
         for(char c:s.toCharArray()){
