@@ -47,7 +47,6 @@ class Solution {
         if (Character.isLetter(arr[idx])) {
             arr[idx] ^= 32; // toggle case using bit trick
             backtrack(arr, idx + 1, result);
-            arr[idx] ^= 32; // backtrack
         }
     }
 }
