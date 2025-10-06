@@ -23,9 +23,17 @@ class Solution {
     public void printLinkedListInReverse(ImmutableListNode head) {
         helper(head);
     }
-    private void helper(ImmutableListNode head){
+    private void helper2(ImmutableListNode head){
         if(head.getNext()==null){
             head.printValue();
+            return;
+        }   
+        helper(head.getNext());
+        head.printValue();
+    }
+
+    private void helper(ImmutableListNode head){
+        if(head==null){
             return;
         }   
         helper(head.getNext());
