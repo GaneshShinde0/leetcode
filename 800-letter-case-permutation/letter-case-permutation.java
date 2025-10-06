@@ -1,6 +1,6 @@
 class Solution {
     Set<String> set;
-    public List<String> letterCasePermutation(String s) {
+    public List<String> letterCasePermutationInitial(String s) {
         set = new HashSet<>();
         char[] arr = s.toLowerCase().toCharArray();
         List<String> res = new ArrayList<>();
@@ -26,5 +26,28 @@ class Solution {
             arr[curr]+=32;
         }
         return helper(res,arr,curr+1,n);        
+    }
+
+    public List<String> letterCasePermutation(String s) {
+        List<String> result = new ArrayList<>();
+        backtrack(s.toCharArray(), 0, result);
+        return result;
+    }
+
+    private void backtrack(char[] arr, int idx, List<String> result) {
+        if (idx == arr.length) {
+            result.add(new String(arr));
+            return;
+        }
+
+        // Always move forward without change
+        backtrack(arr, idx + 1, result);
+
+        // If it's a letter, flip case and explore
+        if (Character.isLetter(arr[idx])) {
+            arr[idx] ^= 32; // toggle case using bit trick
+            backtrack(arr, idx + 1, result);
+            arr[idx] ^= 32; // backtrack
+        }
     }
 }
