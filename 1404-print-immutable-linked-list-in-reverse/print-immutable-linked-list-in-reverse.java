@@ -8,6 +8,18 @@
  */
 
 class Solution {
+    public void printLinkedListInReverseInitial(ImmutableListNode head) {
+        helper1(head);
+    }
+    private void helper1(ImmutableListNode head){
+        if(head.getNext()==null){
+            head.printValue();
+            return;
+        }   
+        ImmutableListNode temp = head;
+        helper(head.getNext());
+        temp.printValue();
+    }
     public void printLinkedListInReverse(ImmutableListNode head) {
         helper(head);
     }
@@ -16,8 +28,7 @@ class Solution {
             head.printValue();
             return;
         }   
-        ImmutableListNode temp = head;
         helper(head.getNext());
-        temp.printValue();
+        head.printValue();
     }
 }
