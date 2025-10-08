@@ -1,5 +1,16 @@
 class Solution {
     public int largestUniqueNumber(int[] nums) {
+        int result = -1;
+        int[] map = new int[1001];
+        for (int num : nums) {
+            map[num]++;
+        }
+        for(int i=1000;i>=0;i--){
+            if(map[i]==1) return i;
+        }
+        return result;
+    }
+    public int largestUniqueNumberUsingHashMap(int[] nums) {
         Map<Integer,Integer> hm = new TreeMap<>();
         for(int i=0;i<nums.length;i++){
             hm.put(nums[i],hm.getOrDefault(nums[i],0)+1);
