@@ -1,25 +1,28 @@
 class Solution {
     public int[] successfulPairs(int[] spells, int[] potions, long success) {
         Arrays.sort(potions);
-        int n = potions.length;
-        int[] res = new int[spells.length];
-        for(int i=0;i<spells.length;i++){
-            res[i] = n-binarySearch(potions,spells[i],success);
+        int n = spells.length;
+        int[] res = new int[n];
+        for(int i=0;i<n;i++){
+            res[i]=getCountOfPotionsGreaterThanSuccess(spells[i],success,potions);
         }
         return res;
     }
 
-    private int binarySearch(int[] potions, long mult, long success){
-        int left = 0, right = potions.length;
+    private int getCountOfPotionsGreaterThanSuccess(int spell,long success, int[] potions){
+        int left = 0, n = potions.length,right=n;
+        // left = 0, right = 5, mid = 2, potions[mid] = 3
+        // 3*3>potions[mid]
+        // right = 1; mid = 0
         while(left<right){
-            int mid = (right-left)/2+left;
-            if(potions[mid]*mult<success){
-                left = mid+1;
+            int mid = (right+left)/2;
+            if(((long)potions[mid]*spell)<success){
+                left=mid+1;
             }else{
-                right = mid;
+                right=mid;
             }
-            // System.out.println("Left: "+left+"Right: "+right+" Mid: "+mid);
         }
-        return left;
+        return n-right;
     }
+
 }
