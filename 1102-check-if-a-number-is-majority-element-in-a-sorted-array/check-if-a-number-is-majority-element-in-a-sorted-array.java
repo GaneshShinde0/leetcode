@@ -5,6 +5,6 @@ class Solution {
         for(int i:nums){
             hm.put(i,hm.getOrDefault(i,0)+1);
         }
-        return hm.getOrDefault(target,0)>=(nums.length/2+1);
+        return hm.getOrDefault(target,0)>(nums.length/2);
     }
 }
