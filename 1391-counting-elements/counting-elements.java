@@ -10,6 +10,14 @@ class Solution {
                 res+=freq[i];
             }
         }
+
+        
+        // for(int num : arr) {
+        //     if(!checked[num] && num != 1000 && counter[num + 1] > 0){
+        //         count += counter[num];
+        //         checked[num] = true;
+        //     }
+        // }
         return res;
     }
 }
