@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+SELECT distinct user_id FROM Loans where user_id in (SELECT user_id from Loans WHERE loan_type='Refinance') AND user_id in (SELECT user_id from loans where loan_type='Mortgage') order by user_id asc
