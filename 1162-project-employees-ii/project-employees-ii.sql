@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+SELECT project_id FROM Project GROUP BY project_id having count(*)= (SELECT max(count) from (SELECT count(*) as count,project_id from Project group by project_id) src)
