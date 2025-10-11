@@ -15,7 +15,7 @@ class Solution {
         long mx = 0;
         long ans = 0;
         int j = 0;
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             while (j < i && vec.get(j)[0] < vec.get(i)[0] - 2) {
                 mx = Math.max(mx, f[j]);
                 j++;
