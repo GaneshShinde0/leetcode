@@ -1,0 +1,2 @@
+/* Write your T-SQL query statement below */
+SELECT a.sale_date, (a.sold_num-b.sold_num) as diff from Sales a inner join Sales b on a.sale_date=b.sale_date and a.fruit='apples' and b.fruit = 'oranges' ORDER BY a.sale_date asc
