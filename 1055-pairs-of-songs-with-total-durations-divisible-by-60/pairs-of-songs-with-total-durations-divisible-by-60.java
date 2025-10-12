@@ -14,6 +14,19 @@ class Solution {
     }
 
     public int numPairsDivisibleBy60(int[] hours) {
+        long[] hoursInDay = new long[60];
+        int res = 0;
+        for(int i: hours){
+            int remainder = i%60;
+            int complement = (60-remainder)%60;
+            res+=hoursInDay[complement];
+            hoursInDay[remainder]++;
+        }
+        return (int) res;
+    }
+
+
+    public int numPairsDivisibleBy60Second(int[] hours) {
         Map<Integer, Integer> map = new HashMap<>();
         int count = 0;
 
