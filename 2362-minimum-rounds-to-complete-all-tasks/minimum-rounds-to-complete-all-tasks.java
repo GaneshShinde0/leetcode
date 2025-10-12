@@ -11,10 +11,9 @@ class Solution {
             int threes = e.getValue()/3;
             int remainder = e.getValue()%3;
             if(remainder==1||remainder==2){
-                res+=threes+1;
-            }else{
-                res+=threes;
+                threes+=1;
             }
+            res+=threes;
         }
         return res;
     }
