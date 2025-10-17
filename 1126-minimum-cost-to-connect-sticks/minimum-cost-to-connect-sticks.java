@@ -1,5 +1,6 @@
 class Solution {
-    public int connectSticks(int[] sticks) {
+    // Initial Solution 30 Min
+    public int connectSticksInitial(int[] sticks) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for(int i:sticks){
             pq.add(i);
@@ -14,6 +15,21 @@ class Solution {
         int res = 0;
         for(int i:li){
             res+=i;
+        }
+        return res;
+    }
+    // Optimized
+    public int connectSticks(int[] sticks) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i:sticks){
+            pq.add(i);
+        }
+        int res = 0;
+        while(pq.size()>1){
+            int x = pq.poll();
+            int y = pq.poll();
+            pq.add(x+y);
+            res+=(x+y);
         }
         return res;
     }
