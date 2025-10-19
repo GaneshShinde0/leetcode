@@ -17,3 +17,4 @@ CompanyStats as (
 SELECT re.id, re.company, re.salary FROM RankedEmployees re
 JOIN CompanyStats cs ON re.company = cs.company
 WHERE re.rnk = cs.median_rank  OR (cs.total_employees%2=0 AND re.rnk = cs.median_rank+1)
+-- ORDER BY re.company, re.salary;
