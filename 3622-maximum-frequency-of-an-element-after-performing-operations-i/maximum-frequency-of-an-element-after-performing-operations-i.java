@@ -17,7 +17,7 @@
 
 class Solution {
     public int maxFrequency(int[] nums, int k, int numOps){
-        int maxVal = Arrays.stream(nums).max().getAsInt()+k+2;
+        int maxVal = Arrays.stream(nums).max().getAsInt()+k+1;
         int[] count = new int[maxVal];
 
         for(int i:nums) count[i]++;
