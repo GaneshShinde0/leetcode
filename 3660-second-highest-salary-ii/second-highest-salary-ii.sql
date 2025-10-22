@@ -1,0 +1,2 @@
+/* Write your T-SQL query statement below */
+SELECT emp_id, dept FROM (SELECT emp_id, salary,DEPT, dense_rank() OVER(PARTITION BY DEPT ORDER BY SALARY DESC) rnk FROM EMPLOYEES  ) src WHERE rnk = 2 ORDER BY emp_id asc
