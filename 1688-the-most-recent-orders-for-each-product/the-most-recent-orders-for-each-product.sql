@@ -1,0 +1,2 @@
+SELECT p.product_name, o.product_id, o.order_id, o.order_date FROM Orders o left join Products p on o.product_id=p.product_id
+WHERE o.order_date = (SELECT MAX(o1.order_date) FROM Orders o1 WHERE o1.product_id = o.product_id) ORDER BY 1 ASC,3 ASC
