@@ -9,12 +9,13 @@ class Solution {
         Queue<Integer> queueIndices = new LinkedList<>();
         int n = deck.length;
         for(int i=0;i<n;i++){
-            queueElements.add(deck[i]);
             queueIndices.add(i);
         }
+        int i = 0;
         int[] res = new int[n];
-        while(!queueElements.isEmpty()){
-            int first = queueElements.poll();
+        while(i<n){
+            int first = deck[i];
+            i++;
             res[queueIndices.poll()]=first;
             queueIndices.add(queueIndices.poll());
         }
