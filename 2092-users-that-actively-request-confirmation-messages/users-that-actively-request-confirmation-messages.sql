@@ -1,0 +1,2 @@
+SELECT DISTINCT c1.user_id from Confirmations c1 left join Confirmations c2 on c1.user_id = c2.user_id and c1.time_stamp<> c2.time_stamp
+WHERE ABS(DATEDIFF(SECOND, c1.time_stamp,c2.time_stamp))<=86400;
