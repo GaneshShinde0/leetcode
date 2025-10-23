@@ -54,7 +54,7 @@ class Solution {
                 int y1 = currPoint.y;
                 int x2 = visitedPoint.x;
                 int y2 = visitedPoint.y;
-                // if(x1==x2 || y1==y2) continue;
+                if(x1==x2 || y1==y2) continue;
 
                 Point p3 = new Point(x1,y2);
                 Point p4 = new Point(x2,y1);
