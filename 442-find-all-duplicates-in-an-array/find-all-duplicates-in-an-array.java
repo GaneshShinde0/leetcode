@@ -25,20 +25,11 @@ class Solution {
     public List<Integer> findDuplicates(int[] nums) {
         int n = nums.length;
         List<Integer> li = new ArrayList<>();
-        // 1<=x<=8
         for(int i=0;i<n;i++){
-            int index = Math.abs(nums[i])-1;
-            if(nums[index]<0) li.add(index+1);
-            nums[index]=-nums[index];
-
-            // if(nums[i]>0){
-            //     nums[nums[i]-1] = -nums[nums[i]-1];
-            // }
-            // if(nums[nums[i]-1]<0) {
-            //     li.add(-nums[nums[i]-1]);
-            //     continue;
-            // }
-        }
+            int temp = Math.abs(nums[i]);
+            if(nums[temp-1]<0) li.add(temp);
+            else nums[temp-1]= -nums[temp-1];
+        }   
         return li;
     }
 }
