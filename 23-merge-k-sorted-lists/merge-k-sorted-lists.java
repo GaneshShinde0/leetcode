@@ -34,7 +34,6 @@ class Solution {
     private ListNode mergeList(ListNode l1, ListNode l2){
         ListNode root = new ListNode(-1);
         ListNode node = root;
-        if(l1==null) return l2;
         while(l1!=null && l2!=null){
             if(l1.val>=l2.val){
                 node.next = l2;
