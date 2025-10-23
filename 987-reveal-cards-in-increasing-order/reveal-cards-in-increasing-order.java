@@ -13,10 +13,10 @@ class Solution {
         int i = 0;
         int[] res = new int[n];
         while(i<n){
-            int first = deck[i];
-            i++;
-            res[queueIndices.poll()]=first;
+            int processIndex = queueIndices.poll();
             queueIndices.add(queueIndices.poll());
+            res[processIndex]=deck[i];
+            i++;
         }
         return res;
     }
