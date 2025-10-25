@@ -22,7 +22,7 @@ class Solution {
         }
         res = temp.next;
         ListNode prev = temp;
-        System.out.println(duplicates);
+        // System.out.println(duplicates);
         while(prev.next!=null){
             if(duplicates.contains(prev.next.val)){
                 prev.next=prev.next.next;
