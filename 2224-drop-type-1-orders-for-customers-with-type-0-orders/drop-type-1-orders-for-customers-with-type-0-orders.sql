@@ -1,0 +1,2 @@
+/* Write your T-SQL query statement below */
+SELECT * FROM Orders WHERE order_id not in (SELECT order_id FROM Orders WHERE order_type = 1 AND customer_id IN (SELECT customer_id from ORDERS WHERE order_type = 0))
