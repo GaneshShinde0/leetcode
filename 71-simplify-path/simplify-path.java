@@ -3,7 +3,7 @@ class Solution {
         StringBuilder sb = new StringBuilder();
         Stack<String> stk = new Stack<>();
         String[] arr = path.split("/+");
-        System.out.println(Arrays.toString(arr));
+        // System.out.println(Arrays.toString(arr));
         for(String s:arr){
             if(s.equals(".")||s.equals("")){
                 continue;
