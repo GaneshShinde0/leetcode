@@ -9,7 +9,7 @@ class Logger {
     public boolean shouldPrintMessage(int timestamp, String message) {
         if((timestamp-hm.getOrDefault(message,-10))>=10){
             hm.put(message,timestamp);
-            System.out.println(message);
+            // System.out.println(message);
             return true;
         }
         return false;
