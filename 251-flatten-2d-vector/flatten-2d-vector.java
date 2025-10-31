@@ -2,7 +2,7 @@ class Vector2D {
 
     private int[][] vec;
     private int i,j;
-    private int m,n;
+    private int m;
     public Vector2D(int[][] vec) {
         this.vec = vec;
         this.i=0;
