@@ -12,7 +12,7 @@ class Solution {
                 String slope = Arrays.toString(points[i])+","+slopeDouble;
                 slopeToPoints.computeIfAbsent(slope, k->new HashSet<>()).add(points[i][0] + "," + points[i][1]);;
                 slopeToPoints.get(slope).add(points[j][0]+","+points[j][1]);
-                System.out.println("Slope: +"+slope+", Points: "+slopeToPoints.get(slope));
+                // System.out.println("Slope: +"+slope+", Points: "+slopeToPoints.get(slope));
                 res = Math.max(slopeToPoints.get(slope).size(),res);
             }
         }
