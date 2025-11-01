@@ -40,7 +40,7 @@ class Solution {
         return nextGreater;
     }
 
-    // Reverse And Filter Approach
+    // 5ms Reverse And Filter Approach
     public ListNode removeNodes(ListNode head){
         ListNode prev = null, curr = head;
         // Reverse
