@@ -15,11 +15,7 @@ class Solution {
         for(int i:nums) set.add(i);
         ListNode dummy = new ListNode(-1);
         ListNode temp = dummy;
-        // dummy.next = head;
         while(head!=null){
-            // while(head!=null && set.contains(head.val)){
-            //     head = head.next;
-            // }
             if(!set.contains(head.val)){
                 dummy.next = head;
                 dummy = dummy.next;
