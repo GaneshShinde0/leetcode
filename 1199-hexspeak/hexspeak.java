@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 class Solution {
     public String toHexspeak(String num) {
         String s = Long.toHexString(Long.parseLong(num));
@@ -14,5 +16,9 @@ class Solution {
             }
         }
         return sb.toString().toUpperCase();
+    }
+    public static String stringToHex(String numStr) {
+        BigInteger num = new BigInteger(numStr);
+        return num.toString(16).toUpperCase();
     }
 }
