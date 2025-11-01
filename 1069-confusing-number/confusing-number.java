@@ -1,7 +1,29 @@
 class Solution {
+    private static final Map<Integer, Integer> ROTATION_MAP;
+    
+    static {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 0);
+        map.put(1, 1);
+        map.put(6, 9);
+        map.put(8, 8);
+        map.put(9, 6);
+        ROTATION_MAP = Collections.unmodifiableMap(map);
+    }
+    public boolean confusingNumber(int n) {
+        int temp=n;
+        int num=0;
+        while(temp>0) {
+            int digit = temp%10;
+            if(!ROTATION_MAP.containsKey(digit)) return false;
+            num = num*10+ROTATION_MAP.get(digit);
+            temp=temp/10;
+        }
+        return n!=num;
+    }
     Map<Character, Character> hm = Map.of('0','0','1','1','6','9','8','8','9','6');
 
-    public boolean confusingNumber(int n) {
+    public boolean confusingNumberInitial(int n) {
         String num = String.valueOf(n);
         StringBuilder sb = new StringBuilder();
         for(char c:num.toCharArray()){
