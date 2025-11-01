@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+SELECT ROUND(COALESCE((SELECT COUNT(DISTINCT requester_id,accepter_id)*1.0 FROM RequestAccepted)/(SELECT COUNT(DISTINCT sender_id, send_to_id) FROM FriendRequest),0),2) as accept_rate
