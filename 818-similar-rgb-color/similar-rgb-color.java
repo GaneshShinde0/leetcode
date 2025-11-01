@@ -14,12 +14,15 @@ class Solution {
         int ans = -1, minDiff = 1000;
         // We try the value of every possible "XX" pair.
         for(int i=0;i<16;i++){
+            // We are taking 17 because 
+            // First digit takes i*16 and second takes i*1=> Totally it becomes i*17
             int currDiff = (int) Math.pow(i*17-num,2);
             if(currDiff<minDiff){
                 minDiff = currDiff;
                 ans = i;
             }
         }
+        // Returining "XX", the pair of the highest similarity.
         return Integer.toHexString(ans).repeat(2);
     }
     public String findTarget1(String color) {
