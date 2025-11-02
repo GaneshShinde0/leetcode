@@ -1,0 +1,1 @@
+SELECT ROUND(COUNT(DISTINCT(Session_ID))/(IIF(COUNT(DISTINCT(user_id))=0,1,COUNT(DISTINCT(user_id)))*1.0),2) as average_sessions_per_user  from Activity WHERE activity_date>DATEADD(DAY,-30, CAST('2019-07-27' as date))AND ACTIVITY_date<='2019-07-27'
