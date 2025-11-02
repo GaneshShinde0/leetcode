@@ -21,7 +21,7 @@ class Solution {
 
         int res = 0;
         for(int i=0;i<m;i++){
-            System.out.println(Arrays.toString(grid[i]));
+            // System.out.println(Arrays.toString(grid[i]));
             for(int j=0;j<n;j++){
                 if(grid[i][j]=='\u0000') res++;
             }
