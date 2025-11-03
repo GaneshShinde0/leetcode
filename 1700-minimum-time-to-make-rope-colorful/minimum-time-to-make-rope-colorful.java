@@ -3,8 +3,6 @@ class Solution {
     public int minCost(String colors, int[] neededTime) {
         int n = colors.length();
         int res = 0;
-        int[] freq = new int[26];
-        int prev = 0;
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         pq.add(neededTime[0]);
         for(int i=1;i<n;i++){
