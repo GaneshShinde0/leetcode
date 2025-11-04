@@ -16,7 +16,7 @@ class Solution {
         }
         return res;
     }
-    public int[] findXSum(int[] nums, int k, int x) {
+    public int[] findXSumOlder(int[] nums, int k, int x) {
         
         int max = getMax(nums);
         int[] result = new int[nums.length - k + 1];
@@ -60,5 +60,34 @@ class Solution {
         }
 
         return max;
+    }
+
+    public int[] findXSum(int[] nums, int k, int x) {
+        int n = nums.length;
+        int[] res = new int[n-k+1];
+        int max = 0;
+        for(int i:nums) max = Math.max(i,max);
+        for(int i=k;i<=n;i++){
+            int temp = x;
+            int indvRes = 0;
+            int[] freq = new int[max+1];
+            for(int j=i-k;j<i;j++){
+                freq[nums[j]]++;
+            }
+            System.out.println(Arrays.toString(freq));
+            while(temp>0){
+                int currMax =0;
+                for(int j=max;j>=0;j--){
+                    if(freq[j]>freq[currMax]){
+                        currMax = j;
+                    }
+                }
+                indvRes+=currMax*freq[currMax];
+                freq[currMax]=0;
+                temp--;
+            }
+            res[i-k]=indvRes;
+        }
+        return res;
     }
 }
