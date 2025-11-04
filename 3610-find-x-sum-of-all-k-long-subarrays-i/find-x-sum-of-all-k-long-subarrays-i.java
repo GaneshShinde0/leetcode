@@ -74,7 +74,7 @@ class Solution {
             for(int j=i-k;j<i;j++){
                 freq[nums[j]]++;
             }
-            System.out.println(Arrays.toString(freq));
+            // System.out.println(Arrays.toString(freq));
             while(temp>0){
                 int currMax =0;
                 for(int j=max;j>=0;j--){
