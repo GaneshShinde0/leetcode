@@ -7,7 +7,7 @@ class Solution {
         }
         return s.equals("");
     }
-    public boolean isValid(String s) {
+    public boolean isValidStack(String s) {
         Stack<Character> stk = new Stack<>();
         for(int i=0;i<s.length();i++){
             char ch = s.charAt(i);
@@ -21,5 +21,16 @@ class Solution {
             }
         }
         return stk.isEmpty();
+    }
+
+    public boolean isValid(String s) {
+        char[] arr = s.toCharArray();
+        int j = 0;
+        for (int i = 0; i < s.length(); i++) {
+            arr[j++] = arr[i];
+            if (j >= 3 && arr[j-3] == 'a' && arr[j-2] == 'b' && arr[j-1] == 'c')
+                j -= 3;
+        }
+        return j == 0;
     }
 }
