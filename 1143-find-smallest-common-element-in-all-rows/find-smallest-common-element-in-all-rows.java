@@ -8,7 +8,9 @@ class Solution {
         for(i=1;i<m;i++){
             for(j=0;j<n;j++){
                 if(tm.containsKey(mat[i][j])){
-                    tm.put(mat[i][j],tm.get(mat[i][j])+1);
+                    int temp = tm.get(mat[i][j]);
+                    if(temp<i) tm.remove(mat[i][j]);
+                    else tm.put(mat[i][j],tm.get(mat[i][j])+1);
                 }
             }
         }
