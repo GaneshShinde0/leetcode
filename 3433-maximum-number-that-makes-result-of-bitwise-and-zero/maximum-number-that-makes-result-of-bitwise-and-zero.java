@@ -1,5 +1,5 @@
 class Solution {
-    public long maxNumber(long n) {
+    public long maxNumberInitial(long n) {
         String s = Long.toBinaryString(n);
         String ones = "1".repeat(s.length());
         char[] ch = ones.toCharArray();
@@ -13,6 +13,11 @@ class Solution {
             ch[i]='1';
         }
         return res;
+    }
+
+    public long maxNumber(long n) {
+        long highestBit = Long.highestOneBit(n); // largest power of 2 ≤ n
+        return highestBit - 1;
     }
 }
 /*
