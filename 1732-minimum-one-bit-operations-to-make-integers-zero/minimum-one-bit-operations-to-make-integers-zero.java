@@ -10,7 +10,7 @@ class Solution {
         return (1<<(k+1))-1-minimumOneBitOperations(n^curr);
     }
 
-    public int minimumOneBitOperations(int n) {
+    public int minimumOneBitOperations2(int n) {
         int[] f = new int[32];
         f[0] = 1;
         for(int j=1;j<32;j++) f[j] = f[j-1]*2+1;
@@ -22,6 +22,14 @@ class Solution {
             plus^=1;
         }
         return ans;
+    }
+    public int minimumOneBitOperations(int n) {
+        if(n==0) return 0;
+        int numOfBits = 0;
+        while(Math.pow(2,numOfBits)<=n) numOfBits++;  
+        // Many ways are there to count bits.. we can do by dividing n until 0 as well asummining we copies n to some other variable.
+        numOfBits-=1;
+        return ((int)Math.pow(2,numOfBits+1))-1-minimumOneBitOperations(((int)Math.pow(2,numOfBits))^n);
     }
 
 }
