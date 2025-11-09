@@ -1,12 +1,29 @@
 class Solution {
+    public int maxAInitial(int n) {
+        int[] dp = new int[n+1];
+        if(n<=6) return n;
+        for(int i=0;i<6;i++){
+            dp[i]=i+1;
+        }
+        // We already calculated until 6.
+        for(int i=6;i<n;i++){
+            // We are worried about last 6 steps only... There we can copy paste twice.
+            for(int j=i-6;j<i-3;j++){
+                dp[i]= Math.max(dp[i],(i-j-1)*dp[j]);
+            }
+        }
+        return dp[n-1];
+    }
+
     public int maxA(int n) {
         int[] dp = new int[n+1];
         if(n<=6) return n;
         for(int i=0;i<6;i++){
             dp[i]=i+1;
         }
-        for(int i=6;i<n;i++){
-            for(int j=i-6;j<i-3;j++){
+        for(int i=0;i<n;i++){
+
+            for(int j=0;j<i-3;j++){
                 dp[i]= Math.max(dp[i],(i-j-1)*dp[j]);
             }
         }
