@@ -5,9 +5,9 @@ class Solution {
         for(int i=0;i<4;i++){
             dp[i]=i+1;
         }
-        for(int i=0;i<n-3;i++){
-            for(int j=i+3;j<=Math.min(n,i+6);j++){
-                dp[j]= Math.max(dp[j],(j-i-1)*dp[i]);
+        for(int i=0;i<n;i++){
+            for(int j=1;j<=i-3;j++){
+                dp[i]= Math.max(dp[i],(i-j-1)*dp[j]);
             }
         }
         return dp[n-1];
