@@ -22,6 +22,6 @@ class Solution {
                 return mid;
             }
         }
-        return reader.get(mid-1)==target?mid-1:-1;
+        return -1;
     }
 }
