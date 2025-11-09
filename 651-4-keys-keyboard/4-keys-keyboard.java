@@ -2,7 +2,7 @@ class Solution {
     public int maxA(int n) {
         int[] dp = new int[n+1];
         if(n<=6) return n;
-        for(int i=0;i<6;i++){
+        for(int i=0;i<4;i++){
             dp[i]=i+1;
         }
         for(int i=0;i<n-3;i++){
