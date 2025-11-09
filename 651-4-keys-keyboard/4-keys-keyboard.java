@@ -2,10 +2,10 @@ class Solution {
     public int maxA(int n) {
         int[] dp = new int[n+1];
         if(n<=6) return n;
-        for(int i=0;i<4;i++){
+        for(int i=0;i<6;i++){
             dp[i]=i+1;
         }
-        for(int i=0;i<n;i++){
+        for(int i=6;i<n;i++){
             for(int j=0;j<i-3;j++){
                 dp[i]= Math.max(dp[i],(i-j-1)*dp[j]);
             }
