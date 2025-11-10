@@ -29,8 +29,9 @@ class Solution {
         return finalRes;
     }
 
-    // TLE 314/315
+    // TLE 314/315 If I add Arrays.sort();
     public List<List<Integer>> threeSum(int[] nums){
+        Arrays.sort(nums);
         Map<Integer,Integer> hm = new HashMap<>();
         int n = nums.length;
         for(int i=0; i<nums.length; i++){
@@ -38,7 +39,6 @@ class Solution {
         }
         Set<List<Integer>> result = new HashSet<>();
         if(n<3) return new ArrayList<>(result);
-
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
                 int temp = -(nums[i]+nums[j]);
