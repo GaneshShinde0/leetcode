@@ -3,7 +3,6 @@ class Solution {
         int n = arr.length;
         int[] lisLength = new int[n];
         Arrays.fill(lisLength,1);
-
         for(int i=1;i<n;i++){
             for(int j=0;j<i;j++){
                 if(arr[i]>arr[j]){
@@ -17,4 +16,5 @@ class Solution {
         }
         return res;
     }
+    
 }
