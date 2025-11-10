@@ -53,6 +53,13 @@ class Solution {
 
     // With Binary Search
     // It will same as previous ... We will use Binary search to get value of j.
+
+    // With this approach we are basically doing following
+    // Array : 1 4 8 2 3 4
+    // 1 4 8
+    // 1 2 8
+    // 1 2 3
+    // 1 2 3 4
     public int lengthOfLIS(int[] arr){
         List<Integer> li = new ArrayList<>();
         li.add(arr[0]);
