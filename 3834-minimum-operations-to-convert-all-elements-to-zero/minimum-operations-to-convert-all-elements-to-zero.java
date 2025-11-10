@@ -8,8 +8,6 @@ What we can do
     - If we have not processed anything increase result by 1
     - If we have previous element greater than current... Then increase the result by 1... as we have processed larger element and we need to process (current -> smaller) element.
     - If we have previous element smaller than current element... we will think about processing current element.
-
-
 */
 class Solution {
     public int minOperations(int[] nums) {
