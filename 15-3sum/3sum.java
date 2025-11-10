@@ -29,8 +29,8 @@ class Solution {
         return finalRes;
     }
 
-    // TLE 314/315 If I add Arrays.sort();
-    public List<List<Integer>> threeSum(int[] nums){
+    // TLE 314/315 With TLE ... sometimes 2700 ms
+    public List<List<Integer>> threeSum3(int[] nums){
         Arrays.sort(nums);
         Map<Integer,Integer> hm = new HashMap<>();
         int n = nums.length;
@@ -52,7 +52,7 @@ class Solution {
         }
         return new ArrayList<>(result);
     }
-    public List<List<Integer>> threeSum2(int[] nums){
+    public List<List<Integer>> threeSum(int[] nums){
         Arrays.sort(nums);
         int n = nums.length;
         List<List<Integer>> res = new ArrayList<>();
