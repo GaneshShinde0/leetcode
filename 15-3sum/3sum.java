@@ -30,7 +30,7 @@ class Solution {
     }
 
     // TLE 314/315 With TLE ... sometimes 2700 ms
-    public List<List<Integer>> threeSum3(int[] nums){
+    public List<List<Integer>> threeSum(int[] nums){
         Arrays.sort(nums);
         Map<Integer,Integer> hm = new HashMap<>();
         int n = nums.length;
@@ -49,10 +49,14 @@ class Solution {
                     if(!result.contains(triplet)) result.add(triplet);
                 }
             }
+            
+            while(i<n-1 && nums[i]==nums[i+1]){
+                i++;
+            }
         }
         return new ArrayList<>(result);
     }
-    public List<List<Integer>> threeSum(int[] nums){
+    public List<List<Integer>> threeSumTwoPointer(int[] nums){
         Arrays.sort(nums);
         int n = nums.length;
         List<List<Integer>> res = new ArrayList<>();
