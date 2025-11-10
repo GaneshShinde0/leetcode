@@ -16,7 +16,7 @@ class Solution {
         }
         return res;
     }
-    public int lengthOfLIS(int[] arr) {
+    public int lengthOfLIS2(int[] arr) {
         int n = arr.length;
         int[] lisLength = new int[n];
         Arrays.fill(lisLength,1);
@@ -32,5 +32,51 @@ class Solution {
             res = Math.max(i,res);
         }
         return res;
+    }
+    public int lengthOfLISIntelligentlyBuildASubsequence(int[] arr) {
+        List<Integer> li = new ArrayList<>();
+        li.add(arr[0]);
+        for(int i=1;i<arr.length;i++){
+            if(li.get(li.size()-1) <arr[i]){
+                li.add(arr[i]);
+            }else{
+                int j=0;
+                while(arr[i]>li.get(j)){
+                    j+=1;
+                }
+                // We are making sure to nums[i] in its position... in a sorted array.
+                li.set(j,arr[i]);
+            }
+        }
+        return li.size();
+    }
+
+    // With Binary Search
+    // It will same as previous ... We will use Binary search to get value of j.
+    public int lengthOfLIS(int[] arr){
+        List<Integer> li = new ArrayList<>();
+        li.add(arr[0]);
+        for(int i=1;i<arr.length;i++){
+            if(li.get(li.size()-1)<arr[i]){
+                li.add(arr[i]);
+            }else{
+                int j = binarySearch(li,arr[i]);
+                li.set(j,arr[i]);
+            }
+        }
+        return li.size();
+    }
+    private int binarySearch(List<Integer> li, int target){
+        int low = 0, high = li.size()-1;
+        while(low<high){
+            int mid = low + (high-low)/2;
+            // if(li.get(mid)==target) return mid;
+            if(li.get(mid)<target){
+                low = mid+1;
+            }else{
+                high=mid;
+            }
+        }
+        return low;
     }
 }
