@@ -10,9 +10,9 @@ class Solution {
             set.add(new int[]{i[0],i[1],idx});
             idx++;
         }
-        for(int[] i: set){
-            System.out.println(Arrays.toString(i));
-        }
+        // for(int[] i: set){
+        //     System.out.println(Arrays.toString(i));
+        // }
         int n = intervals.length;
         int[] res = new int[n];
         for(int i=0;i<n;i++){
