@@ -1,5 +1,5 @@
 class Solution {
-    public int[] findRightInterval(int[][] intervals) {
+    public int[] findRightIntervalInitial(int[][] intervals) {
         TreeSet<int[]> set = new TreeSet<>((a,b)->{
                     if(a[1]==b[0]) return Integer.compare(a[0],b[0]);
                     return Integer.compare(a[1],b[0]); 
@@ -26,6 +26,24 @@ class Solution {
             }else{
                 res[i] = temp[2];
             }
+        }
+        return res;
+    }
+
+    public int[] findRightInterval(int[][] intervals) {
+        int n = intervals.length;
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        
+        // Store each interval’s start with its original index
+        for (int i = 0; i < n; i++) {
+            map.put(intervals[i][0], i);
+        }
+        
+        int[] res = new int[n];
+        for (int i = 0; i < n; i++) {
+            // Find the smallest start >= current interval’s end
+            Map.Entry<Integer, Integer> entry = map.ceilingEntry(intervals[i][1]);
+            res[i] = (entry == null) ? -1 : entry.getValue();
         }
         return res;
     }
