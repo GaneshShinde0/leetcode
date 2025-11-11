@@ -32,10 +32,10 @@ class TimeMapInitial {
  * String param_2 = obj.get(key,timestamp);
  */
 
- class TimeMap {
+ class TimeMapUsingTreeMap {
     private Map<String, TreeMap<Integer, String>> map;
 
-    public TimeMap() {
+    public TimeMapUsingTreeMap() {
         map = new HashMap<>();
     }
     
@@ -47,5 +47,45 @@ class TimeMapInitial {
         if (!map.containsKey(key)) return "";
         Map.Entry<Integer, String> e = map.get(key).floorEntry(timestamp);
         return e == null ? "" : e.getValue();
+    }
+}
+class TimeMap {
+
+    static class Pair {
+        int timestamp;
+        String value;
+        Pair(int timestamp, String value) {
+            this.timestamp = timestamp;
+            this.value = value;
+        }
+    }
+
+    private Map<String, List<Pair>> map;
+
+    public TimeMap() {
+        map = new HashMap<>();
+    }
+
+    public void set(String key, String value, int timestamp) {
+        map.computeIfAbsent(key, k -> new ArrayList<>())
+           .add(new Pair(timestamp, value));
+    }
+
+    public String get(String key, int timestamp) {
+        if (!map.containsKey(key)) return "";
+        List<Pair> list = map.get(key);
+
+        int lo = 0, hi = list.size() - 1;
+        String res = "";
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            if (list.get(mid).timestamp <= timestamp) {
+                res = list.get(mid).value;
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return res;
     }
 }
