@@ -31,19 +31,15 @@ class Solution {
     }
 
     public int[] findRightInterval(int[][] intervals) {
-        int n = intervals.length;
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        
-        // Store each interval’s start with its original index
-        for (int i = 0; i < n; i++) {
-            map.put(intervals[i][0], i);
-        }
-        
+        int n = intervals.length, idx=0;
         int[] res = new int[n];
-        for (int i = 0; i < n; i++) {
-            // Find the smallest start >= current interval’s end
-            Map.Entry<Integer, Integer> entry = map.ceilingEntry(intervals[i][1]);
-            res[i] = (entry == null) ? -1 : entry.getValue();
+        TreeMap<Integer, Integer> tm = new TreeMap<>();
+        for(int[] i:intervals){
+            tm.put(i[0],idx);
+            idx++;
+        }
+        for(int i=0;i<n;i++){
+            res[i]= tm.ceilingEntry(intervals[i][1])!=null?tm.ceilingEntry(intervals[i][1]).getValue():-1;
         }
         return res;
     }
