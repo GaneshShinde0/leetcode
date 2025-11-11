@@ -17,7 +17,7 @@ class TimeMap {
     public String getFormattedTimeStamp(int timestamp){
         int n = String.valueOf(timestamp).length();
         StringBuilder sb = new StringBuilder(String.valueOf(timestamp));
-        while(n<8){
+        while(n<7){
             sb.insert(0,"0");
             n++;
         }
