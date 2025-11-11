@@ -18,7 +18,7 @@ class Solution {
     public long calculateSumOfDivisors(int[] nums, long mid){
         long sum = 0;
         for(int i:nums){
-            // sum+=(int) Math.ceil(i*1.0/mid);
+            // sum+=(int) Math.ceil(i*1.0/mid);// Next line alone speeds up the function by 20 ms
             sum += (i + mid - 1) / mid; // ceiling(n/div)
         }
         return sum;
