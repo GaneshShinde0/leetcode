@@ -4,7 +4,7 @@ class Solution {
         for(int i=0;i<n;i++){
             li.add(new StringBuilder(String.valueOf(i+1)));
         }
-        System.out.println(li);
+        // System.out.println(li);
         while(n>0){
             for(int i=0;i<n/2;i++){
                 li.get(i).insert(0,"(");
