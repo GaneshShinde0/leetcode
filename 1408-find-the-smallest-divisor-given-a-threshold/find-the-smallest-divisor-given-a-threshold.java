@@ -1,8 +1,8 @@
 class Solution {
     public int smallestDivisor(int[] nums, int threshold) {
-        long sum =0;
-        for(int i:nums) sum+=i;
-        long low = 1,high = sum;
+        long max =0;
+        for(int i:nums) max = Math.max(i,max);
+        long low = 1,high = max;
         while(low<high){
             long mid = low+(high-low)/2;
             long curr = calculateSumOfDivisors(nums,mid);
