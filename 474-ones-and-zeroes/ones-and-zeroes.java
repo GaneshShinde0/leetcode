@@ -1,4 +1,54 @@
 class Solution {
+    public int findMaxFormTLE3Recursion(String[] strs, int m, int n) {
+        return calculate(strs, 0, m, n);
+    }
+    public int calculate(String[] strs, int i, int zeroes, int ones) {
+        if (i == strs.length)
+            return 0;
+        int[] count = countZerosOnes(strs[i]);
+        int taken = -1;
+        if (zeroes - count[0] >= 0 && ones - count[1] >= 0)
+            taken = calculate(strs, i + 1, zeroes - count[0], ones - count[1]) + 1;
+        int not_taken = calculate(strs, i + 1, zeroes, ones);
+        return Math.max(taken, not_taken);
+    }
+    public int findMaxFormTLE1(String[] strs, int m, int n){
+        int maxLen = 0;
+        int strsLen = strs.length;
+        for(int i=0;i<(1<<strsLen);i++){
+            int zeros = 0, ones = 0, len = 0;
+            for(int j=0; j<strsLen;j++){
+                if((i&(1<<j))!=0){
+                    int[] count = countZerosOnes(strs[j]);
+                    zeros+=count[0];
+                    ones+=count[1];
+                    len++;
+                }
+            }
+            if(zeros<=m && ones<=n){
+                maxLen = Math.max(maxLen,len);
+            }
+        }
+        return maxLen;
+    }
+
+    public int findMaxFormTLE(String[] strs, int m, int n){
+        int maxLen = 0;
+        for(int i=0;i<(1<<strs.length);i++){
+            int zeros=0, ones=0, len = 0;
+            for(int j=0;j<32;j++){
+                if((i & (1<<j))!=0){
+                    int[] count = countZerosOnes(strs[j]);
+                    zeros+=count[0];
+                    ones+=count[1];
+                    if(zeros>m || ones>n) break;
+                    len++;
+                }
+            }
+            if(zeros<=m && ones<=n) maxLen = Math.max(maxLen, len);
+        }
+        return maxLen;
+    }
     public int findMaxForm(String[] strs, int m, int n) {   
         int len = strs.length;
         int[][] dp = new int[m+1][n+1];
