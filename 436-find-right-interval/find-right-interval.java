@@ -39,7 +39,10 @@ class Solution {
             idx++;
         }
         for(int i=0;i<n;i++){
-            res[i]= tm.ceilingEntry(intervals[i][1])!=null?tm.ceilingEntry(intervals[i][1]).getValue():-1;
+            Map.Entry<Integer,Integer> e = tm.ceilingEntry(intervals[i][1]);
+            res[i] = e==null?-1:e.getValue();
+
+            // res[i]= tm.ceilingEntry(intervals[i][1])!=null?tm.ceilingEntry(intervals[i][1]).getValue():-1;
         }
         return res;
     }
