@@ -1,7 +1,7 @@
-class TimeMap {
+class TimeMapInitial {
     TreeMap<String, String> tm;
 
-    public TimeMap() {
+    public TimeMapInitial() {
         tm = new TreeMap<>();
     }
     
@@ -17,7 +17,7 @@ class TimeMap {
     public String getFormattedTimeStamp(int timestamp){
         int n = String.valueOf(timestamp).length();
         StringBuilder sb = new StringBuilder(String.valueOf(timestamp));
-        while(n<7){
+        while(n<8){
             sb.insert(0,"0");
             n++;
         }
@@ -31,3 +31,21 @@ class TimeMap {
  * obj.set(key,value,timestamp);
  * String param_2 = obj.get(key,timestamp);
  */
+
+ class TimeMap {
+    private Map<String, TreeMap<Integer, String>> map;
+
+    public TimeMap() {
+        map = new HashMap<>();
+    }
+    
+    public void set(String key, String value, int timestamp) {
+        map.computeIfAbsent(key, k -> new TreeMap<>()).put(timestamp, value);
+    }
+    
+    public String get(String key, int timestamp) {
+        if (!map.containsKey(key)) return "";
+        Map.Entry<Integer, String> e = map.get(key).floorEntry(timestamp);
+        return e == null ? "" : e.getValue();
+    }
+}
