@@ -7,6 +7,7 @@ class Solution {
         int ans = Integer.MAX_VALUE;
         for(int i=0;i<n;i++){
             int g = nums[i];
+            // Smallest Subarray whose gcd is 1;
             for(int j=i+1;j<n;j++){
                 g = gcd(g, nums[j]);
                 if(g==1){
@@ -15,6 +16,7 @@ class Solution {
                 }
             }
         }
+        // Smallest SubArray Whose GCD is 1
         if(ans==Integer.MAX_VALUE) return -1;
         return ans+n-1;
     }
