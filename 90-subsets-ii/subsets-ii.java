@@ -1,5 +1,5 @@
 class Solution {
-    public List<List<Integer>> subsetsWithDup(int[] nums) {
+    public List<List<Integer>> subsetsWithDupInitial(int[] nums) {
         Set<List<Integer>> set = new HashSet<>();
         Arrays.sort(nums);
         List<Integer> li = new ArrayList<>();
@@ -8,7 +8,7 @@ class Solution {
     }
 
     private void recurse(Set<List<Integer>> set, int[] nums,List<Integer> li, int start, int end){
-        // Collections.sort(li);
+        // Collections.sort(li); // This is not needed and adds about 8 ms to result.
         set.add(new ArrayList<>(li));
         for(int i= start; i<end;i++){
             li.add(nums[i]);
@@ -16,5 +16,25 @@ class Solution {
             li.remove(li.size()-1);
             recurse(set, nums, li, i+1, end);
         }
+    }
+
+    
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Set<List<Integer>> rs = new HashSet<>();
+        Arrays.sort(nums);
+        List<Integer> li = new ArrayList<>();
+        recurseWithoutForLoop(rs, nums,li, 0, nums.length);
+        return new ArrayList(rs);
+    }
+
+    private void recurseWithoutForLoop(Set<List<Integer>> res, int[] nums,List<Integer> li, int start, int end){
+        if(start==end){
+            res.add(new ArrayList<>(li));
+            return;
+        }
+        li.add(nums[start]);
+        recurseWithoutForLoop(res, nums, li, start+1, end);
+        li.remove(li.size()-1);
+        recurseWithoutForLoop(res, nums, li, start+1, end);
     }
 }
