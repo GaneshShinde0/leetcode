@@ -8,7 +8,7 @@ class Solution {
     }
 
     private void recurse(Set<List<Integer>> set, int[] nums,List<Integer> li, int start, int end){
-        Collections.sort(li);
+        // Collections.sort(li);
         set.add(new ArrayList<>(li));
         for(int i= start; i<end;i++){
             li.add(nums[i]);
