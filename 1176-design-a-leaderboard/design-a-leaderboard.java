@@ -9,10 +9,10 @@ Has there are 100 scores only... We can use set to save score and then save id o
 Kind of like HashMap<Integer, Set<Integer>> = new HashMap();
 */
 
-class Leaderboard {
+class LeaderboardInitial{
     TreeMap<Integer, Set<Integer>> scoreToPlayers;
     HashMap<Integer,Integer> playerToScore;
-    public Leaderboard() {
+    public LeaderboardInitial() {
        scoreToPlayers= new TreeMap<>();
        playerToScore = new HashMap<>();
     }
@@ -50,6 +50,54 @@ class Leaderboard {
     }
 }
 
+class Leaderboard {
+    private final TreeMap<Integer, Set<Integer>> scoreToPlayers;
+    private final Map<Integer, Integer> playerToScore;
+
+    public Leaderboard() {
+        scoreToPlayers = new TreeMap<>();
+        playerToScore = new HashMap<>();
+    }
+
+    public void addScore(int playerId, int score) {
+        int oldScore = playerToScore.getOrDefault(playerId, 0);
+        int newScore = oldScore + score;
+
+        if (oldScore != 0) removeFromScoreMap(playerId, oldScore);
+        scoreToPlayers.computeIfAbsent(newScore, k -> new HashSet<>()).add(playerId);
+        playerToScore.put(playerId, newScore);
+    }
+
+    public int top(int K) {
+        int sum = 0;
+        for (var entry : scoreToPlayers.descendingMap().entrySet()) {
+            int score = entry.getKey();
+            Set<Integer> players = entry.getValue();
+            int count = players.size();
+
+            if (K > count) {
+                sum += score * count;
+                K -= count;
+            } else {
+                sum += score * K;
+                break;
+            }
+        }
+        return sum;
+    }
+
+    public void reset(int playerId) {
+        Integer oldScore = playerToScore.remove(playerId);
+        if (oldScore != null) removeFromScoreMap(playerId, oldScore);
+    }
+
+    private void removeFromScoreMap(int playerId, int score) {
+        Set<Integer> set = scoreToPlayers.get(score);
+        if (set == null) return;
+        set.remove(playerId);
+        if (set.isEmpty()) scoreToPlayers.remove(score);
+    }
+}
 /**
  * Your Leaderboard object will be instantiated and called as such:
  * Leaderboard obj = new Leaderboard();
