@@ -13,7 +13,7 @@ class Solution {
             sb.insert(0,s.substring(0,i+1));
             set.add(sb.toString());
 
-            if(set.size()==4){
+            if(set.size()==3){
                 set.pollLast();
                 set.pollLast();
             }
