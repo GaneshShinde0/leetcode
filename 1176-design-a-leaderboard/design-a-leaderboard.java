@@ -50,7 +50,7 @@ class LeaderboardInitial{
     }
 }
 
-class Leaderboard {
+class Leaderboard{
     private final TreeMap<Integer, Set<Integer>> scoreToPlayers;
     private final Map<Integer, Integer> playerToScore;
 
