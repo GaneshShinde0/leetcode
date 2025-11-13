@@ -12,6 +12,11 @@ class Solution {
             sb.reverse();
             sb.insert(0,s.substring(0,i+1));
             set.add(sb.toString());
+
+            if(set.size()==4){
+                set.pollLast();
+                set.pollLast();
+            }
         }
         return set.first();
     }
