@@ -18,9 +18,9 @@ To Count number of odd sub arrays we count total number of consecutive odd eleme
 
 class Solution {
     public long evenProduct(int[] nums) {
-        int n = nums.length;
+        long n = nums.length;
         // If I do not add 1l in following statement the calculation wont work properly;
-        long total_subs = 1l*n*(n+1)/2, odd_cnt = 0, odd_subs = 0;
+        long total_subs = n*(n+1)/2, odd_cnt = 0, odd_subs = 0;
         for(int num: nums){
             if(num%2==1) odd_cnt++;
             else odd_cnt = 0;
