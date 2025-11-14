@@ -24,7 +24,7 @@ class Node {
 
 
 class Solution {
-    public Node connect(Node root) {
+    public Node connectInitial(Node root) {
         if(root==null) return root;
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
@@ -40,6 +40,25 @@ class Solution {
                 if(prev.left!=null) queue.add(prev.left);
                 if(prev.right!=null) queue.add(prev.right);
             }
+        }
+        return root;
+    }
+    public Node connect(Node root) {
+        if(root==null) return root;
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int n = queue.size();
+            Node prev = null;
+            for (int i = 0; i < n; i++) {
+                Node curr = queue.poll();
+                if (prev != null) prev.next = curr;
+                prev = curr;
+
+                if (curr.left != null) queue.add(curr.left);
+                if (curr.right != null) queue.add(curr.right);
+            }
+
         }
         return root;
     }
