@@ -22,12 +22,15 @@ class Solution {
             int[] curr = new int[end+1];
             curr[0] = nums[0];
             for(int i=1;i<=end;i++){
-
                 if(nums[i]%2==nums[i-1]%2) return;
                 else curr[i] = nums[i];
             }
             res.add(curr);
         }else{
+            for(int i=1;i<start;i++){
+                if(nums[i]%2==nums[i-1]%2) return;
+                
+            }
             for(int i=start;i<=end;i++){
                 swap(nums, i, start);
                 helper(res, start+1, end, nums);
