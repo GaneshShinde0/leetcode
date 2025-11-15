@@ -20,7 +20,7 @@ class Solution{
     public int numberOfSubstrings(String s){
         int n = s.length();
         int[] pre = new int[n+1];
-        pre[0] = -1;
+        pre[0] = 0;
         for(int i=0;i<n;i++){
             if(i==0 || i>0 && s.charAt(i-1)=='0'){
                 pre[i+1] = i;
