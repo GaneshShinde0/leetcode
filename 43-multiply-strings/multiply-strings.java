@@ -13,7 +13,7 @@ class Solution {
                 carry = mult/10;
             }
             if(carry>0) sb.insert(0,carry);
-            System.out.println(sb);
+            // System.out.println(sb);
             StringBuilder sum = new StringBuilder();
             if(i<num2.length()-1){
                 carry = 0;
@@ -29,7 +29,7 @@ class Solution {
             }else{
                 res = sb;
             }
-            System.out.println(sum);
+            // System.out.println(sum);
         }
         int index = 0;
         while (res.length() > 1 && res.charAt(index) == '0') {
