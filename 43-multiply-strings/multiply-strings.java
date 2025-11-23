@@ -45,7 +45,7 @@ class Solution {
         for(int i = n1-1;i>=0;i--){
             int d1 = num1.charAt(i)-'0';
             for(int j= n2-1;j>=0;j--){
-                result[i+j+1] +=d1*(num2.charAt(j)-'0'); // Lets store multiplication as well
+                result[i+j+1] +=d1*(num2.charAt(j)-'0'); // Lets store multiplication directly
             }
         }
         for(int i=result.length-1, carry=0,sum;i>=0;i--){
