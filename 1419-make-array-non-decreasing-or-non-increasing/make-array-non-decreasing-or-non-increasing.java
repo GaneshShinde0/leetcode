@@ -14,8 +14,7 @@ class Solution {
         for(int num:arr){
             pq.offer(num);
             if(pq.peek()<num){
-                cost += (num-pq.peek());
-                pq.poll();
+                cost += (num-pq.poll());
                 pq.offer(num);
             }
         }
