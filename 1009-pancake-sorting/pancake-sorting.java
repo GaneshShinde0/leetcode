@@ -3,6 +3,7 @@ class Solution {
         List<Integer> res = new ArrayList<>();
         for(int i=arr.length;i>0;i--){
             int idx = findIdx(arr,i);
+            if(idx==i-1) continue;
             if(idx!=0){
                 res.add(idx+1);
                 flip(arr,idx+1);
