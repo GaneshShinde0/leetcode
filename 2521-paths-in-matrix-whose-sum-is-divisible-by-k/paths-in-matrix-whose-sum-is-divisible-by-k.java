@@ -27,7 +27,7 @@ class Solution {
         for(int i=1;i<=m;i++){
             for(int j=1;j<=n;j++){
                 if(i==1&&j==1){
-                    dp[i][j][grid[0][0]%k]=1;
+                    dp[i][j][grid[0][0]%k]=1; // Count at the beginning is 1, as there is only one element with grid[0][0]%k;
                     continue;
                 }
                 int value = grid[i-1][j-1]%k;
