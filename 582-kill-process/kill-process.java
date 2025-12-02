@@ -4,7 +4,7 @@ class Solution {
         for(int i=0;i<ppid.size();i++){
             hm.computeIfAbsent(ppid.get(i),k->new ArrayList<Integer>()).add(pid.get(i));
         }
-        System.out.println(hm);
+        // System.out.println(hm);
         List<Integer> res = new ArrayList<>();
         dfs(hm, res, kill);
         return res;
