@@ -8,9 +8,9 @@ class Solution {
         long res = 0;
         long sum = 0;
         for(Map.Entry<Integer,Integer> e: hm.entrySet()){
-            long numOfEdges = (1l*e.getValue()*(e.getValue()-1))/2;
-            res = (res+numOfEdges*sum)%mod;
-            sum = (sum+numOfEdges)%mod;
+            long numOfEdges = 1l*e.getValue()*(e.getValue()-1)/2;
+            res = (res+sum*numOfEdges)%mod;
+            sum = sum+numOfEdges;
         }
         return (int)res;
     }
