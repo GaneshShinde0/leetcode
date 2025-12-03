@@ -33,7 +33,7 @@ class Solution {
 
                 int mid = (x1+x2)*10000+(y1+y2);
                 slopeToIntercept.computeIfAbsent(k,key-> new ArrayList<>()).add(b);
-                midToSlope.computeIfAbsent(mid,key->new ArrayList<>()).add(k);
+                midToSlope.computeIfAbsent(mid,key->new ArrayList<>()).add(k); // midToSlope maps encoded mid point to a list of k slopes. ach slope in the list corresponds to a segment that passes through particular midpoint.
             }
         }
 
@@ -49,7 +49,8 @@ class Solution {
                 sum += count;
             }
         }
-
+        // A parallelogram would get counted twice by the slopeToIntercept logic. (once for each pair of parallel sides).
+        // Following code removes them.
         for(List<Double> mts: midToSlope.values()){
             if(mts.size()==1) continue;
             Map<Double, Integer> cnt = new TreeMap<>();
