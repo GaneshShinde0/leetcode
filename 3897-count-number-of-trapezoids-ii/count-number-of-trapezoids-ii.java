@@ -25,7 +25,7 @@ class Solution {
                     // y = (dy/dx)*x+c; // c is the x intercept
                     // c = y-(dy/dx)*x;
                     // b = y1-k*x1;
-                    b = (1.0 * (y1 * dx - x1 * dy)) / dx;
+                    b = (1.0 * (y1 * dx - x1 * dy)) / dx; // Above line does not work as line no. 28 gives more precision.
 
                 }
                 if(k==-0.0) k= 0.0;
