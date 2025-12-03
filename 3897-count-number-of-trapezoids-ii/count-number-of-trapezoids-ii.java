@@ -17,7 +17,7 @@ class Solution {
                 double k, b;
 
                 if(dx==0){
-                    k=inf; // slope
+                    k=Integer.MAX_VALUE; // slope
                     b=x1; // x intercept
                 }else{
                     k = (1.0*dy)/dx; // Slope
