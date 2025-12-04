@@ -1,7 +1,7 @@
 class Solution {
     public int countCollisions(String directions) {
         Stack<Character> stk = new Stack<>();
-        System.out.println();
+        // System.out.println();
         int res = 0;
         for(char c: directions.toCharArray()){
             // if (stk.isEmpty() && c=='R'||c=='S') stk.push(c);
