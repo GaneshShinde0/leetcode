@@ -25,6 +25,43 @@ class Solution {
         return res;
     }
 
+    public int countCollisions(String directions) {
+        Stack<Character> stack = new Stack<>();
+        int collisions = 0;
+
+        for (char c : directions.toCharArray()) {
+
+            // Case 1: R → L collision
+            if (!stack.isEmpty() && stack.peek() == 'R' && c == 'L') {
+                collisions += 2;
+                stack.pop();
+                c = 'S';     // becomes stationary after collision
+            }
+
+            // Case 2: anything hits a stationary car
+            if (c == 'S') {
+                // All previous R cars will collide into S
+                while (!stack.isEmpty() && stack.peek() == 'R') {
+                    collisions++;
+                    stack.pop();
+                }
+                stack.push('S');
+                continue;
+            }
+
+            // Case 3: L car hits stationary S
+            if (!stack.isEmpty() && stack.peek() == 'S' && c == 'L') {
+                collisions++;
+                continue;   // L disappears, no push
+            }
+
+            // Case 4: Safe push (R or L when no collision)
+            stack.push(c);
+        }
+
+        return collisions;
+    }
+
     
     public int countCollisionsSecond(String directions) {
         int res = 0;
@@ -50,7 +87,7 @@ class Solution {
         }
         return res;
     }
-    public int countCollisions(String str) {
+    public int countCollisions100(String str) {
         int count=0;
         int left=0,right=str.length()-1;
         char[] s=str.toCharArray();
