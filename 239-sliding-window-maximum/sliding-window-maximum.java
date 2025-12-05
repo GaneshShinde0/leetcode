@@ -16,4 +16,20 @@ class Solution {
         }
         return res;
     }
+    // public int[] maxSlidingWindow(int[] nums, int k) {
+    //     int n = nums.length;
+    //     int[] res = new int[n-k+1];
+    //     Arrays.fill(res,Integer.MIN_VALUE);
+    //     // if(k==1) return nums;
+    //     PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->Integer.compare(b[1],a[1]));
+    //     for(int i=0;i<n;i++){
+    //         pq.add(nums[i]);
+    //         if(i-k>=0){
+    //             pq.poll();
+    //         }
+    //         res[Math.max(i-k+1,0)] = Math.max(res[Math.max(i-k+1,0)],pq.peek());
+            
+    //     }
+    //     return res;
+    // }
 }
