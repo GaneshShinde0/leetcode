@@ -26,10 +26,11 @@ class Solution {
             // Remove Elements outside window
             if(!dq.isEmpty() && dq.peekFirst()<=i-k) dq.pollFirst();
 
+            // If previous are less than current we dont need any of them.
             while(!dq.isEmpty() && nums[dq.peekLast()]<=nums[i]){
                 dq.pollLast();
             }
-            dq.add(i);
+            dq.addLast(i);
             if(i-k+1>=0){
                 res[i-k+1]=nums[dq.peekFirst()];
             }
