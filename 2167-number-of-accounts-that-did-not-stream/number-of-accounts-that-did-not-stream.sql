@@ -1,0 +1,2 @@
+/* Write your T-SQL query statement below */
+SELECT COUNT(*) as accounts_count FROM Subscriptions s left join streams stm on s.account_id = stm.account_id WHERE (year(start_date ) = 2021 or year(end_Date)=2021) AND year(stream_date)<>2021
