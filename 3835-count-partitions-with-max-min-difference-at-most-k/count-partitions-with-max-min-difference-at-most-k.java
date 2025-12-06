@@ -2,8 +2,7 @@ class Solution {
      public int countPartitions(int[] nums, int k) {
         int n = nums.length;
         long mod = (long) 1e9 + 7;
-        long[] dp = new long[n + 1];
-        long[] prefix = new long[n + 1];
+        long[] dp = new long[n + 1], prefix = new long[n + 1];
         TreeMap<Integer, Integer> cnt = new TreeMap<>();
 
         dp[0] = 1;
