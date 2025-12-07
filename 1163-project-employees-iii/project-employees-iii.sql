@@ -1,0 +1,2 @@
+SELECT project_id, employee_id FROM (SELECT project_id, p.employee_id , DENSE_RANK() OVER(PARTITION BY project_id ORDER BY experience_years desc) as rnk from Project p left join Employee e on p.employee_id = e.employee_id
+) src  WHERE rnk = 1
