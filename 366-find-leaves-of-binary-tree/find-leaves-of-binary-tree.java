@@ -24,6 +24,7 @@ class Solution {
         int level = 1+ Math.max(height(root.left,res), height(root.right,res));
         if(res.size()<level) res.add(new ArrayList<>());
         res.get(level-1).add(root.val);
+        root = null;
         return level;
     }
 }
