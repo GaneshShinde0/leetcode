@@ -28,7 +28,7 @@ class Solution {
     }
 
     // Iterative Inplace
-    public ListNode reverseList(ListNode head){
+    public ListNode reverseListIterative(ListNode head){
         ListNode prev = null;
         while(head!=null){
             ListNode temp = head.next;
@@ -38,4 +38,46 @@ class Solution {
         }
         return prev;
     }
+
+    public ListNode reverseListOld(ListNode head){
+        // Base case: Empty or single node list
+        if(head==null||head.next==null){
+            return head;
+        }
+        
+        // Recursively Reverse the rest of the list
+        ListNode newHead = reverseList(head.next);
+        // After recursion, head.next is the last node in the reversed subList;
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+
+    public ListNode reverseList(ListNode head){
+        ListNode prev = null;
+        while(head!=null){
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
