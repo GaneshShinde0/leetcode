@@ -34,19 +34,13 @@ class Solution {
         int size = 0;
         ListNode temp = new ListNode(-1);
         temp.next = head;
-        while(head!=null){
-            size++;
-            head = head.next;
+        ListNode fast = temp, slow = temp;
+        for(int i=0;i<=n;i++) fast = fast.next;
+        while(fast!=null){
+            slow = slow.next;
+            fast = fast.next;
         }
-        // if(size==1) return null;
-        int k = size-n;
-        int i=-1;
-        head = temp;
-        while(i<k-1){
-            i++;
-            head = head.next;
-        }
-        if(head.next!=null) head.next=head.next.next;
+        slow.next = slow.next.next;
         return temp.next;
     }
 
