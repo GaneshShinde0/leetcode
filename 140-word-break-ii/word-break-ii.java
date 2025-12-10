@@ -1,6 +1,33 @@
 class Solution {
-    Set<String> words;
+    Map<String, List<String>> memo = new HashMap<>();
     public List<String> wordBreak(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict);
+        return dfs(s, dict);
+    }
+    
+    private List<String> dfs(String s, Set<String> dict) {
+        if (memo.containsKey(s)) return memo.get(s);
+        List<String> result = new ArrayList<>();
+        
+        if (dict.contains(s))
+            result.add(s); // whole word
+
+        for (int i = 1; i < s.length(); i++) {
+            String prefix = s.substring(0, i);
+            if (dict.contains(prefix)) {
+                List<String> suffixWays = dfs(s.substring(i), dict);
+                for (String suffix : suffixWays) {
+                    result.add(prefix + " " + suffix);
+                }
+            }
+        }
+        
+        memo.put(s, result);
+        return result;
+    }
+
+    Set<String> words;
+    public List<String> wordBreakInitial(String s, List<String> wordDict) {
         words  = new HashSet<>(wordDict);
         return wordBreak(s,wordDict, new ArrayList<StringBuilder>());
     }
