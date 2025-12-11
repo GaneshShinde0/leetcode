@@ -17,7 +17,7 @@ class Solution {
             int[] xLower = x.lower(b);
             int[] xHigher = x.higher(b);
             int[] yLower = y.lower(b);
-            int[] yHigher = y.higher(b);
+            int[] yHigher = y.higher(b); 
             if((xLower!=null && xHigher!=null && xLower[0]==b[0] && xHigher[0]==b[0]) && 
             (yLower!=null && yHigher!=null && yLower[1]==b[1] && yHigher[1]==b[1])){
                 res++;
