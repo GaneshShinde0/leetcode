@@ -16,10 +16,11 @@ class Solution {
         //     if(a[1].equals(b[1]) && a[0]!=null && b[0]!=null) return a[0].compareTo(b[0]);
         //     return 0;
         //     });
+        
+        
         Arrays.sort(codeToBusinessLine, Comparator
     .comparing((Object[] row) -> (String) row[1], Comparator.nullsFirst(String::compareTo))
     .thenComparing(row -> (String) row[0], Comparator.nullsFirst(String::compareTo)));
-
         for(int i=0;i<n;i++){
             if(!codeToBusinessLine[i][1].equals("5") &&  codeToBusinessLine[i][0]!=null &&  !codeToBusinessLine[i][0].isEmpty()) res.add(codeToBusinessLine[i][0]);
         }
