@@ -1,5 +1,5 @@
 class Solution {
-    public int leastInterval(char[] tasks, int n) {
+    public int leastIntervalInitial(char[] tasks, int n) {
         int currGap = n;
         int[] freq = new int[26];
         for(char c:tasks) freq[c-'A']++;
@@ -23,5 +23,19 @@ class Solution {
             time += (pq.isEmpty()?taskCount:n+1);
         }
         return time;
+    }
+
+    
+    public int leastInterval(char[] tasks, int n) {
+        int currGap = n;
+        int[] freq = new int[26];
+        for(char c:tasks) freq[c-'A']++;
+        Arrays.sort(freq);
+        int res = (freq[25]-1)*n;
+        for(int i=24;i>=0;i--){
+            res -= Math.min((freq[25]-1),freq[i]);
+        }
+        return res>0?res+tasks.length:tasks.length;
+
     }
 }
