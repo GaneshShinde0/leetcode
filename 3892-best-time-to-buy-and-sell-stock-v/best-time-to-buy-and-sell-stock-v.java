@@ -17,12 +17,13 @@ class Solution {
     }
 
     private long dfs(int i, int j, int state){
-        if(j==0) return 0;
-        if(i==0) return state==0?0:(state==1?-prices[0]:prices[0]);
-        if(memo[i][j][state]!=-1) return memo[i][j][state];
+        if(j==0) return 0; // When There are 0 Transactions (k) remaining return 0;
+        if(i==0) return state==0?0:(state==1?-prices[0]:prices[0]); // When We are buying and i==0 (curr = -prices[0]) hoping we will have some value > curr in future.
+        // For Sell we are hoping we will have some value < curr.(in future)
+        if(memo[i][j][state]!=-1) return memo[i][j][state]; // Already calculated value
 
-        int p = prices[i];
-        long res;
+        int p = prices[i]; // Current Price.
+        long res=0;
         if(state == 0){
             res = Math.max(dfs(i-1,j,0),Math.max(dfs(i-1,j,1)+p, dfs(i-1,j,2)-p));
         }else if (state == 1){
