@@ -17,7 +17,7 @@ class Solution {
                 int nx = x+dir[0];
                 int ny = y+dir[1];
                 // rooms[nx][ny]<=rooms[x][y] takes 800 ms
-                // Where as 
+                // Where as +1 takes 13 ms
                 if(nx>=m || nx<0 || ny>=n || ny<0 || rooms[nx][ny]<=rooms[x][y]+1 ||rooms[nx][ny]==0) continue;
                 rooms[nx][ny]=Math.min(rooms[nx][ny],rooms[x][y]+1);
                 pq.add(new int[]{nx,ny,rooms[nx][ny]});
