@@ -1,0 +1,1 @@
+SELECT question_id as survey_log from (SELECT TOP 1 action,question_id, count(*) as count FROM SurveyLog WHERE action='answer' GROUP BY action, question_id ORDER BY 3 DESC, 2 ASC) src
