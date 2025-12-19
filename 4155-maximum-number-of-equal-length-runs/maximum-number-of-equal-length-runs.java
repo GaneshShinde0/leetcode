@@ -12,7 +12,7 @@ class Solution {
         }
         hm.put(count, hm.getOrDefault(count,0)+1);
         int res = 0;
-        System.out.println(hm);
+        // System.out.println(hm);
         for(int i:hm.values()){
             res = Math.max(i,res);
         }
