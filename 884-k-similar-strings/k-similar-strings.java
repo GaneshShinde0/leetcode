@@ -36,7 +36,7 @@ class Solution {
         List<String> li = new ArrayList<>();
         for(int j=i+1;j<s1.length();j++){
             // Taking only neighbors which are relevant to our cause.
-            if(arr[j]==s2.charAt(i)){
+            if(arr[j]==s2.charAt(i)  && arr[j] != s2.charAt(j)){ // Only First Condition used to take 90 ms
                 swap(i,j,arr);
                 li.add(new String(arr));
                 swap(i,j,arr);
