@@ -6,7 +6,7 @@ class Solution {
         At Every single level branch into its neighbors and check if they are same.
         */
         Set<String> visited = new HashSet<>();
-        Queue<String> queue = new LinkedList<>();
+        Queue<String> queue = new ArrayDeque<>();
         visited.add(s1);
         queue.add(s1);
         int level = 0;
