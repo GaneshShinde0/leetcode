@@ -4,7 +4,6 @@ class Solution {
         long step = 1;
         long remaining = n;
         boolean leftToRight = true;
-
         while (remaining > 1) {
             if (!leftToRight && remaining % 2 == 0) {
                 head += step;
