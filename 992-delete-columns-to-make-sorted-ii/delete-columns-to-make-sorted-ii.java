@@ -36,13 +36,13 @@ class Solution {
         // curr = ["abc","def","ghi"]
         String[] curr = new String[n];
         Arrays.fill(curr, new String());
-        System.out.println(Arrays.toString(curr));
+        // System.out.println(Arrays.toString(curr));
         for(int j=0;j<w;j++){
             // curr2: what we potentially can write, includign the newest column [A[i][j] for i]
             // E.g. If curr = ["ab","de","gh"] and col = ["c","f","i"]
             // then curr2 = ["abc","def","ghi"]
             String[] curr2 = Arrays.copyOf(curr, n);
-            System.out.println(Arrays.toString(curr2));
+            // System.out.println(Arrays.toString(curr2));
             for(int i=0;i<n;i++){
                 curr2[i]+=strs[i].charAt(j);
             }
