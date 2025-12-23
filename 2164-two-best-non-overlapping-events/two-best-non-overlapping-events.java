@@ -1,31 +1,29 @@
 class Solution {
-
     public int maxTwoEvents(int[][] events) {
-        Arrays.sort(events, (a, b) -> a[0] - b[0]);
-        int[][] dp = new int[events.length][3];
-        for (int[] d : dp) Arrays.fill(d, -1);
-        return findEvents(events, 0, 0, dp);
+        Arrays.sort(events,(a,b)->a[0]-b[0]);
+        int[][] dp = new int[events.length][3]; // Three Choices
+        for(int[] d:dp) Arrays.fill(d,-1);
+        return findEvents(events,0,0,dp);
     }
 
-    // Recursive function to find the greatest sum for the pairs.
-    int findEvents(int[][] events, int idx, int cnt, int[][] dp) {
-        if (cnt == 2 || idx >= events.length) return 0;
-        if (dp[idx][cnt] == -1) {
+    private int findEvents(int[][] events, int idx, int count, int[][] dp){
+        int n = events.length;
+        if(count==2||idx>=n) return 0;
+        if(dp[idx][count]==-1){
             int end = events[idx][1];
-            int lo = idx + 1, hi = events.length - 1;
-            while (lo < hi) {
-                int mid = lo + ((hi - lo) >> 1);
-                if (events[mid][0] > end) hi = mid;
-                else lo = mid + 1;
+            int low = idx+1, high = n-1;
+            while(low<high){
+                int mid = low + (high-low)/2;
+                if(events[mid][0]>end) high = mid; // Checking event which started after previous event ended.
+                else low = mid+1;
             }
-            int include =
-                events[idx][2] +
-                (lo < events.length && events[lo][0] > end
-                        ? findEvents(events, lo, cnt + 1, dp)
-                        : 0);
-            int exclude = findEvents(events, idx + 1, cnt, dp);
-            dp[idx][cnt] = Math.max(include, exclude);
+            int include = events[idx][2]; // Including Current Event
+            if(low<n && events[low][0]>end){
+                include += findEvents(events, low, count+1, dp);
+            }
+            int exclude = findEvents(events,idx+1, count, dp); // Excluding the curerent Event;
+            dp[idx][count] = Math.max(include, exclude);
         }
-        return dp[idx][cnt];
+        return dp[idx][count];
     }
 }
