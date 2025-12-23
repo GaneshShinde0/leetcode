@@ -34,17 +34,18 @@ class Solution {
         PriorityQueue<Pair<Integer,Integer>> pq = new PriorityQueue<>(
             Comparator.comparingInt(Pair::getKey)
         );
-
         Arrays.sort(events, (a,b)-> a[0]-b[0]);
         int maxVal = 0, maxSum = 0;
         
         for(int[] event: events){
-            while(!pq.isEmpty() && pq.peek().getKey()<event[0]){
+            while(!pq.isEmpty() && pq.peek().getKey()<event[0]){ // If Event is ending before start of current event;
                 maxVal = Math.max(maxVal, pq.peek().getValue());
                 pq.poll();
             }
             maxSum = Math.max(maxSum, maxVal+event[2]);
+            // System.out.println(pq);
             pq.add(new Pair<>(event[1],event[2]));
+            // System.out.println(pq);
         }
         return maxSum;
     }
