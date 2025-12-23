@@ -3,6 +3,9 @@ class Solution {
         Arrays.sort(events,(a,b)->a[0]-b[0]);
         int[][] dp = new int[events.length][3]; // Three Choices
         for(int[] d:dp) Arrays.fill(d,-1);
+                // System.out.println(Arrays.toString(dp[events.length-1]));
+                // System.out.println(Arrays.toString(dp[0]));
+                // return 0;
         return findEvents(events,0,0,dp);
     }
 
@@ -22,7 +25,7 @@ class Solution {
                 include += findEvents(events, low, count+1, dp);
             }
             int exclude = findEvents(events,idx+1, count, dp); // Excluding the curerent Event;
-            dp[idx][count] = Math.max(include, exclude);
+            dp[idx][count] = Math.max(include, exclude); 
         }
         return dp[idx][count];
     }
