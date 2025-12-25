@@ -5,6 +5,7 @@ class Solution {
         Arrays.sort(freq);
         int res = 0;
         for(int i=0;i<26;i++){
+            if(freq[i]==0) continue;
             int mult = (i>=17)?1:(i>=8)?2:3;
             res += mult*freq[i];
         }
