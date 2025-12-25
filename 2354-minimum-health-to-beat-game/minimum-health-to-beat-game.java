@@ -9,7 +9,7 @@ class Solution {
                 usedArmor = armor;
             }
         }
-        if(usedArmor==0)usedArmor = Math.max(usedArmor,armor);
+        // if(usedArmor==0)usedArmor = Math.max(usedArmor,armor);
         return Math.max(res-usedArmor+1,1);
     }
 }
