@@ -10,10 +10,16 @@ class Solution {
             if(curr==0 && i==0) break;
             while(freq[i]>=2){
                 char c = (char) (i+'0');
-                sb.insert(sb.length()-curr,c);
-                sb.insert(curr,c);
-                freq[i]-=2;
-                curr++;
+                StringBuilder builder = new StringBuilder(freq[i]/2); // Optional: pre-size for efficiency
+                for (int j = 0; j < freq[i]/2; j++) {
+                    builder.append(c);
+                }
+                sb.insert(sb.length()-curr,builder.toString());
+                sb.insert(curr,builder.toString());
+                // System.out.println(sb.toString());
+                // System.out.println(curr);
+                curr+=freq[i]/2;
+                freq[i]=freq[i]%2;
             }
         }
         for(int i=9;i>=0;i--){
