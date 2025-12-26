@@ -41,7 +41,6 @@ class Solution {
         for(int i=1;i<=n;i++){
             prefixSum[i]=prefixSum[i-1]+(customers.charAt(i-1)=='Y'?1:0);
         }
-        // Logic hint
         int minPenalty = n + 1;
         int bestHour = 0;
 
