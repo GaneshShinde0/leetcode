@@ -30,7 +30,8 @@ class Solution {
         }
         return map.size(); // We Are just using size ... so we wont need map as well
     }
-    public int numSpecialEquivGroups(String[] words) {
+    // Takes 15 ms
+    public int numSpecialEquivGroupsUsingSet(String[] words) {
         Set<String> set = new HashSet<>();
         int res = 0;
         for(String s:words){
@@ -40,6 +41,22 @@ class Solution {
                 else freq[26+s.charAt(i)-'a']++;
             }
             set.add(Arrays.toString(freq));
+        }
+        return set.size();
+    }
+
+    // Takes 15 ms
+    // HashCode
+    public int numSpecialEquivGroups(String[] words) {
+        Set<Integer> set = new HashSet<>();
+        int res = 0;
+        for(String s:words){
+            int[] freq = new int[52]; // We will save even initially and odds later ()
+            for(int i=0;i<s.length();i++){
+                if(i%2==0) freq[s.charAt(i)-'a']++;
+                else freq[26+s.charAt(i)-'a']++;
+            }
+            set.add(Arrays.hashCode(freq));
         }
         return set.size();
     }
