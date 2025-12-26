@@ -16,7 +16,7 @@ i = 4
 res = Max(4-3, 4-3-(3-3))=1;
 */
 class Solution {
-    public int bestClosingTime(String customers) {
+    public int bestClosingTimeInitial(String customers) {
         int n = customers.length();
         int[] prefixSum = new int[n+1];
         for(int i=1;i<=n;i++){
@@ -35,26 +35,26 @@ class Solution {
         }
         return idx;
     }
-    // public int bestClosingTime(String customers) {
-    //     int n = customers.length();
-    //     int[] prefixSum = new int[n+1];
-    //     for(int i=1;i<=n;i++){
-    //         prefixSum[i]=prefixSum[i-1]+(customers.charAt(i-1)=='Y'?1:0);
-    //     }
-    //     // Logic hint
-    //     int minPenalty = n + 1;
-    //     int bestHour = 0;
+    public int bestClosingTime(String customers) {
+        int n = customers.length();
+        int[] prefixSum = new int[n+1];
+        for(int i=1;i<=n;i++){
+            prefixSum[i]=prefixSum[i-1]+(customers.charAt(i-1)=='Y'?1:0);
+        }
+        // Logic hint
+        int minPenalty = n + 1;
+        int bestHour = 0;
 
-    //     for (int i = 0; i <= n; i++) {
-    //         int nsBefore = i - prefixSum[i];
-    //         int ysAfter = prefixSum[n] - prefixSum[i];
-    //         int penalty = nsBefore + ysAfter;
+        for (int i = 0; i <= n; i++) {
+            int nsBefore = i - prefixSum[i];
+            int ysAfter = prefixSum[n] - prefixSum[i];
+            int penalty = nsBefore + ysAfter;
             
-    //         if (penalty < minPenalty) {
-    //             minPenalty = penalty;
-    //             bestHour = i;
-    //         }
-    //     }
-    //     return bestHour;
-    // }
+            if (penalty < minPenalty) {
+                minPenalty = penalty;
+                bestHour = i;
+            }
+        }
+        return bestHour;
+    }
 }
