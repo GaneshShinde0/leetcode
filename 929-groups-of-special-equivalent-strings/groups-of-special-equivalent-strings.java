@@ -1,4 +1,5 @@
 class Solution {
+    // Takes 18 ms
     public int numSpecialEquivGroupsInitial(String[] words) {
         HashMap<String,Integer> map = new HashMap<>();
         int res = 0;
@@ -14,6 +15,7 @@ class Solution {
         }
         return map.size();
     }
+    // Takes 16 ms; 
     public int numSpecialEquivGroups(String[] words) {
         HashMap<String,Integer> map = new HashMap<>();
         int res = 0;
@@ -26,6 +28,7 @@ class Solution {
             String temp = Arrays.toString(freq);
             map.put(temp,map.getOrDefault(temp,0)+1);
         }
-        return map.size();
+        return map.size(); // We Are just using size ... so we wont need map as well
     }
+    
 }
