@@ -18,8 +18,8 @@ class Solution {
                 int curr = q.poll();
                 Set<Integer> set= graph.computeIfAbsent(curr,k->new HashSet<Integer>());
                 for(int j:set){
-                    inDegree[j]--;
-                    if(inDegree[j]==0){
+                    inDegree[j]--; // One less course to Do
+                    if(inDegree[j]==0){ // If we can do this course lets add it to result.
                         q.add(j); 
                     }                   
                 }
