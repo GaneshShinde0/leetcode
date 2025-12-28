@@ -2,7 +2,7 @@
       boolean knows(int a, int b); */
 
 public class Solution extends Relation {
-    public int findCelebrityInitial(int n) {
+    public int findCelebrityInitialFailsCoupleOfTestCases(int n) {
         System.out.println(n);
         int[] knowsCount = new int[n];
         for(int i=0;i<n;i++){
