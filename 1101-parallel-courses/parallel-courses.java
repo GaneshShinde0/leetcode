@@ -12,7 +12,7 @@ class Solution {
         }
         int res = 0;
         while(!q.isEmpty()){
-            System.out.println(q);
+            // System.out.println(q);
             int size = q.size();
             for(int i=0;i<size;i++){
                 int curr = q.poll();
