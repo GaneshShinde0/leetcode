@@ -14,7 +14,27 @@
  * }
  */
 class Solution {
+
     public TreeNode findNearestRightNode(TreeNode root, TreeNode u) {
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
+
+                if (node == u) {
+                    return (i == size - 1) ? null : q.peek();
+                }
+
+                if (node.left != null) q.offer(node.left);
+                if (node.right != null) q.offer(node.right);
+            }
+        }
+        return null;
+    }
+    public TreeNode findNearestRightNodeInitial(TreeNode root, TreeNode u) {
         if(root==null) return null;
         Deque<TreeNode> dq = new ArrayDeque<>();
         dq.add(root);
