@@ -5,21 +5,21 @@ class Solution {
         int m = grid.length, n = grid[0].length;
         for(int i=0;i<m;i++){
             if(grid[i][0]==1){
-                stk.add(new int[]{i,0});
+                stk.push(new int[]{i,0});
                 grid[i][0] = 0; // Mark visited immediately
             }
             if(grid[i][n-1]==1){
-                stk.add(new int[]{i,n-1});
+                stk.push(new int[]{i,n-1});
                 grid[i][n-1] = 0; // Mark visited immediately
             }
         }
         for(int i=0;i<n;i++){
             if(grid[0][i]==1){
-                stk.add(new int[]{0,i});
+                stk.push(new int[]{0,i});
                 grid[0][i] = 0; // Mark visited immediately
             }
             if(grid[m-1][i]==1){
-                stk.add(new int[]{m-1,i});
+                stk.push(new int[]{m-1,i});
                 grid[m-1][i] = 0; // Mark visited immediately
             }
         }
