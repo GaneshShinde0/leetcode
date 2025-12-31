@@ -2,7 +2,9 @@ class Solution {
     private int[][] directions = new int[][]{{1,0},{-1,0},{0,1},{0,-1}};
     public int latestDayToCross(int row, int col, int[][] cells) {
         int left = 1;
-        int right = row*col; // Right is the point when all cells get filled.
+        // int right = row*col; // Right is the point when all cells get filled.
+        // Following also works fine
+        int right = cells.length;
         while(left<right){
             int mid = right - (right-left)/2;
             if(canCross(row, col, cells, mid)){
