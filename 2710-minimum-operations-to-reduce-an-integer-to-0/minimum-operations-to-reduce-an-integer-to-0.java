@@ -21,7 +21,7 @@ class Solution {
         int res = 0;
         while(n>0){
             if((n&3)==3){ // Seeing if last two bits were 11 If yes we will increment result by 1 and n by 1 (basically making 011 to 100 which can be converted to 0 later)
-                n++;
+                n++; // n+1 will also take care of scenarios like 10111111; Making 10111111 to 1000000
                 res++;
             }else{
                 res+=n&1; // See if last bit was 1
