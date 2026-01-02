@@ -32,8 +32,7 @@ class RandomizedSet
             return false;
         }
         int position=hm.get(val);
-        if(position!=(arrlist.size()-1))
-        {
+        if(position!=(arrlist.size()-1)){
             int lastelevalue=arrlist.get(arrlist.size()-1);
             arrlist.set(position,lastelevalue);
             hm.put(lastelevalue,position);
