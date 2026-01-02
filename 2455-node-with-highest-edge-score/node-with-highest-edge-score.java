@@ -11,7 +11,7 @@ class Solution {
                 else maxNode = edges[i];
             }
         }
-        System.out.println(Arrays.toString(score));
+        // System.out.println(Arrays.toString(score));
         return maxNode;
     }
 }
