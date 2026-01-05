@@ -51,7 +51,7 @@ class Solution {
         }
         return mostCost;
     }
-    public int minCostConnectPoints(int[][] points) {
+    public int minCostConnectPointsPrimsOptimized(int[][] points) {
         int n = points.length;
         int mstCost = 0;
         int edgesUsed = 0;
@@ -94,5 +94,31 @@ class Solution {
         }
         
         return mstCost;
+    }
+
+    public int minCostConnectPoints(int[][] points) {
+        int n = points.length, edgesUsed = 0, mostPoints = 0;
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->Integer.compare(a[0],b[0]));
+        boolean[] inMST = new boolean[n];
+
+        pq.add(new int[]{0,0});
+
+        while(edgesUsed<n){
+            int[] curr = pq.poll();
+            int weight = curr[0];
+            int node = curr[1];
+            if(inMST[node]) continue;
+            inMST[node] = true;
+            edgesUsed++;
+            mostPoints+=weight;
+            for(int i=0;i<n;i++){
+                if(!inMST[i]){
+                    int newWt = Math.abs(points[node][0]-points[i][0])+Math.abs(points[node][1]-points[i][1]);
+                    pq.add(new int[]{newWt,i});
+                }
+            }
+        }
+        return mostPoints;
     }
 }
