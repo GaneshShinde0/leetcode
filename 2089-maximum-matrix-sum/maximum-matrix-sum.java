@@ -27,7 +27,6 @@ class Solution {
         int m = matrix.length, n = matrix[0].length;
         int negs = 0;
         
-        // Initialize minAbs to a large number so we can find the true minimum
         int minAbs = Integer.MAX_VALUE; 
         long sum = 0;
 
