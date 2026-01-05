@@ -11,7 +11,7 @@ class UnionFind{
     public int find(int x){
         // Check Following Later
         // return parent[x];
-        if(parent[x]!=x) parent[x] =find(parent[x]);
+        if(parent[x]!=x) parent[x] =find(parent[x]); // Check Parents until we find node with same parent.
         return parent[x];
     }
 
