@@ -13,12 +13,12 @@
  *     }
  * }
  */
-class BSTIterator {
+class BSTIteratorON {
 
     List<Integer> li;
     int n;
     int curr;
-    public BSTIterator(TreeNode root) {
+    public BSTIteratorON(TreeNode root) {
         li = new ArrayList<>();
         inOrder(root);
         n = li.size();
@@ -42,5 +42,32 @@ class BSTIterator {
     
     public boolean hasNext() {
         return curr<n;
+    }
+}
+
+class BSTIterator{
+    Stack<TreeNode> stack;
+    public BSTIterator(TreeNode root){
+        this.stack = new Stack<TreeNode>();
+        leftMostInOrder(root);
+    }
+
+    private void leftMostInOrder(TreeNode root){
+        while(root!=null){
+            stack.push(root);
+            root = root.left;
+        }
+    }
+
+    public int next(){
+        TreeNode topMostNode = stack.pop();
+        if(topMostNode.right!=null){
+            leftMostInOrder(topMostNode.right);
+        }
+        return topMostNode.val;
+    }
+
+    public boolean hasNext(){
+        return stack.size()>0;
     }
 }
