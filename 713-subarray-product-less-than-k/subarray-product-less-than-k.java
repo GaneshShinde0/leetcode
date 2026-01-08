@@ -14,7 +14,7 @@ class Solution {
             res+=right-left+1;
             right++;
         }
-        System.out.println("Left: "+left+", Right: "+right);
+        // System.out.println("Left: "+left+", Right: "+right);
         return res;
     }
 }
