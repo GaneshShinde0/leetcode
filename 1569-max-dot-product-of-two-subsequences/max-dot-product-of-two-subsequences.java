@@ -19,7 +19,7 @@ class Solution {
                 int left = dp[i-1][j];
                 int prev = dp[i-1][j-1];
                 int maxUpLeft=Math.max(up,left);
-                dp[i][j] = Math.max(dp[i-1][j-1]+curr,curr);
+                dp[i][j] = Math.max(dp[i-1][j-1]+curr,curr); 
                 dp[i][j] = Math.max(dp[i][j],maxUpLeft);
             }
         }
