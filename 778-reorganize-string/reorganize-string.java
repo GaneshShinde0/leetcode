@@ -1,5 +1,45 @@
+// Define a simple class to avoid external dependencies like 'Pair'
+class CharCount {
+    char c;
+    int val;
+    CharCount(char c, int val) { this.c = c; this.val = val; }
+}
+
 class Solution {
     public String reorganizeString(String s) {
+        // 1. Frequency Map
+        int[] count = new int[26];
+        for (char c : s.toCharArray()) {
+            count[c - 'a']++;
+            // Fail Fast Check
+            if (count[c - 'a'] > (s.length() + 1) / 2) return "";
+        }
+
+        // 2. Max Heap
+        PriorityQueue<CharCount> pq = new PriorityQueue<>((a, b) -> b.val - a.val);
+        for (int i = 0; i < 26; i++) {
+            if (count[i] > 0) pq.offer(new CharCount((char)('a' + i), count[i]));
+        }
+
+        StringBuilder sb = new StringBuilder();
+        
+        // 3. Greedy Placement
+        while (pq.size() >= 2) {
+            CharCount p1 = pq.poll();
+            CharCount p2 = pq.poll();
+            
+            sb.append(p1.c);
+            sb.append(p2.c);
+            
+            if (--p1.val > 0) pq.offer(p1);
+            if (--p2.val > 0) pq.offer(p2);
+        }
+
+        if (!pq.isEmpty()) sb.append(pq.poll().c);
+
+        return sb.toString();
+    }
+    public String reorganizeStringInitial(String s) {
         HashMap<Character, Integer> hm = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         for(char c:s.toCharArray()){
