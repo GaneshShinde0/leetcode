@@ -10,11 +10,13 @@ class Solution {
         }
         while(k>0){
             int[] temp = pq.poll();
-            if(temp[1]>1){
-                temp[1]--;
-                pq.offer(temp);
+            int reduce = 0;
+            if(temp[1]>=1){
+                reduce = Math.min(temp[1],k);
+                temp[1] -= reduce;
+                if(temp[1]>0) pq.offer(temp);
             }
-            k--;
+            k-=reduce;
         }
         return pq.size();
     }
