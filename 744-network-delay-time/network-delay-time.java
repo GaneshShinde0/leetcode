@@ -1,37 +1,49 @@
+/*
+Minimum time... 
+Weights are different... Positive Weights... Directed Graph.
+Dijkstras Algorithm.
+*/
 class Solution {
     public int networkDelayTime(int[][] times, int n, int k) {
+        Map<Integer,List<List<Integer>>> adj = new HashMap<>();
+        for(int[] time:times){
+            List<List<Integer>> subList = adj.computeIfAbsent(time[0], t -> new ArrayList<>());
+            List<Integer> li = new ArrayList<>();
+            li.add(time[1]);
+            li.add(time[2]);
+            subList.add(li);
+        }
         int[] dist = new int[n+1];
         Arrays.fill(dist,Integer.MAX_VALUE);
-        dist[k]=0;
-        HashMap<Integer, List<Pair<Integer,Integer>>> hm = new HashMap<>();
-        for(int[] time:times){
-            hm.computeIfAbsent(time[0],z->new ArrayList<Pair<Integer,Integer>>()).add(new Pair(time[1],time[2]));
-        }
-        dijkstra(dist,k,n,hm);
-        int maxDist = 0;
+        dijkstra(k,dist,adj);
+        
+        int res = 0;
         for(int i=1;i<=n;i++){
             if(dist[i]==Integer.MAX_VALUE) return -1;
-            maxDist = Math.max(maxDist,dist[i]);
+            res = Math.max(res,dist[i]);
         }
-        return maxDist;
+        return res;
     }
 
-    private void dijkstra(int[] dist,int k, int n,HashMap<Integer, List<Pair<Integer,Integer>>> hm){
+    private void dijkstra(int start, int[] dist, Map<Integer,List<List<Integer>>> adj){
         PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->Integer.compare(a[1],b[1]));
-        pq.add(new int[]{k,0}); // Lets start with one node;
+        pq.add(new int[]{start,0});
+        boolean[] visited = new boolean[dist.length+1];
         while(!pq.isEmpty()){
             int[] curr = pq.poll();
-            int node = curr[0], weight = curr[1];
-            if(weight>dist[node]) continue;
-            if(!hm.containsKey(node)) continue;
-            for(Pair<Integer,Integer> edge:hm.get(node)){
-                int neighbor = edge.getKey();
-                int time = edge.getValue();
-                if(dist[neighbor]>weight+time){
-                    dist[neighbor] = weight+time;
-                    pq.add(new int[]{neighbor,dist[neighbor]});
-                }
+            int node = curr[0];
+            int distance = curr[1];
+            if(!adj.containsKey(node)) continue;
+            if(dist[node]<distance) continue;
+            if(visited[node]) continue;
+            dist[node]=distance;
+            for(List<Integer> edge:adj.get(node)){
+                int subNode = edge.get(0);
+                int subDist = edge.get(1);
+                dist[subNode] = Math.min(dist[subNode],distance+subDist);
+                pq.add(new int[]{subNode,dist[subNode]});
             }
+            visited[node]=true;
         }
     }
 }
