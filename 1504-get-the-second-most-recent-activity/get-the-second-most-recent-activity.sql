@@ -1,0 +1,1 @@
+SELECT  username, activity,startDate, endDate FROM (SELECT *, COUNT(*) OVER(PARTITION BY username) as cnt, rank() OVER(PARTITION BY username ORDER BY startDate DESC) as rnk FROM UserActivity ) SRC  where rnk = 2 or cnt = 1
