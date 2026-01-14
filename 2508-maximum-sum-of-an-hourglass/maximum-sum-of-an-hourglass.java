@@ -6,7 +6,7 @@ class Solution {
                 grid[i][j]+=grid[i][j-1];
                 // if(j>2) grid[i][j]-=grid[i][j-3];
             }
-            System.out.println(Arrays.toString(grid[i]));
+            // System.out.println(Array/s.toString(grid[i]));
         }
         int res = 0;
         for(int i=1;i<m-1;i++){
