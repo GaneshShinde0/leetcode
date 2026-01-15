@@ -14,7 +14,7 @@ class Solution {
             else countVBars = 1;
             maxCols = Math.max(maxCols,countVBars);
         }
-        int side = Math.min(maxCols+1,maxRows+1);
+        int side = Math.min(maxCols,maxRows)+1;
         return side*side;
     }
 }
