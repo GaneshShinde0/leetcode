@@ -10,7 +10,9 @@ class Solution {
 
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
+                // Minimum X of Top Right-Maximum X of bottomLeft.(will give us correct shortest edge)
                 int w = Math.min(topRight[i][0],topRight[j][0])-Math.max(bottomLeft[i][0],bottomLeft[j][0]);
+                // Minimum Y of Top Right - Maximum Y of bottom Left. (Will give us correct shortest height)
                 int h = Math.min(topRight[i][1],topRight[j][1])-Math.max(bottomLeft[i][1],bottomLeft[j][1]);
 
                 int side = Math.min(w,h);
