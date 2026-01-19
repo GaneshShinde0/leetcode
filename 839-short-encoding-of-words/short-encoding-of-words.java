@@ -7,6 +7,6 @@ class Solution {
                 sb.append(word).append("#");
             }
         }
-        return sb.toString().length();
+        return sb.length();
     }
 }
