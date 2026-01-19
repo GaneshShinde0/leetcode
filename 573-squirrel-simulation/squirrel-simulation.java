@@ -9,6 +9,12 @@ class Solution {
         for(int[] nut:nuts){
             int curr = getDistance(tree,nut);
             totalDistance+=2*curr;
+
+            // S----------------N
+            // N--------------------T
+            // Squirrel will travel
+            // S---------------
+            // Distance between tree to Nut minus squirrel to nut.
             d = Math.max(d,curr-getDistance(squirrel,nut)); // Maximize distance that can be reduced.
         }
         return totalDistance-d;
