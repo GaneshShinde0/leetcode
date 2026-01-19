@@ -28,7 +28,7 @@ class Solution {
         for(String word:set){
             totalLen+=word.length()+1;
         }
-        System.out.println(set);
+        // System.out.println(set);
         return totalLen;
     }
 }
