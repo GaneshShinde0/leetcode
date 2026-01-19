@@ -5,7 +5,7 @@ Distance between tree to all nuts will be twice.
 */
 class Solution {
     public int minDistance(int height, int width, int[] tree, int[] squirrel, int[][] nuts) {
-        int totalDistance = 0, d=Integer.MIN_VALUE;
+        int totalDistance = 0, d=Integer.MIN_VALUE; // Sometimes this distance can be negative as well so will consider min value
         for(int[] nut:nuts){
             int curr = getDistance(tree,nut);
             totalDistance+=2*curr;
