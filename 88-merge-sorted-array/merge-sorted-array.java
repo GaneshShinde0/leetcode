@@ -18,7 +18,7 @@ class Solution {
             }
             p3++;
         }
-        System.out.println(Arrays.toString(res));
+        // System.out.println(Arrays.toString(res));
         if(nums1.length>=nums2.length){
             for(int i=0;i<m+n;i++){
                 nums1[i]=res[i];
