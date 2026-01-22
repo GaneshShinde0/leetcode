@@ -2,7 +2,7 @@
 Input: nums = [3,7,1,6]
 Input: nums = [4,6,1,6]
 Input: nums = [5,5,1,6]
-Input: nums = [3,7,1,6]
+Input: nums = [5,5,2,5]
 
 */
 class Solution {
