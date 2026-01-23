@@ -7,7 +7,7 @@ class Solution {
                 if(nums[left]==0){
                     zeroCount--;
                 }
-                res = Math.max(res, right-left);
+                // res = Math.max(res, right-left);
                 left++;
             }
             res = Math.max(res, right-left+1);
