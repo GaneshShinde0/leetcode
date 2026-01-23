@@ -1,6 +1,6 @@
 
 with t as (
-    select 
+    select DISTINCT
         salary
     from employees 
     group by salary 
