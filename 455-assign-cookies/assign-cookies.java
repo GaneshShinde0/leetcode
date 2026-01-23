@@ -2,15 +2,15 @@ class Solution {
     public int findContentChildren(int[] g, int[] s) {
         Arrays.sort(g);
         Arrays.sort(s);
-        int childrens = g.length, chocolates = s.length;
-        int currentChild = 0;
-        int res =0;
-        for(int i=0;i<chocolates;i++){
-            if(currentChild<childrens && s[i]>=g[currentChild]){
-                res++;
-                currentChild++;
+        int gPtr = 0, sPtr = 0;
+        while(gPtr<g.length && sPtr<s.length){
+            if(g[gPtr]<=s[sPtr]){
+                gPtr++;
+                sPtr++;
+            }else{
+                sPtr++;
             }
         }
-        return res;
+        return gPtr;
     }
 }
