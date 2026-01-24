@@ -14,7 +14,7 @@ class MapSum {
     
     public int sum(String prefix) {
         int sum = 0;
-        System.out.println(hm);
+        // System.out.println(hm);
         for(String s: li){
             if(s.startsWith(prefix)){
                 sum+=hm.get(s);
