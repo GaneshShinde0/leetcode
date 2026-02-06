@@ -9,7 +9,7 @@ class Solution {
             }else{
                 count++;
             }
-                if(count==k) return arr[0];
+            if(count==k) return arr[0];
         }
         int max = 0;
         for(int i:arr) max = Math.max(max,i);
