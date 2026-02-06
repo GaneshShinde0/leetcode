@@ -13,7 +13,7 @@ class Solution {
             if(count==k) return currentWinner;
         }
         int max = 0;
-        for(int i:arr) max = Math.max(max,i);
-        return max;        
+        // for(int i:arr) max = Math.max(max,i);
+        return currentWinner;        
    }
 }
