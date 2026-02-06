@@ -4,13 +4,12 @@ class Solution {
         int count = 0;
         for(int i=1;i<arr.length;i++){
             if(arr[0]<arr[i]){
-                if(count==k) return arr[0];
                 arr[0]=arr[i];
                 count = 1;                
             }else{
-                if(count==k) return arr[0];
                 count++;
             }
+                if(count==k) return arr[0];
         }
         int max = 0;
         for(int i:arr) max = Math.max(max,i);
