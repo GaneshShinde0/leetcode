@@ -2,6 +2,22 @@ class Solution {
 
     public int minimumDeletions(String s){
         int n = s.length();
+        Stack<Character> charStack = new Stack<>();
+        int deleteCount = 0;
+        // Iterate through each character in the string
+        for(int i=0;i<n;i++){
+            // If stack is not empty, top of stack is 'b', and current char is 'a'
+            if(!charStack.isEmpty() && charStack.peek()=='b' && s.charAt(i)=='a'){
+                charStack.pop();
+                deleteCount++;
+            }else{
+                charStack.push(s.charAt(i));
+            }
+        }
+        return deleteCount;
+    }
+    public int minimumDeletionsO1Space(String s){
+        int n = s.length();
         int aCount = 0;
 
         // First pass: Count the number of a's 
