@@ -25,11 +25,10 @@ class Solution {
                 }
             }
         }
-
+        // Following form a cycle
         for(int i=0;i<n;i++){
             if(count[i]>1) q.add(i);
         }
-        
         while(!q.isEmpty()){
             int i = q.poll();
             for(int j:graph.get(i)){
