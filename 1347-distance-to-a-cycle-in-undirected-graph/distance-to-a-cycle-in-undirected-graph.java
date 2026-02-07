@@ -14,6 +14,8 @@ class Solution {
             if(graph.get(i).size()==1) q.add(i);
         }
 
+        // Set distance of all the nodes which are not in cycle to Integer.MAX_VALUE;
+        // Set Count of all the nodes which are not in cycle to 1;
         while(!q.isEmpty()){
             int i = q.poll();
             res[i] = Integer.MAX_VALUE;
