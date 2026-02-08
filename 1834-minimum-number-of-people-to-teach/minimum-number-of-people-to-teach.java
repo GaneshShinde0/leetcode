@@ -21,7 +21,7 @@ class Solution {
         int maxLangKnown = 0;
         int[] langCount = new int[n+1];
         for(int i: cannotCommunicate){
-            for(int j: languages[i]){
+            for(int j:languages[i]){
                 langCount[j]++;
                 maxLangKnown = Math.max(maxLangKnown,langCount[j]);
             }
