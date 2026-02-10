@@ -1,1 +1,1 @@
-<h2>remove-duplicate-letters Notes</h2><hr>[ Time taken: 28 m 46 s ]
+<h2>remove-duplicate-letters Notes</h2><hr>[ Time taken: 4 m 34 s ]
