@@ -30,7 +30,7 @@ class Solution {
             else {
                 int j = i + 1;
                 while (j < n && s.charAt(j) != '%') j++;
-                String key = s.substring(i + 1, j); // [i + 1, j)  -> %a%
+                String key = s.substring(i + 1, j); // [i + 1, j)  -> %a% -> will give only s.charAt(i+1);
                 sb.append(dfs(map.get(key)));
                 i = j;// new start without % 
             }
