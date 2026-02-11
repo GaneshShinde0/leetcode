@@ -13,7 +13,7 @@ class Solution {
 
     HashMap<String, String> map;
     HashMap<String, String> memo;
-    public String applySubstitutions(List<List<String>> replacements, String text) {
+    public String applySubstitutions2(List<List<String>> replacements, String text) {
         map  = new HashMap<>();
         memo = new HashMap<>();
         for (List<String> r : replacements){
@@ -38,5 +38,22 @@ class Solution {
         String res = sb.toString();
         memo.put(s, res);
         return res;
+    }
+
+    public String applySubstitutions(List<List<String>> replacements, String text) {
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i < replacements.size(); i++) {
+            map.put(replacements.get(i).get(0), replacements.get(i).get(1));
+        }
+        while (text.contains("%")) {
+            StringBuilder sb = new StringBuilder();
+            String[] arr = text.split("%");
+            for (int i = 0; i < arr.length; i++) {
+                if (i % 2 == 0) sb.append(arr[i]);
+                else sb.append(map.get(arr[i]));
+            }
+            text = sb.toString();
+        }
+        return text;
     }
 }
