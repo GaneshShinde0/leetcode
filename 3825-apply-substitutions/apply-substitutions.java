@@ -1,10 +1,13 @@
 class Solution {
     public String applySubstitutions(List<List<String>> replacements, String text) {
-        while(text.indexOf("%")!=-1){
+        StringBuilder sb = new StringBuilder(text);
+        while(sb.indexOf("%")!=-1){
             for(List<String> li: replacements){
-                text = text.replace("%"+li.get(0)+"%",li.get(1));
+                int index= sb.indexOf("%"+li.get(0)+"%");
+                if(index==-1) continue;
+                sb.replace(index, index+3,li.get(1));
             }
         }
-        return text;
+        return sb.toString();
     }
 }
