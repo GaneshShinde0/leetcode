@@ -11,13 +11,13 @@ class Solution {
         return sb.toString();
     }
 
-    HashMap<String, String> map;
+    HashMap<String, String> map1;
     HashMap<String, String> memo;
     public String applySubstitutions2(List<List<String>> replacements, String text) {
-        map  = new HashMap<>();
+        map1  = new HashMap<>();
         memo = new HashMap<>();
         for (List<String> r : replacements){
-            map.put(r.get(0), r.get(1));
+            map1.put(r.get(0), r.get(1));
         }
         return dfs(text);
     }
@@ -31,7 +31,7 @@ class Solution {
                 int j = i + 1;
                 while (j < n && s.charAt(j) != '%') j++;
                 String key = s.substring(i + 1, j); // [i + 1, j)  -> %a% -> will give only s.charAt(i+1);
-                sb.append(dfs(map.get(key)));
+                sb.append(dfs(map1.get(key)));
                 i = j;// new start without % 
             }
         }
@@ -40,7 +40,7 @@ class Solution {
         return res;
     }
 
-    public String applySubstitutions(List<List<String>> replacements, String text) {
+    public String applySubstitutions3(List<List<String>> replacements, String text) {
         Map<String, String> map = new HashMap<>();
         for (int i = 0; i < replacements.size(); i++) {
             map.put(replacements.get(i).get(0), replacements.get(i).get(1));
@@ -55,5 +55,62 @@ class Solution {
             text = sb.toString();
         }
         return text;
+    }
+    
+    
+    HashMap<String, List<String>> map;     
+    public String applySubstitutions(List<List<String>> replacements, String text) {
+        this.memo = new HashMap<>();
+        this.map = new HashMap<>();
+        Map<String, Integer> inDegree = new HashMap<>();
+        for (List<String> r : replacements) {
+            String key = r.get(0);
+            memo.put(key, r.get(1)); 
+            inDegree.put(key, 0);
+        }
+        for (String key : memo.keySet()) {
+            String val = memo.get(key);
+            int i = 0;
+            while ((i = val.indexOf('%', i)) != -1) {
+                int next = val.indexOf('%', i + 1);
+                String depKey = val.substring(i + 1, next);
+                map.computeIfAbsent(depKey, k -> new ArrayList<>()).add(key);
+                inDegree.put(key, inDegree.get(key) + 1);
+                i = next + 1;
+            }
+        }
+        Queue<String> queue = new LinkedList<>();
+        for (String key : inDegree.keySet()) {
+            if (inDegree.get(key) == 0) queue.offer(key);
+        }
+        while (!queue.isEmpty()) {
+            String curKey = queue.poll();
+            memo.put(curKey, resolve(memo.get(curKey)));
+            if (map.containsKey(curKey)) {
+                for (String nextKey : map.get(curKey)) {
+                    inDegree.put(nextKey, inDegree.get(nextKey) - 1);
+                    if (inDegree.get(nextKey) == 0) {
+                        queue.offer(nextKey);
+                    }
+                }
+            }
+        }
+        return resolve(text);
+    }
+    private String resolve(String s) {
+        if (s.indexOf('%') == -1) return s;
+        StringBuilder sb = new StringBuilder();
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) != '%') {
+                sb.append(s.charAt(i));
+            } else {
+                int j = s.indexOf('%', i + 1);
+                String key = s.substring(i + 1, j);
+                sb.append(memo.get(key));
+                i = j;
+            }
+        }
+        return sb.toString();
     }
 }
