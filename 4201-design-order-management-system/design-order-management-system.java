@@ -99,54 +99,53 @@ class OrderManagementSystem2 {
         return res;
     }
 }
-class OrderManagementSystem {
-    // Maps orderId -> price
-    Map<Integer, Integer> buyOrders = new HashMap<>();
-    Map<Integer, Integer> sellOrders = new HashMap<>();
 
-    // Maps price -> Set of orderIds (This makes lookup O(1) instead of O(N))
-    Map<Integer, Set<Integer>> buyPriceMap = new HashMap<>();
-    Map<Integer, Set<Integer>> sellPriceMap = new HashMap<>();
+class OrderManagementSystem {
+    // Since orderId <= 2000, we use arrays for O(1) access
+    private int[] prices = new int[2001];
+    private boolean[] isBuy = new boolean[2001];
+    
+    // Price can be 10^9, so we must use a Map for the price -> list relationship
+    private Map<Integer, List<Integer>> buyMap = new HashMap<>();
+    private Map<Integer, List<Integer>> sellMap = new HashMap<>();
+
+    public OrderManagementSystem() {}
 
     public void addOrder(int orderId, String orderType, int price) {
-        if (orderType.equals("buy")) {
-            buyOrders.put(orderId, price);
-            buyPriceMap.computeIfAbsent(price, k -> new HashSet<>()).add(orderId);
-        } else {
-            sellOrders.put(orderId, price);
-            sellPriceMap.computeIfAbsent(price, k -> new HashSet<>()).add(orderId);
-        }
+        prices[orderId] = price;
+        isBuy[orderId] = orderType.equals("buy");
+        
+        Map<Integer, List<Integer>> targetMap = isBuy[orderId] ? buyMap : sellMap;
+        targetMap.computeIfAbsent(price, k -> new ArrayList<>()).add(orderId);
     }
 
     public void modifyOrder(int orderId, int newPrice) {
-        if (buyOrders.containsKey(orderId)) {
-            int oldPrice = buyOrders.get(orderId);
-            buyPriceMap.get(oldPrice).remove(orderId);
-            addOrder(orderId, "buy", newPrice);
-        } else if (sellOrders.containsKey(orderId)) {
-            int oldPrice = sellOrders.get(orderId);
-            sellPriceMap.get(oldPrice).remove(orderId);
-            addOrder(orderId, "sell", newPrice);
-        }
+        int oldPrice = prices[orderId];
+        boolean typeIsBuy = isBuy[orderId];
+        
+        // Remove from old price list
+        List<Integer> list = (typeIsBuy ? buyMap : sellMap).get(oldPrice);
+        list.remove(Integer.valueOf(orderId));
+        
+        // Update price and add to new list
+        prices[orderId] = newPrice;
+        (typeIsBuy ? buyMap : sellMap).computeIfAbsent(newPrice, k -> new ArrayList<>()).add(orderId);
     }
 
     public void cancelOrder(int orderId) {
-        if (buyOrders.containsKey(orderId)) {
-            int price = buyOrders.remove(orderId);
-            buyPriceMap.get(price).remove(orderId);
-        } else if (sellOrders.containsKey(orderId)) {
-            int price = sellOrders.remove(orderId);
-            sellPriceMap.get(price).remove(orderId);
-        }
+        int price = prices[orderId];
+        List<Integer> list = (isBuy[orderId] ? buyMap : sellMap).get(price);
+        list.remove(Integer.valueOf(orderId));
     }
 
     public int[] getOrdersAtPrice(String orderType, int price) {
-        Set<Integer> ids = (orderType.equals("buy") ? buyPriceMap : sellPriceMap).get(price);
-        if (ids == null || ids.isEmpty()) return new int[0];
+        List<Integer> list = (orderType.equals("buy") ? buyMap : sellMap).get(price);
+        if (list == null || list.isEmpty()) return new int[0];
         
-        int[] res = new int[ids.size()];
-        int i = 0;
-        for (int id : ids) res[i++] = id;
+        int[] res = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            res[i] = list.get(i);
+        }
         return res;
     }
 }
