@@ -3,21 +3,23 @@ class Solution {
         return Integer.toBinaryString(Integer.parseInt(a,2)+ Integer.parseInt(b,2));
     }
 
-    public String addBinarhy(String a, String b){
+    public String addBinary(String a, String b){
         int n = a.length(), m = b.length();
         if(n<m) return addBinary(b,a);
         StringBuilder sb = new StringBuilder();
         int carry = 0, j = m-1;
         for(int i=n-1;i>-1;i--){
             if(a.charAt(i)=='1') carry++;
+            if(j>-1 && b.charAt(j--)=='1') ++carry;
             if(carry%2==1) sb.append('1');
             else sb.append('0');
+            carry/=2;
         }
         if(carry%2==1) sb.append('1');
         sb.reverse();
         return sb.toString();
     }
-    public String addBinary(String a, String b) {
+    public String addBinaryI(String a, String b) {
         StringBuilder sb = new StringBuilder();
         int aLen = a.length()-1, bLen = b.length()-1;
         int carry = 0;
