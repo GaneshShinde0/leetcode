@@ -43,60 +43,60 @@ class OrderManagementSystemInitial{
     }
 }
 class OrderManagementSystem {
-    // Stores metadata: orderId -> Order(type, price)
-    Map<Integer, Order> orders;
-    // Stores lookup: type -> price -> Set of orderIds
-    Map<String, Map<Integer, Set<Integer>>> priceMap;
+    // Current price of each order: orderId -> price
+    Map<Integer, Integer> buyOrders = new HashMap<>();
+    Map<Integer, Integer> sellOrders = new HashMap<>();
 
-    class Order {
-        String type;
-        int price;
-        Order(String type, int price) {
-            this.type = type;
-            this.price = price;
+    // Quick lookup: price -> Set of orderIds
+    Map<Integer, Set<Integer>> buyPriceMap = new HashMap<>();
+    Map<Integer, Set<Integer>> sellPriceMap = new HashMap<>();
+
+    public OrderManagementSystem() {}
+
+    public void addOrder(int orderId, String orderType, int price) {
+        if (orderType.equals("buy")) {
+            buyOrders.put(orderId, price);
+            buyPriceMap.computeIfAbsent(price, k -> new HashSet<>()).add(orderId);
+        } else {
+            sellOrders.put(orderId, price);
+            sellPriceMap.computeIfAbsent(price, k -> new HashSet<>()).add(orderId);
         }
     }
 
-    public OrderManagementSystem() {
-        orders = new HashMap<>();
-        priceMap = new HashMap<>();
-        priceMap.put("buy", new HashMap<>());
-        priceMap.put("sell", new HashMap<>());
-    }
-    
-    public void addOrder(int orderId, String orderType, int price) {
-        orders.put(orderId, new Order(orderType, price));
-        priceMap.get(orderType)
-                .computeIfAbsent(price, k -> new HashSet<>())
-                .add(orderId);
-    }
-    
     public void modifyOrder(int orderId, int newPrice) {
-        if (!orders.containsKey(orderId)) return;
-        
-        Order order = orders.get(orderId);
-        // 1. Remove from the old price set
-        priceMap.get(order.type).get(order.price).remove(orderId);
-        
-        // 2. Update price and add to the new price set
-        order.price = newPrice;
-        priceMap.get(order.type)
-                .computeIfAbsent(newPrice, k -> new HashSet<>())
-                .add(orderId);
+        if (buyOrders.containsKey(orderId)) {
+            int oldPrice = buyOrders.get(orderId);
+            buyPriceMap.get(oldPrice).remove(orderId);
+            buyOrders.put(orderId, newPrice);
+            buyPriceMap.computeIfAbsent(newPrice, k -> new HashSet<>()).add(orderId);
+        } else if (sellOrders.containsKey(orderId)) {
+            int oldPrice = sellOrders.get(orderId);
+            sellPriceMap.get(oldPrice).remove(orderId);
+            sellOrders.put(orderId, newPrice);
+            sellPriceMap.computeIfAbsent(newPrice, k -> new HashSet<>()).add(orderId);
+        }
     }
-    
+
     public void cancelOrder(int orderId) {
-        if (!orders.containsKey(orderId)) return;
-        
-        Order order = orders.remove(orderId);
-        priceMap.get(order.type).get(order.price).remove(orderId);
+        if (buyOrders.containsKey(orderId)) {
+            int price = buyOrders.remove(orderId);
+            buyPriceMap.get(price).remove(orderId);
+        } else if (sellOrders.containsKey(orderId)) {
+            int price = sellOrders.remove(orderId);
+            sellPriceMap.get(price).remove(orderId);
+        }
     }
-    
+
     public int[] getOrdersAtPrice(String orderType, int price) {
-        Set<Integer> orderIds = priceMap.get(orderType).get(price);
-        if (orderIds == null || orderIds.isEmpty()) return new int[0];
+        Map<Integer, Set<Integer>> targetMap = orderType.equals("buy") ? buyPriceMap : sellPriceMap;
+        Set<Integer> set = targetMap.get(price);
         
-        return orderIds.stream().mapToInt(Integer::intValue).toArray();
+        if (set == null || set.isEmpty()) return new int[0];
+        
+        int[] res = new int[set.size()];
+        int i = 0;
+        for (int id : set) res[i++] = id;
+        return res;
     }
 }
 
