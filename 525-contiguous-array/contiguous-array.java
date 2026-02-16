@@ -15,13 +15,13 @@ class Solution {
         return res;
     }
     // Checking some tweaks from other solutions
-     static {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try (FileWriter fw = new FileWriter("display_runtime.txt")) {
-                fw.write("0"); // Basically this is what is getting read while fetching runtime in leetcode submission.
-            } catch (Exception e) {}
-        }));
-     }
+    //  static {
+    //     Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+    //         try (FileWriter fw = new FileWriter("display_runtime.txt")) {
+    //             fw.write("0"); // Basically this is what is getting read while fetching runtime in leetcode submission.
+    //         } catch (Exception e) {}
+    //     }));
+    //  }
 }
 
 /*
