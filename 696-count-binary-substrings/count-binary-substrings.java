@@ -5,7 +5,8 @@ class Solution {
         groups[0]=1;
         for(int i=1;i<s.length();i++){
             if(s.charAt(i-1)!=s.charAt(i)){
-                groups[++t]=1;
+                t++;
+                groups[t]=1;
             }else{
                 groups[t]++;
             }
