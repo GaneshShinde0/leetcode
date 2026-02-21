@@ -1,6 +1,38 @@
 class Solution {
     public int maxStarSum(int[] vals, int[][] edges, int k) {
         Map<Integer, PriorityQueue<Integer>> adj = new HashMap<>();
+        Comparator<Integer> comp = (a, b) -> b - a;
+
+        for (int[] e : edges) {
+            if (vals[e[1]] > 0)
+                adj.computeIfAbsent(e[0], x -> new PriorityQueue<>(comp)).add(vals[e[1]]);
+            if (vals[e[0]] > 0)
+                adj.computeIfAbsent(e[1], x -> new PriorityQueue<>(comp)).add(vals[e[0]]);
+        }
+
+        int res = Integer.MIN_VALUE;
+
+        for (int i = 0; i < vals.length; i++) {
+            int sum = vals[i];
+            res = Math.max(res, sum);
+
+            PriorityQueue<Integer> pq = adj.get(i);
+            if (pq == null) continue;
+
+            PriorityQueue<Integer> copy = new PriorityQueue<>(pq);
+            int cnt = 0;
+
+            while (cnt < k && !copy.isEmpty()) {
+                sum += copy.poll();
+                res = Math.max(res, sum);
+                cnt++;
+            }
+        }
+        return res;
+    }
+
+    public int maxStarSumInitial(int[] vals, int[][] edges, int k) {
+        Map<Integer, PriorityQueue<Integer>> adj = new HashMap<>();
         Comparator<Integer> comp = (a,b)->Integer.compare(b,a);
         for(int[] edge:edges){
             adj.computeIfAbsent(edge[0],s->new PriorityQueue<Integer>(comp)).add(vals[edge[1]]);
