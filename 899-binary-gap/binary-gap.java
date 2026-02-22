@@ -1,23 +1,26 @@
 class Solution {
-    public int binaryGapInitialSolution(int n) {
-        String s = Integer.toBinaryString(n);
-        int res = 0, prev =s.indexOf('1'), len = s.length();
-        for(int i=prev; i<len; ++i){
-            if(s.charAt(i)=='1'){
-                res = Math.max(res,i-prev);
-                prev = i;
+    public int binaryGap(int n) {
+        int res = 0, curr = 0, prev = -1;
+        while(n>0){
+            int rem = n%2;
+            n=n/2;
+            if(rem==1 && prev !=-1 ){
+                res = Math.max(res, curr-prev);
+                prev = curr;
+            }else if(rem==1){
+                prev=curr;
             }
+            curr++;
         }
         return res;
     }
-    public int binaryGap(int n) {
-        int ans = 0;
-        for (int d = -32; n > 0; n /= 2, ++d)
-        if (n % 2 == 1) {
-            ans = Math.max(ans, d);
-            d = 0;
-        }
-
-        return ans;
-    }
 }
+/*
+
+22
+
+10110
+
+prev = 0
+
+*/
