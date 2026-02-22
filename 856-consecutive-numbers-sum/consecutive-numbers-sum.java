@@ -65,15 +65,28 @@ Algorithm:
 
 class Solution {
 
+
+    // Mathematical Sum of first K natural Numbers, O(n^1/2)
     // N = (x + 1) + ... + (x + k)
     // N = x k + k(k + 1)/2
-    public int consecutiveNumbersSum(int n) {
+    public int consecutiveNumbersSum1(int n) {
         int count = 0;
         // x>0 --> N/k-(k+1)/2>0
         int upper_limit = (int)(Math.sqrt(2*n+0.25)-0.5);
         for(int k =1; (k<=upper_limit); k++){
             // x should be an integer
             if((n-k*(k+1)/2)%k==0) count++;
+        }
+        return count;
+    }
+
+    // Approach 2: Mathematical: Decrease N Gradually
+    public int consecutiveNumbersSum(int N){
+        int count = 0;
+        int upperLimit = (int) (Math.sqrt(2*N+0.25)-0.5);
+        for(int k=1; k<=upperLimit;++k){
+            N-=k;
+            if(N%k==0) count++;
         }
         return count;
     }
