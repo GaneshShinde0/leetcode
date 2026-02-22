@@ -1,37 +1,34 @@
 class Solution {
     public String predictPartyVictory(String senate) {
-        Queue<Character> q = new LinkedList<>();
-        int DMember = 0;
-        int RMember = 0;
-        for(int i=0; i<senate.length(); i++){
-            char c = senate.charAt(i);
-            q.add(c);
+        Queue<Character> queue = new LinkedList<>();
+        int DMember=0, RMember = 0;
+        for(char c:senate.toCharArray()){
+            queue.add(c);
             if(c=='D') DMember++;
             else RMember++;
         }
-        int DVote = 0, RVote = 0;
+        int dVote = 0, rVote = 0;
         while(DMember!=0 && RMember!=0){
-            if(q.peek()=='D'){
-                if(RVote>0){
-                    q.poll();
-                    RVote--;
-                    DMember--;
-                }else{
-                    q.add(q.poll());
-                    DVote++;
-                }
-            }else{
-                if(DVote>0){
-                    q.poll();
-                    DVote--;
+            if(queue.peek()=='R'){
+                if(dVote>0){
+                    queue.poll();
+                    dVote--;
                     RMember--;
                 }else{
-                    q.add(q.poll());
-                    RVote++;
+                    queue.add(queue.poll());
+                    rVote++;
+                }
+            }else{
+                if(rVote>0){
+                    queue.poll();
+                    rVote--;
+                    DMember--;
+                }else{
+                    queue.add(queue.poll());
+                    dVote++;
                 }
             }
         }
-
         if(DMember>0) return "Dire";
         else return "Radiant";
     }
