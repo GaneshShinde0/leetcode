@@ -25,6 +25,8 @@ class MyCircularQueue {
         if(head==null && tail==null){
             head = node;
             tail = node;
+            curr++;
+            return true;
         }
         tail.next = node;
         tail = node;
