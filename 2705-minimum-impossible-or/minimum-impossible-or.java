@@ -45,4 +45,14 @@ class Solution {
         }
         return a;
     }
+
+    public int minImpossibleORAlternate(int[] nums) {
+        int singleBitsFound = 0;
+        for (int n : nums) {
+            if ((n & (n - 1)) == 0) {
+                singleBitsFound |= n;
+            }
+        }
+        return 1 << Integer.numberOfTrailingZeros(singleBitsFound ^ Integer.MAX_VALUE);
+    }
 }
