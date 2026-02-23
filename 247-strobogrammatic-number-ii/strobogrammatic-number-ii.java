@@ -19,6 +19,8 @@ Algorithm:
     - Initialize an empty array currStroboNums to store strobogrammatic numbers of n-digits.
     - For each number in prevStroboNums we append all reversiblePairs at the beginning and the end except when the current reversible pair is '00' and n==finalLength (because we can't append '0' at the beginning of a number) and push this number in ans.
     - At the end of the function, return all the strobogrammatic numbers, i.e., currStroboNums.
+
+
 */
 
 class Solution {
@@ -50,3 +52,16 @@ class Solution {
         return generateStroboNumbers(n,n);
     }
 }
+
+/*
+N is length of strobogrammatic numbers we need to find.
+
+Lets try visualizing the recursion tree for our approach, Our recursibe function makes another recursive call with each recursive call we decrease N by 2.
+[N, N-2, N-4, N-6,... ,0]
+
+Hence, in our recursion tree, we will have at most N/2 levels.
+
+Time Complexity: N*5^[N/2]+1.
+
+Space O(N*5^[n/2])
+*/
