@@ -21,7 +21,6 @@ class Solution {
         int n = s.length();
         int result = n;
         int[] ones = new int[n];
-        int[] zeros = new int[n];
         int curr = 0;
         for(int i=0;i<n;i++){
             if(s.charAt(i)=='1') curr++;
