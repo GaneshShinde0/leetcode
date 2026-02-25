@@ -26,14 +26,12 @@ class Solution {
             if(s.charAt(i)=='1') curr++;
             ones[i]=curr;
         }
-        if(curr==n) return 0;
         curr = 0;
         for(int i=n-1;i>=0;i--){
-            if(s.charAt(i)=='0') curr++;
-            int temp = curr+ones[i]-1;
+            if(s.charAt(i)=='0') curr++; // Zeros on the right
+            int temp = curr+ones[i]-1; // Zeros on right + ones on left - 1 (minus 1 is for reducing the current)
             result = Math.min(result,temp);
         }
-        if(curr==n) return 0;
         return result;
     }
 }
