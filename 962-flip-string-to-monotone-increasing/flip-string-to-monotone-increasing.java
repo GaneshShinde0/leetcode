@@ -26,6 +26,7 @@ class Solution {
             if(s.charAt(i)=='1') curr++;
             ones[i]=curr;
         }
+        if(curr==n) return 0;
         curr = 0;
         for(int i=n-1;i>=0;i--){
             if(s.charAt(i)=='0') curr++; // Zeros on the right
