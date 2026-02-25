@@ -17,7 +17,7 @@ Zeros:  [3,2,2,1,1,1]
 */
 
 class Solution {
-    public int minFlipsMonoIncr(String s) {
+    public int minFlipsMonoIncrUsingExtraSpace(String s) {
         int n = s.length();
         int result = n;
         int[] ones = new int[n];
@@ -34,5 +34,22 @@ class Solution {
             result = Math.min(result,temp);
         }
         return result;
+    }
+
+    public int minFlipsMonoIncr(String s){
+        int m = 0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='0') m++; // Incrementing zeros.
+        }
+
+        int ans = m;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='0'){
+                ans = Math.min(ans,--m);
+            }else{
+                m++;
+            }
+        }
+        return ans;
     }
 }
