@@ -34,6 +34,7 @@ class Solution {
         Map<Integer, String> name = new HashMap<>();
         Map<String, Integer> seen = new HashMap<>(); 
 
+        // Phase 1: Build unions based on shared emails
         for(int i=0;i<n;i++){
             name.put(i, accounts.get(i).get(0));
             for(int j=1;j<accounts.get(i).size();j++){
