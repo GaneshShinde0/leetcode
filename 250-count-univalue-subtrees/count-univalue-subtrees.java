@@ -16,15 +16,15 @@
 class Solution {
     int res = 0;
     public int countUnivalSubtrees(TreeNode root) {
-        if(root==null) return  res;
         isUniValue(root);
         return res;
     }
 
     private boolean isUniValue(TreeNode root){
+        if(root==null) return true;
         boolean left = true, right = true;
-        if(root.left!=null) left = isUniValue(root.left);
-        if(root.right!=null) right = isUniValue(root.right);
+        left = isUniValue(root.left);
+        right = isUniValue(root.right);
         if(root.left!=null && root.left.val!=root.val) return false;
         if(root.right!=null && root.right.val!=root.val) return false;
         if(left&&right) this.res++;
