@@ -32,7 +32,8 @@ class Solution {
 
     // Advanced Sliding Window
     // Basically once we got longest window we will hold on to it, until we find larger window.
-    public int maxFrequency(int[] nums, int k){
+    // Same time and space complexity.
+    public int maxFrequencyAdvancedSlidingWindow(int[] nums, int k){
         Arrays.sort(nums);
         int n = nums.length, left = 0;
         long currSum = 0;
@@ -47,5 +48,40 @@ class Solution {
         return n-left;
     }
 
+    public int maxFrequency(int[] nums, int k){
+        Arrays.sort(nums);
+        long[] prefix = new long[nums.length];
+        prefix[0] = nums[0];
+
+        for(int i=1; i<nums.length; i++){
+            prefix[i] = nums[i]+prefix[i-1];
+        }
+
+        int ans = 0;
+        for(int i=0;i<nums.length;i++){
+            ans = Math.max(ans, check(i, k, nums, prefix));
+        }
+        return ans;
+    }
+    public int check(int i, int k, int[] nums, long[] prefix){
+        int target = nums[i];
+        int left = 0, right = i, best = i;
+
+        while(left<=right){
+            int mid = (left+right)/2;
+            long count = i-mid+1;
+            long finalSum = count*target;
+            long originalSum = prefix[i]-prefix[mid]+nums[mid];
+            long operationsRequired = finalSum-originalSum;
+            if(operationsRequired>k){
+                left = mid+1;
+            }else{
+                best = mid;
+                right  = mid-1;
+            }
+        }
+
+        return i-best+1;
+    }
 }
 
