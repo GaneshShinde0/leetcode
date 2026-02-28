@@ -4,7 +4,7 @@ class Solution {
         int left = 0, ans = 0; // left pointer, best answer so far, sum of elements in our window
         long currSum = 0;
         for(int right = 0; right<nums.length; right++){
-            long target = nums[right];
+            long target = nums[right]; // considering long as multiplication might become 10^5*10^5 = 10^10 => outside 2^32 => 2,147,483,647
             currSum+=target;
             // previous window * target - current sum is>k 
             // i.e. consider array as 3 6 7 12 19 22 44 150
