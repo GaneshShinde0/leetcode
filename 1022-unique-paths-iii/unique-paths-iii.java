@@ -1,4 +1,4 @@
-class Solution {
+class SolutionInitial{
     private static final int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
     private int res;
     private int walkables;
@@ -46,5 +46,48 @@ class Solution {
             }
             grid[i][j] = 0;
         }
+    }
+}
+
+class Solution {
+    int res = 0, empty = 1; // Start empty=1 to include starting square
+    
+    public int uniquePathsIII(int[][] grid) {
+        int sx = 0, sy = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 0) empty++; // Count 0s
+                else if (grid[i][j] == 1) {
+                    sx = i; sy = j; // Found Start
+                }
+            }
+        }
+        dfs(grid, sx, sy);
+        return res;
+    }
+
+    public void dfs(int[][] grid, int x, int y) {
+        // 1. Boundary / Obstacle Check
+        if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] < 0) return;
+        
+        // 2. Target Reached Check
+        if (grid[x][y] == 2) {
+            if (empty == 0) res++; // Check if we visited all nodes
+            return;
+        }
+
+        // 3. Process Node
+        grid[x][y] = -2; // Mark visited
+        empty--; // Decrement count
+        
+        // 4. Recurse neighbors
+        dfs(grid, x + 1, y);
+        dfs(grid, x - 1, y);
+        dfs(grid, x, y + 1);
+        dfs(grid, x, y - 1);
+        
+        // 5. Backtrack
+        grid[x][y] = 0;
+        empty++;
     }
 }
