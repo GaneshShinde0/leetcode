@@ -22,10 +22,6 @@ class Solution {
     }
 
     private boolean isUniValue(TreeNode root){
-        if(root.left==null&&root.right==null){
-            this.res++;
-            return true;
-        }
         boolean left = true, right = true;
         if(root.left!=null) left = isUniValue(root.left);
         if(root.right!=null) right = isUniValue(root.right);
