@@ -1,9 +1,9 @@
 /*
-There would be 10000 Combinations, 
-Time complexity will become O(10000)
+There would be 1000 Combinations, 
+Time complexity will become O(1000)
 
 Memory Complexity:
-Worst Case O(10000)
+Worst Case O(1000)
 */
 
 class Solution {
