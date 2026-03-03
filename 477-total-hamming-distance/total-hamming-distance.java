@@ -37,7 +37,7 @@ class Solution {
         =k⋅(n−k) for this particular bit. Hence Hamming Distance for this particular bit is k⋅(n−k).
         */
         for(int i=0;i<32;i++){
-            if(freq[i]==0||freq[i]==nums.length) continue;
+            //if(freq[i]==0||freq[i]==nums.length) continue;
             res+=(nums.length-freq[i])*freq[i];
         }
         return res;
