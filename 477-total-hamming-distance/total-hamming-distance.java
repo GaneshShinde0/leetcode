@@ -38,7 +38,7 @@ class Solution {
         */
         for(int i=0;i<32;i++){
             //if(freq[i]==0||freq[i]==nums.length) continue;
-            res+=(nums.length-freq[i])*freq[i];
+            res+=(nums.length-freq[i])*freq[i]; // we can pair bits which have one along side with those who have zeros and vice versa.
         }
         return res;
     }
