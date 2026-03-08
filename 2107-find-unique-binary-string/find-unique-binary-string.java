@@ -18,16 +18,10 @@ class Solution {
         sb.append('0');
         String res = backtrack(index + 1, n, sb, set);
         if (res != null) return res; // If found in this branch, stop and return!
-        
-        // Backtrack: Remove '0' to try '1'
         sb.deleteCharAt(sb.length() - 1); 
-
-        // Try '1'
         sb.append('1');
         res = backtrack(index + 1, n, sb, set);
         if (res != null) return res; // If found, return!
-        
-        // Backtrack: Clean up before returning to previous level
         sb.deleteCharAt(sb.length() - 1);
         
         return null; // Neither '0' nor '1' worked here
