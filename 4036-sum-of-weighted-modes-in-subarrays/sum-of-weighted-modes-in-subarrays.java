@@ -1,12 +1,4 @@
 class Solution {
-    static class NumAndFreq{
-        int num;
-        int freq;
-        NumAndFreq(int num, int freq){
-            this.num=num;
-            this.freq=freq;
-        }
-    }
     public long modeWeight(int[] nums, int k) {
         long result = 0;
         HashMap<Integer,Integer> numToFreq = new HashMap<>();
@@ -19,15 +11,15 @@ class Solution {
             if(i>=k-1){
                 result += 1l*freqToNum.lastEntry().getKey()*freqToNum.lastEntry().getValue().first();
                 freq = numToFreq.get(nums[i-k+1]);
-                numToFreq.put(nums[i-k+1],freq-1);
                 freqToNum.computeIfAbsent(freq,t->new TreeSet<Integer>()).remove(nums[i-k+1]);
                 if(freqToNum.get(freq).size()==0) freqToNum.remove(freq);
                 freq = freq-1;
+                numToFreq.put(nums[i-k+1],freq);
                 freqToNum.computeIfAbsent(freq,t->new TreeSet<Integer>()).add(nums[i-k+1]);
-                if(freq==0) freqToNum.remove(0);
                 if(numToFreq.get(nums[i-k+1])==0) numToFreq.remove(nums[i-k+1]);
             }
         }
         return result;
     }
+
 }
