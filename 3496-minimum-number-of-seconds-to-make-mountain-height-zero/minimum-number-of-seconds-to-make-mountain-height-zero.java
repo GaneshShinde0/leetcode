@@ -19,7 +19,7 @@ class Solution {
         long timeTaken=0;
         for(int t:times){
             long work = mid/t;
-            timeTaken += (long)((-1.0+Math.sqrt(1+work*8))/2+1e-7);
+            timeTaken += (long)((-1.0+Math.sqrt(1+work*8))/2);
         }
         return timeTaken>=mountainHeight;
     }
