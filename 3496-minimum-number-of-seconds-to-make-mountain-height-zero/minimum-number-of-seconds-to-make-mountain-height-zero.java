@@ -4,22 +4,22 @@ class Solution {
         for(int time:workerTimes) max= Math.max(time,max);
         long maxTime = (max*mountainHeight*(mountainHeight+1))/2;
         long left = 0, right = maxTime, ans = 0;
-        while(left<right){
+        while(left<=right){
             long mid = (left+right)/2;
             if(canComplete(workerTimes,mid, mountainHeight)){
                 ans = mid;
-                right = mid;
+                right = mid-1;
             }else{
                 left = mid+1; 
             }
         }
-        return right;
+        return ans;
     }
     private boolean canComplete(int[] times, long mid, int mountainHeight){
         long timeTaken=0;
         for(int t:times){
             long work = mid/t;
-            timeTaken += (long)((-1.0+Math.sqrt(1+work*8))/2);
+            timeTaken += (long)((-1.0+Math.sqrt(1+work*8))/2+1e-7);
         }
         return timeTaken>=mountainHeight;
     }
