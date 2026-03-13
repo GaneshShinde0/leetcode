@@ -4,16 +4,16 @@ class Solution {
         for(int time:workerTimes) max= Math.max(time,max);
         long maxTime = (max*mountainHeight*(mountainHeight+1))/2;
         long left = 0, right = maxTime, ans = 0;
-        while(left<=right){
+        while(left<right){
             long mid = (left+right)/2;
             if(canComplete(workerTimes,mid, mountainHeight)){
                 ans = mid;
-                right = mid-1;
+                right = mid;
             }else{
                 left = mid+1; 
             }
         }
-        return ans;
+        return right;
     }
     private boolean canComplete(int[] times, long mid, int mountainHeight){
         long timeTaken=0;
