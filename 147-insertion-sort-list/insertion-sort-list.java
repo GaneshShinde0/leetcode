@@ -52,7 +52,7 @@ With the same example before, i.e., input = [4,3,5], we illustrate what the abov
  */
 class Solution {
     public ListNode insertionSortList(ListNode head) {
-        ListNode dummy = new ListNode();
+        ListNode dummy = new ListNode(0 );
         ListNode curr = head;
 
         while(curr!=null){
@@ -75,3 +75,51 @@ class Solution {
         return dummy.next;
     }
 }
+/*
+Dry Run:
+Input: 4 -> 5 -> 1 -> 13 -> 2
+Sorted (Dummy): 0 -> null
+
+Iter 1: Curr = 4
+
+Scan: prev starts at Dummy(0). Next(null) is end. Stop.
+Insert: 4 after 0.
+List: 0 -> 4
+Iter 2: Curr = 5
+
+Scan: prev at 0. Next(4) < 5. Move prev to 4.
+Insert: 5 after 4.
+List: 0 -> 4 -> 5
+Iter 3: Curr = 1
+
+Scan: prev at 0. Next(4) > 1. Stop at 0.
+Insert: 1 after 0.
+List: 0 -> 1 -> 4 -> 5
+Iter 4: Curr = 13
+
+Scan: prev moves past 1, 4, 5 (all < 13). Stop at 5.
+Insert: 13 after 5.
+List: 0 -> 1 -> 4 -> 5 -> 13
+Iter 5: Curr = 2
+
+Scan: prev moves past 1. Next(4) > 2. Stop at 1.
+Insert: 2 after 1.
+List: 0 -> 1 -> 2 -> 4 -> 5 -> 13
+Result: 1 -> 2 -> 4 -> 5 -> 13
+*/
+/*
+Complexity Analysis:
+
+Let N be the nubmer of elements in the input list.
+
+- Time Complexity: O(N^2)
+    - First of all, we run an iteration over the input list.
+    - At each iteration, we insert an element into the resulting list. In the worst case where position to insert is the tail of the list, we will have to walk through the entire resulting list.
+    - As a result, the total steps that we need to walk in the worst case would be n(n+1)/2
+    - To sum up, the overall time complexity of the algorithm is O(N^2)/
+
+- Spacce Complexity: O(1)
+    - We used some pointers whithin the algorithm. However, their memory consumption is constant regardless of the input.
+    - Note, we did not create new nodes to hold the values of input list, but simply reorder the existing nodes.
+
+*/
