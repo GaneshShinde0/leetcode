@@ -4,31 +4,29 @@ Basic Idea is to find generate a list of strobogrammatic numbers with the length
 
 class Solution {
     public int strobogrammaticInRange(String low, String high) {
-        int count = 0;
         List<String> numbers = new ArrayList<>();
         for(int i=low.length();i<=high.length();i++){
             numbers.addAll(helper(i,i));
         }
+        int result = 0;
         for(String num:numbers){
-            if((num.length()==low.length() && num.compareTo(low)<0)|| (num.length()==high.length() && num.compareTo(high)>0)) continue; 
-            count++;
+            if( (num.length()==low.length() && num.compareTo(low)<0) || (num.length()==high.length() && num.compareTo(high)>0)) continue;
+            result++;
         }
-        return count;
+        return result;
     }
 
     private List<String> helper(int curr, int max){
-        if(curr == 0) return Arrays.asList("");
-        if(curr==1) return Arrays.asList("1","8","0");
+        if(curr==0) return Arrays.asList("");
+        if(curr==1) return Arrays.asList("0","1","8");
+        List<String> middleElements = helper(curr-2, max);
         List<String> result = new ArrayList<>();
-        List<String> center = helper(curr-2,max);
-
-        for(int i=0;i<center.size();i++){
-            String temp = center.get(i);
-            if(curr!=max) result.add("0"+temp+"0");
-            result.add("1"+temp+"1");
-            result.add("6"+temp+"9");
-            result.add("9"+temp+"6");
-            result.add("8"+temp+"8");
+        for(String middle:middleElements){
+            if(curr!=max) result.add("0"+middle+"0");
+            result.add("1"+middle+"1");
+            result.add("6"+middle+"9");
+            result.add("9"+middle+"6");
+            result.add("8"+middle+"8");
         }
         return result;
     }
