@@ -59,9 +59,9 @@ class Solution {
         for(int i=n-2;i>=0;i--){
             if(nums[i]<nums[i+1]) continue;
             int numElements = 0;
-            if(nums[i]%nums[i+1]==0) numElements +=  nums[i]/nums[i+1]; 
-            else numElements +=  nums[i]/nums[i+1]+1; 
-            answer +=numElements-1;
+            if(nums[i]%nums[i+1]==0) numElements =  nums[i]/nums[i+1]; 
+            else numElements =  nums[i]/nums[i+1]+1; 
+            answer +=numElements-1; // Answer is numer of splits which is numElements -1;
             nums[i]= nums[i]/numElements;
         }
         return answer;
