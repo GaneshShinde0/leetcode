@@ -60,8 +60,8 @@ class Solution {
             if(nums[i]<nums[i+1]) continue;
             int numElements = 0;
             if(nums[i]%nums[i+1]==0) numElements =  nums[i]/nums[i+1]; 
-            else numElements =  nums[i]/nums[i+1]+1; 
-            answer +=numElements-1; // Answer is numer of splits which is numElements -1;
+            else numElements =  nums[i]/nums[i+1]+1; // Extra one is of remainder.
+            answer +=numElements-1; // Answer is number of splits which is numElements -1;
             nums[i]= nums[i]/numElements;
         }
         return answer;
