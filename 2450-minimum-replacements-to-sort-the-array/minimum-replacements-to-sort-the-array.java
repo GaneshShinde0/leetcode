@@ -39,14 +39,28 @@ Algorithm:
 */
 
 class Solution {
+    public long minimumReplacementAlternate(int[] nums) {
+        long answer = 0;
+        int n = nums.length;
+        
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]) continue;
+            int numElements = (nums[i]+nums[i+1]-1)/nums[i+1]; // It will make sure to take one less when nums[i] is divisible and perform normal operation when it is not divisible.
+            answer +=numElements-1;
+            nums[i]= nums[i]/numElements;
+        }
+        return answer;
+    }
+
     public long minimumReplacement(int[] nums) {
         long answer = 0;
         int n = nums.length;
         
         for(int i=n-2;i>=0;i--){
             if(nums[i]<nums[i+1]) continue;
-
-            int numElements = (nums[i]+nums[i+1]-1)/nums[i+1];
+            int numElements = 0;
+            if(nums[i]%nums[i+1]==0) numElements +=  nums[i]/nums[i+1]; 
+            else numElements +=  nums[i]/nums[i+1]+1; 
             answer +=numElements-1;
             nums[i]= nums[i]/numElements;
         }
