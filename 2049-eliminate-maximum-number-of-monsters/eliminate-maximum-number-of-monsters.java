@@ -6,7 +6,7 @@ Time to reach = distance/speed;
 
 */
 class Solution {
-    public int eliminateMaximum(int[] dist, int[] speed) {
+    public int eliminateMaximumInitial(int[] dist, int[] speed) {
         int n = dist.length;
         int[] timeToReach = new int[n];
         for(int i=0;i<n;i++) timeToReach[i] = (int) Math.ceil(1.0*dist[i]/speed[i]);
@@ -17,5 +17,20 @@ class Solution {
             res++;
         }
         return res;
+    }
+
+    public int eliminateMaximum(int[] dist, int[] speed){
+        double[] arrival = new double[dist.length];
+        for(int i=0;i<dist.length;i++){
+            arrival[i] = 1.0*dist[i]/speed[i];
+        }
+        Arrays.sort(arrival);
+        
+        int result = 0;
+        for(int i=0;i<arrival.length;i++){
+            if(arrival[i]<=i) break; // Arrives before we could reload, and we can kill only one monster per min.
+            result++;
+        }
+        return result;
     }
 }
