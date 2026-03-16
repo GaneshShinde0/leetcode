@@ -22,6 +22,8 @@ class Solution {
         }
         List<Integer> li = new ArrayList<>(counts.values());
         Collections.sort(li);
+        /*Case 1 (2 or more components): To maximize points, the code takes the two largest components and assumes the single "added point" can be placed at an intersection (x,y) that merges these two groups. The result is size_of_largest + size_of_second_largest + 1 (the +1 is the newly added point).
+        */
         if(li.size()>=2) return li.get(li.size()-1)+li.get(li.size()-2)+1;
         else return li.get(li.size()-1)+1;
     }
