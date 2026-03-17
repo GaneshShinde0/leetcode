@@ -10,6 +10,8 @@ class Solution {
             int[] row = matrix[i].clone();
             Arrays.sort(row);
             for(int j=0;j<n;j++){
+                // row is sorted in increasing order, If we have row[j], then it is bound to have values greater than or equal to in next (n-j-1) rows.
+                // Considering that max square would be row[j]*(n-j)
                 res = Math.max(res,row[j]*(n-j));
             }
         }
