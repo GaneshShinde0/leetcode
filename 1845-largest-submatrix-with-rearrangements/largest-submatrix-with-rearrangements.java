@@ -79,6 +79,7 @@ Space Complexity:
                 // Here i+1 represents columns we are considering.
                 // i.e. prevvious i columns can be considered. (0,...i-1) and current as well
                 // Given us total width of (i+1)
+                // As previous i columns had height greater than or equal to current.
             }
             prevHeights = heights;
         }
