@@ -75,7 +75,10 @@ Space Complexity:
             }
 
             for(int i=0;i<heights.size();i++){
-                res = Math.max(res, heights.get(i).getKey()*(i+1));
+                res = Math.max(res, heights.get(i).getKey()*(i+1)); // Basicaly with our previous for loops we are sorting heights in decending order. as we are sorting in descendng order 
+                // Here i+1 represents columns we are considering.
+                // i.e. prevvious i columns can be considered. (0,...i-1) and current as well
+                // Given us total width of (i+1)
             }
             prevHeights = heights;
         }
