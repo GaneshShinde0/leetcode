@@ -1,5 +1,5 @@
 class Solution {
-    public int largestSubmatrix(int[][] matrix) {
+    public int largestSubmatrixModifiesInput(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
         int res = 0;
         for(int i=0;i<m;i++){
@@ -17,4 +17,32 @@ class Solution {
         }
         return res;
     }
+
+    public int largestSubmatrix(int[][] matrix){
+        int m = matrix.length, n = matrix[0].length;
+        int[] prevRow = new int[n];
+        int ans =  0;
+
+        for(int row=0;row<m;row++){
+            for(int col=0;col<n;col++){
+                if(matrix[row][col]!=0) prevRow[col]+=matrix[row][col];
+                else prevRow[col] = 0;
+            }
+
+            int[] sortedRow = prevRow.clone();
+            Arrays.sort(sortedRow);
+            for(int i=0;i<n;i++) ans = Math.max(ans,sortedRow[i]*(n-i));
+        }
+        return ans;
+    }
 }
+
+/*
+
+Time Complexity
+O(m*n*log(n))
+Space Complexity: 
+    O(n) for extra array.
+    But we are also modifying matrix, so modifaction should be counted in space complexity.
+    O(m*n);
+*/
