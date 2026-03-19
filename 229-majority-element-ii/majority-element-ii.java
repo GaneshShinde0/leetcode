@@ -10,7 +10,7 @@ class SolutionInitial {
         return li;
     }
 }
-class Solution {
+class SolutionWithWrapperClasses {
     public List < Integer > majorityElement(int[] nums) {
         int count1 =0, count2=0, len= nums.length;
         Integer candidate1 = null, candidate2 = null;
@@ -40,6 +40,52 @@ class Solution {
         if(count1>len/3) result.add(candidate1);
         if(count2>len/3 && candidate1!=candidate2) result.add(candidate2);
         
+        return result;
+    }
+}
+
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int count1 = 0, count2 = 0;
+        int candidate1 = 0, candidate2 = 0;
+
+        // 1st Pass: Find potential candidates
+        for (int n : nums) {
+            if (n == candidate1) {
+                count1++;
+            } else if (n == candidate2) {
+                count2++;
+            } else if (count1 == 0) {
+                candidate1 = n;
+                count1 = 1;
+            } else if (count2 == 0) {
+                candidate2 = n;
+                count2 = 1;
+            } else {
+                count1--;
+                count2--;
+            }
+        }
+
+        // 2nd Pass: Verify candidates
+        count1 = 0;
+        count2 = 0;
+        for (int n : nums) {
+            if (n == candidate1) {
+                count1++;
+            } else if (n == candidate2) {
+                // The 'else if' ensures we don't double count if 
+                // candidate1 and candidate2 happen to be the same value.
+                count2++;
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        int threshold = nums.length / 3;
+        
+        if (count1 > threshold) result.add(candidate1);
+        if (count2 > threshold) result.add(candidate2);
+
         return result;
     }
 }
