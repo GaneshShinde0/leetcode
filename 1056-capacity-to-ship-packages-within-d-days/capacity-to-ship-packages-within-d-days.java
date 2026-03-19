@@ -36,24 +36,18 @@ class Solution {
             minPerDay = Math.max(minPerDay, i);
             totalWeight+=i;
         }
-        int low = minPerDay;
-        int high = totalWeight;
-        int result = totalWeight; // Keep track of the best valid answer
-
-        while(low <= high){ // Use <= to fully explore the range
-            int mid = low + (high - low) / 2;
-            int daysNeeded = calculateDaysWithCapacity(weights, mid);
-
-            if(daysNeeded <= days){
-                // mid works. Store it, try for a smaller one.
-                result = mid;
-                high = mid - 1; // Search the left half
-            } else {
-                // mid is too small. Increase capacity.
-                low = mid + 1; // Search the right half
+        int low = minPerDay, high = totalWeight, mid = 0, res = high; // res is initialized to low
+        while(low<high){ // Loop terminates when low == high
+            mid = low + (high-low)/2;
+            int curr = calculateDaysWithCapacity(weights, mid);
+            if(curr>days){
+                low = mid+1;
+            }else{
+                res = mid;      // <--- Issue: This update might miss the final 'low' value
+                high = mid;
             }
         }
-        return result;
+        return res; // Final answer might be 'low' (which is equal to 'high'), not 'res'
     }
     private int calculateDaysWithCapacity(int[] weights, int capacity){
         // Start with 1 day, as we must ship all packages
