@@ -4,9 +4,7 @@ class FirstUnique {
 
     public FirstUnique(int[] nums) {
         for(int num:nums){
-            hm.put(num,hm.getOrDefault(num,0)+1);
-            if(hm.get(num)>1 && set.contains(num)) set.remove(num);
-            else if(hm.get(num)==1) set.add(num); 
+            addSingleRemoveDuplicate(num);
         }    
     }
     
@@ -17,10 +15,15 @@ class FirstUnique {
     }
     
     public void add(int num) {
+        addSingleRemoveDuplicate(num);
+    }
+
+    private void addSingleRemoveDuplicate(int num){
         hm.put(num,hm.getOrDefault(num,0)+1);
         if(hm.get(num)>1 && set.contains(num)) set.remove(num);
         else if(hm.get(num)==1) set.add(num); 
     }
+
 }
 
 /**
