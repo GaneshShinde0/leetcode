@@ -1,27 +1,31 @@
 class FirstUnique {
-    HashMap<Integer,Integer> hm = new HashMap<>();
+    HashMap<Integer, Integer> hm = new HashMap<>();
     Set<Integer> set = new LinkedHashSet<>();
 
     public FirstUnique(int[] nums) {
-        for(int num:nums){
+        for (int num : nums) {
             addSingleRemoveDuplicate(num);
-        }    
+        }
     }
-    
+
     public int showFirstUnique() {
-        if(set.isEmpty()) return -1;
+        if (set.isEmpty())
+            return -1;
         // else return new ArrayList<>(set).get(0);// Changing this  line to next improves time from 2 second to 144 ms
-        else return set.iterator().next();
+        else
+            return set.iterator().next();
     }
-    
+
     public void add(int num) {
         addSingleRemoveDuplicate(num);
     }
 
-    private void addSingleRemoveDuplicate(int num){
-        hm.put(num,hm.getOrDefault(num,0)+1);
-        if(hm.get(num)>1 && set.contains(num)) set.remove(num);
-        else if(hm.get(num)==1) set.add(num); 
+    private void addSingleRemoveDuplicate(int num) {
+        hm.put(num, hm.getOrDefault(num, 0) + 1);
+        if (hm.get(num) > 1 && set.contains(num))
+            set.remove(num);
+        else if (hm.get(num) == 1)
+            set.add(num);
     }
 
 }
