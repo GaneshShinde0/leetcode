@@ -1,4 +1,37 @@
 class Solution {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     public int[] maxSlidingWindowUsingHm(int[] nums, int k) {
         int n = nums.length;
         int[] res = new int[n-k+1];
