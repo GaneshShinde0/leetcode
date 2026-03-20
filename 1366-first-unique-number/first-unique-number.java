@@ -12,7 +12,7 @@ class FirstUnique {
     
     public int showFirstUnique() {
         if(set.isEmpty()) return -1;
-        else return new ArrayList<>(set).get(0);
+        else return set.iterator().next();
     }
     
     public void add(int num) {
