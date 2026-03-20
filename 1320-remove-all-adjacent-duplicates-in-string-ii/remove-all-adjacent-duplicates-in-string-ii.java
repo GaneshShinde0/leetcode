@@ -1,13 +1,13 @@
 class Solution {
     public String removeDuplicates(String s, int k) {
-        int i = 0, n = s.length();
+        int i=0, n= s.length();
         int[] count = new int[n];
-        char[] stack = s.toCharArray();
+        char[] stk = s.toCharArray();
         for(int j=0;j<n;j++,i++){
-            stack[i] =  stack[j];
-            count[i] = i>0 && stack[i-1]==stack[j]?count[i-1]+1:1;
+            stk[i]=stk[j]; // Keeping current chars
+            count[i] = i>0 && stk[i-1]==stk[j]?count[i-1]+1:1;
             if(count[i]==k) i-=k;
-        }        
-        return new String(stack,0,i);
+        }
+        return new String(stk,0,i);
     }
 }
