@@ -1,13 +1,12 @@
 import java.util.*;
 
-class Solution {
+class Solution1 {
     private List<List<Integer>> graph;
     private int[] firstMax;   // Longest path downwards from node u
     private int[] secondMax;  // Second longest path downwards from node u
     private int[] maxDist;    // Longest path starting from node u (result equivalent)
 
     public String findSpecialNodes(int n, int[][] edges) {
-        // 1. Build Adjacency List
         graph = new ArrayList<>(n);
         for (int i = 0; i < n; i++) {
             graph.add(new ArrayList<>());
@@ -17,20 +16,13 @@ class Solution {
             graph.get(e[1]).add(e[0]);
         }
 
-        // Initialize DP arrays
         firstMax = new int[n];
         secondMax = new int[n];
         maxDist = new int[n];
 
-        // 2. First DFS (Post-order): Compute max depth going DOWN into subtrees
-        // We calculate height based on edges (leaf = 0).
         dfsDown(0, -1);
-
-        // 3. Second DFS (Pre-order): Compute max depth considering UPWARD paths (re-rooting)
-        // Combine downward info with the path coming from parent.
         dfsUp(0, -1, 0);
 
-        // 4. Find the diameter (maximum value in maxDist)
         int diameter = 0;
         for (int d : maxDist) {
             diameter = Math.max(diameter, d);
@@ -45,16 +37,12 @@ class Solution {
         return sb.toString();
     }
 
-    // Computes the height of the tree rooted at u (considering only children)
     private void dfsDown(int u, int p) {
         for (int v : graph.get(u)) {
             if (v == p) continue;
             
             dfsDown(v, u);
-            
-            int depth = firstMax[v] + 1; // 1 edge + child's max depth
-            
-            // Update first and second largest depths
+            int depth = firstMax[v] + 1;
             if (depth > firstMax[u]) {
                 secondMax[u] = firstMax[u];
                 firstMax[u] = depth;
@@ -64,31 +52,83 @@ class Solution {
         }
     }
 
-    // Computes the longest path for u considering the path coming from parent
     private void dfsUp(int u, int p, int upPath) {
-        // The longest path starting at u is either the longest downward path 
-        // OR the path coming from the parent (upPath).
         maxDist[u] = Math.max(firstMax[u], upPath);
-
         for (int v : graph.get(u)) {
             if (v == p) continue;
-
-            // Calculate the longest path 'upwards' for the child v.
-            // It is 1 + max(path coming to u from u's parent, 
-            //               longest path from u downwards NOT passing through v)
-            
-            int longestFromU = upPath; // Path from u's parent
-            
+            int longestFromU = upPath;
             if (firstMax[v] + 1 == firstMax[u]) {
-                // v is on the longest path of u, so we take the second longest
                 longestFromU = Math.max(longestFromU, secondMax[u]);
             } else {
-                // v is NOT on the longest path, so we can take the longest
                 longestFromU = Math.max(longestFromU, firstMax[u]);
             }
 
             dfsUp(v, u, longestFromU + 1);
         }
+    }
+}
+
+/* Solution 2
+Intuition:
+
+Find all the furthest nodes from node 0, as they all must be the endpoints. Then pick any of these endpoints and find all the furthest nodes from that, as these must be the opposite endpoints.
+
+Complexity:
+Time Complexity: O(n)
+Space Complexity: O(n)
+*/
+class Solution{
+    private int[][] adj;
+    private int[] dist;
+    private int max = 0; // Global max depth for any node;
+
+    public String findSpecialNodes(int n, int[][] edges){
+        this.adj = buildGraph(edges, n); // Optimized adj list function.
+        this.dist = new int[n];
+        char[] arr = new char[n];
+        calcDepth(0,-1,1); // Find distance from node 0;
+        int index = -1;
+        for(int i=0;i<n;i++){
+            if(dist[i]==max){ // If a node is max from 0 then it must be an endpoint.
+                index = i;
+                arr[i]='1';
+            }else{
+                arr[i]='0';
+            }
+            dist[i]=0; // Reset the distance array.
+        }
+        max = 0; // Reset the global max
+        calcDepth(index,-1,1); // We have already calculated for startNode 0, now lets count for last Node which  is index.
+        for(int i=0;i<n;i++){
+            if(dist[i]==max) arr[i] = '1';
+        }
+        return String.valueOf(arr);
+        
+    }
+
+    private void calcDepth(int startNode, int prevNode, int depth){
+        if(depth>max) max = depth;
+        dist[startNode] = depth;
+        for(int next: adj[startNode]){
+            if(next!=prevNode) calcDepth(next,startNode, depth+1);
+        }
+    }
+    private static int[][] buildGraph(int[][] edges, int n){
+        int[] degree = new int[n];
+        for(int[] edge:edges){
+            degree[edge[0]]++;
+            degree[edge[1]]++;
+        }
+        int[][] graph = new int[n][];
+        for(int i=0;i<n;i++) graph[i] = new int[degree[i]]; // Optimized Space
+        for(int[] edge:edges){
+            int u = edge[0], v = edge[1];
+            degree[u]--;
+            degree[v]--;
+            graph[u][degree[u]] = v;
+            graph[v][degree[v]] = u;
+        }
+        return graph;
     }
 }
 /*
