@@ -58,7 +58,7 @@ backtracking(List<> factors, List<List<>> ans){
     - Restore the list backtrack factors by adding the lastFactor back.
 }
 */
-class Solution {
+class SolutionApproach1 {
     public List<List<Integer>> getFactors(int n) {
         List<List<Integer>> ans = new ArrayList<>();
         backtracking(new ArrayList<Integer>(Arrays.asList(n)), ans);
@@ -80,6 +80,52 @@ class Solution {
         factors.add(lastFactor);
     }
 }
+
+/*
+# Approach 2: Iterative DFS
+# Intuition:
+The intuition is the same as before. Start with the single number n as the list of factors. We again maintain the factors list sorted and at each step, replace last factor in the list lastFactor with a,b as discussed in previous approach. Instead of using recursive backtracking, we can use a stack to traverse the tree iteratively DFS.
+
+Algorithm:
+- Create a stack which contains list with the only element n initially.
+- Create an empty list ans
+- Until Stack is empty pop a factors list.
+    - Get last element of factors lastFactor and remove it from factors. 
+    - If factors is empty, iterate over i from 2, otherwise loop i from the last value in factors. Iterate until i>lastFactor/i.
+        - For each i, if lastFactor%i==0, make one copy of the list factors named newFactors. Put i and lastFactor%i into newFactors.
+        - Push newFactors into the stack stack.
+        - Push a copyy of newFactors into the stack stack.
+- return ans;
+*/
+
+
+class Solution{
+    public List<List<Integer>> getFactors(int n){
+        final List<List<Integer>> ans = new LinkedList<>();
+        final Stack<LinkedList<Integer>> stack = new Stack<>();
+        stack.push(new LinkedList<>(new LinkedList<>(Arrays.asList(n))));
+        while(!stack.isEmpty()){
+            final LinkedList<Integer> factors = stack.pop();
+            final int lastFactor =  factors.removeLast();
+            for(int i=factors.isEmpty()?2:factors.peekLast();i<=lastFactor/i;i++){
+                if(lastFactor%i==0){
+                    LinkedList<Integer> newFactors = new LinkedList<>(factors);
+                    newFactors.add(i);
+                    newFactors.add(lastFactor/i);
+                    stack.push(newFactors);
+                    ans.add(new LinkedList<>(newFactors));
+                }
+            }
+        }
+        return ans;
+    }
+}
+/*
+Time Complexity: O(2^logN)
+Space Complexity:
+Recursion Depth: O(logN) 
+Factor List O(logN)
+*/
 
 /*
 2 = 2
