@@ -58,7 +58,7 @@ backtracking(List<> factors, List<List<>> ans){
     - Restore the list backtrack factors by adding the lastFactor back.
 }
 */
-class SolutionApproach1 {
+class Solution {
     public List<List<Integer>> getFactors(int n) {
         List<List<Integer>> ans = new ArrayList<>();
         backtracking(new ArrayList<Integer>(Arrays.asList(n)), ans);
@@ -99,7 +99,7 @@ Algorithm:
 */
 
 
-class Solution{
+class Solution2{
     public List<List<Integer>> getFactors(int n){
         final List<List<Integer>> ans = new LinkedList<>();
         final Stack<LinkedList<Integer>> stack = new Stack<>();
