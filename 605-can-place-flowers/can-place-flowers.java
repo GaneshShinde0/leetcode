@@ -7,7 +7,7 @@ class Solution {
             if(flowerbed[i]==1){
                 canPlace += (emptyBeds-1)/2;
                 emptyBeds = 0;
-                if(canPlace>n) return true;
+                if(canPlace>=n) return true;
             }else emptyBeds++;
         }
 
