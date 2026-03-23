@@ -11,23 +11,19 @@ class Solution {
                 continue;
             }
             boolean isLeftSorted = nums[left] <= nums[mid];
-            boolean targetInLeftRange = (target >= nums[left] && target < nums[mid]);
-
-            if (isLeftSorted) {
-                if (targetInLeftRange) {
-                    // Target is in the sorted left half
-                    right = mid - 1;
-                } else {
-                    // Target must be in the right half
-                    left = mid + 1;
+            boolean isTargetInLeftRange = nums[left]<=target && target<=nums[mid];
+            if(isLeftSorted){
+                if(isTargetInLeftRange){
+                    right = mid-1;
+                }else{
+                    left= mid+1;
                 }
-            } else {
-                // Right half must be the sorted one
-                boolean targetInRightRange = (target > nums[mid] && target <= nums[right]);
-                if (targetInRightRange) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
+            }else{
+                boolean isTargetInRightRange = target>=nums[mid] && target<=nums[right];
+                if(isTargetInRightRange){
+                    left = mid+1;
+                }else{
+                    right = mid-1;
                 }
             }
         }
