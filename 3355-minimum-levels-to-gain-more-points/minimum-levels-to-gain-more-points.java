@@ -28,7 +28,7 @@ class Solution {
         int res = -1;
         for (int i = 0; i < n-1; i++){
             rightSum = rightSum +((possible[i] == 0)?- 1:1);
-            if (sum-rightSum <rightSum) return i+1;
+            if (rightSum > sum-rightSum) return i+1;
         }
         return res;
         
