@@ -10,20 +10,24 @@ class Solution {
                 left++;
                 continue;
             }
-            boolean leftLessThanMid = nums[left]<=nums[mid];
-            boolean leftLessThanTarget = nums[left]<=target;
-            boolean existInFirst = leftLessThanMid ^ leftLessThanTarget;
-            if(existInFirst){
-                if(leftLessThanMid){
-                    left = mid+1;
-                }else{
-                    right = mid-1;
+            boolean isLeftSorted = nums[left] <= nums[mid];
+            boolean targetInLeftRange = (target >= nums[left] && target < nums[mid]);
+
+            if (isLeftSorted) {
+                if (targetInLeftRange) {
+                    // Target is in the sorted left half
+                    right = mid - 1;
+                } else {
+                    // Target must be in the right half
+                    left = mid + 1;
                 }
-            }else{
-                if(nums[mid]<target){
-                    left = mid+1;
-                }else{
-                    right = mid-1;
+            } else {
+                // Right half must be the sorted one
+                boolean targetInRightRange = (target > nums[mid] && target <= nums[right]);
+                if (targetInRightRange) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
                 }
             }
         }
