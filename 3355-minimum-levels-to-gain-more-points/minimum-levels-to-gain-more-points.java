@@ -19,18 +19,17 @@ class Solution {
     public int minimumLevels(int[] possible) {
         int n = possible.length;
         
-        int sum = 0;
+        int totalPoints = 0;
         for (int i = 0; i < n; i++){
-            if (possible[i] == 0) sum = sum - 1;
-            else sum = sum + 1;
+            if (possible[i] == 0) totalPoints = totalPoints - 1;
+            else totalPoints = totalPoints + 1;
         }
-        int rightSum = 0;
-        int res = -1;
+        int alicesCurrentPoints = 0;
         for (int i = 0; i < n-1; i++){
-            rightSum = rightSum +((possible[i] == 0)?- 1:1);
-            if (rightSum > sum-rightSum) return i+1;
+            alicesCurrentPoints = alicesCurrentPoints +((possible[i] == 0)?- 1:1);
+            if (alicesCurrentPoints > totalPoints-alicesCurrentPoints) return i+1; //
         }
-        return res;
+        return -1;
         
     }
 
