@@ -39,9 +39,10 @@ class Solution {
                 adjListChildToParent.computeIfAbsent(j,k->new HashSet<Integer>()).add(i);
             }
         }
+        int[] resultArr = new int[n+1];
         while(!queue.isEmpty()){
             int curr = queue.poll();
-            result.add(curr);
+            resultArr[curr]=1;
             if(!adjListChildToParent.containsKey(curr)) continue;
             for(int parent: adjListChildToParent.get(curr)){
                 if(outDegree[parent]>0){
@@ -50,7 +51,10 @@ class Solution {
                 }
             }
         }
-        Collections.sort(result);
+        for(int i=0;i<=n;i++){
+            if(resultArr[i]==1) result.add(i);
+        }
+        // Collections.sort(result);
         // return new ArrayList<Integer>(result);
         return result;
     }
