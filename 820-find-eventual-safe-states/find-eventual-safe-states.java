@@ -54,7 +54,7 @@ class Solution {
         for(int i=0;i<=n;i++){
             if(resultArr[i]==1) result.add(i);
         }
-        // Collections.sort(result);
+        // Collhections.sort(result);
         // return new ArrayList<Integer>(result);
         return result;
     }
