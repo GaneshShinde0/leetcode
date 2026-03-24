@@ -28,7 +28,7 @@ class Solution {
 
     public List<Integer> eventualSafeNodes(int[][] graph) {
         int n = graph.length;
-        TreeSet<Integer> result = new TreeSet<>();
+        List<Integer> result = new ArrayList<>();
         Queue<Integer> queue = new LinkedList<>();
         int[] outDegree = new int[n+1];
         HashMap<Integer, Set<Integer>> adjListChildToParent= new HashMap<>();
@@ -50,7 +50,8 @@ class Solution {
                 }
             }
         }
-        // Collections.sort(result);
-        return new ArrayList<Integer>(result);
+        Collections.sort(result);
+        // return new ArrayList<Integer>(result);
+        return result;
     }
 }
