@@ -5,8 +5,6 @@ class Solution {
         long[] res = new long[n];
         for(int i=0;i<n;i++){
             res[i] = queries[i]-1+base;
-        }
-        for(int i=0;i<n;i++){
             if(res[i]>=base*10){
                 res[i]=-1;
                 continue;
