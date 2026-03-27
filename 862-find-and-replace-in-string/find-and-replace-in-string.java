@@ -34,11 +34,11 @@ class Solution {
         return sb.toString();
     }
 
-    public String findReplaceString(String s, int[] indexes, String[] sources, String[] targets) {
+    public String findReplaceString2(String s, int[] indexes, String[] sources, String[] targets) {
         List<int[]> sorted = new ArrayList<>();
         for (int i = 0; i < indexes.length; i++)
             sorted.add(new int[] { indexes[i], i });
-        Collections.sort(sorted, (a,b)->Integer.compare(a[0],b[0]));
+        Collections.sort(sorted, (a, b) -> Integer.compare(a[0], b[0]));
         StringBuilder sb = new StringBuilder(s);
         int diff = 0;
         for (int[] ind : sorted) {
@@ -51,6 +51,36 @@ class Solution {
             }
         }
         return sb.toString();
+    }
+
+    public String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
+        int n = s.length();
+        // match[i] will store the index of the replacement if one starts at s[i]
+        int[] match = new int[n];
+        Arrays.fill(match, -1);
+
+        for (int i = 0; i < indices.length; i++) {
+            // Check if the source matches at the specified index
+            if (s.startsWith(sources[i], indices[i])) {
+                match[indices[i]] = i;
+            }
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < n;) {
+            if (match[i] != -1) {
+                // If a valid replacement starts here, append the target
+                int replacementIdx = match[i];
+                res.append(targets[replacementIdx]);
+                // Jump over the original source string
+                i += sources[replacementIdx].length();
+            } else {
+                // Otherwise, keep the original character
+                res.append(s.charAt(i));
+                i++;
+            }
+        }
+        return res.toString();
     }
 }
 
