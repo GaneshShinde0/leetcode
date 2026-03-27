@@ -7,12 +7,12 @@ class Solution {
             res[i] = queries[i]-1+base;
             if(res[i]>=base*10){
                 res[i]=-1;
-                continue;
+            }else{
+                String s = String.valueOf(res[i]);
+                StringBuilder sb = new StringBuilder(s);
+                StringBuilder reverse = new StringBuilder(s).reverse();
+                res[i] = Long.parseLong(intLength%2==1?sb.append(reverse.substring(1)).toString():sb.append(reverse).toString());
             }
-            String s = String.valueOf(res[i]);
-            StringBuilder sb = new StringBuilder(s);
-            StringBuilder reverse = new StringBuilder(s).reverse();
-            res[i] = Long.parseLong(intLength%2==1?sb.append(reverse.substring(1)).toString():sb.append(reverse).toString());
         }
         return res;
     }
