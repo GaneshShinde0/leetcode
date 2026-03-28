@@ -13,12 +13,13 @@ MONTH(CAST(nd.purchase_date as datetime)) = '11' AND YEAR(CAST(nd.purchase_date 
 GROUP BY nd.purchase_date HAVING DAY(CAST(nd.purchase_date as datetime))%7=3
 */
 WITH NovemberDates AS (
-    -- Recursive CTE to generate all days in November 2023
-    SELECT CAST('2023-11-01' AS DATE) AS purchase_date
+    -- Start at the 1st of November
+    SELECT DATEFROMPARTS(2023, 11, 1) AS purchase_date
     UNION ALL
+    -- Automatically stop at the last day of that same month
     SELECT DATEADD(DAY, 1, purchase_date)
     FROM NovemberDates
-    WHERE purchase_date < '2023-11-30'
+    WHERE purchase_date < EOMONTH(DATEFROMPARTS(2023, 11, 1))
 )
 SELECT 
     -- Standard formula for week of month (1-7 = Week 1, 8-14 = Week 2, etc.)
