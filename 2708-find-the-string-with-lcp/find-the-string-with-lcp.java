@@ -59,23 +59,17 @@ class Solution {
         // 2. Verification
         // Any greedy construction must be verified because the lcp matrix 
         // might contain contradictions (e.g., non-symmetric or invalid values).
-        int[][] actualLCP = new int[n + 1][n + 1];
-        for (int i = n - 1; i >= 0; i--) {
-            for (int j = n - 1; j >= 0; j--) {
-                // Check if characters match
-                if (s[i] == s[j]) {
-                    actualLCP[i][j] = actualLCP[i + 1][j + 1] + 1;
-                } else {
-                    actualLCP[i][j] = 0;
+        // 2. Verification (Forward Loop)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int expected = (s[i] == s[j]) ? 1 : 0;
+                if (expected > 0 && i + 1 < n && j + 1 < n) {
+                    expected += lcp[i + 1][j + 1];
                 }
                 
-                // The computed LCP must exactly match the input matrix
-                if (actualLCP[i][j] != lcp[i][j]) {
-                    return "";
-                }
+                if (lcp[i][j] != expected) return "";
             }
         }
-
 
         return new String(s);
     }
