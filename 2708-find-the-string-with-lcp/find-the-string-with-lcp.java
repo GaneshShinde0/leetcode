@@ -1,12 +1,11 @@
-class Solution1 {
+class Solution {
     public String findTheString(int[][] lcp) {
         int n = lcp.length;
         char[] s = new char[n];
         char curr = 'a';
-        System.out.println(Arrays.toString(s));
         for(int i=0;i<n;i++){
             if(s[i]!=0) continue;
-            if(curr>'z') return ""; 
+            if(curr>'z') return "";
             for(int j=i;j<n;j++){
                 if(lcp[i][j]>0){
                     s[j] = curr;
@@ -14,25 +13,38 @@ class Solution1 {
             }
             curr++;
         }
-
-        // Verification using DP to compute the actual LCP of constructed String
-        int[][] actualLCP = new int[n+1][n+1];
-        for(int i=n-1;i>=0;i--){
-            for(int j=n-1;j>=0;j--){
-                if(s[i]==s[j]){
-                    actualLCP[i][j] = actualLCP[i+1][j+1]+1;
-                }else{
-                    actualLCP[i][j]=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                int expected = s[i]==s[j]?1:0;
+                if(expected>0 && i<n-1 && j<n-1){
+                    expected += lcp[i+1][j+1];
                 }
-
-                if(actualLCP[i][j]!=lcp[i][j]) return "";
+                if(expected != lcp[i][j]) return "";
             }
         }
-        return new String(s);
+        return String.valueOf(s);
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
-class Solution {
+class SolutionWithComments {
     public String findTheString(int[][] lcp) {
         int n = lcp.length;
         char[] s = new char[n];
