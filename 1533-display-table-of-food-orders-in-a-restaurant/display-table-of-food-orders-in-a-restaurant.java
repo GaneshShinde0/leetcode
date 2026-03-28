@@ -1,4 +1,4 @@
-class Solution {
+class SolutionMine {
     public List<List<String>> displayTable(List<List<String>> orders) {
         List<List<String>> displayTable = new ArrayList<>();
         TreeSet<Integer> tables = new TreeSet<>();
@@ -47,3 +47,41 @@ class Solution {
         return displayTable;
     }
 }
+
+
+class Solution {
+    public List<List<String>> displayTable(List<List<String>> orders) {
+        TreeMap<Integer,TreeMap<String,Integer>>hm=new TreeMap<>();
+        Set<String>st=new HashSet<>();
+        for(List<String>lst:orders){
+            int table=Integer.parseInt(lst.get(1));
+            String food=lst.get(2);
+            st.add(food);
+            if(hm.containsKey(table)){
+                TreeMap<String,Integer>t=hm.get(table);
+                t.put(food,t.getOrDefault(food,0)+1);
+            }
+            else {
+                hm.put(table,new TreeMap<>());
+                hm.get(table).put(food,1);
+            }
+        }
+        List<List<String>>ans=new ArrayList<>();
+        List<String>l=new ArrayList<>(st);
+        Collections.sort(l);
+        l.add(0,"Table");
+        ans.add(l);
+
+        for(Integer s:hm.keySet()){
+            List<String>lst=new ArrayList<>();
+            lst.add(s+"");
+            TreeMap<String,Integer>tm=hm.get(s);
+            for(int i=1;i<l.size();i++){
+                if(tm.containsKey(l.get(i)))lst.add(tm.get(l.get(i))+"");
+                else lst.add("0");
+            }
+            ans.add(lst);
+        }
+        return ans;
+    }
+    }
