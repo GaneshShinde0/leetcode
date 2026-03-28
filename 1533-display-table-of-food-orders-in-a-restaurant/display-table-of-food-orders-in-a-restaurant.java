@@ -1,4 +1,4 @@
-class SolutionMine {
+class Solution {
     public List<List<String>> displayTable(List<List<String>> orders) {
         List<List<String>> displayTable = new ArrayList<>();
         TreeSet<Integer> tables = new TreeSet<>();
@@ -49,7 +49,7 @@ class SolutionMine {
 }
 
 
-class Solution {
+class SolutionBitSlow {
     public List<List<String>> displayTable(List<List<String>> orders) {
         TreeMap<Integer,TreeMap<String,Integer>>hm=new TreeMap<>();
         Set<String>st=new HashSet<>();
