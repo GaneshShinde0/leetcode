@@ -76,10 +76,6 @@ class Solution {
             }
         }
 
-        // Final check to ensure every character was assigned (handles edge cases)
-        for (int i = 0; i < n; i++) {
-            if (s[i] == 0) return "";
-        }
 
         return new String(s);
     }
