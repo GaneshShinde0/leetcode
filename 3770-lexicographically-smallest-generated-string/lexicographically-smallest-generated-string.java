@@ -25,19 +25,19 @@ class Solution {
 
         for (int i = 0; i < n; i++) {
             if (str1.charAt(i) == 'F') {
-                boolean flag = false;
+                boolean notMatching = false;
                 int idx = -1;
                 for (int j = i + m - 1; j >= i; j--) {
                     if (str2.charAt(j - i) != s[j]) {
-                        flag = true;
+                        notMatching = true;
+                        break;
                     }
                     if (idx == -1 && fixed[j] == 0) {
                         idx = j;
                     }
                 }
-                if (flag) {
-                    continue;
-                } else if (idx != -1) {
+                if(notMatching) continue;
+                if (idx != -1) {
                     s[idx] = 'b';
                 } else {
                     return "";
