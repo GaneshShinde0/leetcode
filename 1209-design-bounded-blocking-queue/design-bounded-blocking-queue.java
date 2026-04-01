@@ -25,6 +25,21 @@ class BoundedBlockingQueueInitial {
     }
 }
 
+/*
+Reentrant Lock = Volatile + CAS (Compare and Swap) + Condition
+Condition = LinkedNode which contains Waiting Thread.
+In same ReentrantLock, we can create multiple conditions
+For this question, Blockingqueue needs two waiting lists (full/empty)
+
+When queue is empty, we block dequeue thread, add  thread to full waiting list.
+When queue is full, block enqueue thread, add thread to full waiting list.
+
+Signal = Notify
+SignalAll = NotifyAll
+Await = Wait
+
+Same as BlockingQueue implementation in java
+*/
 class BoundedBlockingQueue {
     private ReentrantLock lock = new ReentrantLock();
     private Condition full = lock.newCondition();
