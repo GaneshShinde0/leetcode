@@ -65,7 +65,7 @@ class Solution {
         Stack<Integer> stk = new Stack<>();
         for(int i=0;i<n;i++)indices[i]=i;
         Arrays.sort(indices,(a,b)-> Integer.compare(positions[a], positions[b]));
-        System.out.println(Arrays.toString(indices));
+        // System.out.println(Arrays.toString(indices));
         for(int i:indices){
             if(directions.charAt(i)=='R'){
                 stk.push(i);
