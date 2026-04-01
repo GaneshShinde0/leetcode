@@ -1,3 +1,4 @@
+// This of this as bit manipulation
 class Solution {
     public int minimumAddedCoins(int[] coins, int target) {
         Arrays.sort(coins);
@@ -10,7 +11,7 @@ class Solution {
                 currentMax+=coins[index];
                 index++;
             }else{
-                currentMax+=currentMax+1;
+                currentMax+=currentMax+1; 
                 additions++;
             }
         }
