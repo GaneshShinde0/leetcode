@@ -20,7 +20,7 @@ class BoundedBlockingQueue {
         return value;
     }
     
-    public int size() {
+    public synchronized int size() {
         return queue.size();
     }
 }
