@@ -2,8 +2,8 @@ class Solution {
     public List<List<Integer>> getSkyline(int[][] buildings) {
         List<List<Integer>> result = new ArrayList<>();
         PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->{
-            if(a[0]==b[0]) return Integer.compare(a[1],b[1]);
-            else return Integer.compare(a[0],b[0]);
+            if(a[0]==b[0]) return Integer.compare(a[1],b[1]); // Compare by height
+            else return Integer.compare(a[0],b[0]); // Compare by start/end
         });
         for(int[] building:buildings){
             pq.add(new int[]{building[0],building[2],0});
@@ -15,7 +15,7 @@ class Solution {
         int prevMaxHeight = 0;
         while(!pq.isEmpty()){
             
-            int currentX = pq.peek()[0];
+            int currentX = pq.peek()[0]; // Check all the elements with current start/end
 
             while(!pq.isEmpty() && pq.peek()[0]==currentX){
                 int[] curr = pq.poll();
