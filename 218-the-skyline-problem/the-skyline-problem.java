@@ -2,7 +2,7 @@ class Solution {
     public List<List<Integer>> getSkyline(int[][] buildings) {
         List<List<Integer>> result = new ArrayList<>();
         PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->{
-            if(a[0]==b[0]) return Integer.compare(a[1],b[1]); // Compare by height
+            if(a[0]==b[0]) return Integer.compare(a[1],b[1]); // Compare by height if same start
             else return Integer.compare(a[0],b[0]); // Compare by start/end
         });
         for(int[] building:buildings){
