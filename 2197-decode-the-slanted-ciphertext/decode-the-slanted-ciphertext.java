@@ -29,11 +29,26 @@ class Solution {
         return sb.toString().stripTrailing();
     }
 
-    public String decodeCiphertext(String encodedText, int rows) {
+    public String decodeCiphertext36ms(String encodedText, int rows) {
         int n = encodedText.length();
         int skip = n/rows;
         char[] encodedTextArr = encodedText.toCharArray();
         StringBuilder sb = new StringBuilder();
+        for(int i=0;i<skip;i++){
+            int curr = i;
+            while(curr<n){
+                sb.append(encodedTextArr[curr]);
+                curr+=skip+1;
+            }
+        }
+        return sb.toString().stripTrailing();
+    }
+
+    public String decodeCiphertext(String encodedText, int rows) {
+        int n = encodedText.length();
+        int skip = n/rows;
+        char[] encodedTextArr = encodedText.toCharArray();
+        StringBuilder sb = new StringBuilder(n);
         for(int i=0;i<skip;i++){
             int curr = i;
             while(curr<n){
