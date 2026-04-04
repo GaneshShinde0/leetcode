@@ -56,6 +56,11 @@ class Solution {
                 curr+=skip+1;
             }
         }
-        return sb.toString().stripTrailing();
+        int i = sb.length() - 1;
+        while (i >= 0 && sb.charAt(i) == ' ') {
+            i--;
+        }
+        sb.setLength(i + 1);
+        return sb.toString();
     }
 }
