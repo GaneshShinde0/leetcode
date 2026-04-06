@@ -6,10 +6,10 @@ class Solution {
             min = Math.min(min, nums[i]);
             max = Math.max(max,nums[i]);
         }
+        System.out.println(gcd(5,0));
         return gcd(min,max);
     }
     private int gcd(int a, int b){
-        // if(a<b) return gcd(b,a);
-        return a%b==0?b:gcd(b,a%b);
+        return b==0?a:gcd(b,a%b);
     }
 }
