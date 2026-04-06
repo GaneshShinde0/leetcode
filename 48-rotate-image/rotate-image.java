@@ -4,7 +4,6 @@ class Solution {
         for(int[] arr: matrix){
             reverse(arr);
         }
-        
         for(int i=0;i<n-1;i++){
             for(int j=0;j<n-i-1;j++){
                 swap(matrix,i,j,n-j-1,n-i-1);
@@ -73,5 +72,8 @@ for(int i=0;i<m;i++){
         swap(nums,i,j,n-j-1,n-i-1);
     }
 }
+
+
+This can also be done with transpose and reverse.
 
 */
