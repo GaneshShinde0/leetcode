@@ -6,7 +6,7 @@ class Solution {
             min = Math.min(min, nums[i]);
             max = Math.max(max,nums[i]);
         }
-        return gcd(max,min);
+        return gcd(min,max);
     }
     private int gcd(int a, int b){
         // if(a<b) return gcd(b,a);
