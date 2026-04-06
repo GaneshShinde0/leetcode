@@ -1,55 +1,33 @@
 class Solution {
-    int[][] directions = {{0,1},{1,0},{-1,0},{0,-1}};
     public int orangesRotting(int[][] grid) {
-        int m = grid.length;
-        int n = grid[0].length;
-        boolean[][] visited = new boolean[m][n];
-        Queue<int[]> q= new LinkedList<>();
-        int x,y,res=0;
+        int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
+        int minutes = -1;
+        int m = grid.length, n = grid[0].length;
+        Queue<int[]> queue = new LinkedList<>();
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                if(grid[i][j]==2){
-                    q.offer(new int[]{i,j});
-                    visited[i][j] = true;
+                if(grid[i][j]==2) queue.add(new int[]{i,j});
+            }
+        }
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int k=0;k<size;k++){
+                int[] curr = queue.poll();
+                int i = curr[0],j=curr[1];
+                for(int[] dir:dirs){
+                    int newI = i+dir[0], newJ = j+dir[1];
+                    if(newI<0||newJ<0||newI>=m||newJ>=n||grid[newI][newJ]!=1) continue;
+                    grid[newI][newJ]=2;
+                    queue.add(new int[]{newI,newJ});
                 }
             }
+            minutes++;
         }
-        if(checkGrid(grid)) return res;
-        while(!q.isEmpty()){
-            res++;
-            int size = q.size();
-            for(int i=0;i<size;i++){
-                int[] current = q.poll();
-                // System.out.println("Res: "+res+": "+Arrays.toString(current));
-                for(int[] dir:directions){
-                    x = current[0]+dir[0];
-                    y = current[1]+dir[1];
-                    // System.out.println("X: "+x+", Y: "+y);
-                    if(x<0||y<0||x>=m||y>=n) continue;
-                    // for(int k=0;k<m;k++){
-                    //     System.out.println(Arrays.toString(visited[k]));
-                    // }
-                    if(!visited[x][y] && grid[x][y]==1){
-                        visited[x][y]=true;
-                        grid[x][y]=2;
-                        q.offer(new int[]{x,y});
-                    }
-                    if(checkGrid(grid)) return res;
-                }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==1) return -1;
             }
         }
-        // for(int i=0;i<m;i++){
-        //     System.out.println(Arrays.toString(grid[i]));
-        // }        
-        return -1;
-    }
-
-    private boolean checkGrid(int[][] grid){
-        for(int i=0;i<grid.length;i++){
-            for(int j=0;j<grid[0].length;j++){
-                if(grid[i][j]==1) return false;
-            }
-        }
-        return true;
+        return Math.max(minutes,0);
     }
 }
