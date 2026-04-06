@@ -9,7 +9,7 @@ class Solution {
         return gcd(max,min);
     }
     private int gcd(int a, int b){
-        if(a<b) return gcd(b,a);
+        // if(a<b) return gcd(b,a);
         return a%b==0?b:gcd(b,a%b);
     }
 }
