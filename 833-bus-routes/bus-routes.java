@@ -14,7 +14,7 @@ class Solution {
         if(graph.get(source)==null||graph.get(target)==null) return -1;
 
         Queue<Integer> queue = new LinkedList<>();
-        Set<Integer> vis = new HashSet<Integer>();
+        Set<Integer> vis = new HashSet<Integer>(graph.size());
         
         for(int route:graph.get(source)){
             queue.add(route);
