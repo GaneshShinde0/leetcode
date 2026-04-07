@@ -11,9 +11,10 @@ class Solution {
         int ans = dp[currentPile][coinsLeft];
         if(ans!=0) return ans;
         int sumOfValuesFromTop = 0;
-        for(int i=0;i<=piles.get(currentPile).size() && i<=coinsLeft; i++){
+        int currPileSize = piles.get(currentPile).size();
+        for(int i=0;i<=currPileSize && i<=coinsLeft; i++){
             ans = Math.max(ans, checkRemainingPiles(currentPile-1,coinsLeft-i,piles)+sumOfValuesFromTop);
-            if(i<piles.get(currentPile).size()) sumOfValuesFromTop +=piles.get(currentPile).get(i);
+            if(i<currPileSize) sumOfValuesFromTop +=piles.get(currentPile).get(i);
         }
         dp[currentPile][coinsLeft]=ans;
         return ans;
