@@ -1,57 +1,19 @@
 class Solution {
-    private static final int MOD = 1000000007;
-    // Mine
+    private static final int MOD = 1_000_000_007;
     public int xorAfterQueries(int[] nums, int[][] queries) {
-        for(int[] query:queries){
-            int idx = query[0];
-            int r = query[1];
-            int k =query[2];
-            int v = query[3];
-            for(int i=idx;i<=r;i+=k){
-                nums[i]=(int) ((1l*nums[i]*v)%MOD);
+        int result = 0;
+        for(int i=0;i<queries.length;i++){
+            int l=queries[i][0];
+            int r = queries[i][1];
+            int k = queries[i][2];
+            int v = queries[i][3];
+            for(int j=l;j<=r;j+=k){
+                nums[j]=(int)((1l*nums[j]*v)%MOD);
             }
         }
-        int res =0;
-        for(int i:nums){
-            res^=i;
+        for(int num:nums){
+            result^=num;
         }
-        return res;
-    }
-    // GPT
-    public int xorAfterQueriesGPT(int[] nums, int[][] queries) {
-        int n = nums.length;
-        // Step 1: For each index, track all multipliers
-        List<List<Integer>> multipliers = new ArrayList<>(n);
-        for (int i = 0; i < n; i++) {
-            multipliers.add(new ArrayList<>());
-        }
-
-        for (int[] query : queries) {
-            int idx = query[0];
-            int r = query[1];
-            int k = query[2];
-            int v = query[3];
-
-            // Only go through affected indices
-            for (int i = idx; i <= r; i += k) {
-                multipliers.get(i).add(v);
-            }
-        }
-
-        // Step 2: Apply all multipliers per index
-        for (int i = 0; i < n; i++) {
-            long val = nums[i];
-            for (int v : multipliers.get(i)) {
-                val = (val * v) % MOD;
-            }
-            nums[i] = (int) val;
-        }
-
-        // Step 3: Compute XOR
-        int res = 0;
-        for (int val : nums) {
-            res ^= val;
-        }
-        return res;
+        return result;
     }
 }
