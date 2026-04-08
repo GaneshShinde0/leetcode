@@ -15,11 +15,11 @@ class Solution {
         int n = nums.length;
         if(n==3) return 0;
         Arrays.sort(nums);
-        int max = Integer.MAX_VALUE;
-        max = Math.min(max,Math.abs(nums[n-1]-nums[2]));
-        max = Math.min(max,Math.abs(nums[n-2]-nums[1]));
-        max = Math.min(max,Math.abs(nums[n-3]-nums[0]));
-        return max;
+        int maxMin = Integer.MAX_VALUE;
+        maxMin = Math.min(maxMin,Math.abs(nums[n-1]-nums[2]));
+        maxMin = Math.min(maxMin,Math.abs(nums[n-2]-nums[1]));
+        maxMin = Math.min(maxMin,Math.abs(nums[n-3]-nums[0]));
+        return maxMin;
     }
 }
 
