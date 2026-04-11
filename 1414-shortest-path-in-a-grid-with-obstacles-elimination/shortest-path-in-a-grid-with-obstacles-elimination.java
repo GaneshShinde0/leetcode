@@ -33,7 +33,7 @@ class Solution {
                 queue.add(new int[]{newI,newJ,d+1,temp});
             }
         }
-        return res==Integer.MAX_VALUE?-1:res;
+        return -1;
     }
 }
 
