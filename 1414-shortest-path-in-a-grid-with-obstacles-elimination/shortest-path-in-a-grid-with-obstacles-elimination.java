@@ -57,6 +57,7 @@ class Solution {
 
                 if (nr >= 0 && nr < m && nc >= 0 && nc < n) {
                     int nextK = remK - grid[nr][nc];
+                    // If we have enough k and haven't visited this state
                     if (nextK >= 0 && !vis[nr][nc][nextK]) {
                         vis[nr][nc][nextK] = true;
                         queue.add(new int[]{nr, nc, nextK, dist + 1});
