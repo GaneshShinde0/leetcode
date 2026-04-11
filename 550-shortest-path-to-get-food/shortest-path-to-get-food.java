@@ -18,13 +18,13 @@ class Solution {
             int i = curr[0];
             int j = curr[1];
             int d = curr[2];
-            if(grid[i][j]=='#') return d;
             for(int[] dir:dirs){
                 int newI = i+dir[0];
                 int newJ = j+dir[1];
                 if(newI<0||newJ<0||newI>=m||newJ>=n||vis[newI][newJ]) continue;
                 vis[newI][newJ] = true;
                 if(grid[newI][newJ]=='X') continue;
+                if(grid[newI][newJ]=='#') return d+1;
                 queue.add(new int[]{newI,newJ,d+1});
             }
         }
