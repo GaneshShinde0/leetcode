@@ -26,10 +26,10 @@ class Solution {
                     else if(grid[newI][newJ]==0) return d+1;
                 }
                 if(newI<0||newJ<0||newI>=m||newJ>=n||vis[newI][newJ][k1]) continue;
+                vis[newI][newJ][k1] = true;
                 int temp = k1;
                 if(grid[newI][newJ]==1) temp--;
                 if(temp<0)continue;
-                vis[newI][newJ][k1] = true;
                 queue.add(new int[]{newI,newJ,d+1,temp});
             }
         }
