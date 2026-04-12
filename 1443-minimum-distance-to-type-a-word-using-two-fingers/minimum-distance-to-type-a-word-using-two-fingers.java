@@ -92,7 +92,6 @@ class Solution {
             int curr = word.charAt(i)-'A';
             int prev = word.charAt(i-1)-'A';
             int d = getDistance(curr,prev);
-
             for(int j=0;j<26;j++){
                 dp[i][j] =Math.min(dp[i][j],dp[i-1][j]+d);
                 if(prev == j){ // Already calculated?
