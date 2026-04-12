@@ -12,7 +12,7 @@ We consider the transition based on these two cases.
 - When word[i]=l, the left hand is at position of word[i]. We consider where the i-1th character was typed.
     - If the left hand was at word[i-1], then it moves from word[i-1] to word[i]
 */
-class Solution {
+class SolutionApproach1 {
 
     private int getDistance(int p, int q){
         int x1 = p/6, y1=p%6;
@@ -57,6 +57,54 @@ class Solution {
                 ans = Math.min(ans, dp[n-1][i][j]);
             }
         }
+        return ans;
+    }
+}
+
+/*
+Approach 2: Dynamic Programming + Space Optimization
+- From Approach 1, For any state dp[i][j][k] or dp[i][left][right], either word[i]=l or word[i]=r. This means that for each i, we only need to store 2[x] states instead of [x][x].
+- We can redefine the states as dp[i][op][rest], where 
+    - op = 0 means the left hand is at word[i].
+    - op = 1 means the right hand is at word[i]
+    - rest represents the position of the other hand.
+- We can simplify this further by observing symmetry. Swapping the roles of the left and right hands does not change the total movement cost. Therefore, dp[i][op=0][rest] and dp[i][op=1][rest] are always equal.
+
+This allows us to reduce the state to dp[i][rest], which represents the minimum movement cost when one hand is at word[i] and the other is at position rest. We no longer need to distinguish between left and right hands.
+
+*/
+class Solution {
+
+    private int getDistance(int p, int q){
+        int x1 = p/6, y1=p%6;
+        int x2 = q/6, y2=q%6;
+        return Math.abs(x1-x2)+Math.abs(y1-y2);
+    }
+
+    public int minimumDistance(String word) {
+        int n = word.length();
+        int[][] dp = new int[n][26];
+        for(int i=0; i<n; i++){
+            Arrays.fill(dp[i],Integer.MAX_VALUE/2);
+        }
+        Arrays.fill(dp[0],0);
+        for(int i=1;i<n;i++){
+            int curr = word.charAt(i)-'A';
+            int prev = word.charAt(i-1)-'A';
+            int d = getDistance(curr,prev);
+
+            for(int j=0;j<26;j++){
+                dp[i][j] =Math.min(dp[i][j],dp[i-1][j]+d);
+                if(prev == j){ // Already calculated?
+                    for(int k=0;k<26;k++){
+                        int d0 = getDistance(k,curr);
+                        dp[i][j] = Math.min(dp[i][j], dp[i-1][k]+d0);
+                    }
+                }
+            }
+        }
+        int ans = Integer.MAX_VALUE/2;
+        for(int value:dp[n-1]) ans = Math.min(ans,value);
         return ans;
     }
 }
