@@ -3,6 +3,10 @@ class Solution {
     public boolean isScramble(String s1, String s2) {
         String key = s1+","+s2;
         if(hashMap.containsKey(key)) return hashMap.get(key);
+        if(s1.equals(s2)){
+            hashMap.put(key,true);
+            return true;
+        }
         int n = s1.length();
         if(s1.equals(s2)) return true;
         for(int i=1;i<s1.length();i++){
