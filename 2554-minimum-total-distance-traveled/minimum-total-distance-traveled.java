@@ -1,9 +1,31 @@
 class Solution {
-
     public long minimumTotalDistance(List<Integer> robot, int[][] factory){
         Collections.sort(robot);
         Arrays.sort(factory, Comparator.comparingInt(a->a[0]));
-        List<Integer> factoryPositions = flattonArray(factory);
+        List<Integer> factoryPositions = flattenArray(factory);
+        int roboCount = robot.size();
+        int factoryCount = factoryPositions.size();
+        long[][] dp = new long[roboCount+1][factoryCount+1];
+
+        // Initialize base cases
+        for(int i =0;i<roboCount;i++){
+            dp[i][factoryCount] = (long) 1e12; // No factories left
+        }
+
+        // Fill DP Table BottomUp
+        for(int i= roboCount-1;i>=0;i--){
+            for(int j = factoryCount-1; j>=0; j--){
+                long assign = Math.abs(robot.get(i)-factoryPositions.get(j))+dp[i+1][j+1];
+                long skip = dp[i][j+1];
+                dp[i][j] = Math.min(assign, skip);
+            }
+        }
+        return dp[0][0];
+    }
+    public long minimumTotalDistanceMemoizedRecursion(List<Integer> robot, int[][] factory){
+        Collections.sort(robot);
+        Arrays.sort(factory, Comparator.comparingInt(a->a[0]));
+        List<Integer> factoryPositions = flattenArray(factory);
         int robotCount = robot.size();
         int factoryCount = factoryPositions.size();
         long[][] memo = new long[robotCount][factoryCount];
@@ -23,7 +45,7 @@ class Solution {
         return memo[robotIdx][factoryIdx];
     }
 
-    private List<Integer> flattonArray(int[][] arr){
+    private List<Integer> flattenArray(int[][] arr){
         List<Integer> flattenedList = new ArrayList<>();
         for(int[] a: arr){
             for(int i=0;i<a[1];i++){
