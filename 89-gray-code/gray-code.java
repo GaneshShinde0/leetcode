@@ -15,7 +15,7 @@ class Solution {
     public List<Integer> grayCode(int n){
         List<Integer> result = new ArrayList<>();
         for(int i=0; i<(1<<n);i++){
-            result.add(i^(i>>1));
+            result.add(i^(i>>1)); // i xor with (i)>>1 i.e. after removing lsb of I
         }
         return result;
     }
