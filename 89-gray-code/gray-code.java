@@ -1,5 +1,5 @@
 class Solution {
-    public List<Integer> grayCode(int n) {
+    public List<Integer> grayCodeInitial(int n) {
         List<Integer> li = new ArrayList<>();
         li.add(0);
         for(int i=1;i<=n;i++){
@@ -10,6 +10,14 @@ class Solution {
             }
         }
         return li;
+    }
+    // Another one
+    public List<Integer> grayCode(int n){
+        List<Integer> result = new ArrayList<>();
+        for(int i=0; i<(1<<n);i++){
+            result.add(i^(i>>1));
+        }
+        return result;
     }
 }
 /*
