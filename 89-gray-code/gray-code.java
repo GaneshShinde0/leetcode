@@ -4,8 +4,9 @@ class Solution {
         li.add(0);
         for(int i=1;i<=n;i++){
             int size = li.size();
+            int add = 1<<(i-1);
             for(int j=size-1;j>=0;j--){
-                li.add(li.get(j)+(1<<(i-1)));
+                li.add(li.get(j)+add);
             }
         }
         return li;
