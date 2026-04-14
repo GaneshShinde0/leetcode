@@ -3,6 +3,8 @@ There
 */
 class Solution {
     public int minCostII(int[][] costs) {
+        if (costs == null || costs.length == 0) return 0;
+        if (costs[0].length == 1 && costs.length > 1) return Integer.MAX_VALUE; // Impossible
         int n = costs.length, m = costs[0].length;
         int[] res = new int[m];
         res = costs[0].clone();
