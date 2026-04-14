@@ -15,7 +15,7 @@ class Solution {
     public List<Integer> grayCode(int n){
         List<Integer> result = new ArrayList<>();
         for(int i=0; i<(1<<n);i++){
-            result.add(i^(i>>1)); // i xor with (i)>>1 i.e. after removing lsb of I
+            result.add(i^(i>>1)); // i xor with (i)>>1 i.e. after removing lsb of I ... This effectively aligns the kth bit with the k+1 th bit.
         }
         return result;
     }
