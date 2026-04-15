@@ -1,4 +1,52 @@
+
 class Solution {
+    public List<String> generatePalindromes(String s) {
+        int[] freq = new int[26];
+        for (char c : s.toCharArray()) {
+            freq[c - 'a']++;
+        }
+        int odds = 0;
+        String middle = "";
+        int[] halfFreq = new int[26];
+        int targetLen = s.length()/2;
+
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] % 2 == 1) {
+                middle = "" + (char) (i + 'a');
+                odds++;
+            }
+            if (odds > 1) return new ArrayList<>(); // Early exit if not a palindrome permutation
+
+            halfFreq[i] = freq[i] / 2; // Store only half for permutations
+        }
+
+        List<String> result = new ArrayList<>();
+        backtrack(halfFreq, targetLen, new StringBuilder(), middle, result);
+        return result;
+    }
+    private void backtrack(int[] halfFreq, int targetLen, StringBuilder current, String middle, List<String> res) {
+        if (current.length() == targetLen) {
+            String half = current.toString();
+            String full = half + middle + new StringBuilder(half).reverse().toString();
+            res.add(full);
+            return;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (halfFreq[i] > 0) {
+                halfFreq[i]--; // Choose
+                current.append((char) (i + 'a'));
+                
+                backtrack(halfFreq, targetLen, current, middle, res);
+                
+                current.deleteCharAt(current.length() - 1); // Un-choose
+                halfFreq[i]++;
+            }
+        }
+    }
+}
+
+class Solution1 {
     Set<String> set = new HashSet<>();
     public List<String> generatePalindromes(String s) {
         int[] freq = new int[26];
