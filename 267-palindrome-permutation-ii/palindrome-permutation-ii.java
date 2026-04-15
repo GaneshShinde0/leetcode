@@ -6,11 +6,11 @@ class Solution {
             freq[c-'a']++;
         }
         int odds = 0;
-        char middle = 'A';
+        String middle = "";
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<26;i++){
             if(freq[i]%2==1){
-                middle = (char) (i+'a');
+                middle = ""+(char) (i+'a');
                 odds++;
             }
             if(odds == 2)  return new ArrayList<>(set);
@@ -22,10 +22,10 @@ class Solution {
         return new ArrayList<>(set);
     }
 
-    private void permutations(int start, String s, char middle){
+    private void permutations(int start, String s, String middle){
         if(start==s.length()){
             StringBuilder sb = new StringBuilder(s);
-            if(middle!='A') sb.append(middle);
+            sb.append(middle);
             String reverse = sb.reverse().toString();
             set.add(s+reverse);
         }else{
