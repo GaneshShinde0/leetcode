@@ -19,7 +19,9 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         long sumOfMinimums = 0;
         for(int i=0;i<=arr.length;i++){
-            while(!stack.isEmpty() && (i==arr.length||arr[stack.peek()]>arr[i])){
+            // When i reaches the array length, it is an indication that all the elements have been processed, and the remaining elements in that stack should now be popped out.
+            while(!stack.isEmpty() && (i==arr.length||arr[stack.peek()]>=arr[i])){
+                // >= ensures 
                 int mid = stack.pop();
                 int leftBoundary = stack.isEmpty()?-1:stack.peek();
                 int rightBoundary = i;
