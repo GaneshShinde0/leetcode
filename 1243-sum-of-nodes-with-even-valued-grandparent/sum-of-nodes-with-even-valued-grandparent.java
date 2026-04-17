@@ -33,7 +33,7 @@
         dfs(null,8,3);
         dfs(5,8,3);=+5
  */
-class Solution {
+class SolutionInitial {
     int sum = 0;
     public int sumEvenGrandparent(TreeNode root) {
         if(root.left!=null){
@@ -57,5 +57,22 @@ class Solution {
             dfs(curr.right, parent, curr);
         }
     }
+}
 
+class Solution{
+    int sum;
+    public int sumEvenGrandparent(TreeNode root){
+        this.sum = 0;
+        dfs(root,null,null);
+        return sum;
+    }
+
+    private void dfs(TreeNode curr, TreeNode parent, TreeNode grandParent){
+        if(curr==null) return;
+        if(grandParent!=null && grandParent.val%2==0){
+            sum+=curr.val;
+        }
+        dfs(curr.left, curr, parent);
+        dfs(curr.right, curr, parent);
+    }
 }
