@@ -21,10 +21,11 @@ class Solution {
         for(int i=0;i<=arr.length;i++){
             // When i reaches the array length, it is an indication that all the elements have been processed, and the remaining elements in that stack should now be popped out.
             while(!stack.isEmpty() && (i==arr.length||arr[stack.peek()]>=arr[i])){
-                // >= ensures 
+                // >= ensures that no contribution is counted twice. Right boundary takes equal or elements into account while leftBoundary takes only the strictly smaller elements into account.
                 int mid = stack.pop();
                 int leftBoundary = stack.isEmpty()?-1:stack.peek();
                 int rightBoundary = i;
+                // Sub arrays where mid is the minimum elements.
                 long count = ((mid-leftBoundary)*(rightBoundary-mid))%MOD;
                 sumOfMinimums = (sumOfMinimums+count*arr[mid])%MOD;
             }
