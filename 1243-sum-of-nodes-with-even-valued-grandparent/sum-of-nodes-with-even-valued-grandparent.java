@@ -50,7 +50,7 @@ class SolutionInitial {
     private void dfs(TreeNode curr, TreeNode grandParent, TreeNode parent){
         if(curr==null) return;
         if(grandParent!=null && grandParent.val%2==0){
-            if(curr!=null) sum+=curr.val;
+            sum+=curr.val;
         }
         if(curr!=null){
             dfs(curr.left,parent, curr);
