@@ -7,7 +7,7 @@ WITH ProductsBroughtByThreeUsers as (
 ), main_process AS(
     SELECT p.product_id as product1_id, p1.product_id as product2_id, count(distinct p.user_id) customer_count 
     FROM ProductPurchases p INNER JOIN ProductPurchases p1 on p.product_id <p1.product_id AND p.user_id = p1.user_id
-    AND EXISTS (SELECT 1 FROM ProductsBroughtByThreeUsers C where P.product_id = C.product_id)
+    AND EXISTS (SELECT 1 FROM ProductsBroughtByThreeUsers C where C.product_id=P.product_id )
     AND EXISTS ( SELECT 1 FROM ProductsBroughtByThreeUsers C WHERE c.product_id=P1.PRODUCT_ID )
 	GROUP BY P.product_id, P1.product_id
     HAVING COUNT(DISTINCT p.user_id)>=3
