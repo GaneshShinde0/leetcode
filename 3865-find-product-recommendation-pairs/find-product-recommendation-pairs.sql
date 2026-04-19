@@ -1,5 +1,5 @@
 /* Write your T-SQL query statement below */
-WITH filter_first as (
+WITH ProductsBroughtByThreeUsers as (
     SELECT product_id, count(user_id) total_bought
     FROM ProductPurchases
     GROUP BY product_id
@@ -7,8 +7,8 @@ WITH filter_first as (
 ), main_process AS(
     SELECT p.product_id as product1_id, p1.product_id as product2_id, count(distinct p.user_id) customer_count 
     FROM ProductPurchases p INNER JOIN ProductPurchases p1 on p.product_id <p1.product_id AND p.user_id = p1.user_id
-    AND EXISTS (SELECT 1 FROM filter_first C where P.product_id = C.product_id)
-    AND EXISTS ( SELECT 1 FROM filter_first C WHERE P1.PRODUCT_ID = c.product_id)
+    AND EXISTS (SELECT 1 FROM ProductsBroughtByThreeUsers C where P.product_id = C.product_id)
+    AND EXISTS ( SELECT 1 FROM ProductsBroughtByThreeUsers C WHERE P1.PRODUCT_ID = c.product_id)
 	GROUP BY P.product_id, P1.product_id
     HAVING COUNT(DISTINCT p.user_id)>=3
 )
