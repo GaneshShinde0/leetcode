@@ -17,9 +17,7 @@ class UnionFind{
 
     void union(int x, int y){
         int xPar = find(x), yPar = find(y);
-        if(xPar==yPar){
-            return;
-        }else if(rank[xPar]<rank[yPar]){
+        if(rank[xPar]<rank[yPar]){
             parent[yPar]=xPar;
         }else if(rank[yPar]<rank[xPar]){
             parent[xPar]=yPar;
