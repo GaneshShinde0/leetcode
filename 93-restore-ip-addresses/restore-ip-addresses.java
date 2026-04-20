@@ -2,11 +2,10 @@ class Solution {
     public List<String> restoreIpAddresses(String s) {
         List<String> result = new ArrayList<>();
         if(s.length()>12) return result;
-        backtrack(0,0,s, new StringBuilder(),result);
+        backtrack(s,0,0,new StringBuilder(),result);
         return result;
     }
-
-    private void backtrack(int i, int dots, String s, StringBuilder sb, List<String> result){
+    public void backtrack(String s, int i, int dots, StringBuilder sb, List<String> result){
         if(dots==4 && i==s.length()){
             sb.deleteCharAt(sb.length()-1);
             result.add(sb.toString());
@@ -14,10 +13,11 @@ class Solution {
         }
         if(dots>=4) return;
         for(int j=i;j<Math.min(s.length(),i+3);j++){
-            if(Integer.parseInt(s.substring(i,j+1))<256 && (i==j || s.charAt(i)!='0')){ // i =j makes sure that we are considering single 0... example 0.0.0.0
+            int curr = Integer.parseInt(s.substring(i,j+1));
+            if(curr<256 && (i==j || s.charAt(i)!='0')){
                 int start = sb.length();
                 sb.append(s.substring(i,j+1)).append(".");
-                backtrack(j+1,dots+1, s, sb, result);
+                backtrack(s,j+1,dots+1,sb,result);
                 sb.delete(start,sb.length());
             }
         }
