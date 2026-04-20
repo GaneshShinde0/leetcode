@@ -14,7 +14,7 @@ class Solution {
         }
         if(dots>4) return;
         for(int j=i;j<Math.min(s.length(),i+3);j++){
-            if(Integer.parseInt(s.substring(i,j+1))<256 && (i==j || s.charAt(i)!='0')){
+            if(Integer.parseInt(s.substring(i,j+1))<256 && (i==j || s.charAt(i)!='0')){ // i =j makes sure that we are considering single 0... example 0.0.0.0
                 int start = sb.length();
                 sb.append(s.substring(i,j+1)).append(".");
                 backtrack(j+1,dots+1, s, sb, result);
