@@ -23,9 +23,6 @@ class UnionFind{
             parent[yPar]=xPar;
         }else if(rank[yPar]<rank[xPar]){
             parent[xPar]=yPar;
-        }else{
-            rank[xPar]++;
-            parent[yPar] = xPar;
         }
     }
 }
