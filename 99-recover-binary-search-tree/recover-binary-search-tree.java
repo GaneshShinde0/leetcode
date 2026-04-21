@@ -110,7 +110,7 @@ Iterative approach 2 could be converted into recursive one.
 Recursive inorder traversal is " left->node->right" i.e. 
 */
 
-class Solution{
+class Solution2{
     TreeNode x = null, y = null, predecessor = null;
     public void swap(TreeNode a, TreeNode b){
         int temp = a.val;
@@ -132,5 +132,60 @@ class Solution{
     public void recoverTree(TreeNode root){
         findTwoSwapped(root);
         swap(x, y);
+    }
+}
+
+/*
+Approach 4: Morris Inorder Traversal
+- Iterative and receursive inorder traversals, which both have great time complexity through use up to O(N) to keep stack. We could trade in performance to save space.
+
+The idea of Morris inorder traversal is simple: To use no space but to traverse the tree.
+    - At each node one has to decide where to go: left or right, traverse left subtree or right.
+    - How can we knw that the left subtree is already done if no additional memory is allowed.
+
+The idea of Morris algorithm is to set the temporarary link between the node and its predecessor: predecesssor.right = root. So one starts from the node, computes its predecessor and verifies if the link is present.
+- There is no link? Set it and go to the left subtree.
+- There is a link? Break it and go to the right subtree.
+
+Issue to deal: What if there is no left child, i.e. there is no left subtree? Then go straightforward to the right subtree.
+
+*/
+
+class Solution{
+
+    public void recoverTree(TreeNode root){
+        TreeNode x = null, y = null, pred = null, predecessor = null;
+        while(root!=null){
+            if(root.left!=null){
+                predecessor = root.left;
+                while(predecessor.right!=null && predecessor.right!=root) predecessor = predecessor.right;
+                if(predecessor.right == null){
+                    predecessor.right = root;
+                    root = root.left;
+                }else{
+                    if(pred!=null && root.val<pred.val){
+                        y = root;
+                        if(x==null) x = pred;
+                    }
+                    pred = root;
+                    predecessor.right = null;
+                    root = root.right;
+                }
+            }else{
+                if(pred!=null && root.val<pred.val){
+                    y = root;
+                    if(x==null) x = pred;
+                }
+                pred = root;
+                root = root.right;
+            }
+        }
+        swap(x,y);
+    }
+
+    private void swap(TreeNode a, TreeNode b){
+        int temp = a.val;
+        a.val = b.val;
+        b.val = temp;
     }
 }
