@@ -40,9 +40,7 @@ class Solution {
                     break;
                 }
             }
-            if(canConnect){
-                uf.union(a,b);
-            }
+            if(canConnect) uf.union(a,b);
             result[i]=canConnect;   
         }
         return result;
