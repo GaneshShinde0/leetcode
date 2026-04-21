@@ -19,7 +19,7 @@ class Solution {
         Arrays.sort(satisfaction);
         int res = 0, total = 0, n = satisfaction.length;
         for(int i = n-1; i>=0 && satisfaction[i]+total>0;i--){
-            total += satisfaction[i];
+            total = total + satisfaction[i]; // Keep adding dish until we get positive result.
             res += total;
         }
         return res;
