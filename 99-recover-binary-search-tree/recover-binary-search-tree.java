@@ -16,7 +16,7 @@
  /*
 Given the root of a binary search Tree (BST), where the values of exactly two nodes of the tree were swapped by mistake. Recover the tree without changing its structure.
  */
-class Solution {
+class Solution1 {
     /*
     Approach 1: Sort an almost sorted array where two elements are swaped.
 
@@ -74,7 +74,7 @@ class Solution {
 
     /*
     Approach 2:
-    Same as above 
+    Same as above, without inOrder 
     */
 
     public void recoverTree(TreeNode root){
@@ -100,5 +100,37 @@ class Solution {
         int temp = a.val;
         a.val = b.val;
         b.val = temp;
+    }
+}
+
+/*
+Approach 3: Recursive Inorder Traversal
+Iterative approach 2 could be converted into recursive one.
+
+Recursive inorder traversal is " left->node->right" i.e. 
+*/
+
+class Solution{
+    TreeNode x = null, y = null, predecessor = null;
+    public void swap(TreeNode a, TreeNode b){
+        int temp = a.val;
+        a.val = b.val;
+        b.val = temp;
+    }
+
+    public void findTwoSwapped(TreeNode root){
+        if(root == null) return;
+        findTwoSwapped(root.left);
+        if(predecessor!=null && root.val<predecessor.val){
+            y = root;
+            if(x==null) x = predecessor;
+            else return;
+        }
+        predecessor = root;
+        findTwoSwapped(root.right);
+    }
+    public void recoverTree(TreeNode root){
+        findTwoSwapped(root);
+        swap(x, y);
     }
 }
