@@ -28,8 +28,12 @@ class Solution {
     1. Construct inorder traversal of the tree. It should be almost sorted list where only two elements are swapped.
     2. Identify two swapped elements x and y in almost sorted array in linear tiem.
     3. Traverse the tree again. Change value x to y and valye y to x.
+
+    Complexity Analysis:
+    - Time Complexity: O(N) - Inorder takes O(N) to identify, O(N) to swap.
+    - Space Complexity: O(N)
     */
-    public void recoverTree(TreeNode root) {
+    public void recoverTreeInitial(TreeNode root) {
         List<Integer> nums = new ArrayList<>();
         inOrder(root, nums);
         int[] swapped = getSwapped(nums);
@@ -66,5 +70,35 @@ class Solution {
             }
         }
         return res;
+    }
+
+    /*
+    Approach 2:
+    Same as above 
+    */
+
+    public void recoverTree(TreeNode root){
+        Deque<TreeNode> stk = new ArrayDeque();
+        TreeNode x = null, y = null, pred = null;
+        while(!stk.isEmpty() || root!=null){
+            while(root!=null){
+                stk.add(root);
+                root=root.left;
+            }
+            root = stk.removeLast();
+            if(pred!=null && root.val<pred.val){
+                y = root;
+                if(x==null) x = pred;
+                else break;
+            }
+            pred = root;
+            root =  root.right;
+        }
+        swap(x,y);
+    }
+    public void swap(TreeNode a, TreeNode b){
+        int temp = a.val;
+        a.val = b.val;
+        b.val = temp;
     }
 }
