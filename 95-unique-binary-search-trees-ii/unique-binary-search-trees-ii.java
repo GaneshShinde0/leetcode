@@ -41,7 +41,9 @@ class Solution {
     private List<TreeNode> recurse(int left, int right){
         List<TreeNode> res = new LinkedList<TreeNode>();
         if(left>right){
-            res.add(null);
+            // Addition of null is essential as we use nested loops to combine left and right subtrees.
+            // If leftSubtrees or rightSubtrees were an empty list (size 0), thes eloops would never execute. By adding null we ensure thhat list has size of 1 which allows the loops to run atleast once, treating the child as null.
+            res.add(null); // Even if we dont find anything we still want to get left or right value to add our current node to list.
             return res;
         }
         for(int i=left;i<=right;i++){
