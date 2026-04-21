@@ -32,6 +32,7 @@ class Solution {
         for(int i=0;i<result.length;i++){
             int a = uf.find(requests[i][0]), b = uf.find(requests[i][1]);
             boolean canConnect =true;
+            // Check if we are violating any restriction after making a and b as friend.
             for(int[] r:restrictions){
                 int x = uf.find(r[0]);
                 int y = uf.find(r[1]);
