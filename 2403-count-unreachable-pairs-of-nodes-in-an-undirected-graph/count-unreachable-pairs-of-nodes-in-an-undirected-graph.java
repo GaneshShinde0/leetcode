@@ -25,13 +25,13 @@ class UnionFind{
         }
     }
 }
-class Solution {
+class SolutionInitial {
     public long countPairs(int n, int[][] edges) {
 
         UnionFind uf  = new UnionFind(n);
         for(int[] edge:edges) uf.union(edge[0],edge[1]);
         for(int i=0;i<n;i++) uf.find(i);
-        long res = 0, singles = 0;
+        long res = 0;
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         for(int par:uf.parent){
             hashMap.put(par,hashMap.getOrDefault(par,0)+1);
@@ -41,6 +41,32 @@ class Solution {
             remaining-=e.getValue();
             res +=remaining*e.getValue();
         }
+        return res;
+    }
+}
+
+class Solution {
+    public long countPairs(int n, int[][] edges) {
+
+        UnionFind uf  = new UnionFind(n);
+        for(int[] edge:edges) uf.union(edge[0],edge[1]);
+        for(int i=0;i<n;i++) uf.find(i);
+        long res = 0;
+        int[] componentSizes = new int[n];
+        for (int i = 0; i < n; i++) {
+            int root = uf.find(i);
+            componentSizes[root]++;
+        }
+        long remaining = n;
+        for (int size : componentSizes) {
+            if (size > 0) {
+                remaining -= size;
+                // Each node in the current component is unreachable from 
+                // all nodes in the remaining components.
+                res += (long) size * remaining;
+            }
+        }
+
         return res;
     }
 }
