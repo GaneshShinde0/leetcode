@@ -12,40 +12,43 @@ class Solution {
     public List<String> twoEditWordsInitial(String[] queries, String[] dictionary) {
         int len = queries[0].length();
         List<String> res = new ArrayList<>();
-        Set<String> resSet = new HashSet<>();
-        Set<String> dictSet = new HashSet<>(List.of(dictionary));
-        Stack<WordArrEdits> stk = new Stack<>();
-        for(int i= queries.length-1;i>=0;i--){
-            String s = queries[i];
-            stk.add(new WordArrEdits(s,s.toCharArray(),0));
-        }
-        while(!stk.isEmpty()){
-            WordArrEdits curr = stk.pop();
-            String word = curr.word;
-            char[] wordArr = curr.arr;
-            int edits = curr.edits;
-            if(dictSet.contains(new String(wordArr))){
-                if(!resSet.contains(word)){
-                    res.add(word);
+        Set<String> dictSet = new HashSet<>(Arrays.asList(dictionary));
+
+        for (String q : queries) { 
+            Stack<WordArrEdits> stk = new Stack<>();
+            stk.add(new WordArrEdits(q, q.toCharArray(), 0));
+            Set<String> visited = new HashSet<>(); 
+            boolean found = false;
+
+            while (!stk.isEmpty()) {
+                WordArrEdits curr = stk.pop();
+                String currentMutation = new String(curr.arr);
+                if (dictSet.contains(currentMutation)) {
+                    res.add(q);
+                    found = true;
+                    break; 
                 }
-                resSet.add(word);
-                continue;
-            }
-            for(int i=0;i<len;i++){
-                for(int j=0;j<26;j++){
-                    char temp = wordArr[i];
-                    wordArr[i]=(char) (j+'a');
-                    if(edits==1 && !dictSet.contains(new String(wordArr))) continue;
-                    char[] arr = new char[len];
-                    arr = Arrays.copyOf(wordArr,len);
-                    stk.add(new WordArrEdits(word, arr, edits+1));
-                    wordArr[i]=temp;
+
+                if (curr.edits < 2) {
+                    for (int i = 0; i < len; i++) {
+                        char originalChar = curr.arr[i];
+                        for (char c = 'a'; c <= 'z'; c++) {
+                            if (c == originalChar) continue;
+                            
+                            curr.arr[i] = c;
+                            String nextWord = new String(curr.arr);
+                            if (!visited.contains(nextWord)) {
+                                visited.add(nextWord);
+                                stk.add(new WordArrEdits(q, curr.arr.clone(), curr.edits + 1));
+                            }
+                        }
+                        curr.arr[i] = originalChar;
+                    }
                 }
             }
         }
         return res;
     }
-
     public List<String> twoEditWords(String[] queries, String[] dictionary) {
         List<String> result = new ArrayList<>();
         for(String q:queries){
