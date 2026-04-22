@@ -23,7 +23,7 @@
  *     }
  * }
  */
-class Solution {
+class Solution1 {
     public TreeNode sortedListToBSTRevisitLater(ListNode head) {
         Stack<TreeNode> stk = new Stack<>();
         TreeNode root = null;
@@ -55,7 +55,6 @@ class Solution {
         mid.left = sortedListToBST(head);
         mid.right = sortedListToBST(temp);
         return mid;
-
     }
 
     public ListNode getMiddle(ListNode head){
@@ -67,5 +66,36 @@ class Solution {
         }
         if(prev!=null) prev.next=null;
         return slow;
+    }
+}
+
+class Solution{
+    private ListNode head;
+
+    private int findSize(ListNode head){
+        ListNode temp = head;
+        int n = 0;
+        while(temp!=null){
+            temp=temp.next;
+            n++;
+        }
+        return n;
+    }
+
+    private TreeNode convertListToBST(int l, int r){
+        if(l>r) return null;
+        int mid = (l+r)/2;
+        TreeNode left = convertListToBST(l,mid-1);
+        TreeNode node = new TreeNode(this.head.val);
+        node.left = left;
+        this.head = this.head.next;
+        node.right = this.convertListToBST(mid+1,r);
+        return node;
+    }
+
+    public TreeNode sortedListToBST(ListNode head){
+        int size = findSize(head);
+        this.head = head;
+        return convertListToBST(0,size-1);
     }
 }
