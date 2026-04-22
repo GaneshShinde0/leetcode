@@ -16,7 +16,7 @@ class Solution {
         Queue<int[]> queue = new LinkedList<>();
         queue.add(source);
         Set<Long> visited = new HashSet<>();
-        // visited.add(source[0]+MIL*source[1]);
+        visited.add(source[0]+MIL*source[1]);
         while(!queue.isEmpty()){
             int[] curr = queue.poll();
             int x = curr[0];
