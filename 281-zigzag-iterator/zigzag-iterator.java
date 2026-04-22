@@ -1,10 +1,10 @@
-public class ZigzagIterator {
+class ZigzagIteratorInitial {
     boolean turn;
     int idx1;
     int idx2;
     List<Integer> v1;
     List<Integer> v2;
-    public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
+    public ZigzagIteratorInitial(List<Integer> v1, List<Integer> v2) {
         this.turn = true;
         this.idx1 = 0;
         this.idx2 = 0;
@@ -33,6 +33,26 @@ public class ZigzagIterator {
 
     public boolean hasNext() {
         return idx1<v1.size()||idx2<v2.size();
+    }
+}
+
+public class ZigzagIterator{
+    Queue<Iterator<Integer>> queue;
+    public ZigzagIterator(List<Integer> v1, List<Integer> v2){
+        queue = new LinkedList<>();
+        if(!v1.isEmpty()) queue.offer(v1.iterator());
+        if(!v2.isEmpty()) queue.offer(v2.iterator());
+    }
+
+    public int next(){
+        Iterator<Integer> curr = queue.poll();
+        int res = curr.next();
+        // If this list still has elements, put it back at the end of the line.
+        if(curr.hasNext()) queue.offer(curr);
+        return res;
+    }
+    public boolean hasNext(){
+        return !queue.isEmpty();
     }
 }
 
