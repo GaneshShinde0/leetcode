@@ -62,7 +62,8 @@ class Solution {
         int diff = 0;
         for(int i=0;i<source.length();i++){
             if(source.charAt(i)!=target.charAt(i)) diff++;
+            if(diff>2) return false;
         }
-        return diff<=2;
+        return true;
     }
 }
