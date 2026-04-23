@@ -9,7 +9,19 @@
 */
 
 class Solution {
-    public int minSteps(int n) {
+    public int minSteps(int n){
+        int ans = 0;
+        int d = 2;
+        while(n>1){
+            while(n%d==0){
+                ans+=d;
+                n/=d;
+            }
+            d++;
+        }
+        return ans;
+    }
+    public int minStepsInitial(int n) {
         if(n==1) return 0;
         int[] dp = new int[n+1];
         Arrays.fill(dp, Integer.MAX_VALUE);
