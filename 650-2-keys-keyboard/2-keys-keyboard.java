@@ -18,9 +18,10 @@ class Solution {
                 dp[i]=i;
             }else{
                 dp[i]=i;
-                for(int j=2;j<i;j++){
+                for(int j=2;j<=Math.sqrt(i);j++){
                     if(i%j==0){
                         dp[i]=Math.min(dp[i],dp[j]+i/j);
+                        dp[i]=Math.min(dp[i],dp[i/j]+j);
                     }
                 }
             }
