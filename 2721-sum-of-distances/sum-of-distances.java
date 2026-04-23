@@ -33,7 +33,7 @@ class Solution {
         for(int i=0;i<nums.length;i++){
             final int idx = i;
             SumSizelastIndex curr = hm.computeIfAbsent(nums[i],k->new SumSizelastIndex(0,0,idx));
-            curr.sum += (i-curr.lastIndex)*(curr.size);
+            curr.sum += 1l*(i-curr.lastIndex)*(curr.size);
             curr.lastIndex=i;
             curr.size++;
             res[i]=curr.sum;
@@ -42,7 +42,7 @@ class Solution {
         for(int i=nums.length-1;i>=0;i--){
             final int idx = i;
             SumSizelastIndex curr = hm.computeIfAbsent(nums[i],k->new SumSizelastIndex(0,0,idx));
-            curr.sum += (curr.lastIndex-i)*(curr.size);
+            curr.sum += 1l*(curr.lastIndex-i)*(curr.size);
             curr.size++;
             curr.lastIndex=i;
             res[i]+=curr.sum;
