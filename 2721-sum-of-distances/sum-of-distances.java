@@ -38,10 +38,10 @@ class Solution {
             curr.size++;
             res[i]=curr.sum;
         }
-        Map<Integer, SumSizelastIndex> hm2 = new HashMap<>();
+        hm.clear();
         for(int i=nums.length-1;i>=0;i--){
             final int idx = i;
-            SumSizelastIndex curr = hm2.computeIfAbsent(nums[i],k->new SumSizelastIndex(0,0,idx));
+            SumSizelastIndex curr = hm.computeIfAbsent(nums[i],k->new SumSizelastIndex(0,0,idx));
             curr.sum += (curr.lastIndex-i)*(curr.size);
             curr.size++;
             curr.lastIndex=i;
