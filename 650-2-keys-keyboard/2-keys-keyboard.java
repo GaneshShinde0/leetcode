@@ -9,10 +9,12 @@
 */
 
 class Solution {
+    // This problem is same as sum of all prime factors.
     public int minSteps(int n){
         int ans = 0;
         int d = 2;
         while(n>1){
+            // If d is the prime factor of n, keep dividing n by d until no longer divisible.
             while(n%d==0){
                 ans+=d;
                 n/=d;
