@@ -9,4 +9,4 @@ select distinct user_id --,u.*, c1.*, c2.*
 from USER_MAX_MIN u 
 left join cte c1 on u.first_call = c1.call_time 
 left join cte c2 on u.last_call = c2.call_time
-WHERE c1.u2 = c2.u2 AND ISNULL(user_id,0) <> ISNULL(c2.u2,0)  --AND ISNULL(user_id,0) <> ISNULL(c1.u2,0)
+WHERE c1.u2 = c2.u2 AND ISNULL(user_id,0) <> ISNULL(c2.u2,0)  AND ISNULL(user_id,0) <> ISNULL(c1.u2,0)
