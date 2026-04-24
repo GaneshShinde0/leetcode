@@ -15,11 +15,33 @@
  */
 
 class Solution{
-    /*
+    public List<Integer> closestKValues(TreeNode root, double target, int k){
+        List<Integer> res = new ArrayList<>();
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
 
-    Final Solution
-    Time Complexity: O(k+logn)
-    */
+        inorder(root, target, false, s1);
+        inorder(root, target, true, s2);
+
+        while(k-->0){
+            if(s1.isEmpty()) res.add(s2.pop());
+            else if(s2.isEmpty()) res.add(s1.pop());
+            else if(Math.abs(s1.peek()-target)<Math.abs(s2.peek()-target)) res.add(s1.pop());
+            else res.add(s2.pop());
+        }
+        
+        return res;
+    }
+
+    void inorder(TreeNode root, double target, boolean reverse, Stack<Integer> stack){
+        if(root == null) return;
+        inorder(reverse?root.right:root.left, target, reverse, stack);
+        if((reverse && root.val<=target) || (!reverse && root.val>target)) return;
+        stack.push(root.val);
+        inorder(reverse?root.left:root.right, target,reverse, stack);
+    }
+}
+class SolutionOptimized2{
     public List<Integer> closestKValues(TreeNode root, double target, int k){
         Deque<Integer> queue = new LinkedList<>();
         dfs(root, queue, k, target);
