@@ -28,7 +28,6 @@ class Solution{
         if(queue.size()>k){
             if(Math.abs(target-queue.peekFirst())<=Math.abs(target-queue.peekLast())){
                 queue.removeLast();
-                return;
             }else{
                 queue.removeFirst();
             }
