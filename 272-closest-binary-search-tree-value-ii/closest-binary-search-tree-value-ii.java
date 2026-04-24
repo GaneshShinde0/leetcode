@@ -15,6 +15,11 @@
  */
 
 class Solution{
+    /*
+
+    Final Solution
+    Time Complexity: O(k+logn)
+    */
     public List<Integer> closestKValues(TreeNode root, double target, int k){
         Deque<Integer> queue = new LinkedList<>();
         dfs(root, queue, k, target);
