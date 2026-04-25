@@ -1,0 +1,1 @@
+<h2>word-pattern-ii Notes</h2><hr>[ Time taken: 1hr 1m 33s ]
