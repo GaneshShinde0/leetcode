@@ -1,15 +1,14 @@
-SELECT customer_id, COUNT(order_id) AS total_orders,
-    round(SUM(CASE WHEN CAST(order_timestamp AS time) BETWEEN '11:00:00' AND '14:00:00' 
-				  OR CAST(order_timestamp AS time) BETWEEN '18:00:00' AND '21:00:00' 
-			 THEN 1 ELSE 0 END) * 100.0 / COUNT(1), 0) AS peak_hour_percentage,
-    round(AVG(order_rating * 1.0), 2) AS average_rating
-FROM restaurant_orders
-GROUP BY customer_id
-HAVING
-COUNT(order_id) >= 3
-AND SUM(CASE WHEN CAST(order_timestamp AS time) BETWEEN '11:00:00' AND '14:00:00' 
-			  OR CAST(order_timestamp AS time) BETWEEN '18:00:00' AND '21:00:00' 
-		 THEN 1 ELSE 0 END) * 100.0 / COUNT(1) >= 60
-AND SUM(CASE WHEN order_rating IS NOT NULL THEN 1 ELSE 0 END) * 100.0 / COUNT(1) > 50
-and AVG(order_rating) >= 4
-order by average_rating desc, customer_id desc;
+select customer_id, total_orders,
+(round((peak_orders*1.0/total_orders)*100,0)) peak_hour_percentage, average_rating
+from (select customer_id, count(*) total_orders, 
+round(avg(order_rating * 1.00),2) average_rating, count(order_rating) orderratingcount,
+sum(case 
+        when (datepart(hour, order_timestamp) between 11 and 13)
+        or (datepart(hour, order_timestamp) between 18 and 20)
+        then 1 
+        else 0 
+    end) as peak_orders from restaurant_orders
+group by customer_id having count(*) >=3 and round(avg(order_rating * 1.00),2) >= 4.0)
+t where (((orderratingcount*1.00)/total_orders)*100) >=50 and (round((peak_orders*1.0/total_orders)*100,0))>=60 order by average_rating desc, customer_id desc
+
+
