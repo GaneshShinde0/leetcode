@@ -1,4 +1,4 @@
-class Solution {
+class Solution1 {
     public boolean wordPatternMatch(String pattern, String s) {
         HashMap<Character, String> symbolMap = new HashMap<>();
         Set<String> wordSet = new HashSet<>();
@@ -25,4 +25,44 @@ class Solution {
         }
         return false;
     }
+
+}
+
+class Solution {
+    public boolean wordPatternMatch(String pattern, String s) {
+        String[] symbols = new String[26];
+        Arrays.fill(symbols, "");
+        Set<String> wordSet = new HashSet<>();
+        return backtrack(pattern, 0, s,0, symbols, wordSet);
+    }
+    private boolean backtrack(String pattern, int pIdx, String s, int sIdx, String[] symbols, Set<String> wordSet){
+        if(pIdx == pattern.length()){
+            return (sIdx == s.length());
+        }
+        char symbol = pattern.charAt(pIdx);
+        if(!symbols[symbol-'a'].equals("")){
+            String word = symbols[symbol-'a'];
+            if(!s.startsWith(word, sIdx)){
+                return false;
+            }
+            // If it matches continue to match the rest
+            return backtrack(pattern,pIdx+1,s,sIdx+word.length(), symbols, wordSet);
+        }
+        int filledSpots=0;
+        for(int i=pIdx+1;i<pattern.length();i++){
+            char p = pattern.charAt(i);
+            filledSpots += symbols[p-'a'].equals("")?1:symbols[p-'a'].length();
+        }
+        for(int k = sIdx+1; k<=s.length()-filledSpots; k++){
+            String substr = s.substring(sIdx, k);
+            if(wordSet.contains(substr)) continue;
+            symbols[symbol-'a'] = substr;
+            wordSet.add(substr);
+            if(backtrack(pattern,pIdx+1,s,k,symbols, wordSet)) return true;
+            symbols[symbol-'a']="";
+            wordSet.remove(substr);
+        }
+        return false;
+    }
+
 }
