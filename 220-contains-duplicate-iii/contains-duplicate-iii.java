@@ -25,7 +25,7 @@ class Solution {
             if(floor!=null && i-floor.getValue()<=indexDiff && (nums[i]-floor.getKey())<=valueDiff){
                 return true;     
             }
-            System.out.println(ceil+" , "+floor);
+            // System.out.println(ceil+" , "+floor);
             treeMap.put(nums[i],i);
         }
         return false;
