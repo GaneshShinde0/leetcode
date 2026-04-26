@@ -4,6 +4,23 @@ class Solution {
         int n = 1;
         for(int x:arr) if(x>0) nums[n++]=x;
         nums[0] = nums[n++] = 1;
+
+        int[][] dp = new int[n][n];
+        for(int k=1;k<n;k++){
+            for(int left = 0;left<n-k;left++){
+                int right = left+k;
+                for(int i= left+1; i<right;i++){
+                    dp[left][right] = Math.max(dp[left][right], nums[left]*nums[i]*nums[right] + dp[left][i]+dp[i][right]);
+                }
+            }
+        }
+        return dp[0][n-1];
+    }
+    public int maxCoinsDPWithRecursion(int[] arr) {
+        int[] nums = new int[arr.length+2];
+        int n = 1;
+        for(int x:arr) if(x>0) nums[n++]=x;
+        nums[0] = nums[n++] = 1;
         int[][] memo = new int[n][n];
         return burst(memo, nums, 0, n-1);
     }
