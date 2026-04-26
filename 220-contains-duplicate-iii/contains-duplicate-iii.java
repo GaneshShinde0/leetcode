@@ -6,7 +6,7 @@
 */
 
 class Solution {
-    public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff) {
+    public boolean containsNearbyAlmostDuplicateInitial(int[] nums, int indexDiff, int valueDiff) {
         TreeMap<Integer,Integer> treeMap = new TreeMap<>();
         for(int i=0;i<nums.length;i++){
             Map.Entry<Integer,Integer> ceil = treeMap.ceilingEntry(nums[i]);
@@ -27,6 +27,19 @@ class Solution {
             }
             // System.out.println(ceil+" , "+floor);
             treeMap.put(nums[i],i);
+        }
+        return false;
+    }
+
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff) {
+        TreeSet<Integer> set = new TreeSet<>();
+        for(int i=0;i<nums.length;i++){
+            Integer ceil = set.ceiling(nums[i]);
+            Integer floor = set.floor(nums[i]);
+            if(ceil!=null && ceil-nums[i]<=valueDiff) return true;
+            if(floor!=null && nums[i]-floor<=valueDiff) return true;
+            set.add(nums[i]);
+            if(set.size()>indexDiff) set.remove(nums[i-indexDiff]);
         }
         return false;
     }
