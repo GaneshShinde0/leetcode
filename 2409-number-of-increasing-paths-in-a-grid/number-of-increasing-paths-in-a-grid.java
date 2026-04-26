@@ -3,25 +3,17 @@ class Solution {
     private static final long MOD = 1_000_000_007;
     int[][] dirs = {{0,1},{1,0},{0,-1},{-1,0}};
 
-    public int countPaths(int[][] grid) {
+    public int countPaths(int[][] matrix) {
         this.res = 0;
-        return longestIncreasingPath(grid);
-    }
-    public int longestIncreasingPath(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
         int[][] maxPath = new int[m][n];
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(maxPath[i][j]!=0) continue;
-                maxPath[i][j] = dfs(i,j, matrix, maxPath);
+        long totalPaths = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                totalPaths = (totalPaths + dfs(i, j, matrix, maxPath)) % MOD;
             }
         }
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                res = (res+maxPath[i][j])%MOD;
-            }
-        }
-        return (int) (res);
+        return (int) totalPaths;
     }
     private int dfs(int i, int j, int[][] matrix, int[][] maxPath){
         if(maxPath[i][j]>0){
