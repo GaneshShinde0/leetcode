@@ -6,7 +6,48 @@
 */
 
 class Solution {
-    public boolean containsNearbyAlmostDuplicateInitial(int[] nums, int indexDiff, int valueDiff) {
+    /*To calculate the bucket ID (similar to Math.floorDiv) without using the library, you need to handle how Java's division behaves for negative numbers. In Java, / truncates toward zero, whereas floorDiv truncates toward negative infinity.*/
+    private long getIDCustom(long x, long w) {
+        if (x >= 0) {
+            return x / w;
+        } else {
+            return (x + 1) / w - 1;
+        }
+    }
+    private int getId(int x, int w){
+        return Math.floorDiv(x,w);
+    }
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff) {
+        if(valueDiff<0) return false;
+        Map<Integer, Integer> buckets = new HashMap<>();
+        int w = valueDiff+1;
+        for(int i=0;i<nums.length;i++){
+            int bucket = getId(nums[i],w);
+            if(buckets.containsKey(bucket)) return true;
+
+            if(buckets.containsKey(bucket-1) && Math.abs(nums[i]-buckets.get(bucket-1))<w) return true;
+            if(buckets.containsKey(bucket+1) && Math.abs(nums[i]-buckets.get(bucket+1))<w) return true;
+
+            buckets.put(bucket, nums[i]);
+            if(i>=indexDiff) buckets.remove(getId(nums[i-indexDiff],w));
+        }
+        return false;
+    }   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public boolean containsNearbyAlmostDuplicateUsingTreeMap(int[] nums, int indexDiff, int valueDiff) {
         TreeMap<Integer,Integer> treeMap = new TreeMap<>();
         for(int i=0;i<nums.length;i++){
             Map.Entry<Integer,Integer> ceil = treeMap.ceilingEntry(nums[i]);
@@ -31,7 +72,7 @@ class Solution {
         return false;
     }
 
-    public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff) {
+    public boolean containsNearbyAlmostDuplicateUsingSet(int[] nums, int indexDiff, int valueDiff) {
         TreeSet<Integer> set = new TreeSet<>();
         for(int i=0;i<nums.length;i++){
             Integer ceil = set.ceiling(nums[i]);
