@@ -15,7 +15,21 @@ class Solution {
         }
         return dfs(startRow,startColumn, 0);
     }
+    
     private int dfs(int row, int col, int currMoves){
+        if(row<0||col<0||row>=m||col>=n) return 1;
+        if(currMoves==maxMove) return 0;
+        if(memo[row][col][currMoves]!=-1) return memo[row][col][currMoves]%MOD;
+
+        int count = 0;
+        for(int[] dir:dirs){
+            int newR = row+dir[0];
+            int newC = col+dir[1];
+            count = (count+dfs(newR,newC, currMoves+1))%MOD;
+        }
+        return memo[row][col][currMoves] = count;
+    }
+    private int dfsWithoutBUD(int row, int col, int currMoves){
         if(memo[row][col][currMoves]!=-1){
             return memo[row][col][currMoves]%MOD;
         }
