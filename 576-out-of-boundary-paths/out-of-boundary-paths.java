@@ -15,8 +15,7 @@ class Solution {
         }
         Stack<int[]> stack = new Stack<>();
         stack.add(new int[]{startRow, startColumn, 0});
-        dfs(startRow,startColumn, 0);
-        return memo[startRow][startColumn][0];
+        return dfs(startRow,startColumn, 0);
     }
     private int dfs(int row, int col, int currMoves){
         if(memo[row][col][currMoves]!=-1){
