@@ -13,8 +13,6 @@ class Solution {
         for(int[][] arr:memo){
             for(int[] a:arr) Arrays.fill(a,-1);
         }
-        Stack<int[]> stack = new Stack<>();
-        stack.add(new int[]{startRow, startColumn, 0});
         return dfs(startRow,startColumn, 0);
     }
     private int dfs(int row, int col, int currMoves){
