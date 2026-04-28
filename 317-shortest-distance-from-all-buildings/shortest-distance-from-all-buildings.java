@@ -1,13 +1,12 @@
 // Optimized
 class Solution {
     public int shortestDistance(int[][] grid) {
-        // Next four directions.
         int dirs[][] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         
         int rows = grid.length;
         int cols = grid[0].length;
         
-        // Total Mtrix to store total distance sum for each empty cell.
+        // Total Matrix to store total distance sum for each empty cell.
         int[][] total = new int[rows][cols];
 
         int emptyLandValue = 0;
