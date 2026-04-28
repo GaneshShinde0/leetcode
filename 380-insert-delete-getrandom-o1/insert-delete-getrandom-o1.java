@@ -1,51 +1,40 @@
-class RandomizedSet 
-{
-    ArrayList<Integer> arrlist;
-    HashMap<Integer,Integer> hm;
-    Random rand = new Random();
-    public RandomizedSet() 
-    {
-        arrlist=new ArrayList<>();
-        hm=new HashMap<>();
-        
+class RandomizedSet {
+
+    List<Integer> li;
+    Random random;
+    HashMap<Integer, Integer> valToIdx;
+    public RandomizedSet() {
+        li = new ArrayList<>();
+        random = new Random();
+        valToIdx = new HashMap<>();
     }
     
-    public boolean insert(int val) 
-    {
-        if(hm.containsKey(val))
-        {
+    public boolean insert(int val) {
+        if(valToIdx.containsKey(val)){
             return false;
         }
-        else
-        {
-            hm.put(val,arrlist.size());
-            arrlist.add(val);
-            return true;
-        }
-        
-    }
-    
-    public boolean remove(int val) 
-    {
-        if(!hm.containsKey(val))
-        {
-            return false;
-        }
-        int position=hm.get(val);
-        if(position!=(arrlist.size()-1)){
-            int lastelevalue=arrlist.get(arrlist.size()-1);
-            arrlist.set(position,lastelevalue);
-            hm.put(lastelevalue,position);
-        }
-        hm.remove(val);
-        arrlist.remove(arrlist.size()-1);
+        li.add(val);
+        valToIdx.put(val,li.size()-1);
         return true;
     }
     
-    public int getRandom() 
-    {
-     int randomval=rand.nextInt(arrlist.size());
-     return arrlist.get(randomval);
+    public boolean remove(int val) {
+        if(!valToIdx.containsKey(val)){
+            return false;
+        }
+        int idx = valToIdx.get(val);
+        if(idx!=li.size()-1){
+            int lastValue = li.get(li.size()-1);
+            li.set(idx,lastValue);
+            valToIdx.put(lastValue,idx);
+        }
+        valToIdx.remove(val);
+        li.remove(li.size()-1);
+        return true;
+    }
+    
+    public int getRandom() {
+        return li.get(random.nextInt(li.size()));
     }
 }
 
