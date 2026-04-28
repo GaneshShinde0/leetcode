@@ -1,7 +1,3 @@
-/*
-input = [4, -3, -1,-1,-1]
-*/
-
 class Solution {
     public int maxTransactions(int[] transactions) {
         int count = 0;
