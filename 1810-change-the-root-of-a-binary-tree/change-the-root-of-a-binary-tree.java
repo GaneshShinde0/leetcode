@@ -8,6 +8,15 @@ class Node {
 };
 */
 
+/*
+Intuition:
+Consider parent pointer as the next pointer in a Linked List. Follow the parent pointer, climb up the list starting from leaf node and swap oldParent with new Parent.
+
+For Every Node:
+- Save the old parent as a variable for later user.
+- Point the parent pointer to the new Parent (Initially Null)
+- Before we reset the right child and left child, clean the left and right children if they point to the new Parent.
+*/
 class Solution {
     public Node flipBinaryTree(Node root, Node leaf) {
         Node originalRoot = root;
