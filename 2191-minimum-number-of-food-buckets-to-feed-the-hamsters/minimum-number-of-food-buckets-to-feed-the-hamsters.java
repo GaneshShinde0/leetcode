@@ -6,7 +6,7 @@ class Solution {
         for(int i=0;i<n;i++){
             int prev = Math.max(0,i-1);
             int next = Math.min(n-1,i+1);
-            if(arr[i]=='.'||arr[i]=='D') continue;
+            if(arr[i]!='H') continue;
             else if(arr[i]=='H' && arr[prev]=='H' && arr[next]=='H') return -1;
             else if(arr[next]=='.'&&arr[prev]!='D'){
                 arr[next]='D';
