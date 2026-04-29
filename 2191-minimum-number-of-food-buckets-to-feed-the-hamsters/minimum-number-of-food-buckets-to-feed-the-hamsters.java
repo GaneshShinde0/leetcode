@@ -1,5 +1,8 @@
 class Solution {
-    public int minimumBuckets(String hamsters) {
+    public int minimumBuckets(String s){
+        return (s.equals("H")||s.startsWith("HH")||s.endsWith("HH")||s.contains("HHH"))?-1:s.replace("H.H","  ").length()-s.replace("H","").length();
+    }
+    public int minimumBucketsOptimized(String hamsters) {
         int n = hamsters.length();
         int buckets = 0;
         int lastBucketPos = -2; // Tracks the position of the last placed bucket
