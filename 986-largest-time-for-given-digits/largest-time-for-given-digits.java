@@ -71,3 +71,55 @@ class Solution {
         return res;
     }
 }
+class SolutionOther {
+    public String largestTimeFromDigits(int[] arr) {
+        int[] freq = new int[10];
+        for(int num : arr){
+            freq[num]++;
+        }
+
+        if(freq[0] == 0 && freq[1] == 0 && freq[2] == 0) return "";
+
+        StringBuilder sb = new StringBuilder();
+        helper(sb, freq, 0, false);
+        String temp = sb.toString();
+        StringBuilder sb2 = new StringBuilder();
+        for(int i = 0; i < temp.length(); i++){
+            sb2.append(temp.charAt(i));
+            if(i == 1){
+                sb2.append(':');
+            }
+        }
+        return sb2.toString();
+    }
+
+    private boolean helper(StringBuilder sb, int[] freq, int i, boolean isTight){
+        if(i == 4) return true;
+
+
+        int upperBound = 0;
+        if(i == 0){
+            upperBound = 2;
+        }else if(i == 1 && isTight){
+            upperBound = 3;
+        }else if(i == 2){
+            upperBound = 5;
+        }else{
+            upperBound = 9;
+        }
+        
+        for(int d = upperBound; d >= 0; d--){
+            if(freq[d] > 0){
+                sb.append((char)(d + '0'));
+                freq[d]--;
+                boolean nextTight = (i == 0 && d == 2);
+                if(helper(sb, freq, i + 1, nextTight)) return true;
+                // System.out.println(List.of(i, d));
+                sb.deleteCharAt(sb.length() - 1);
+                freq[d]++;
+            }
+        }
+        return false;
+
+    }
+}
