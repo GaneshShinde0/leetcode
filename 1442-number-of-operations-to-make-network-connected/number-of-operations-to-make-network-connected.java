@@ -20,8 +20,9 @@ class Solution {
         return groups-1;
     }
     private void dfs(int curr, boolean[] vis){
-        if(vis[curr] || !graph.containsKey(curr)) return;
+        if(vis[curr]) return;
         vis[curr] = true;
+        if(!graph.containsKey(curr)) return;
         for(int i:graph.get(curr)){
             dfs(i,vis);
         }
