@@ -17,7 +17,7 @@ class Solution {
         for(i=0;i<n;i++){
             reducedTotal-=elementAndFreq[i][1];
             if(reducedTotal<=total/2){
-                return Math.max(i+1,1);
+                return i+1;
             }
         }
         return 1;
