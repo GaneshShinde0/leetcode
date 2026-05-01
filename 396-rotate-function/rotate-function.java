@@ -15,7 +15,7 @@ F[2]=16-3*2+7+6=>23
 F[3]=23-3*3+4+8=>26
 */
 class Solution {
-    public int maxRotateFunction(int[] nums) {
+    public int maxRotateFunctionInitial(int[] nums) {
         int n = nums.length;
         int[] prefixSum = new int[n];
         int[] suffixSum = new int[n];
@@ -33,6 +33,21 @@ class Solution {
         for(int i=1;i<n;i++){
             f[i]=f[i-1]-(n-1)*nums[n-i]+prefixSum[n-i]+suffixSum[n-i];
             res = Math.max(res, f[i]);
+        }
+        return res;
+    }
+    
+    public int maxRotateFunction(int[] nums) {
+        int n = nums.length;
+        int sum = 0,f=0;
+        for(int i=0;i<n;i++){
+            sum += nums[i];
+            f+=i*nums[i];
+        }
+        int res = f;
+        for(int i=1;i<n;i++){
+            f=f-(n-1)*nums[n-i]+sum-nums[n-i];
+            res = Math.max(res, f);
         }
         return res;
     }
