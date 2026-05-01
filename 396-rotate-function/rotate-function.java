@@ -46,7 +46,8 @@ class Solution {
         }
         int res = f;
         for(int i=1;i<n;i++){
-            f=f-(n-1)*nums[n-i]+sum-nums[n-i];
+            // f=f-(n-1)*nums[n-i]+sum-nums[n-i];
+            f=f+sum-n*nums[n-i];
             res = Math.max(res, f);
         }
         return res;
