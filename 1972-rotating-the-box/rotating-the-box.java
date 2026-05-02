@@ -3,15 +3,16 @@ class Solution {
         int rows = grid.length, cols = grid[0].length;
         char[][] res = new char[cols][rows];
         for(char[] row:res) Arrays.fill(row,'.');
+
         for(int i=0;i<rows;i++){
-            int chooseCol = rows-i-1;
             int chooseRow = cols-1;
+            int chooseCol = rows-i-1;
             for(int j=cols-1;j>=0;j--){
                 if(grid[i][j]=='#'){
                     res[chooseRow][chooseCol]='#';
                     chooseRow--;
                 }else if(grid[i][j]=='*'){
-                    res[j][rows-i-1]='*';
+                    res[j][chooseCol]='*';
                     chooseRow = j-1;
                 }
             }
