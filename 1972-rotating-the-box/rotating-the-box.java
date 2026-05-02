@@ -1,20 +1,19 @@
 class Solution {
-    public char[][] rotateTheBox(char[][] boxGrid) {
-        int m = boxGrid.length, n= boxGrid[0].length;
-        char[][] res = new char[n][m];
-        for(int i=0;i<m;i++){
-            int right=n-1;
-            for(int left = n-1; left>=0; left--){
-                if(boxGrid[i][left]=='*'){
-                    res[left][m-i-1]='*';
-                    right=left-1;
-                }else if(boxGrid[i][left]=='#'){
-                    res[right][m-i-1]='#';
-                    right--;
+    public char[][] rotateTheBox(char[][] grid) {
+        int rows = grid.length, cols = grid[0].length;
+        char[][] res = new char[cols][rows];
+        for(char[] row:res) Arrays.fill(row,'.');
+        for(int i=0;i<rows;i++){
+            int chooseCol = rows-i-1;
+            int chooseRow = cols-1;
+            for(int j=cols-1;j>=0;j--){
+                if(grid[i][j]=='#'){
+                    res[chooseRow][chooseCol]='#';
+                    chooseRow--;
+                }else if(grid[i][j]=='*'){
+                    res[j][rows-i-1]='*';
+                    chooseRow = j-1;
                 }
-            }
-            for(int j=0;j<n;j++){
-                if(res[j][i]=='\u0000') res[j][i]='.';
             }
         }
         return res;
