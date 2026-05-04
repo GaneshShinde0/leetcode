@@ -7,7 +7,7 @@ class Solution {
         int result = 0;
         int[] dp = new int[max+1];
         dp[0]=0;
-        dp[1]= Math.max(arr[1],arr[0]);
+        dp[1]= arr[1];
         for(int i=2;i<=max;i++){
             dp[i] = Math.max(dp[i-2]+i*arr[i],dp[i-1]);
         }
