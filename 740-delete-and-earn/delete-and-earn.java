@@ -1,21 +1,16 @@
 class Solution {
     public int deleteAndEarn(int[] nums) {
-        // Arrays.sort(nums);
-        // int[] dp = new int[nume.length];
-        if(nums.length == 0) return 0;
-        int[] sums = new int[10010];
-        int[] select = new int[10010];
-        int[] nonSelect = new int[10010];
-
-        int maxV = 0;
-        for(int x:nums){
-            sums[x]+=x;
-            maxV = Math.max(maxV,x);
+        int max = 0;
+        for(int num:nums) max = Math.max(num,max);
+        int[] arr = new int[max+1];
+        for(int num:nums) arr[num]++;
+        int result = 0;
+        int[] dp = new int[max+1];
+        dp[0]=0;
+        dp[1]= Math.max(arr[1],arr[0]);
+        for(int i=2;i<=max;i++){
+            dp[i] = Math.max(dp[i-2]+i*arr[i],dp[i-1]);
         }
-        for(int i=1; i<=maxV; i++){
-            select[i] = nonSelect[i-1] + sums[i];
-            nonSelect[i] = Math.max(select[i-1],nonSelect[i-1]);
-        }
-        return Math.max(select[maxV], nonSelect[maxV]);
+        return dp[max];
     }
 }
