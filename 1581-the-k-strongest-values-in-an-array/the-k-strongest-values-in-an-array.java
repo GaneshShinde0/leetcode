@@ -10,7 +10,7 @@ class Solution {
             pq.add(num);
             if(pq.size()>k) pq.poll();
         }
-        System.out.println(pq);
+        // System.out.println(pq);
         int[] res = new int[k];
         for(int i=0;i<k;i++){
             res[i] = pq.poll();
