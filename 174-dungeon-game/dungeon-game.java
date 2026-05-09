@@ -1,6 +1,8 @@
 class Solution {
     int[][] dirs = {{0,1},{1,0}};
     public int calculateMinimumHP(int[][] grid) {
+        // grid = new int[200][200];
+        // for (int[] row : grid) Arrays.fill(row, -1);
         int m = grid.length, n = grid[0].length;
         int[][] maxCurrentHealth = new int[m][n];
         for (int i = 0; i < m; i++) {
