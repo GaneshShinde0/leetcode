@@ -13,7 +13,7 @@ class Solution {
             int[] curr = queue.poll();
             int i = curr[0];
             int j = curr[1];
-            if(maxCurrentHealth[i][j]>=curr[3]) continue;
+            if(maxCurrentHealth[i][j]>=curr[3]) continue; // We already reached this point i,j with more health.. No need to visit this again.
             maxCurrentHealth[i][j]=curr[3];
             if(i==m-1 && j==n-1){
                 if(curr[2]>0) return 1;
