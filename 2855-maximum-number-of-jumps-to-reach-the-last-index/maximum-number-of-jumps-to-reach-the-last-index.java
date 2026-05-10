@@ -4,10 +4,10 @@ class Solution {
         int[] dp = new int[n];
         Arrays.fill(dp, -n);//        Arrays.fill(dp, Integer.MIN_VALUE);
         dp[0] = 0;
-        for(int i=1;i<n;i++){
-            for(int j=0;j<i;j++){
+        for(int j=1;j<n;j++){
+            for(int i=0;i<j;i++){
                 if(Math.abs(nums[i]-nums[j])<=target){
-                    dp[i]=Math.max(dp[j]+1,dp[i]);
+                    dp[j]=Math.max(dp[i]+1,dp[j]);
                 }
             }
         }
