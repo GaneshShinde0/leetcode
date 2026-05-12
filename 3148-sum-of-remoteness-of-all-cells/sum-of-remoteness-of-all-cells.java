@@ -3,6 +3,7 @@ class Solution {
     int m,n;
     int currVis;
     public long sumRemoteness(int[][] grid) {
+        
         long totalSum = 0, result = 0;
         this.m = grid.length;
         this.n = grid[0].length;
