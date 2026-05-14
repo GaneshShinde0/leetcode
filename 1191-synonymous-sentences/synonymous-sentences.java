@@ -33,7 +33,7 @@ class Solution {
             }
             for(String s:visited){
                 li.add(s);
-                dfs(result,graph,words,new ArrayList<>(li),i+1);
+                dfs(result,graph,words,li,i+1);
                 li.remove(li.size()-1);
             }
         }
