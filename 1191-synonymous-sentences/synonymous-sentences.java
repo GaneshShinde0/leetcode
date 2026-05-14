@@ -16,13 +16,13 @@ class Solution {
     private void dfs(List<String> result, Map<String, Set<String>> graph, String[] words, List<String> li, int i){
         if(i==words.length) result.add(String.join(" ",li));
         else{
-            List<String> choices = new ArrayList<>();
+            // List<String> choices = new ArrayList<>();
             Set<String> visited = new HashSet<>();
             Stack<String> stk = new Stack<>();
             stk.add(words[i]);
             while(!stk.isEmpty()){
                 String curr = stk.pop();
-                choices.add(curr);
+                // choices.add(curr);
                 visited.add(curr);
                 if(!graph.containsKey(curr)) continue;
                 for(String s:graph.get(curr)){
@@ -31,7 +31,7 @@ class Solution {
                     }
                 }
             }
-            for(String s:choices){
+            for(String s:visited){
                 li.add(s);
                 dfs(result,graph,words,new ArrayList<>(li),i+1);
                 li.remove(li.size()-1);
