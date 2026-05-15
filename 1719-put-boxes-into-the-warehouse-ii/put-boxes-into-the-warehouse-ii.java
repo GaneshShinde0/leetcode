@@ -23,6 +23,6 @@ class Solution {
             }
             bp--;
         }
-        return left+warehouse.length-right-1;
+        return left+warehouse.length-(right+1);
     }
 }
