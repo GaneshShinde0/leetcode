@@ -13,6 +13,7 @@ class Solution {
                 }
             }
         }
+
         for(int i=k+1;i<=n;i++){
             if(currSum+i>maxSum) return count;
             if(!bannedSet.contains(i)){
