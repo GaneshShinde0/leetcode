@@ -7,7 +7,6 @@ class Solution {
         for(int i=0;i<n;i++){
             graph.computeIfAbsent(arr[i],x->new HashSet<>()).add(i);
         }
-        vis[0] = true;
         queue.add(0);
         int depth = 0;
         while(!queue.isEmpty()){
