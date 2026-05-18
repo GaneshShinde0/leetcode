@@ -14,21 +14,19 @@ class Solution {
             int size = queue.size();
             for(int i=0;i<size;i++){
                 int curr = queue.poll();
+                vis[curr] = true;
                 if(curr==n-1) return depth;
                 if(curr+1<n && !vis[curr+1]){
-                    vis[curr+1] = true;
                     queue.add(curr+1);
                 }
                 if(curr-1>=0 && !vis[curr-1]){
-                    vis[curr-1] = true;
                     queue.add(curr-1);
                 }
                 if(!graph.containsKey(arr[curr])) continue;
                 for(int jumps:graph.get(arr[curr])){
                     if(!vis[jumps]){
-                        vis[jumps] = true;
                         queue.add(jumps);
-                    }                    
+                    }                 
                 }
                 graph.remove(arr[curr]);
             }
