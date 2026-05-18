@@ -1,4 +1,4 @@
-class Solution {
+class SolutionInitial{
     public int maxScore(int[] nums) {
         int n = nums.length;
         int[] dp = new int[n];
@@ -8,5 +8,16 @@ class Solution {
             }
         }
         return dp[n-1];
+    }
+}
+class Solution {
+    public int maxScore(int[] nums) {
+        int n = nums.length;
+        int res = 0, max = 0;
+        for(int i=n-1;i>0;i--){
+            max = Math.max(max,nums[i]);
+            res+=max;
+        }
+        return res;
     }
 }
