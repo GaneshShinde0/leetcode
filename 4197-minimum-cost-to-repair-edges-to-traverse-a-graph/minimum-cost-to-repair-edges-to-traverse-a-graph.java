@@ -12,7 +12,6 @@ class Solution {
         int[] minEdges = new int[n];
         Arrays.fill(minEdges, Integer.MAX_VALUE);
         queue.add(new int[]{0,0,0});
-        int kCounter = 0;
         while(!queue.isEmpty()){
             int[] curr = queue.poll();
             int node = curr[0];
