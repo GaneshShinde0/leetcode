@@ -7,7 +7,6 @@ class Solution {
         }
         // If we do not have start in edges then return -1;
         if(!adj.containsKey(0)) return -1;
-
         PriorityQueue<int[]> queue = new PriorityQueue<>((a,b)->Integer.compare(a[1],b[1]));
         int[] minEdges = new int[n];
         Arrays.fill(minEdges, Integer.MAX_VALUE);
