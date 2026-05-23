@@ -8,11 +8,11 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class Solution1 {
     Random random;
     HashMap<Integer, Integer> hm = new HashMap<>();
     int count = 0;
-    public Solution(ListNode head) {
+    public Solution1(ListNode head) {
         this.random = new Random();
         while(head!=null){
             hm.put(count,head.val);
@@ -23,6 +23,28 @@ class Solution {
     
     public int getRandom() {
         return hm.get(random.nextInt(count));
+    }
+}
+
+class Solution {
+    Random random;
+    HashMap<Integer, Integer> hm = new HashMap<>();
+    int count = 0;
+    ListNode head;
+    public Solution(ListNode head) {
+        this.random = new Random();
+        this.head=head;
+    }
+    
+    public int getRandom() {
+        int chosenValue = 0, i = 1;
+        ListNode tempNode = head;
+        while(tempNode!=null){
+            if(random.nextInt(i)==0) chosenValue=tempNode.val;
+            tempNode = tempNode.next;
+            i++;
+        }
+        return chosenValue;
     }
 }
 
