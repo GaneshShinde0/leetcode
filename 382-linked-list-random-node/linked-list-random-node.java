@@ -25,7 +25,7 @@ class Solution1 {
         return hm.get(random.nextInt(count));
     }
 }
-
+// Reservoir Sampling
 class Solution {
     Random random;
     HashMap<Integer, Integer> hm = new HashMap<>();
@@ -39,8 +39,8 @@ class Solution {
     public int getRandom() {
         int chosenValue = 0, i = 1;
         ListNode tempNode = head;
-        while(tempNode!=null){
-            if(random.nextInt(i)==0) chosenValue=tempNode.val;
+        while(tempNode != null){
+            if(random.nextInt(i) == 0) chosenValue=tempNode.val;
             tempNode = tempNode.next;
             i++;
         }
