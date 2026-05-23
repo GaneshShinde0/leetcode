@@ -9,10 +9,11 @@
  * }
  */
 class Solution {
-    Random random = new Random();
+    Random random;
     HashMap<Integer, Integer> hm = new HashMap<>();
     int count = 0;
     public Solution(ListNode head) {
+        this.random = new Random();
         while(head!=null){
             hm.put(count,head.val);
             head = head.next;
