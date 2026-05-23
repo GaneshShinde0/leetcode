@@ -28,8 +28,6 @@ class Solution1 {
 // Reservoir Sampling
 class Solution {
     Random random;
-    HashMap<Integer, Integer> hm = new HashMap<>();
-    int count = 0;
     ListNode head;
     public Solution(ListNode head) {
         this.random = new Random();
