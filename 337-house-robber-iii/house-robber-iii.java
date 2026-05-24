@@ -30,6 +30,24 @@
  */
  
 class Solution {
+    public int rob(TreeNode root) {
+        int[] res = helper(root);
+        return Math.max(res[0],res[1]); // Max of skipping or robbing the root.
+    }
+    private int[] helper(TreeNode root){
+        if(root==null) return new int[]{0,0};
+        int[] left = helper(root.left);
+        int[] right = helper(root.right);
+
+        // State 0: Since we didn't rob this node we are free to either rob or SKIP the children , We greedily take maximum of children has to offer.
+        int skip = Math.max(left[0],left[1])+Math.max(right[0],right[1]);
+        
+        // State 1: We rob the current node, since we rob the current node, we must skip the children
+        int rob = root.val + left[0]+right[0];
+        return new int[]{skip, rob};
+    }
+}
+class SolutionOptimized2 {
     HashMap<TreeNode,Integer> hm;
     public int rob(TreeNode root) {
         this.hm = new HashMap<>();
