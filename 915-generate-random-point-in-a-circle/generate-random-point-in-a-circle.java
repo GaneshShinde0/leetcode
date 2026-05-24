@@ -11,6 +11,11 @@ class Solution {
     }
     
     public double[] randPoint() {
+        double d = radius*Math.sqrt(Math.random());
+        double theta = Math.random()*2*Math.PI;
+        return new double[]{d*Math.cos(theta)+xC, d*Math.sin(theta)+yC};
+    }
+    public double[] randPointCheckUntilFound() {
         double x0 = xC-radius;
         double y0 = yC-radius;
         double[] res = new double[2];
