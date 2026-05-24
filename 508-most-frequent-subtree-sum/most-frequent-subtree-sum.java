@@ -14,7 +14,15 @@
  * }
  */
 class Solution {
+    int maxCount = 0;
     public int[] findFrequentTreeSum(TreeNode root) {
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        helper(root, hm);
+        return hm.entrySet().stream().filter(e->e.getValue()==maxCount)
+                .mapToInt(Map.Entry::getKey)
+                .toArray();
+    }
+    public int[] findFrequentTreeSumDoubleStream(TreeNode root) {
         HashMap<Integer, Integer> hm = new HashMap<>();
         helper(root, hm);
         int max = hm.values().stream().max(Integer::compare).get();
@@ -31,6 +39,7 @@ class Solution {
         int rightSum = helper(root.right,hm);
         int total = leftSum+rightSum+root.val;
         hm.put(total, hm.getOrDefault(total,0)+1);
+        maxCount = Math.max(maxCount, hm.get(total));
         return total;
     }
 }
