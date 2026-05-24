@@ -28,7 +28,31 @@
  *     }
  * }
  */
+ 
 class Solution {
+    HashMap<TreeNode,Integer> hm;
+    public int rob(TreeNode root) {
+        this.hm = new HashMap<>();
+        return helper(root);
+    }
+    private int helper(TreeNode root){
+        if(root==null) return 0;
+        if(hm.containsKey(root)) return hm.get(root);
+        int res1 = root.val;
+        if(root.left!=null){
+            res1+=helper(root.left.left);
+            res1+=helper(root.left.right);
+        }
+        if(root.right!=null){
+            res1+=helper(root.right.left);
+            res1+=helper(root.right.right);
+        }
+        int res2 = helper(root.left)+helper(root.right);
+        hm.put(root, Math.max(res1,res2));
+        return hm.get(root);
+    }
+}
+class SolutionOptimized {
     HashMap<TreeNode,Integer> hm;
     public int rob(TreeNode root) {
         this.hm = new HashMap<>();
