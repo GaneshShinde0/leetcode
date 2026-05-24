@@ -1,4 +1,41 @@
 class Solution{
+    public int[] numberOfPairs(int[] nums1, int[] nums2, int[][] queries){
+        int n = nums2.length, block = (int) Math.sqrt(n)+1;
+        Map<Integer,Integer>[] freq = new Map[block];
+        for(int i=0;i<block;i++) freq[i] = new HashMap<>();
+        for(int i=0;i<n;i++) freq[i/block].put(nums2[i], freq[i/block].getOrDefault(nums2[i],0)+1);
+
+        int[] lazy = new int[block];
+        List<Integer> res = new ArrayList<>();
+        for(int[] q:queries){
+            if(q[0]==1){
+                for(int i=q[1];i<=q[2];){
+                    int b = i/block;
+                    if(i%block==0 && i+block-1<=q[2]){
+                        lazy[b]+=q[3]; // full blcok update
+                        i+=block;
+                    }else{
+                        freq[b].put(nums2[i], freq[b].get(nums2[i])-1);
+                        nums2[i]+=q[3];
+                        freq[b].put(nums2[i], freq[b].getOrDefault(nums2[i],0)+1);
+                        i++;
+                    }
+                }
+            }else{
+                int count = 0;
+                for(int x:nums1){
+                    for(int b=0;b<=(n-1)/block;b++){
+                        count += freq[b].getOrDefault(q[1]-x-lazy[b],0);
+                    }
+                }
+                res.add(count);
+            }
+        }
+        return res.stream().mapToInt(i->i).toArray();
+    }
+}
+
+class Solution3{
     int s = 300;
     public int[] numberOfPairs(int[] nums1, int[] nums2, int[][] queries){
         Map<Integer, Integer>[] cnt = new Map[s];
