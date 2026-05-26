@@ -1,5 +1,5 @@
 class Solution {
-    public int matrixSum(int[][] nums) {
+    public int matrixSumInitial(int[][] nums) {
         int m = nums.length, n = nums[0].length;
         PriorityQueue[] rowPQ= new PriorityQueue[m];
         for(int i=0;i<m;i++){
@@ -13,6 +13,26 @@ class Solution {
             int max = 0;
             for(int i=0;i<m;i++){
                 max = Math.max(max,(int)rowPQ[i].poll());
+            }
+            res+=max;
+        }
+        return res;
+    }
+    public int matrixSum(int[][] nums) {
+        int m = nums.length, n = nums[0].length;
+        List<Integer>[] rowPQ= new List[m];
+        for(int i=0;i<m;i++){
+            rowPQ[i] = new ArrayList<Integer>();
+            for(int j=0;j<n;j++){
+                rowPQ[i].add(nums[i][j]);
+            }
+            Collections.sort(rowPQ[i]);
+        }
+        int res = 0;
+        for(int j=0;j<n;j++){
+            int max = 0;
+            for(int i=0;i<m;i++){
+                max = Math.max(max,(int)rowPQ[i].get(n-j-1));
             }
             res+=max;
         }
