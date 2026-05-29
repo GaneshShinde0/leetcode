@@ -4,5 +4,4 @@ WITH CTE AS (
 CTE2 as (
     SELECT *, lag(curr_year_spend) OVER (partition by product_id ORDER BY year asc) as prev_year_spend FROM CTE
 )
-SELECT *, ROUND((curr_year_spend-prev_year_spend)/prev_year_spend*100.00,2) as yoy_rate FROM CTE2 
-ORDER BY product_id, year
+SELECT *, ROUND((curr_year_spend-prev_year_spend)/prev_year_spend*100.00,2) as yoy_rate FROM CTE2 ORDER BY product_id, year
