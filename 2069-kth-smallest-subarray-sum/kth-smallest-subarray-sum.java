@@ -4,7 +4,7 @@ Kth Smallest SubArray Sum.
 
 
 - Sorting Wont work-> Will Mess up the order.
-- Brute force will work but too slow.
+- Brute force might work but too slow.
 - HashMap, TreeMap wont work too slow.
 
 - PrefixSum -> Might-> Lets try
@@ -12,7 +12,6 @@ Kth Smallest SubArray Sum.
 - PrefixSum + Binary Search on Ans?
 - Low = min(arr), high = sum(arr)
 
-if(prefSum(mid)>)
 */
 class Solution {
     public int kthSmallestSubarraySum(int[] nums, int k) {
