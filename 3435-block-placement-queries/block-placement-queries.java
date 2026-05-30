@@ -16,7 +16,7 @@ Let pre and nxt denote the positions of the nearest obstacles to the left and ri
 
 We also need to efficiently determine the nearest obstacle on boht sides of x, which requires maintianing an ordered structure during insertions. A balanced binary search tree can be used for this purpose.
 */
-class Solution {
+class SolutionSegmentTree {
     private int[] seg;
     private void update(int idx, int val, int p, int l, int r){
         if(l==r){
@@ -70,6 +70,86 @@ class Solution {
                 ans.add(maxSpace>=size);
             }
         }
+        return ans;
+    }
+}
+
+/*
+Complexity Analysis:
+Let q be the length of queries, and let M be the maximum value of x.
+- Time Complexity: O(QlogQ+QlogM).
+    Each balanced tree operation requires O(logQ) time, and each segment tree update or query requires O(logM) time.
+- Space Complexity: O(M+Q)
+    The segment tree requires O(M) space, while the balanced tree store at most O(q) obstacles.
+*/
+
+/*
+Fenwick Tree
+
+Similar to Segment tree, a Fenwick Tree can also be used to maintain interval maximums. However, after adding an obstacle, interval lengths may decrease, and a Fenwick tree cannot efficiently support such range updates. Therefore, we need a different perspective.
+
+Instead of processing the queries forward, we process them in a reverse order. Initially, we assume that all obstacles already exist. Then, while traversing the queries backward, we remove obstacles one by one, causing adjaccent intervals to merge into larger intervals. 
+
+Let d[r] denote the distance from r to the nearest obstacles on its left, Let pre and nxt represent the positions of the nearest obstacles to the left and right of x, respectively. Then
+
+d[r] = r - pre
+
+When deleting an obstacle position x, the two original intervals [pre,x] and [x,nxt] merge into a single interval [pre,nxt] whose length becomes nxt-pre
+
+Since interval lengths only increase during this reverse process, we can use a Fenwick tree to maintain prefix maximums efficiently.
+
+*/
+
+class Solution{
+    private int[] bt;
+    private void update(int x,int y){
+        for(;x<bt.length; x+=x &-x){ // x &-x gives lowest set bit
+            bt[x] = Math.max(bt[x],y);
+        }
+    }
+
+    private int query(int x){
+        int res = 0;
+        for(;x>0;x-=x&-x){
+            res = Math.max(res, bt[x]);
+        }
+        return res;
+    }
+
+    public List<Boolean> getResults(int[][] queries){
+        int max = 50000;
+        TreeSet<Integer> set = new TreeSet<>();
+        set.add(0);
+        set.add(max);
+        for(int[] q:queries){
+            if(q[0]==1) set.add(q[1]);
+        }
+        bt = new int[max+1];
+        int pre = 0;
+        for(int x:set){
+            if(x==0) continue;
+            update(x,x-pre);
+            pre = x;
+        }
+        List<Boolean> ans = new ArrayList<>();
+        for(int i=queries.length-1;i>=0;i--){
+            int[] q = queries[i];
+            if(q[0]==2){
+                int x = q[1];
+                int size = q[2];
+                int preVal = Optional.ofNullable(set.floor(x)).orElse(0);
+                int maxSpace = query(preVal);
+                maxSpace = Math.max(maxSpace, x-preVal);
+                ans.add(maxSpace>=size);
+            }else{
+                int x = q[1];
+                int prevVal = Optional.ofNullable(set.lower(x)).orElse(0);
+                int nxt = Optional.ofNullable(set.higher(x)).orElse(max);
+                update(nxt, nxt-prevVal);
+                set.remove(x);
+            }
+        }
+        Collections.reverse(ans);
         return ans;
     }
 }
