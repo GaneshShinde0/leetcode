@@ -13,23 +13,20 @@ class Solution1 {
 }
 class Solution {
     public boolean asteroidsDestroyed(int mass, int[] asteroids) {
-        int min = 100000;
-        int max = 0;
-        for(int x : asteroids) {
-            max = Math.max(x, max);
-            min = Math.min(x, min);
+        int max = 0, min = Integer.MAX_VALUE;
+        for(int a:asteroids){
+            max = Math.max(a,max);
+            min = Math.min(a,min);
         }
-
-        int[] freq = new int[max + 1];
-        long val = mass;
-        for(int x : asteroids) {
-            if(x > val) freq[x]++;
-            else val += x;
+        int[] freq = new int[max+1];
+        long total = mass;
+        for(int a:asteroids){
+            if(a>total) freq[a]++;
+            else total+=a;
         }
-        if(val >= max) return true;
-        for(int i = min; i <= max; i++) {
-            if(val < i) return false;
-            if(freq[i] != 0) val += i * freq[i];
+        for(int i=0;i<=max;i++){
+            if(i>total) return false;
+            else total +=i*freq[i];
         }
         return true;
     }
