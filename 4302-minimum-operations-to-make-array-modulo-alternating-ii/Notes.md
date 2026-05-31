@@ -1,0 +1,1 @@
+<h2>minimum-operations-to-make-array-modulo-alternating-ii Notes</h2><hr>[ Time taken: 1hr 58m 24s ]
