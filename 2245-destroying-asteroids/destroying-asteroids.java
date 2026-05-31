@@ -25,7 +25,7 @@ class Solution {
             else total+=a;
         }
         if(total>=max) return true;
-        for(int i=0;i<=max;i++){
+        for(int i=min;i<=max;i++){
             if(i>total) return false;
             else total +=i*freq[i];
         }
