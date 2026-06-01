@@ -33,10 +33,8 @@ class Solution{
         int[] ways = new int[amount+1];
         ways[0]=1;
         for(int coin:coins){
-            for(int i=0;i<=amount;i++){
-                if(i-coin>=0){
-                    ways[i]+=ways[i-coin];
-                }
+            for(int i=coin;i<=amount;i++){
+                ways[i]+=ways[i-coin];
             }
         }
         return ways[amount];
