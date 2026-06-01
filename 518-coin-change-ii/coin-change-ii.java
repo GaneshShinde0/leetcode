@@ -27,7 +27,20 @@ class SolutionWillGiveNumberOfPermutations{
         return ways[amount];
     }
 }
+/*
+Dry Run 
+Input: amount = 5, coins = [1,2,5]
+ways = > [1,0,0,0,0,0]
+coin => 1
+ways => [1,1,1,1,1,1]
 
+coin => 2
+ways => [1,1,2,2,3,3]
+
+coin => 5
+ways => [1,1,2,2,3,4]
+
+*/
 class Solution{
     public int change(int amount, int[] coins) {
         int[] ways = new int[amount+1];
