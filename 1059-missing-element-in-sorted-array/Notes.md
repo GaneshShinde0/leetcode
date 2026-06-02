@@ -1,1 +1,1 @@
-<h2>missing-element-in-sorted-array Notes</h2><hr>[ Time taken: 10hrs 26m 3s ]
+<h2>missing-element-in-sorted-array Notes</h2><hr>[ Time taken: 1m 27s ]
