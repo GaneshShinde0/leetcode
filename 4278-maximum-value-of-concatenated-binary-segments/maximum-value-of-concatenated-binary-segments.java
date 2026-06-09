@@ -13,12 +13,12 @@ class Solution {
                 // else if(b[1]==0) return 1;
                 // else if(a[0]!=b[0]) return Integer.compare(b[0],a[0]);
                 // else return Integer.compare(a[1],b[1]);
-                if (a[1] == 0 || b[1] == 0) {
+                if (a[1] == 0 || b[1] == 0) { // Either of pair has 0 nums0, sort by asc of nums0 -> number with 0 nums0 will come first.
                     return Integer.compare(a[1], b[1]);
-                } else if (a[0] != b[0]) {
+                } else if (a[0] != b[0]) { // Number of ones are different, Take element with higher number of ones.
                     return Integer.compare(b[0], a[0]);
                 } else {
-                    return Integer.compare(a[1], b[1]);
+                    return Integer.compare(a[1], b[1]); // Else take pair with lower number of zeros
                 }
             });
         int res = 0;
