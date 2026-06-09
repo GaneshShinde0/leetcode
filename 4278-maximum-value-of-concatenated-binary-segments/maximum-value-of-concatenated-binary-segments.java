@@ -23,7 +23,7 @@ class Solution {
             });
         int res = 0;
         for(int i=0;i<n;i++){
-            System.out.println(Arrays.toString(comb[i]));
+            // System.out.println(Arrays.toString(comb[i]));
             int both = comb[i][0]+comb[i][1];
             long current = (pow(2,both)-pow(2,comb[i][1])+MOD)%MOD;
             res = (int) ((shift(res,both)+current)%MOD);
