@@ -8,11 +8,18 @@ class Solution {
             comb[i][1]= nums0[i];
         }
         Arrays.sort(comb,(a,b)->{
-                if (a[1] == 0 && b[1] == 0) return 0; // or Integer.compare(b[0], a[0])
-                else if(a[1]==0) return -1;
-                else if(b[1]==0) return 1;
-                else if(a[0]!=b[0]) return Integer.compare(b[0],a[0]);
-                else return Integer.compare(a[1],b[1]);
+                // if (a[1] == 0 && b[1] == 0) return 0; // or Integer.compare(b[0], a[0])
+                // else if(a[1]==0) return -1;
+                // else if(b[1]==0) return 1;
+                // else if(a[0]!=b[0]) return Integer.compare(b[0],a[0]);
+                // else return Integer.compare(a[1],b[1]);
+                if (a[1] == 0 || b[1] == 0) {
+                    return Integer.compare(a[1], b[1]);
+                } else if (a[0] != b[0]) {
+                    return Integer.compare(b[0], a[0]);
+                } else {
+                    return Integer.compare(a[1], b[1]);
+                }
             });
         int res = 0;
         for(int i=0;i<n;i++){
