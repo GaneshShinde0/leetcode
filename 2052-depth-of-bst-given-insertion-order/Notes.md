@@ -1,1 +1,1 @@
-<h2>depth-of-bst-given-insertion-order Notes</h2><hr>[ Time taken: 40m 39s ]
+<h2>depth-of-bst-given-insertion-order Notes</h2><hr>[ Time taken: 41m 32s ]
