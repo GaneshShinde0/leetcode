@@ -1,7 +1,6 @@
 class Solution {
     public int[] restoreArray(int[][] adjacentPairs) {
         HashMap<Integer, HashSet<Integer>> hm = new HashMap<>();
-        HashSet<Integer> visited = new HashSet<>();
         for(int[] pair: adjacentPairs){
             int u = pair[0],v = pair[1];
             hm.computeIfAbsent(u,k->new HashSet<>()).add(v);
@@ -14,7 +13,6 @@ class Solution {
             if(e.getValue().size()==1){
                 res[end] = e.getKey();
                 stk.add(e.getKey());
-                visited.add(e.getKey());
                 end--;
                 break;
             }
@@ -22,12 +20,12 @@ class Solution {
         while(!stk.isEmpty()){
             int top = stk.pop();
             for(int left: hm.get(top)){
-                if(!visited.contains(left)){
-                    visited.add(left);
+                if(hm.containsKey(left)){
                     stk.push(left);
                     res[end--]=left;
                 }
             }
+            hm.remove(top);
         }
         return res;
     }
