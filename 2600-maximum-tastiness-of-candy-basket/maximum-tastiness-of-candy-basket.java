@@ -10,7 +10,7 @@ Selet k elements such that their difference is maximum.
 class Solution {
     public int maximumTastiness(int[] price, int k) {
         Arrays.sort(price);
-        int low = 0, high = price[price.length-1];
+        int low = 0, high = price[price.length-1]-price[0]+1;
         while(low<high){
             int mid = low+(high-low)/2;
             if(check(mid,price,k)) low = mid+1;
