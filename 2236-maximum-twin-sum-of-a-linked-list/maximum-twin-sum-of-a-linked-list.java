@@ -1,28 +1,25 @@
-/*
-Maximum Twin Sum
-Sum of 
-Ni + N-i-1 => Find Max of all sum;
-*/
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
     public int pairSum(ListNode head) {
-        int ans = 0;
-        ListNode newList = null;
-        ListNode current = head;
-        ListNode currHalf = head;
-
-
-        while(currHalf!=null && currHalf.next!=null){
-            currHalf = currHalf.next.next; // Fast Pointer
-            ListNode temp = current.next; // Current Next
-            current.next = newList; // We are basically swapping two nodes in list using third pointer.
-            newList = current;
-            current = temp;
+        int i = 0;
+        List<Integer> li = new ArrayList<>();
+        while(head!=null){
+            li.add(head.val);
+            head = head.next;
         }
-        while(current!=null){
-            ans = Math.max(ans,current.val+newList.val);
-            current = current.next;
-            newList = newList.next;
+        int res = 0, left = 0, right = li.size()-1;
+        while(left<right){
+            res = Math.max(li.get(left++)+li.get(right--), res);
         }
-        return ans;
+        return res;
     }
 }
