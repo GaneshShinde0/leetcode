@@ -1,5 +1,44 @@
 class Solution {
-    public List<Integer> shortestDistanceColor(int[] colors, int[][] queries) {
+    public List<Integer> shortestDistanceColor(int[] colors, int[][] queries){
+        int n = colors.length;
+        int[] rightMost = {0,0,0};
+        int[] leftMost = {n-1,n-1,n-1};
+        int[][] distance = new int[3][n];
+
+        for(int i=0;i<3;i++){
+            Arrays.fill(distance[i],-1);
+        }
+
+        // Looking forward;
+        for(int i=0;i<n;i++){
+            int color = colors[i]-1;
+            for(int j= rightMost[color];j<i+1;j++){
+                distance[color][j] = i-j;
+            }
+            rightMost[color] = i+1;
+        }
+        // Loocking backward
+        for(int i=n-1;i>=0;i--){
+            int color = colors[i]-1;
+            for(int j=leftMost[color];j>i-1;j--){
+                if(distance[color][j]==-1||distance[color][j]>j-i){
+                    distance[color][j] = j-i;
+                }
+            }
+            leftMost[color] = i-1;
+        }
+        List<Integer> queryResults = new ArrayList<>();
+        for(int i=0;i<queries.length;i++){
+            queryResults.add(distance[queries[i][1]-1][queries[i][0]]);
+        }
+        return queryResults;
+    }
+
+
+
+
+
+    public List<Integer> shortestDistanceColorInitial(int[] colors, int[][] queries) {
         List<Integer> result = new ArrayList<>();
         HashMap<Integer, List<Integer>> hm = new HashMap<>();
         for(int i=0;i<colors.length;i++){
