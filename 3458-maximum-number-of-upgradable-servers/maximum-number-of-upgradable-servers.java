@@ -9,16 +9,16 @@ class Solution {
     }
 
     private int getBestScenario(int count, int upgrade, int sell,int money){
-        int left = 0, right = count;
+        long left = 0, right = count;
         while(left<=right){
-            int mid = (left+right)/2;
-            long newMoney = money + 1l*(count-mid)*sell;
+            long mid = (left+right)/2;
+            long newMoney = money + (count-mid)*sell;
             if(newMoney/upgrade>=mid){
-                left =  mid+1;
+                left = mid+1;
             }else{
                 right = mid-1;
             }
         }
-        return  right;
+        return (int) right;
     }
 }
