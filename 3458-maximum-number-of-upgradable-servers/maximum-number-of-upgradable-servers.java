@@ -8,17 +8,17 @@ class Solution {
         return res;
     }
 
-    private int getBestScenario(long count, long upgrade, long sell,long money){
-        long left = 0, right = count;
+    private int getBestScenario(int count, int upgrade, int sell,int money){
+        int left = 0, right = count;
         while(left<=right){
-            long mid = (left+right)/2;
-            long newMoney = money + (count-mid)*sell;
+            int mid = (left+right)/2;
+            long newMoney = money + 1l*(count-mid)*sell;
             if(newMoney/upgrade>=mid){
-                left = mid+1;
+                left =  mid+1;
             }else{
                 right = mid-1;
             }
         }
-        return (int) right;
+        return  right;
     }
 }
