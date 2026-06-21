@@ -6,7 +6,7 @@ class Solution {
     public long numberOfPairs(int[] nums1, int[] nums2, int diff) {
         int n = nums1.length;
         int[] arr = new int[n];
-        Fenwick fw = new Fenwick(60000);
+        Fenwick fw = new Fenwick(60000); // 20000 for nums1,nums2,diff each
         long res = 0;
         for(int ptr=0;ptr<n;ptr++){
             int val = nums1[ptr]-nums2[ptr]+30000;//offset
