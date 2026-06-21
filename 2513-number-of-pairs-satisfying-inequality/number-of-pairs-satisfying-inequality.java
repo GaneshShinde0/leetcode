@@ -9,7 +9,7 @@ class Solution {
         Fenwick fw = new Fenwick(60000);
         long res = 0;
         for(int ptr=0;ptr<n;ptr++){
-            int val = nums1[ptr]-nums2[ptr]+25000;//offset
+            int val = nums1[ptr]-nums2[ptr]+30000;//offset
             res += fw.query(val+diff);
             fw.update(val,1);
         }
