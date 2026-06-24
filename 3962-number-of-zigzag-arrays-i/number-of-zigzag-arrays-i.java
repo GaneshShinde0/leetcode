@@ -58,30 +58,58 @@ public class Solution {
     private static final int MOD = 1_000_000_007;
 
     public int zigZagArrays(int n, int l, int r) {
+        // dp0[j]: The Number of valid arrays ending with the value 'j' where last move was decreasing (i.e. prevValue>j).
         int[] dp0 = new int[r+1];
+        // dp1[j]: The Number of valida arrays ending with the value 'j' where last move was increasing (i.e. prevValue<j)
         int[] dp1 = new int[r+1];
+
+        // Sum0 and sum1 are Prefix Sum Arrays for dp0 and dp1.
+        // Sum0[j] will store the sum of dp0[k] for all k from l upto J.
+        // We use r+2 to safely handle out of bounds requests when j = r.
         int[] sum0 = new int[r+2];
         int[] sum1 = new int[r+2];
 
+        // Base Case: Array of length 1.
         for(int i=1; i<=r; i++){
-            dp0[i]=1;
-            dp1[i]=1;
-            sum0[i] = i-l+1;
+            dp0[i]=1; // 1 valid way to have an array of length 1 ending in 'i'
+            dp1[i]=1; // 1 valid way to have an array of length 1 ending in 'i'
+
+            // Initializing the prefix sums for length 1.
+            sum0[i] = i-l+1; 
             sum1[i] = i-l+1;
         }
 
+        // DP Transition: Build the array lengh by length from 2 upto N
         for(int i=1;i<n;i++){
+            // Step 1: Calculate the new DP values for the current length.
             for(int j=l; j<=r;j++){
+                // We want to DECREASE to 'j'.
+                // Rule: Previous move must have been an INCREASE dp(1)
+                // Rule: Previous value 'k' must be strictly GREATER than 'j' (k>j).
+                // So we need the sum of dp1[k] for k fromm (j+1) to r.
+                // Using prefix sum: Total Sum upto 'r' MINUS sum upto 'j'
                 dp0[j] = (sum1[r]-sum1[j]+MOD)%MOD;
+
+                // We want to INCREASE to 'j'
+                // Rule: Previous Move must have been a Decrease (dp0).
+                // Rule: Previous value 'k' must be strictly less than 'j' (k<j).
+                // So we need the sum of dp0[k] for k from 'l' to (j-1)
+                // Using prefix sum: THis is exactly the prefix sum upto (j-1).
                 dp1[j] = sum0[j-1];
             }
+
+            // Step 2: Update Prefix Sums for the NEXT iteration (Rolling Array Optimization)
             sum0[l] = dp0[l];
             sum1[l] = dp1[l];
             for(int j = l+1;j<=r;j++){
+                // Current Prefix Sum = Previous Prefix Sum + Current DP Value.
                 sum0[j] = (sum0[j-1]+dp0[j])%MOD;
                 sum1[j] = (sum1[j-1]+dp1[j])%MOD;
             }
         }
+        // Final Answer the total valid arrays of length n ending in any value between l and r.
+        // Since sum0[r] holds the sum of all dp0[j] and sum1[r] for dp1[j].
+        // We add them together to get the total valid configurationns.
         return (sum0[r]+sum1[r])%MOD;
     }
 }
