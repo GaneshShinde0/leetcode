@@ -1,1 +1,1 @@
-<h2>number-of-zigzag-arrays-i Notes</h2><hr>[ Time taken: 19hrs 38m 43s ]
+<h2>number-of-zigzag-arrays-i Notes</h2><hr>[ Time taken: 55s ]
