@@ -70,7 +70,7 @@ public class Solution {
         int[] sum1 = new int[r+2];
 
         // Base Case: Array of length 1.
-        for(int i=1; i<=r; i++){
+        for(int i=l; i<=r; i++){
             dp0[i]=1; // 1 valid way to have an array of length 1 ending in 'i'
             dp1[i]=1; // 1 valid way to have an array of length 1 ending in 'i'
 
