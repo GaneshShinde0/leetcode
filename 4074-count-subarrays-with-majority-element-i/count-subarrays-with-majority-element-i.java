@@ -1,8 +1,7 @@
 class Solution {
-    public int countMajoritySubarrays(int[] nums, int target) {
+    public int countMajoritySubarraysInitial(int[] nums, int target) {
         int n = nums.length;
         int res = 0;
-
         // Iterate over all possible subarrays
         for (int i = 0; i < n; i++) {
             int targetCount = 0;
@@ -14,5 +13,26 @@ class Solution {
         }
 
         return res;
+    }
+
+    public int countMajoritySubarrays(int[] nums, int target){
+        int n = nums.length;
+        int[] pre = new int[2*n+1];
+        pre[n] = 1;
+        int cnt = n;
+        int preSum = 0, ans = 0;
+        for(int x:nums){
+            if(x==target){
+                preSum+=pre[cnt];
+                cnt++;
+                pre[cnt]++;
+            }else{
+                cnt--;
+                preSum-=pre[cnt];
+                pre[cnt]++;
+            }
+            ans += preSum;
+        }
+        return ans;
     }
 }
