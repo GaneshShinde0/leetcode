@@ -7,7 +7,7 @@ class Solution {
         int res = 1;
         for(Map.Entry<Integer,Integer> e:freq.entrySet()){
             int key = e.getKey(), value = e.getValue();
-            if(key==1){
+            if(key == 1){
                 if(value%2==1) res = Math.max(value,res);
                 else res = Math.max(value-1,res);
                 continue;
