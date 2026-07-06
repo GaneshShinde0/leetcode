@@ -13,6 +13,7 @@ class Solution {
                 curr.add(i);
             }
             li.add(curr);
+            return;
         }
         for(int i=start;i<=end;i++){
             swap(nums,start, i);
