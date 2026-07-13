@@ -55,8 +55,8 @@ By building a **Prefix Sum Array** (`pref`), we can get these block sums instant
 
 1. Traverse the input array `nums` and populate a list `arr` with the indices of all the `1`s.
 2. Convert `arr` into an array `a` by applying `a[i] = arr.get(i) - i`.
-3. Build a prefix sum array `pref` from `a` (use `long[]` to prevent integer overflow, as sums can get very large).
-4. Initialize `minCost = Long.MAX_VALUE`.
+3. Build a prefix sum array `pref` from `a` (use `int[]` to prevent integer overflow, as sums can get very large).
+4. Initialize `minCost = int.MAX_VALUE`.
 5. Loop through `a` with a sliding window of size `k` (from `left = 0` to `right = k - 1`), shifting both pointers up to the end of `a`.
 6. For each window:
    * Find `mid = left + k / 2`.
@@ -80,21 +80,21 @@ class Solution {
             A[i] = arr.get(i)-i;
         }
 
-        long[] prefixSum = new long[onesCount];
+        int[] prefixSum = new int[onesCount];
         prefixSum[0] = A[0];
         for(int i=1;i<arr.size();i++){
             prefixSum[i] = A[i]+prefixSum[i-1];
         }
 
-        long minCost = Integer.MAX_VALUE;
+        int minCost = Integer.MAX_VALUE;
         for(int left = 0, right=k-1;right<onesCount;right++, left++){
             int mid = left + k/2;
-            long countLeft = mid-left;
-            long countRight = right-mid;
-            long leftSum = getSum(prefixSum, left,mid-1);
-            long rightSum = getSum(prefixSum, mid+1, right);
-            long leftCost = (countLeft*A[mid]-leftSum);
-            long rightCost = (rightSum-countRight*A[mid]);
+            int countLeft = mid-left;
+            int countRight = right-mid;
+            int leftSum = getSum(prefixSum, left,mid-1);
+            int rightSum = getSum(prefixSum, mid+1, right);
+            int leftCost = (countLeft*A[mid]-leftSum);
+            int rightCost = (rightSum-countRight*A[mid]);
             minCost = Math.min(minCost, leftCost+rightCost);
         }
 
@@ -102,7 +102,7 @@ class Solution {
 
     }
 
-    private long getSum(long[] pref, int l, int r) {
+    private int getSum(int[] pref, int l, int r) {
         if (l > r) return 0;
         return l == 0 ? pref[r] : pref[r] - pref[l - 1];
     }
