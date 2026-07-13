@@ -1,6 +1,8 @@
 class Solution {
     public int integerReplacement(int n) {
         HashMap<Long, Integer> hm = new HashMap<>();
+        // int temp = recurse(n, hm);
+        // System.out.println(hm);
         return recurse(n, hm);
     }
     private int recurse(long n, HashMap<Long, Integer> hm){
