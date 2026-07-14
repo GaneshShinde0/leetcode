@@ -16,7 +16,6 @@ class Solution {
         visited.add(start);
 
         int res = 0;
-
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int j = 0; j < size; j++) {
@@ -24,13 +23,10 @@ class Solution {
                 
                 for (int i : pre) {
                     List<Integer> next = new ArrayList<>(curr);
-                    
                     Collections.reverse(next.subList(0, i));
-                    
                     if (next.equals(target)) {
                         return res + 1;
                     }
-                    
                     if (!visited.contains(next)) {
                         visited.add(next);
                         queue.offer(next);
