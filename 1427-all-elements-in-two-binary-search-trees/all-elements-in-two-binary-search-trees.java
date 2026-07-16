@@ -13,7 +13,7 @@
  *     }
  * }
  */
-class Solution {
+class Solution1 {
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
         List<Integer> li1 = new ArrayList<>(), li2 = new ArrayList<>(), res = new ArrayList<>();
         inOrder(root1, li1);
@@ -47,4 +47,36 @@ class Solution {
     }
 
 
+}
+
+class Solution{
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2){
+        ArrayDeque<TreeNode> stk1 = new ArrayDeque();
+        ArrayDeque<TreeNode> stk2 = new ArrayDeque();
+        List<Integer> res = new ArrayList<>();
+
+        while(root1!=null || root2 != null || !stk1.isEmpty() || !stk2.isEmpty()){
+            while(root1 != null){
+                stk1.push(root1);
+                root1 = root1.left;
+            }
+
+            while(root2!=null){
+                stk2.push(root2);
+                root2 = root2.left;
+            }
+
+            if(stk2.isEmpty() || !stk1.isEmpty() && stk1.getFirst().val<=stk2.getFirst().val){
+                root1 = stk1.pop();
+                res.add(root1.val);
+                root1 = root1.right;
+            }else{
+                root2 = stk2.pop();
+                res.add(root2.val);
+                root2 = root2.right;
+            }
+        }
+        return res;
+
+    }
 }
