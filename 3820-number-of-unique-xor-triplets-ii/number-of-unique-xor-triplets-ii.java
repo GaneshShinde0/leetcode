@@ -6,10 +6,16 @@ class Solution {
                 set[(nums[i]^nums[j])]=true;
             }
         }
-        Set<Integer> set2 = new HashSet<>();
+        boolean[] set2 = new boolean[2048];
+        int res = 0;
         for(int i=0;i<2048;i++){
-            if(set[i]) for(int num2:nums) set2.add(i^num2);
+            if(set[i]) for(int num2:nums){
+                if(!set2[i^num2]){
+                    set2[i^num2]=true;
+                    res++;
+                }
+            }
         }
-        return set2.size();
+        return res;
     }
 }
