@@ -26,12 +26,9 @@ class Solution {
                 int curr = queue.poll();
                 Set<Integer> set = hm.get(curr);
                 for(int neighbor:set){
-                    if(hm.containsKey(neighbor)){
-                        degree[neighbor]--;
-                        if(degree[neighbor]==1) queue.add(neighbor);
-                    }
+                    degree[neighbor]--;
+                    if(degree[neighbor]==1) queue.add(neighbor);
                 }
-                if(degree[curr]==0) hm.remove(curr);
             }
             res++;
         }
