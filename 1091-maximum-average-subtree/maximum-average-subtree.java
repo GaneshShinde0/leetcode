@@ -1,3 +1,28 @@
+/*
+Approach 1: Postorder Traversal
+Intuition:
+
+To calculate average value of a subtree rooted at node, we need two things.
+1. Sum of all values of the nodes in the subtree of node, valueSum(node);
+2. Count of the nodes in the node subtree, let's refer to it as NodeCount(node).
+
+Then, the average for subtree rooted at node will be valueSum(node)/ nodeCount(node)
+
+To calculate these values for a subtree rooted at node, we can derive them from the child nodes of node.
+
+1. valueSum(node) = valueSum(node.left) + valueSum(node.right) + value(node)
+2. NodeCount(node) = NodeCount(node.left) + NodeCount(node.right) +1;
+
+Also, for any leaf node leaf, we know that.
+
+valueSum(leaf) = node.val
+NodeCount(leaf) = 1
+
+
+Based on this we can calcualte average of each node in tree by traversing bottom up, First visit and calculate valueSum and NodeCount for child nodes and then use these child nodes values to solve for parent node.
+
+In Post Order Traversal.
+*/
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
