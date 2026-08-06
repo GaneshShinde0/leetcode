@@ -9,7 +9,7 @@
  * };
  */
 
-class Solution {
+class SolutionInitial {
     public List<List<Integer>> findSolution(CustomFunction customfunction, int z) {
         List<List<Integer>> li = new ArrayList<>();
         for(int x=1;x<=1000;x++){
@@ -20,5 +20,20 @@ class Solution {
             }
         }
         return li;
+    }
+}
+
+
+class Solution {
+    public List<List<Integer>> findSolution(CustomFunction customfunction, int z) {
+        List<List<Integer>> res = new ArrayList<>();
+        int x = 1, y = 1000;
+        while (x <= 1000 && y > 0) {
+            int v = customfunction.f(x, y);
+            if (v > z) --y;
+            else if (v < z) ++x;
+            else res.add(Arrays.asList(x++, y--));
+        }
+        return res;
     }
 }
