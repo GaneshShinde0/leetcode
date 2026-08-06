@@ -1,5 +1,5 @@
 class Solution {
-        public int maxFrequency(int[] A, int k) {
+    public int maxFrequency(int[] A, int k) {
         Map<Integer, Integer> count = new HashMap<>();
         for (int a : A) {
             count.put(a, count.getOrDefault(a, 0) + 1);
