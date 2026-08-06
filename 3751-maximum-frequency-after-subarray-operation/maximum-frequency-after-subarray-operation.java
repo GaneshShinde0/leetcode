@@ -2,8 +2,8 @@ class Solution{
     public int maxFrequency(int[] A, int k) {
         int count[] = new int[51], res = 0;
         for (int a : A) {
-            count[a] = Math.max(count[a], count[k]) + 1;
-            res = Math.max(res, count[a] - count[k]);
+            count[a] = Math.max(count[a], count[k]) + 1; // The max we can get after considering current element;
+            res = Math.max(res, count[a] - count[k]); // The max result we can get incase we change k
         }
         return count[k] + res;
     }    
