@@ -1,4 +1,14 @@
-class Solution {
+class Solution{
+    public int maxFrequency(int[] A, int k) {
+        int count[] = new int[51], res = 0;
+        for (int a : A) {
+            count[a] = Math.max(count[a], count[k]) + 1;
+            res = Math.max(res, count[a] - count[k]);
+        }
+        return count[k] + res;
+    }    
+}
+class Solution1 {
     public int maxFrequency(int[] A, int k) {
         Map<Integer, Integer> count = new HashMap<>();
         for (int a : A) {
