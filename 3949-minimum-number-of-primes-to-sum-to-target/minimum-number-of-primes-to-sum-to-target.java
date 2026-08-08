@@ -2,7 +2,7 @@ class Solution {
     private static List<Integer> primes = getPrimes();
     public int minNumberOfPrimes(int n, int m) {
         int[] minNums = new int[Math.max(n + 1, 8000)];
-        Arrays.fill(minNums,100000);
+        Arrays.fill(minNums,10000);
         minNums[0]=0;
         for(int k=0;k<m;k++){
             int p = primes.get(k);
@@ -11,7 +11,7 @@ class Solution {
                 minNums[i] = Math.min(minNums[i-p]+1, minNums[i]);
             }
         }
-        return minNums[n]==100000?-1:minNums[n];
+        return minNums[n]==10000?-1:minNums[n];
     }
 
     private static List<Integer> getPrimes(){
