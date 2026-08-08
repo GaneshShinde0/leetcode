@@ -21,7 +21,7 @@ class Solution {
             if(word1.charAt(i)==word2.charAt(j)){
                 res[j] = i;
                 j++;
-            }else if(!changed && (j==n-1 || rightMatch[j+1]>i)){
+            }else if(!changed && (j==n-1 || rightMatch[j+1]>i)){ // If we have not changed and (its last index of word 2 or next character on right is still available in future)
                 changed = true;
                 res[j] = i;
                 j++;
