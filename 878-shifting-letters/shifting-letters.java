@@ -16,7 +16,7 @@ class Solution {
         long suffixSum = shifts[n-1];
         StringBuilder sb = new StringBuilder();
         for(int i=n-1;i>=0;i--){
-            char c = (char)('a'+ (s.charAt(i)-'a' + (suffixSum%26))%26);
+            char c = (char)('a'+ (s.charAt(i)-'a' + (suffixSum))%26);
             sb.append(c);
             if(i>0) suffixSum=(suffixSum+shifts[i-1])%26;
         }
