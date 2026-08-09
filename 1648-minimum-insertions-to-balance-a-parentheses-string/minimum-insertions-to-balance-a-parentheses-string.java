@@ -8,7 +8,7 @@ class Solution {
                 // If we currently need an odd number of ')', it means we have a single ')' 
                 // without its required pair. Since a new '(' is starting, we must close 
                 // the previous group by inserting one ')'.
-                if(right % 2 > 0) {
+                if(right % 2 == 1) {
                     right--; // We fulfill one ')' requirement by inserting it
                     res++;   // Increment the insertion count
                 }
