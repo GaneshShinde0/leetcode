@@ -1,21 +1,21 @@
 class Solution {
     public int minInsertions(String s) {
-        int res = 0, curr = 0;
+        int res = 0, right = 0;
         for(char c: s.toCharArray()){
             if(c=='('){
-                if(curr%2>0){
-                    curr--;
+                if(right%2>0){
+                    right--;
                     res++;
                 }
-                curr+=2;
+                right+=2;
             }else{
-                curr--;
-                if(curr<0){
-                    curr+=2;
+                right--;
+                if(right<0){
+                    right+=2;
                     res++;
                 }
             }
         }
-        return curr+res;
+        return right+res;
     }
 }
