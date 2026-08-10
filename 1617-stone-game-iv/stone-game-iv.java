@@ -11,17 +11,6 @@ class Solution {
         }
         return dp[n];
     }
-    private boolean recurse(HashMap<Integer,Boolean> memo, int n){
-        if(memo.containsKey(n)) return memo.get(n);
-        if(n==0) return false;
-        boolean res = false;
-        for(int i=1;i*i<=n;i++){
-            res |= !recurse(memo,n-i*i);
-            if(res) break; // This condition alone changes time from 1200 to 360 ms
-        }
-        memo.put(n,res);
-        return res;
-    }
 }
 class SolutionInitial {
     public boolean winnerSquareGame(int n) {
