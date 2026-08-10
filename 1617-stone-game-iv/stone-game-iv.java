@@ -1,7 +1,15 @@
 class Solution {
     public boolean winnerSquareGame(int n) {
-        HashMap<Integer, Boolean> memo = new HashMap<>();
-        return recurse(memo, n);
+        boolean[] dp = new boolean[n+1];
+        for(int k=1;k<=n;k++){
+            for(int i=1;i*i<=k;i++){
+                if(!dp[k-i*i]){
+                    dp[k] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
     }
     private boolean recurse(HashMap<Integer,Boolean> memo, int n){
         if(memo.containsKey(n)) return memo.get(n);
