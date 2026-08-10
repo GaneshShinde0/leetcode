@@ -9,6 +9,7 @@ class Solution {
         boolean res = false;
         for(int i=1;i<=Math.sqrt(n);i++){
             res |= !recurse(memo,n-i*i);
+            if(res) break;
         }
         memo.put(n,res);
         return res;
