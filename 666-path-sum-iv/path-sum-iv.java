@@ -1,4 +1,4 @@
-class Solution {
+class SolutionInitial {
     int totalSum = 0;
     public int pathSum(int[] nums) {
         List<int[]> li = new ArrayList<>();
@@ -47,5 +47,77 @@ class Solution {
         if (hasRight) {
             dfs(li, depth + 1, rightPos, currentSum);
         }
+    }
+}
+
+class SolutionCannonical{
+    int totalSum = 0;
+
+    public int pathSum(int[] nums) {
+        // Flat array to store values based on their 2-digit coordinates
+        int[] tree = new int[100];
+        Arrays.fill(tree, -1);
+        
+        for (int num : nums) {
+            // num / 10 gives the coordinate (e.g., 113 / 10 = 11)
+            // num % 10 gives the value (e.g., 113 % 10 = 3)
+            tree[num / 10] = num % 10;
+        }
+        
+        // Start DFS from the root (which is always the coordinates of the first element)
+        dfs(tree, nums[0] / 10, 0);
+        return totalSum;
+    }
+
+    private void dfs(int[] tree, int node, int currentSum) {
+        if (tree[node] == -1) return;
+
+        currentSum += tree[node];
+
+        int depth = node / 10;
+        int pos = node % 10;
+        
+        // Calculate standard left and right child coordinates
+        int left = (depth + 1) * 10 + (pos * 2 - 1);
+        int right = (depth + 1) * 10 + (pos * 2);
+
+        // If both children are -1, it's a leaf node
+        if (tree[left] == -1 && tree[right] == -1) {
+            totalSum += currentSum;
+            return;
+        }
+
+        // Traverse existing children
+        dfs(tree, left, currentSum);
+        dfs(tree, right, currentSum);
+    }
+}
+class Solution {
+    public int pathSum(int[] nums) {
+        // 's' stores the total path sum for the subtree at a given coordinate
+        int[] s = new int[100];
+        // 'l' stores the number of leaves in the subtree at a given coordinate
+        int[] l = new int[100];
+        
+        // Iterate backwards (bottom-up approach)
+        for (int k = nums.length - 1; k >= 0; k--) {
+            int num = nums[k];
+            int a = num / 100;           // depth
+            int b = (num % 100) / 10;    // pos
+            int c = num % 10;            // value
+            
+            int node = a * 10 + b;
+            int left = (a + 1) * 10 + (b * 2 - 1);
+            int right = (a + 1) * 10 + (b * 2);
+            
+            // Leaf count: max(1, sum of left and right children's leaves)
+            l[node] = Math.max(1, l[left] + l[right]);
+            
+            // Subtree sum: left sum + right sum + (current value * number of leaves)
+            s[node] = s[left] + s[right] + (l[node] * c);
+        }
+        
+        // Return the accumulated sum at the root node (depth 1, position 1)
+        return s[11];
     }
 }
