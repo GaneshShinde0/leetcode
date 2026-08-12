@@ -27,7 +27,7 @@ class Solution {
                 dirPtr = (dirPtr+1)%4;
             }
         }
-        return ((x==0 && y==0) || dirPtr!=0);
+        return ((x==0 && y==0) || dirPtr!=0); // If it reached origin or going in one direction?
     }
 }
 
