@@ -13,7 +13,7 @@
  *     }
  * }
  */
-class Solution {
+class SolutionInitial {
     String smallest = "z".repeat(85);
     public String smallestFromLeaf(TreeNode root) {
         StringBuilder sb = new StringBuilder();
@@ -32,5 +32,26 @@ class Solution {
         if(root.left!=null) sb.deleteCharAt(sb.length()-1);
         recurse(root.right,sb);
         if(root.right!=null) sb.deleteCharAt(sb.length()-1);
+    }
+}
+
+class Solution {
+    String smallest = "z".repeat(85);
+    public String smallestFromLeaf(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        recurse(root, sb);
+        return smallest;
+    }
+    private void recurse(TreeNode root, StringBuilder sb){
+        if(root==null) return;
+        sb.append((char) (root.val+'a'));
+        if(root.left==null && root.right==null){
+            this.smallest = sb.reverse().toString().compareTo(smallest)<0?sb.toString():smallest;
+            sb.reverse();
+        }else{
+            recurse(root.left,sb);
+            recurse(root.right,sb);
+        }
+        sb.deleteCharAt(sb.length()-1);
     }
 }
