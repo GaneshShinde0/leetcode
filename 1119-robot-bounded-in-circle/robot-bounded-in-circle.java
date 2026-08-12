@@ -27,7 +27,7 @@ class Solution {
                 dirPtr = (dirPtr+1)%4;
             }
         }
-        return ((x==0 && y==0) || dirPtr!=0); // If it reached origin or going in one direction?
+        return ((x==0 && y==0) || dirPtr!=0); // If it reached origin or going in one direction... If dirPtr is not zero meaning robot has changed direction; Meaning it will change direction in future and eventually circle around.
     }
 }
 
