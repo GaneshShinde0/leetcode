@@ -1,3 +1,29 @@
+/*
+Intuition:
+Lets Treat it like card game, where stones are cards.
+1. The Meaning of the "Cards" (Stones)
+Instead of looking at the actual numbers, we only care about their remainders when divided by 3 (cnt0, cnt1, cnt2).
+- 0s are "Skip Turn" cards: They don’t change the sum at all. Playing a 0 just forces the other person to make a real move.
+- 1s and 2s are "Action" cards: Playing these actually changes the sum and drives the game forward.
+    - If Alice starts with a 1, the only safe sequence of plays is: 1, 1, 2, 1, 2, 1, 2...
+    - If Alice starts with a 2, the only safe sequence of plays is: 2, 2, 1, 2, 1, 2, 1...
+
+2. Case 1: Even number of 0s (cnt0%2==0)
+If there is an even number of "Skip Turn" cards, they just cancel each other out, Its as if they dont exit
+    - How Alice Wins. She just needs the game to be playable. Since she goes first, cshe can coose winning path, But she must atlease have one of BOTH Types (1s and 2s) to keep the sequence going.
+    - If there are onlly 1's she plays 1's; Bob Playes a 1, and she is stuck.
+    - Code: return cnt1>=1 && cnt2>=1
+
+3. Case 2: Odd Number of 0's (cnt0%2 !=0)
+An odd number of "Skip Turn" cards mean Bob effectively gets one extra "Skip Turn". He will use it to flip a losing game into a winning game for himself.
+    - How Alice Wins: Because bob has this advantage, ALices normal strategy fails. She can only win if the game is extremely unbalanced.
+    - She needs one type of action card (either 1's or 2's ) to be outnumbered by 2 with other. If one type outnumbers the other by more than 2, Bob runs out of safe moves and loses before the game reaches the end, making his "Skip Turn" card useless.
+    - Code return Math.abs(cnt1-cnt2)>2
+
+Summary:
+- Even 0's: Alice Just needs at least one of 1 and one 2 to outplay Bob
+- Odd 0's: Bob has Skip Turn Advantage, so Alice only wins if the pipe of 1s and 2's is heavily lopsided (difference>2).
+*/
 class Solution{
     public boolean stoneGameIX(int[] stones){
         int cnt0 = 0, cnt1 = 0, cnt2 = 0;
