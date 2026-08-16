@@ -4,7 +4,7 @@
  */
 var cancellable = function(generator) {
     var cancelled = false;
-    var cance;
+    var cancel;
     const cancelPromise = new Promise((_,reject)=> cancel = ()=>{
         cancelled = true;
         reject("Cancelled");
