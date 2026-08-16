@@ -1,4 +1,52 @@
 class Solution {
+    public int elevatorRequests(int n, int start, int[][] requests) {
+        int m = requests.length;
+        long[][] dp = new long[1 << m][m];
+        
+        // 1. Initialize with Infinity
+        for (long[] row : dp) {
+            Arrays.fill(row, Long.MAX_VALUE);
+        }
+        
+        // 2. Base Cases: Travel from 'start' to the very first request
+        for (int i = 0; i < m; i++) {
+            long travelTime = Math.abs(start - requests[i][1]);
+            dp[1 << i][i] = Math.max((long)requests[i][0], travelTime);
+        }
+        
+        // 3. The Bitmask DP Blueprint (The 3 Loops)
+        for (int mask = 1; mask < (1 << m); mask++) {
+            for (int u = 0; u < m; u++) {
+                // If request 'u' is NOT in 'mask' or state is unreachable, skip
+                if ((mask & (1 << u)) == 0 || dp[mask][u] == Long.MAX_VALUE) continue;
+                
+                long currentTime = dp[mask][u];
+                
+                for (int v = 0; v < m; v++) {
+                    // If request 'v' IS already in 'mask', skip
+                    if ((mask & (1 << v)) != 0) continue;
+                    
+                    // Transition: travel from floor u to floor v
+                    long travelTime = Math.abs(requests[u][1] - requests[v][1]);
+                    long finishTime = Math.max((long)requests[v][0], currentTime + travelTime);
+                    
+                    int nextMask = mask | (1 << v); // Turn on v's bit
+                    dp[nextMask][v] = Math.min(dp[nextMask][v], finishTime);
+                }
+            }
+        }
+        
+        // 4. Find minimum time in the completely full mask
+        long ans = Long.MAX_VALUE;
+        int fullMask = (1 << m) - 1;
+        for (int i = 0; i < m; i++) {
+            ans = Math.min(ans, dp[fullMask][i]);
+        }
+        
+        return (int) ans;
+    }
+}
+class SolutionInitial {
     public long elevatorRequests(int n, int start, int[][] requests) {
         int m = requests.length;
         int totalMasks = 1<<m;
