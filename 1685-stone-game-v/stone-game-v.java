@@ -9,9 +9,6 @@ class Solution{
         }
 
         int res = 0;
-        Queue<int[]> queue = new LinkedList<>();
-        // Left, Right, currSum
-        queue.add(new int[]{0,n-1, 0});
 
         int[][] memo = new int[n][n];
         for(int[] m:memo) Arrays.fill(m,-1);
