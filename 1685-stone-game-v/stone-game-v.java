@@ -14,7 +14,7 @@ class Solution{
         for(int[] m:memo) Arrays.fill(m,-1);
 
         memo[0][n-1] = 0;
-        for(int len = n; len>=2;len--){
+        for(int len = n; len>=1;len--){
             for(int left = 0; left<=n-len; left++){
                 int right = left + len -1;
                 int sum = memo[left][right];
