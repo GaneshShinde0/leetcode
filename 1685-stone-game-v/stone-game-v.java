@@ -29,21 +29,17 @@ class Solution{
                     if(leftSum>rightSum){
                         if(sum+rightSum>memo[i+1][right]){
                             memo[i+1][right] = sum + rightSum;
-                            queue.add(new int[]{i+1,right, sum+rightSum});
                         }
                     }else if(leftSum<rightSum){
                         if(sum+leftSum>memo[left][i]){
                             memo[left][i] = sum+leftSum;
-                            queue.add(new int[]{left,i, sum+leftSum});
                         }
                     }else{
                         if(sum+rightSum>memo[i+1][right]){
                             memo[i+1][right] = sum + rightSum;
-                            queue.add(new int[]{i+1,right, sum+rightSum});
                         }
                         if(sum+leftSum>memo[left][i]){
                             memo[left][i] = sum+leftSum;
-                            queue.add(new int[]{left,i, sum+leftSum});
                         }
                     }
                 }
