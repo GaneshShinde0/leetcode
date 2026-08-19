@@ -1,0 +1,9 @@
+/* Write your T-SQL query statement below */
+WITH TOP_PERFORMING_STUDENTS AS (
+    SELECT user_id, count(*) as count FROM course_completions GROUP BY user_id HAVING count(*)>=5 AND AVG(course_rating)>=4
+),
+ORDERED_COURSES AS (
+    SELECT USER_ID, course_id, course_name, completion_date, LEAD(COURSE_NAME) OVER (PARTITION BY USER_ID ORDER BY COMPLETION_DATE ASC) as NEXT_COURSE FROM course_completions WHERE USER_ID IN (SELECT USER_ID FROM TOP_PERFORMING_STUDENTS) 
+) 
+SELECT course_name as first_course, NEXT_COURSE as second_course, COUNT(*) as transition_count FROM ORDERED_COURSES WHERE NEXT_COURSE IS NOT NULL AND USER_ID IN (SELECT USER_ID FROM TOP_PERFORMING_STUDENTS) GROUP BY COURSE_NAME, NEXT_COURSE
+ORDER BY 3 DESC, 1 ASC,2 ASC
