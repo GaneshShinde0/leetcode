@@ -1,4 +1,23 @@
-class Solution {
+class Solution{
+    public int maxNumberOfFamilies(int n, int[][] reservedSeats){
+        Map<Integer, Integer> rowWiseSeats = new HashMap<>();
+        for(int[] reserved: reservedSeats){
+            int row = reserved[0], col = reserved[1];
+            rowWiseSeats.put(row, rowWiseSeats.getOrDefault(row,0)|(1<<col));
+        }
+        int res = 0;
+        for(int row:rowWiseSeats.keySet()){
+            int reserved = rowWiseSeats.get(row);
+            int cnt = 0;
+            if((reserved&60)==0) cnt+=1; // Checks if seats 2,3,4,5 are available
+            if((reserved&960)==0) cnt+=1; // Check if seats 6,7,8,9 are available.
+            if((reserved&240)==0 && cnt==0) cnt = 1; // Checks if seat 4,5,6,7 are available
+            res+=cnt;
+        }
+        return res+(n-rowWiseSeats.size())*2;
+    }
+}
+class SolutionInitial {
     public int maxNumberOfFamilies(int n, int[][] reservedSeats) {
         Arrays.sort(reservedSeats,(a,b)->{
             if(a[0]!=b[0]) return Integer.compare(a[0],b[0]);
