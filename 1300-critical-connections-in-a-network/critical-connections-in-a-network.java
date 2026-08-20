@@ -50,11 +50,11 @@ class Solution {
             graph.computeIfAbsent(edge.get(1), x -> new ArrayList<>()).add(edge.get(0));
         }
 
-        int[] disc = new int[n];
-        int[] low = new int[n];
+        int[] toi = new int[n];
+        int[] ltoi = new int[n];
         int[] parent = new int[n];
-        int[] iterIndex = new int[n]; // tracks next neighbor index to process per node
-        Arrays.fill(disc, -1);
+        int[] iterIndex = new int[n]; // remembers which neighbor index we were at for each node
+        Arrays.fill(toi, -1);
         Arrays.fill(parent, -2);
 
         List<List<Integer>> result = new ArrayList<>();
@@ -63,7 +63,7 @@ class Solution {
 
         stack.push(0);
         parent[0] = -1;
-        disc[0] = low[0] = timer++;
+        toi[0] = ltoi[0] = timer++;
 
         while (!stack.isEmpty()) {
             int node = stack.peek();
@@ -71,24 +71,24 @@ class Solution {
 
             if (iterIndex[node] < neighbors.size()) {
                 int neighbor = neighbors.get(iterIndex[node]++);
-                if (neighbor == parent[node]) continue; // skip edge back to parent
+                if (neighbor == parent[node]) continue; // skip parent edge
 
-                if (disc[neighbor] == -1) {
-                    // tree edge: go "deeper"
+                if (toi[neighbor] == -1) {
+                    // tree edge -> "recurse"
                     parent[neighbor] = node;
-                    disc[neighbor] = low[neighbor] = timer++;
+                    toi[neighbor] = ltoi[neighbor] = timer++;
                     stack.push(neighbor);
                 } else {
                     // back edge
-                    low[node] = Math.min(low[node], disc[neighbor]);
+                    ltoi[node] = Math.min(ltoi[node], toi[neighbor]);
                 }
             } else {
-                // all neighbors processed -> simulate "returning" from recursion
+                // finished this node -> simulate "returning" to parent
                 stack.pop();
                 int p = parent[node];
                 if (p != -1) {
-                    low[p] = Math.min(low[p], low[node]);
-                    if (low[node] > disc[p]) {
+                    ltoi[p] = Math.min(ltoi[p], ltoi[node]);
+                    if (ltoi[node] > toi[p]) {
                         result.add(Arrays.asList(p, node));
                     }
                 }
