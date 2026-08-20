@@ -16,7 +16,7 @@ class Solution {
                 bobArrows[0]+=currArrows;
             }
         }
-        System.out.println(Arrays.toString(bobArrows));
+        // System.out.println(Arrays.toString(bobArrows));
         return bobArrows;
     }
     private boolean check(int[] a, int[] b){
