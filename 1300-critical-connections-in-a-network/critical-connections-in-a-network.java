@@ -7,7 +7,7 @@ We will take two separate arrays. (Time of insersion is basically when particula
 
 
 */
-class Solution {
+class SolutionReursive{
     // Print all the bridges.
     // We can use Tarjan's algorithm
     private int timer = 0;
@@ -30,7 +30,7 @@ class Solution {
         for(int neighbor: graph.get(node)){
             if(neighbor==parent) continue;
             if(vis[neighbor]){
-                ltoi[node] = Math.min(ltoi[node], toi[neighbor]);
+                ltoi[node] = Math.min(ltoi[node], ltoi[neighbor]);
             }else{
                 dfs(neighbor, node, toi, ltoi, vis, graph, result);
                 ltoi[node] = Math.min(ltoi[node], ltoi[neighbor]);
@@ -39,5 +39,61 @@ class Solution {
                 }
             }
         }
+    }
+}
+
+class Solution {
+    public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (List<Integer> edge : connections) {
+            graph.computeIfAbsent(edge.get(0), x -> new ArrayList<>()).add(edge.get(1));
+            graph.computeIfAbsent(edge.get(1), x -> new ArrayList<>()).add(edge.get(0));
+        }
+
+        int[] disc = new int[n];
+        int[] low = new int[n];
+        int[] parent = new int[n];
+        int[] iterIndex = new int[n]; // tracks next neighbor index to process per node
+        Arrays.fill(disc, -1);
+        Arrays.fill(parent, -2);
+
+        List<List<Integer>> result = new ArrayList<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        int timer = 0;
+
+        stack.push(0);
+        parent[0] = -1;
+        disc[0] = low[0] = timer++;
+
+        while (!stack.isEmpty()) {
+            int node = stack.peek();
+            List<Integer> neighbors = graph.getOrDefault(node, Collections.emptyList());
+
+            if (iterIndex[node] < neighbors.size()) {
+                int neighbor = neighbors.get(iterIndex[node]++);
+                if (neighbor == parent[node]) continue; // skip edge back to parent
+
+                if (disc[neighbor] == -1) {
+                    // tree edge: go "deeper"
+                    parent[neighbor] = node;
+                    disc[neighbor] = low[neighbor] = timer++;
+                    stack.push(neighbor);
+                } else {
+                    // back edge
+                    low[node] = Math.min(low[node], disc[neighbor]);
+                }
+            } else {
+                // all neighbors processed -> simulate "returning" from recursion
+                stack.pop();
+                int p = parent[node];
+                if (p != -1) {
+                    low[p] = Math.min(low[p], low[node]);
+                    if (low[node] > disc[p]) {
+                        result.add(Arrays.asList(p, node));
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
