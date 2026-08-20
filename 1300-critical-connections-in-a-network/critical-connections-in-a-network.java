@@ -30,7 +30,7 @@ class Solution {
         for(int neighbor: graph.get(node)){
             if(neighbor==parent) continue;
             if(vis[neighbor]){
-                ltoi[node] = Math.min(ltoi[node], ltoi[neighbor]);
+                ltoi[node] = Math.min(ltoi[node], toi[neighbor]);
             }else{
                 dfs(neighbor, node, toi, ltoi, vis, graph, result);
                 ltoi[node] = Math.min(ltoi[node], ltoi[neighbor]);
