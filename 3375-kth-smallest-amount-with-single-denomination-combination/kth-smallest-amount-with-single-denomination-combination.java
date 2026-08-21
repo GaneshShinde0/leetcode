@@ -24,6 +24,7 @@ class Solution {
             for(int i = 0; i < coins.length; i++){
                 if(((1<<i) & mask) > 0) {
                     lcm = lcm(coins[i], lcm); // lcm of all coins included in this subset
+                    if(lcm > x) break;  // stop building THIS subset's lcm early
                 }
             }
 
