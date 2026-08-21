@@ -111,7 +111,7 @@ class Solution {
     public long findKthSmallest(int[] coins, int k) {
         this.coins = coins;
         Arrays.sort(coins);
-        long left = coins[0], right = 1l*k*coins[0];
+        long left = k, right = 1l*k*coins[0];
         while(left<right){
             long mid = (left+right)/2;
             long coinsFound = count(mid);
