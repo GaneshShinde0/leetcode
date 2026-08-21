@@ -1,3 +1,111 @@
+/*
+**General Inclusion-Exclusion (n sets):**
+$$|A_1 \cup A_2 \cup ... \cup A_n| = \sum |A_i| - \sum |A_i \cap A_j| + \sum |A_i \cap A_j \cap A_k| - ... $$
+
+The sign alternates strictly by subset size: **odd size → +, even size → −**. This is exactly what `Integer.bitCount(mask) % 2` checks in your code.
+---
+
+## Example 1: 3 coins → `coins=[2,3,5]`, `x=30`
+
+**General formula:**
+$$|A\cup B\cup C| = |A|+|B|+|C| - |A\cap B|-|A\cap C|-|B\cap C| + |A\cap B\cap C|$$
+
+**Every individual subset (mask):**
+
+| Subset | lcm | x/lcm | Sign | Contribution |
+|---|---|---|---|---|
+| {2} | 2 | 15 | + | +15 |
+| {3} | 3 | 10 | + | +10 |
+| {5} | 5 | 6 | + | +6 |
+| {2,3} | 6 | 5 | − | −5 |
+| {2,5} | 10 | 3 | − | −3 |
+| {3,5} | 15 | 2 | − | −2 |
+| {2,3,5} | 30 | 1 | + | +1 |
+
+**Plug into formula:**
+$$(15+10+6) - (5+3+2) + 1 = 31 - 10 + 1 = 22$$
+
+**Final total = 22** (verified: numbers 1–30 not divisible by 2,3,5 = 8, so 30−8=22 ✅)
+
+---
+
+## Example 2: 5 coins → `coins=[2,3,4,5,6]`, `x=60`
+
+**General formula:**
+$$|A\cup B\cup C\cup D\cup E| = \sum|A_i| - \sum|A_i\cap A_j| + \sum|A_i\cap A_j\cap A_k| - \sum(\text{4-way}) + |A\cap B\cap C\cap D\cap E|$$
+
+**Every individual subset (mask), grouped by size:**
+
+*Size 1 (sign +):*
+| Subset | lcm | x/lcm |
+|---|---|---|
+| {2} | 2 | 30 |
+| {3} | 3 | 20 |
+| {4} | 4 | 15 |
+| {5} | 5 | 12 |
+| {6} | 6 | 10 |
+
+Sum = 87
+
+*Size 2 (sign −):*
+| Subset | lcm | x/lcm |
+|---|---|---|
+| {2,3} | 6 | 10 |
+| {2,4} | 4 | 15 |
+| {2,5} | 10 | 6 |
+| {2,6} | 6 | 10 |
+| {3,4} | 12 | 5 |
+| {3,5} | 15 | 4 |
+| {3,6} | 6 | 10 |
+| {4,5} | 20 | 3 |
+| {4,6} | 12 | 5 |
+| {5,6} | 30 | 2 |
+
+Sum = 70
+
+*Size 3 (sign +):*
+| Subset | lcm | x/lcm |
+|---|---|---|
+| {2,3,4} | 12 | 5 |
+| {2,3,5} | 30 | 2 |
+| {2,3,6} | 6 | 10 |
+| {2,4,5} | 20 | 3 |
+| {2,4,6} | 12 | 5 |
+| {2,5,6} | 30 | 2 |
+| {3,4,5} | 60 | 1 |
+| {3,4,6} | 12 | 5 |
+| {3,5,6} | 30 | 2 |
+| {4,5,6} | 60 | 1 |
+
+Sum = 36
+
+*Size 4 (sign −):*
+| Subset | lcm | x/lcm |
+|---|---|---|
+| {2,3,4,5} | 60 | 1 |
+| {2,3,4,6} | 12 | 5 |
+| {2,3,5,6} | 30 | 2 |
+| {2,4,5,6} | 60 | 1 |
+| {3,4,5,6} | 60 | 1 |
+
+Sum = 10
+
+*Size 5 (sign +):*
+| Subset | lcm | x/lcm |
+|---|---|---|
+| {2,3,4,5,6} | 60 | 1 |
+
+Sum = 1
+
+**Plug into formula:**
+$$87 - 70 + 36 - 10 + 1 = 44$$
+
+**Final total = 44**
+
+This matches the direct check: numbers 1–60 not divisible by any of 2,3,4,5,6 (equivalent to not divisible by 2,3, or 5) = 16, so 60−16=44 ✅
+
+*/
+
 class Solution {
     private int[] coins;
     public long findKthSmallest(int[] coins, int k) {
