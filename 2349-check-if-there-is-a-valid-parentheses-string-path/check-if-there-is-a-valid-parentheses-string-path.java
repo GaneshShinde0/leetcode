@@ -15,18 +15,20 @@ class Solution {
         score += grid[i][j] == '(' ? 1 : -1;
         if(score<0) return false;
         if(memo[score][i][j]!=null) return memo[score][i][j];
+
+        boolean result = false;
         if (i == grid.length - 1 && j == grid[0].length - 1) {
-            if (score == 0) return true;
-            else return false;
+            if (score == 0) result = true;
+            else result = false;
         } else {
-            memo[score][i][j] = false;
             if(i+1 < grid.length){
-                memo[score][i][j] |= dfs(score, i + 1, j, grid);
+                result |= dfs(score, i + 1, j, grid);
             }
             if(j+1 < grid[0].length){
-                memo[score][i][j] |= dfs(score, i, j + 1, grid);
+                result |= dfs(score, i, j + 1, grid);
             }
-            return memo[score][i][j];
         }
+        memo[score][i][j]=result;
+        return result;
     }
 }
