@@ -20,7 +20,7 @@ Base case:
 
 
 */
-class Solution {
+class SolutionTopDown {
 
     private int MOD = 1_000_000_007;
 
@@ -47,6 +47,54 @@ class Solution {
             }
         }
         memo[currTurn][lastFace][consecutiveCount] = res;
+        return res;
+    }
+}
+
+
+class Solution {
+
+    private int MOD = 1_000_000_007;
+
+    int[][][] memo;
+    int[] rollMax;
+    int n;
+
+    public int dieSimulator(int n, int[] rollMax) {
+        this.memo = new int[n+1][7][16];
+        this.n = n;
+        this.rollMax = rollMax;
+
+        // For length 1, every face (1-6) appears exactly 1 consecutive time.
+        for (int face = 1; face <= 6; face++) {
+            memo[1][face][1] = 1;
+        }
+        for(int i=2;i<=n;i++){
+            for(int prevFace  = 1; prevFace <=6; prevFace ++){
+                for (int prevCount = 1; prevCount <= 15; prevCount++) {
+                    
+                    // If this state didn't exist in length i-1, skip it
+                    if (memo[i-1][prevFace][prevCount] == 0) continue;
+                    for (int newFace = 1; newFace <= 6; newFace++) {
+                        // How do we update memo[i][...][...] based on newFace and prevFace?
+                            if(newFace==prevFace){
+                                if(prevCount<rollMax[newFace-1]){
+                                    memo[i][newFace][prevCount+1] += ( memo[i - 1][prevFace][prevCount]) ;
+                                }
+                            }else{
+                                memo[i][newFace][1] += (memo[i-1][prevFace][prevCount])%MOD;
+                            }
+                            memo[i][newFace][1] %=MOD;
+                    }
+                }
+            }
+        }
+        int res = 0;
+        for(int face = 1;face<=6; face++){
+            for(int count = 1;count<=15; count++){
+                res = (res+memo[n][face][count])%MOD;
+            }
+        }
         return res;
     }
 }
