@@ -1,13 +1,14 @@
 class RandomizedCollection {
     List<Integer> li;
-    HashMap<Integer,HashSet<Integer>> valToIdx;
+    // LinkedHashSet guarantees O(1) hashSet does not
+    HashMap<Integer,LinkedHashSet<Integer>> valToIdx;
     public RandomizedCollection() {
         this.li = new ArrayList<>();
-        this.valToIdx = new HashMap<Integer, HashSet<Integer>>();
+        this.valToIdx = new HashMap<Integer, LinkedHashSet<Integer>>();
     }
     
     public boolean insert(int val) {
-        valToIdx.computeIfAbsent(val, x->new HashSet<>()).add(li.size());
+        valToIdx.computeIfAbsent(val, x->new LinkedHashSet<>()).add(li.size());
         li.add(val);
         return valToIdx.get(val).size()==1;
     }
