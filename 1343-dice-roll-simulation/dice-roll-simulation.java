@@ -77,14 +77,14 @@ class Solution {
                     if (memo[i-1][prevFace][prevCount] == 0) continue;
                     for (int newFace = 1; newFace <= 6; newFace++) {
                         // How do we update memo[i][...][...] based on newFace and prevFace?
-                            if(newFace==prevFace){
-                                if(prevCount<rollMax[newFace-1]){
-                                    memo[i][newFace][prevCount+1] += ( memo[i - 1][prevFace][prevCount]) ;
-                                }
-                            }else{
-                                memo[i][newFace][1] += (memo[i-1][prevFace][prevCount])%MOD;
+                        if(newFace==prevFace){
+                            if(prevCount<rollMax[newFace-1]){
+                                memo[i][newFace][prevCount+1] += ( memo[i - 1][prevFace][prevCount]) ;
                             }
-                            memo[i][newFace][1] %=MOD;
+                        }else{
+                            memo[i][newFace][1] += (memo[i-1][prevFace][prevCount])%MOD;
+                        }
+                        memo[i][newFace][1] %=MOD;
                     }
                 }
             }
