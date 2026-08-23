@@ -1,7 +1,6 @@
 class Solution {
     public long subsequenceSumOr(int[] nums) {
         long bits = 0, sum = 0;
-        Arrays.sort(nums);
         for(int num:nums){
             sum += num;
             bits |=num;// Accumulate bits from number.
