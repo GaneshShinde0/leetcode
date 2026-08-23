@@ -4,8 +4,8 @@ class Solution {
         Arrays.sort(nums);
         for(int num:nums){
             sum += num;
-            bits |= num;       // accumulate bits from the number itself
-            bits |= sum;       // accumulate bits from the running prefix sum
+            bits |=num;// Accumulate bits from number.
+            bits |=sum;// Accumulate bits from Sum.
         }
         return bits;
     }
