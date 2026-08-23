@@ -3,7 +3,7 @@ Until 10 -> 9
 Until 100 -> 80
 */
 
-class SolutionEasy {
+class SolutionUsingBuiltInFunction {
     public int newInteger(int n) {
         return Integer.parseInt(Integer.toString(n, 9));
     }
