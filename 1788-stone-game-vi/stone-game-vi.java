@@ -1,18 +1,39 @@
-/*
-Both Players know each others values, 
-    At every point player will try to take maximum from their pile,
-    They will also take the most impactful pile from the piles which might give high score to second player.
-
-Input: aliceValues = [1,3], bobValues = [2,1]
-valueSum = [-1,2] // Alice Perspective.
-valueSum = [1,-2] // Bob Perspective.
-
-// if we sort value diff, Alice will try to take stones from right, bob will try to take from left.
-    - They know how they can take most optimal value for themselves..
-    - We will have to add checks to see how can they reduce opponents score
-*/
 class Solution {
     public int stoneGameVI(int[] aliceValues, int[] bobValues) {
+        int[] freq = new int[201];
+        for (int i = 0; i < aliceValues.length; i++)
+            freq[aliceValues[i] + bobValues[i]]++;
+
+        int diff = -Arrays.stream(bobValues).sum();
+        int pos = 0;
+        for (int v = 200; v > 1; v--) {
+            int c = freq[v];
+            if (c > 0) {
+                diff += v * (pos % 2 == 0 ? (c + 1) / 2 : c / 2);
+                pos += c;
+            }
+        }
+
+        return Integer.signum(diff);
+    }
+}
+class SolutionNLogN {
+    public int stoneGameVI(int[] aliceValues, int[] bobValues) {
+        int n = aliceValues.length;
+
+        int[] combined = IntStream.range(0, n).map(i -> aliceValues[i] + bobValues[i]).toArray();
+        Arrays.sort(combined);
+
+        int diff = -Arrays.stream(bobValues).sum();
+        for (int i = n - 1; i >= 0; i -= 2)
+            diff += combined[i];
+
+        return Integer.signum(diff);
+    }
+}
+
+class SolutionInitial {
+    public int stoneGameVII(int[] aliceValues, int[] bobValues) {
         int n = aliceValues.length, bobSum=0;
         // Take Value difference from Alices Perspective.
         int[][] valueSum = new int[n][2];
