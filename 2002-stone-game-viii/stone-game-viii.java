@@ -1,4 +1,18 @@
-class Solution {
+class Solution{
+    public int stoneGameVIII(int[] stones){
+        int n = stones.length;
+        int totalPrefixSumSoFar = 0;
+        for(int s:stones) totalPrefixSumSoFar += s;
+        int maxDifferenceSoFar = Integer.MIN_VALUE; // Taking min as we have negative elements, This is just a reference of thought process.
+        maxDifferenceSoFar = totalPrefixSumSoFar; // But Initially we will have total prefixSum as maxDifference (Alice Takes All)
+        for(int i = n-2;i>=1;i--){
+            totalPrefixSumSoFar -= stones[i+1]; // i+1 lets take elements until i only
+            maxDifferenceSoFar = Math.max(maxDifferenceSoFar, totalPrefixSumSoFar-maxDifferenceSoFar);
+        }
+        return maxDifferenceSoFar;
+    }
+}
+class SolutionONSpace {
     public int stoneGameVIII(int[] stones) {
         int n = stones.length;
         int[] prefixSum = new int[n];
