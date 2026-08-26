@@ -4,6 +4,17 @@
 */
 class Solution{
     public int maxScore(int[] cardPoints, int k){
+        int frontScore = 0, backScore = 0, n = cardPoints.length;
+        for(int i=0;i<k;i++) frontScore += cardPoints[i];
+        int maxScore = frontScore;
+        for(int i=n-1;i>=n-k;i--){
+            backScore += cardPoints[i];
+            frontScore -= cardPoints[k-(n-i)];
+            maxScore = Math.max(frontScore+backScore, maxScore);
+        }
+        return maxScore;
+    }
+    public int maxScoreUsingPrefixSum(int[] cardPoints, int k){
         int n = cardPoints.length;
         int[] fromFront = new int[k+1];
         int[] fromBack = new int[k+1];
