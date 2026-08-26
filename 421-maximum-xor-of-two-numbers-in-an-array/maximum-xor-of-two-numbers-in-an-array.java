@@ -1,7 +1,11 @@
 class Solution {
     public int findMaximumXOR(int[] nums) {
         int n = nums.length, res = 0;
-        for(int i=31;i>=0;i--){
+        int highBit = 0;
+        for (int x : nums) {
+            highBit = Math.max(highBit, 31 - Integer.numberOfLeadingZeros(x));
+        }
+        for(int i=highBit;i>=0;i--){
             Set<Integer> prefixes = new HashSet<Integer>();
             int target = res | (1<<i);
             for(int num:nums){
