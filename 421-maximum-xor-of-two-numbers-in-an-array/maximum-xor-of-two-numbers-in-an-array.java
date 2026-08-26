@@ -8,6 +8,7 @@ class Solution {
                 num = (num>>i)<<i; // Mask out everything below i
                 prefixes.add(num);
             }
+            // System.out.println(prefixes);
             for(Integer p1:prefixes){
                 int p2 = p1^target;
                 if(prefixes.contains(p2))res = Math.max (res,p1^p2);
