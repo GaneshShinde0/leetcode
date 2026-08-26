@@ -9,7 +9,7 @@ class Solution {
             right++;
         }
         String res = sb.toString();
-        for(int i=1;i<=n-k;i++){
+        for(int left=1;left<=n-k;left++){
             if(sb.charAt(0)=='1') onesCount--;
             sb.deleteCharAt(0);
             while(onesCount<k && right<n){
