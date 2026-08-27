@@ -10,7 +10,7 @@ class Solution {
             int[] curr = pq.poll();
             int row = curr[0], col = curr[1], diff = curr[2];
             maxEffort = Math.max(maxEffort, diff);
-            System.out.println(Arrays.toString(curr));
+            // System.out.println(Arrays.toString(curr));
             if(row==m-1 && col == n-1) return maxEffort;
             for(int[] dir:dirs){
                 int newRow = row+dir[0];
