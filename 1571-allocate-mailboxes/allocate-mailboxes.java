@@ -12,8 +12,6 @@ We will have to arrange in such a way that we can give
 [i+1...j] to k2
 [j+1...k] to k3
 
-So basically this looks like 3D DP
-
 
 */
 class Solution {
@@ -36,7 +34,7 @@ class Solution {
                 if(j==0) dp[i+1][j+1] = cost[1][i+1]; // When J=0, cost of putting first i+1 houses using one post box will be cost[1][i+1]
                 else{
                     for(int m=0;m<=i;m++){
-                        dp[i+1][j+1]=Math.min(dp[i+1][j+1], dp[m][j]+cost[m+1][i+1]); // first m houses using first j post offices + cost of m to ith houses.
+                        dp[i+1][j+1]=Math.min(dp[i+1][j+1], dp[m][j]+cost[m+1][i+1]); // first m houses using first j post offices + cost of m+1 to ith houses.
                     }
                 }
             }
