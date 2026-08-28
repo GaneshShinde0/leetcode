@@ -22,7 +22,7 @@ class Solution {
             prev = arr[i];
 
             // Prune: if we are still matching target and arr[i] < target[idx], skip
-            if (idx < target.length() && sb.toString().compareTo(target.substring(0, idx)) == 0 && arr[i] < target.charAt(idx))
+            if (sb.toString().compareTo(target.substring(0, idx)) == 0 && arr[i] < target.charAt(idx))
                 continue;
 
             used[i] = true;
