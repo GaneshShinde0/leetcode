@@ -28,7 +28,7 @@ class Solution {
     public String findTarget1(String color) {
         int num = Integer.parseInt(color,16);
         // Get Rounded VaAlue of num to 17.
-        int x = Math.round((float) num/17);
+        int x = Math.round((float) num/17); // Rounding off will also provide us number which is nearest to similar color.
         return Integer.toHexString(x).repeat(2);
     }
 
