@@ -1,1 +1,1 @@
-<h2>make-lexicographically-smallest-array-by-swapping-elements Notes</h2><hr>[ Time taken: 43m 30s ]
+<h2>make-lexicographically-smallest-array-by-swapping-elements Notes</h2><hr>[ Time taken: 1hr 4m 32s ]
