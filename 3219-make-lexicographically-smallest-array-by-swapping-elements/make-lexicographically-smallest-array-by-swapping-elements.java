@@ -1,32 +1,20 @@
-/*
-
-
-*/
 class Solution {
     public int[] lexicographicallySmallestArray(int[] nums, int limit) {
-        int[] numsSorted = Arrays.copyOf(nums,nums.length);
-        Arrays.sort(numsSorted); // Regular lexicographical sorting.
-        int currGroup = 0;
-        HashMap<Integer, Integer> numToGroup = new HashMap<>();
-        numToGroup.put(numsSorted[0], currGroup);
-
+        int n = nums.length;
+        int[] sorted = Arrays.copyOf(nums,n);
+        Arrays.sort(sorted);
         HashMap<Integer, LinkedList<Integer>> groupToList = new HashMap<>();
-        groupToList.put(currGroup,new LinkedList<Integer>(Arrays.asList(numsSorted[0])));
-
-        for(int i=1;i<nums.length;i++){
-            if(Math.abs(numsSorted[i]-numsSorted[i-1])>limit){
+        HashMap<Integer, Integer> numToGroup = new HashMap<>();
+        int prevElem = sorted[0], currGroup=0;
+        numToGroup.put(sorted[0],currGroup);
+        for(int i=0;i<n;i++){
+            if(sorted[i]-prevElem>limit){
                 currGroup++;
             }
-            numToGroup.put(numsSorted[i], currGroup);
-            
-            // Add element to sorted group list
-            if(!groupToList.containsKey(currGroup)){
-                groupToList.put(currGroup, new LinkedList<Integer>());
-            }
-
-            groupToList.get(currGroup).add(numsSorted[i]);
+            numToGroup.put(sorted[i],currGroup);
+            prevElem = sorted[i];
+            groupToList.computeIfAbsent(currGroup,x-> new LinkedList<Integer>()).add(sorted[i]);
         }
-
         for(int i=0; i<nums.length; i++){
             int num = nums[i];
             int group = numToGroup.get(num);
