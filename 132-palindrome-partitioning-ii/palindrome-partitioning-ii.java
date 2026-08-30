@@ -1,9 +1,28 @@
+class Solution{
+    public int minCut(String s){
+        int n = s.length();
+        Integer minCuts[] = new Integer[n];
+        boolean palindromeDP[][] = new boolean[n][n];
+        for(int end=0;end<s.length();end++){
+            int minimumCut = end;
+            for(int start = 0; start<=end; start++){
+                if(s.charAt(start)==s.charAt(end) && (end-start<=2||palindromeDP[start+1][end-1])){
+                    palindromeDP[start][end] = true;
+                    minimumCut = start == 0? 0: Math.min(minimumCut, minCuts[start-1]+1);
+                }
+            }
+            minCuts[end] = minimumCut;
+        }
+        return minCuts[n-1];
+    }
+}
+
 /*
 Dynamic Programming: Bottom Up (Tabulation)
 There is yet another technique to implement DP problems
 */
 
-class Solution{
+class SolutionDPTabulation{
     private Boolean memoPalindrome[][];
     private Integer memoCuts[];
     public int minCut(String s) {
