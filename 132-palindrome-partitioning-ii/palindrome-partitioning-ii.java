@@ -1,5 +1,6 @@
 /*
 Dynamic Programming+ Top Down (Recursion, Memoization)
+Time Complexity: O(N^2, N) where N is the length of the string s.
 */
 class Solution {
     private Integer memoCuts[][];
@@ -15,7 +16,7 @@ class Solution {
         if(start==end || isPalindrome(s,start,end)) return 0;
         for(int currEndIndex = start; currEndIndex<=end; currEndIndex++){
             if(isPalindrome(s,start,currEndIndex)){
-                minimumCut = Math.min(minimumCut, 1+minimumCut(s,currEndIndex+1, end, minimumCut));
+                minimumCut = Math.min(minimumCut, 1+minimumCut(s,currEndIndex+1, end, end-currEndIndex-1));
             }
         }
         memoCuts[start][end] = minimumCut;
@@ -34,7 +35,18 @@ class Solution {
         return true;
     }
 }
+/*
+Time Complexity: O(N. 2^N) Where N is the length of string s.
+For each string of size N the recursion method will recur for substrings of size N-1, n-2.. n-2... 1
 
+around n times.
+
+Mathematically that comes to 2^N.
+Also palindrome check comes to O(N)
+Hence total is 2^N.
+
+Space O(N). Recursion Stack
+*/
 class SolutionN2powN{
     public int minCut(String s) {
         int n = s.length();
