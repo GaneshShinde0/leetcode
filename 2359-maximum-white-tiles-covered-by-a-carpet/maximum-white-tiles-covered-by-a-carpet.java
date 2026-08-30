@@ -19,10 +19,9 @@ class Solution {
                 left++;
                 gaps-=tiles[left][0]- tiles[left-1][1]-1;
             }
-            // maxLen = Math.max(maxLen, Math.min(carpetLen-gaps, currEnd-tiles[left][0]-gaps));
-            int covered = Math.min(carpetLen,currEnd - tiles[left][0] + 1) - gaps;
-
-            maxLen = Math.max(maxLen, covered);
+            maxLen = Math.max(maxLen, Math.min(carpetLen-gaps, currEnd-tiles[left][0]+1-gaps));
+            // int covered = Math.min(carpetLen,currEnd - tiles[left][0] + 1) - gaps;
+            // maxLen = Math.max(maxLen, covered);
         }
         return maxLen;
     }
