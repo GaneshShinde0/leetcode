@@ -1,6 +1,29 @@
 class Solution{
     public int minCut(String s){
         int n = s.length();
+        int[] minCuts = new int[n];
+        for(int i=1;i<n;i++) minCuts[i]=i;
+        for(int mid=0;mid<n;mid++){
+            // Check for odd length alindrome around mid index
+            findMinCuts(mid, mid, minCuts, s);
+            // Check for even length palindrome around mid index
+            findMinCuts(mid-1,mid, minCuts,s);
+        }
+        return minCuts[n-1];
+    }
+    private void findMinCuts(int start, int end, int[] minCuts, String s){
+        while(start>=0 && end<s.length() && s.charAt(start)==s.charAt(end)){
+           
+            int newCut = start == 0? 0: minCuts[start-1]+1;
+            minCuts[end] = Math.min(newCut, minCuts[end]);
+            start--;
+            end++;
+        }
+    }
+}
+class SolutionOptimizedTabulationApproach{
+    public int minCut(String s){
+        int n = s.length();
         Integer minCuts[] = new Integer[n];
         boolean palindromeDP[][] = new boolean[n][n];
         for(int end=0;end<s.length();end++){
