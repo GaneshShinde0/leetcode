@@ -40,7 +40,7 @@ class Solution {
                     left = mid+1;
                 }
             }
-            if(left>0) res[i] = prefSum[right];
+            if(right>=0) res[i] = prefSum[right];
         }
         return res;
     }
