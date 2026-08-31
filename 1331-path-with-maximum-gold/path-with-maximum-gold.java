@@ -10,9 +10,7 @@ class Solution {
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j]>0){
-                    Set<Integer> set = new HashSet<>();
-                    set.add(i*100+j);
-                    int curr = dfs(i,j,set);
+                    int curr = dfs(i,j);
                     res = Math.max(curr,res);
                 }
             }
@@ -20,17 +18,17 @@ class Solution {
         return res;
     }
 
-    private int dfs(int i, int j, Set<Integer> set){
+    private int dfs(int i, int j){
         int curr = grid[i][j];
+        grid[i][j]=0;
         int sub = 0;
         for(int[] dir:dirs){
             int newI = i+dir[0];
             int newJ = j+dir[1];
-            if(newI<0||newJ<0||newI>=m||newJ>=n||set.contains(newI*100+newJ) || grid[newI][newJ]==0) continue;
-            set.add(newI*100+newJ);
-            sub =Math.max(sub,dfs(newI, newJ, set));
-            set.remove(newI*100+newJ);
+            if(newI<0||newJ<0||newI>=m||newJ>=n||grid[newI][newJ]==0) continue;
+            sub =Math.max(sub,dfs(newI, newJ));
         }
+        grid[i][j] = curr;
         return curr+sub;
     }
 }
