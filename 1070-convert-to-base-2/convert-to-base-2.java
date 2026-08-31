@@ -7,7 +7,7 @@ class Solution {
             n= n/-2;
             if(remainder<0){
                 remainder+=2; // Shift remainder from -1 to 1
-                n+=1; // Compensate byadding 1 to quotient
+                n += 1; // Adjust quotient so n = (-2)*quotient + remainder still holds
             }
             sb.insert(0,remainder);
         }
