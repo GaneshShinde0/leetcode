@@ -11,7 +11,7 @@ class Solution {
    //O(n)
     public int primePalindrome(int N) {
         while(true){
-            if(N>=8 && N<=11){
+            if(N>8 && N<11){
                 return 11;
             }
             if(reverse(N) == N && isPrime(N)){
