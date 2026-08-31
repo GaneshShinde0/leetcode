@@ -38,6 +38,7 @@ public class Codec {
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         String[] dataArr = data.split(",");
+        // System.out.println(Arrays.toString(dataArr));
         return deserialize(dataArr,new int[]{0});
     }
 
