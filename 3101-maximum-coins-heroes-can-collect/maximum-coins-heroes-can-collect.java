@@ -33,7 +33,7 @@ class Solution {
             int pow = heroes[i];
             int left = 0, right = m-1;
             while(left<=right){
-                int mid = left+(right-left+1)/2;
+                int mid = left+(right-left)/2;
                 if(monsterScore[mid][0]>pow){ // Might be first valid power.
                     right = mid-1;
                 }else{
