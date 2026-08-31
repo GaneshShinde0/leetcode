@@ -31,11 +31,11 @@ class Solution {
         long[] res = new long[n];
         for(int i=0;i<n;i++){
             int pow = heroes[i];
-            int left = 0, right = m;
-            while(left<right){
-                int mid = left+(right-left)/2;
+            int left = 0, right = m-1;
+            while(left<=right){
+                int mid = left+(right-left+1)/2;
                 if(monsterScore[mid][0]>pow){ // Might be first valid power.
-                    right = mid;
+                    right = mid-1;
                 }else{
                     left = mid+1;
                 }
