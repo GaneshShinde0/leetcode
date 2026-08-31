@@ -23,23 +23,20 @@ public class Codec {
     }
 
     private TreeNode deserialize(String[] arr, int[] index) {
-        if (arr[index[0]].equals("Null")) {
-            index[0]++; // Move to next element even if null
+        if(arr[index[0]].equals("Null")){
+            index[0]++;
             return null;
         }
-        TreeNode root = new TreeNode(Integer.parseInt(arr[index[0]]));
-        index[0]++; // Move to next element after creating node
-        
-        root.left = deserialize(arr, index);
-        root.right = deserialize(arr, index);
-        
-        return root;
+        TreeNode node = new TreeNode(Integer.parseInt(arr[index[0]]));
+        index[0]++;
+        node.left = deserialize(arr, index);
+        node.right = deserialize(arr, index);
+        return node;
     }
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        String[] dataArr = data.split(",");
-        // System.out.println(Arrays.toString(dataArr));
-        return deserialize(dataArr,new int[]{0});
+        String dataArr[] = data.split(",");
+        return deserialize(dataArr, new int[]{0});
     }
 
 }
