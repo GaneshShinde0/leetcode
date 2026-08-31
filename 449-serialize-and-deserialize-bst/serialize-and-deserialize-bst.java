@@ -12,8 +12,8 @@ public class Codec {
         if(root==null) sb.append("Null,");
         else{
             sb.append(root.val).append(",");
-            reserialize(root.left,sb);
-            reserialize(root.right,sb);
+            reserialize(root.left, sb);
+            reserialize(root.right, sb);
         }
         return sb;
     }
