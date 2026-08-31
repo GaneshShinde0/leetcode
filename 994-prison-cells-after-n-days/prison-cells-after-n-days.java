@@ -17,7 +17,7 @@ cells = [0,1,0,1,1,0,0,1]
 [0,1,1,0,0,0,0,0]
 
 If you see above solulation, after every 7 count the rows are getting reversed.
-Hence We have to calculate n%15 times only as the 
+Hence We have to calculate (n-1)%14 times only as the 
 */
 class Solution {
 
