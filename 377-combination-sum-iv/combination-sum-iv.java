@@ -22,8 +22,20 @@ Suppose Target => 4
 
 So Basically We have to add 1+combinationSum(nums,target-nums[i]);
 */
-
 class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        int[] dp = new int[target+1];
+        dp[0] = 1; // There is 1 way to form 0, that is not selecting anything.
+        for(int i= 0;i<=target;i++){
+            if(dp[i]==0) continue;
+            for(int num:nums){
+                if(i+num<=target) dp[i+num] +=dp[i];
+            }
+        }
+        return dp[target];
+    }
+}
+class SolutionUsingRecursion{
     HashMap<Integer, Integer> memo;
     public int combinationSum4(int[] nums, int target) {
         this.memo = new HashMap<>();
