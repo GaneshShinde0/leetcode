@@ -19,9 +19,8 @@ class Solution {
         // This for loop is for all the strings, if ith bit from left is 1 we will consider that string.
         for(int i=0;i<(1<<bitLength);i++){
             int curr = 0;
-            int mask = i;
             for(int currBit = 0; currBit<bitLength;currBit++){
-                if(((1<<currBit) & mask)>0){
+                if(((1<<currBit) & i)>0){
                     int currWord = li.get(currBit);
                     if((currWord & curr)>0){
                         curr=0;
