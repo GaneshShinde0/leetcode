@@ -11,7 +11,26 @@
 */
 
 class Solution {
-    public boolean isValidSerialization(String preorder) {
+    public boolean isValidSerialization(String preorder){
+        // Number of available slots
+        int slots = 1;
+        int n = preorder.length();
+        for(int i=0;i<n;i++){
+            if(preorder.charAt(i)==','){
+                // Each node takes one slot.
+                --slots;
+                // If no slots are available
+                if(slots<0) return false;
+                // Non-Empty node creates tow children slots.
+                // i is `,` i-1 should be # or number.
+                if(preorder.charAt(i-1)!='#') slots+=2;
+            }
+        }
+        // The last node
+        slots = (preorder.charAt(n-1)=='#')?slots-1:slots+1;
+        return slots==0;
+    }
+    public boolean isValidSerializationApproach2(String preorder) {
         if(preorder.equals("#")) return true;
         String[] temp = preorder.split(",");
         int i = temp.length-1, hashCount=0;
