@@ -3,16 +3,16 @@ class Solution {
         int n = arr.size();
         List<Integer> li = new ArrayList<>();
         for(int i=0;i<n;i++){
-            int temp = 0;
+            int currWord = 0;
             for(char c:arr.get(i).toCharArray()){
                 int shift = c-'a';
-                if(((1<<shift) & temp) >0){
-                    temp = 0;
+                if(((1<<shift) & currWord) >0){
+                    currWord = 0;
                     break;
                 }
-                temp = (1<<shift)|temp;
+                currWord = (1<<shift)|currWord;
             }
-            if(temp!=0) li.add(temp);
+            if(currWord!=0) li.add(currWord);
         }
         int bitLength = li.size();
         int res = 0;
