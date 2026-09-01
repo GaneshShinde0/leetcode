@@ -25,9 +25,6 @@ class Solution {
             }
             i--;
         }
-        // System.out.println(Arrays.toString(temp));
-        //         System.out.println(isNumeric("#"));
-
         return hashCount==1 && isNumeric(temp[0]);
     }
 
