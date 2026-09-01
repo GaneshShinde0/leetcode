@@ -1,4 +1,4 @@
-class SolutionMine {
+class Solution {
     public int maxLength(List<String> arr) {
         int n = arr.size();
         List<Integer> li = new ArrayList<>();
@@ -36,7 +36,7 @@ class SolutionMine {
     }
 }
 
-class Solution {
+class SolutionUsingString {
     public int maxLength(List<String> arr) {
         // Initialize results with an empty string
         // from which to build all future results
