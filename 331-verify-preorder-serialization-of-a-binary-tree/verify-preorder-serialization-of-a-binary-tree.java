@@ -17,8 +17,7 @@ class Solution {
         int i = temp.length-1, hashCount=0;
         while(i>=0){
             if(temp[i].equals("#")) hashCount++;
-            else if(isNumeric(temp[i])){
-                if(hashCount<=1) return false;
+            else if(isNumeric(temp[i]) && hashCount>=2){
                 hashCount-=1;
             }else{
                 return false;
