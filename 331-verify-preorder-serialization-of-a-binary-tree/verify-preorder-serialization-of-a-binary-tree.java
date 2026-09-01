@@ -24,7 +24,6 @@ class Solution {
                 return false;
             }
             i--;
-            System.out.println(hashCount);
         }
         // System.out.println(Arrays.toString(temp));
         //         System.out.println(isNumeric("#"));
