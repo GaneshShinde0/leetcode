@@ -7,7 +7,32 @@ Objective:
 
 When spelling a given character key[i], the number of steps it takes to spell the character will be the number of rotations made to put the character int 1200 position plus one, which represents pressing the center button to spell the character.
 */
+
 class Solution{
+    public int findRotateSteps(String ring, String key){
+        int ringLen = ring.length(), keyLen = key.length();
+        int[][] bestSteps = new int[ringLen][keyLen+1];
+
+        for(int keyIdx=keyLen-1;keyIdx>=0;keyIdx--){
+            for(int ringIdx=0;ringIdx<ringLen;ringIdx++){
+                bestSteps[ringIdx][keyIdx] = Integer.MAX_VALUE/4;
+                for(int start = 0;start<ringLen;start++){
+                    if(ring.charAt(start)!=key.charAt(keyIdx)) continue;
+                    int stepsBetween = Math.abs(start-ringIdx);
+                    int stepsAround = ringLen-stepsBetween;
+                    int steps = Math.min(stepsBetween, stepsAround);
+                    bestSteps[ringIdx][keyIdx] = Math.min(bestSteps[ringIdx][keyIdx],
+                                                         steps + bestSteps[start][keyIdx+1]);
+                }
+            }
+        }
+        return bestSteps[0][0] + keyLen;
+    }
+}
+
+// Time:  K.R.R (K Recursive calls, one for each letter in key). (Every character in R is same then initial tryLock will be called R times and in recursion (R-1) times)
+// Space: K.R. (Map)
+class SolutionTopDown{
     private static final int MAX = Integer.MAX_VALUE;
     public int findRotateSteps(String ring, String key){
         Map<Pair<Integer,Integer>,Integer> bestSteps = new HashMap<>();
