@@ -22,7 +22,7 @@ class Solution {
         return Arrays.stream(dp).max().getAsLong();
     }
     private long calculateSum(int[] books, int l, int r) {
-        int cnt = Math.min(books[r],r-l+1); // Number of elements in sequence. (suppose )
+        int cnt = Math.min(books[r],r-l+1); // count is total number of count in the range.. suppose left is 2 right is 6 ... so tak elements will be 2,3,4,5,6 => 6-2+1=> 5 Elements.
         return (2l*books[r]+(cnt-1)*(-1))*cnt/2; // Sum of first n elements in AP (n/2)*(2a+(n-1)*d);
     }
 }
