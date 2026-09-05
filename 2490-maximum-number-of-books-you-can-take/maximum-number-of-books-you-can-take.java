@@ -8,7 +8,8 @@ class Solution {
         Deque<Integer> dq = new ArrayDeque<>();
         long[] dp = new long[n];
         for(int i=0;i<n;i++){
-            // Pop indices whose (books[idx]-idx) is >= current's, since they can't be the run's left boundary for i.. And if they are greater their sum will be handled in currSum without explicit worry
+            // Pop indices whose (books[idx]-idx) >= current's — they're still counted positionally in the segment sum,
+            // but their own books[idx] value is never the bottleneck, so they can't remain as a valid left boundary.
             while(dq.size()>0 && books[dq.peekLast()]-dq.peekLast()>=books[i]-i){
                 dq.pollLast();
             }
