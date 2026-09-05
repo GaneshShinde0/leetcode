@@ -28,9 +28,9 @@ class Solution{
             if(ring.charAt(i)==key.charAt(keyIndex)){
                 int currSteps = countSteps(ringIndex, i, ring.length())+1+tryLock(i,keyIndex+1, ring, key,  MAX, bestSteps);
                 minSteps = Math.min(minSteps,currSteps);
-                bestSteps.put(new Pair<>(ringIndex, keyIndex), minSteps);
             }
         }
+        bestSteps.put(new Pair<>(ringIndex, keyIndex), minSteps);
         return minSteps;
     }
 }
