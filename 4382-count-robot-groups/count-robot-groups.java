@@ -8,8 +8,7 @@ class Solution {
         int nextPos = position[n-1];
         
         for(int i=n-2;i>=0;i--){
-            int next = stk.peek();
-            if(speed[i]<=speed[next] && distance<nextPos-position[i]){
+            if(speed[i]<=speed[stk.peek()] && distance<nextPos-position[i]){
                 stk.push(i);
             }
             nextPos = position[i];
