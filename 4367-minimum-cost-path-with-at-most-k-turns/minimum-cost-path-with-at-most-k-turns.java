@@ -31,7 +31,6 @@ class Solution {
             if(curr.i==m-1 && curr.j==n-1){
                 return curr.cost;
             }
-            dist[curr.i][curr.j][curr.k][curr.prevDir] =curr.cost;
             for(int i=0;i<4;i++){
                 int newI = curr.i+dirs[i][0];
                 int newJ = curr.j+dirs[i][1];
