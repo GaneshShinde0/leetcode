@@ -1,4 +1,45 @@
 class Solution {
+    int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    public int minCost(int[][] grid, int k) {
+        int m = grid.length, n = grid[0].length;
+        int[][][][] dist = new int[m][n][k + 1][4];
+        for (int[][][] a : dist)
+            for (int[][] b : a)
+                for (int[] c : b) Arrays.fill(c, Integer.MAX_VALUE);
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        int start = grid[0][0];
+        for (int d = 0; d < 4; d++) {
+            dist[0][0][0][d] = start;
+            pq.add(new int[]{start, 0, 0, 0, d});
+        }
+
+        while (!pq.isEmpty()) {
+            int[] cur = pq.poll();
+            int cost = cur[0], i = cur[1], j = cur[2], turns = cur[3], dir = cur[4];
+
+            if (cost > dist[i][j][turns][dir]) continue; // skip stale entries
+            if (i == m - 1 && j == n - 1) return cost;
+
+            for (int d = 0; d < 4; d++) {
+                int ni = i + dirs[d][0], nj = j + dirs[d][1];
+                if (ni < 0 || nj < 0 || ni >= m || nj >= n) continue;
+
+                int nturns = (d == dir) ? turns : turns + 1;
+                if (nturns > k) continue;
+
+                int ncost = cost + grid[ni][nj];
+                if (ncost < dist[ni][nj][nturns][d]) {
+                    dist[ni][nj][nturns][d] = ncost;
+                    pq.add(new int[]{ncost, ni, nj, nturns, d});
+                }
+            }
+        }
+        return -1;
+    }
+}
+class SolutionUsingObject{
     class Position{
         public int i,j,cost,k,prevDir;
         public Position(int i, int j, int cost, int k, int prevDir){
