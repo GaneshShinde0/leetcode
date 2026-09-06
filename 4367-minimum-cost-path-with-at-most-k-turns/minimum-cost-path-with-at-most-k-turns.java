@@ -28,7 +28,6 @@ class Solution {
         pq.add(new Position(0,0,grid[0][0],0,3));
         while(!pq.isEmpty()){
             Position curr = pq.poll();
-            if (curr.cost > dist[curr.i][curr.j][curr.k][curr.prevDir]) continue;
             if(curr.i==m-1 && curr.j==n-1){
                 return curr.cost;
             }
