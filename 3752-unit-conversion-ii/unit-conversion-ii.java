@@ -34,6 +34,8 @@ class Solution {
         for(int i = 0;i<queries.length;i++){
             int[] query = queries[i];
             int u = query[0], v = query[1];
+            // Relative to Zero is 0-> u... 
+            // Now we have to find u->0 and 0 to v
             long inverseFactor = pow(relativeToZero[u],MOD-2);
             res[i] = (int) ((relativeToZero[v]*inverseFactor)%MOD);
         }
