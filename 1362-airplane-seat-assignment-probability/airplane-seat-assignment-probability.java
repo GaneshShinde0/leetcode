@@ -6,33 +6,16 @@ class Solution {
 }
 
 /*
-1st person sat randomly..
-Probability of him getting correct sit 1/n.
+**The chain-of-displacement explanation, crisp version:**
 
-2nd Person sat randomly.
-Probability of him getting corret sit.. His Initial probability 
-    => If person 1 selects his sit... (1/n)
-        => Personn 2 will select his sit for sure as he has ticket... 1.
-            => Final 1;
-    => If Person 1 selects wrong sit...  This is very high (n-1)/n
-        => Probability of second person getting his own sit. (n-1)/n
-            => Final (n-1)/n;
-    
-3rd Person.
+- Passenger 1 sits randomly in seat `k`.
+- If `k = 1` → no chaos → passenger n gets seat n. ✅
+- If `k = n` → passenger n's seat taken → passenger n loses. ❌
+- If `k` is any middle seat → passengers between just sit normally, and passenger `k` becomes the new "random picker," repeating the same situation.
 
-    => If first person sat correctly. (1/n)
-        => Personn 2 will select his sit for sure as he has ticket... 1.
-            => Personn 3 will select his sit for sure as he has ticket... 1.
-                => Final 1;
-    => If first person seats wrongly. (n-1)/n.
-        => Probability of second person getting his own sit. (n-1)/n
-            => He gets correct seat => (n-1)/n.
-                => Probability of Third Person Getting Correct Seat 1.
-            => He does not get correct seat => 1/n.
-                => He Sits at random place .. making 2 wrong positions... Which will lead to (n-3) Positions (Wrong).
-                    n-3/n
-        
-            => Probabilitty of third person getting his own sit. (n-2)/n
+So it's a chain: person 1 → displaces someone → displaces someone → ... until the chain randomly lands on **seat 1** or **seat n**. Those are the only two seats that end the chain; every other seat just continues it.
 
+Since seat 1 and seat n are treated identically by this random process (neither is special during the chain), the chain is equally likely to end on either one.
 
+**Result:** `P(seat 1 ends it) = P(seat n ends it) = 1/2` → so passenger n gets their own seat with probability **1/2**, for any `n ≥ 2`. For `n = 1`, probability is trivially `1`.
 */
