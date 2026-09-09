@@ -13,7 +13,7 @@ class Solution {
         for(int[] conv: conversions){
             int u = conv[0], v = conv[1], d = conv[2];
             graph.computeIfAbsent(u,x->new ArrayList<Pair>()).add(new Pair(v,d));
-            long inverseFactor = pow(d,MOD-2);
+            long inverseFactor = pow(d,MOD-2); // Fermat's Little Theorem.....
             graph.computeIfAbsent(v,x->new ArrayList<Pair>()).add(new Pair(u,inverseFactor));
         }
         // Conversion Factor related to 0
