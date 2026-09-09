@@ -33,7 +33,7 @@ class Solution:
         return res;
     }
 
-    public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
+    public List<List<String>> mostPopularCreatorUsingPQ(String[] creators, String[] ids, int[] views) {
         HashMap<String, PriorityQueue<Integer>> creatorToVid = new HashMap<>();
         HashMap<String, Long> creatorToViewCount = new HashMap<>();
         long maxViews = 0;
@@ -54,5 +54,29 @@ class Solution:
         }
         return res;
     }
-    
+    public List<List<String>> mostPopularCreator(String[] creators, String[] ids, int[] views) {
+        Map<String, Long> tot = new HashMap<>();
+        Map<String, int[]> best = new HashMap<>(); // best[c] = {viewsOfBestVid, indexOfBestVid}
+        long maxViews = 0;
+
+        for (int i = 0; i < creators.length; i++) {
+            String c = creators[i];
+            long newTotal = tot.getOrDefault(c, 0L) + views[i];
+            tot.put(c, newTotal);
+            maxViews = Math.max(maxViews, newTotal);
+
+            int[] b = best.get(c);
+            if (b == null || views[i] > b[0] || (views[i] == b[0] && ids[i].compareTo(ids[b[1]]) < 0)) {
+                best.put(c, new int[]{views[i], i});
+            }
+        }
+
+        List<List<String>> res = new ArrayList<>();
+        for (Map.Entry<String, Long> e : tot.entrySet()) {
+            if (e.getValue() == maxViews) {
+                res.add(List.of(e.getKey(), ids[best.get(e.getKey())[1]]));
+            }
+        }
+        return res;
+    }
 }
