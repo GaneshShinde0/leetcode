@@ -16,7 +16,7 @@ class Solution {
         for (int i = 0; i < str2.length(); i++) {
             uniqueCharsInStr2.add(str2.charAt(i));
         }
-
+        // When characters are 26 there is no buffer, everything should map.
         return uniqueCharsInStr2.size() < 26;
     }
 }
