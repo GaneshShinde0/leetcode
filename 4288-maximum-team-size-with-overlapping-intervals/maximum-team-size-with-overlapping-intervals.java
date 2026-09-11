@@ -1,35 +1,64 @@
+import java.util.*;
+
 class Solution {
     public int maximumTeamSize(int[] start, int[] end) {
+
         int n = start.length;
+
         int[] sortedStart = start.clone();
         int[] sortedEnd = end.clone();
+
         Arrays.sort(sortedStart);
         Arrays.sort(sortedEnd);
-        int max = 0;
-        for(int i=0;i<n;i++){
-            int a = upperBound(sortedStart, end[i]); // last start on/before end;
-            int b = lowerBound(sortedEnd, start[i]); // last end before start;
-            max = Math.max(max, a-b);
+
+        int maxTeamSize = 0;
+
+        for (int i = 0; i < n; i++) {
+            // Number of intervals whose start <= current end
+            int intervalsStarted = upperBound(sortedStart, end[i]);
+            // Number of intervals whose end < current start
+            int intervalsFinished = lowerBound(sortedEnd, start[i]);
+            // Intervals that overlap with [start[i], end[i]]
+            int teamSize = intervalsStarted - intervalsFinished;
+            maxTeamSize = Math.max(maxTeamSize, teamSize);
         }
-        return max;
+
+        return maxTeamSize;
     }
 
-    private int upperBound(int[] arr, int target){
-        int r = arr.length, l = 0;
-        while(l<r){
-            int m=(l+r)/2;
-            if(arr[m]<=target) l = m+1;
-            else r=m;
+    // Returns the first index where arr[index] > target.
+    // Therefore, it also equals the number of elements <= target.
+    private int upperBound(int[] arr, int target) {
+
+        int left = 0;
+        int right = arr.length;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
         }
-        return l;
+
+        return left;
     }
-    private int lowerBound(int[] arr, int target){
-        int r = arr.length, l = 0;
-        while(l<r){
-            int m=(l+r)/2;
-            if(arr[m]<target) l = m+1;
-            else r=m;
+
+    // Returns the first index where arr[index] >= target.
+    // Therefore, it also equals the number of elements < target.
+    private int lowerBound(int[] arr, int target) {
+
+        int left = 0;
+        int right = arr.length;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
         }
-        return l;
+
+        return left;
     }
 }
