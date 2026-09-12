@@ -1,7 +1,7 @@
 class Twitter {
 
     private Map<Integer, Set<Integer>> userAndFollowing;
-    private Map<Integer, Set<int[]>> tweets;
+    private Map<Integer, PriorityQueue<int[]>> tweets;
     int timestamp;
     public Twitter() {
         userAndFollowing = new HashMap<>();
@@ -10,7 +10,8 @@ class Twitter {
     }
     
     public void postTweet(int userId, int tweetId) {
-        tweets.computeIfAbsent(userId, x->new HashSet<>()).add(new int[]{timestamp++,tweetId});
+        tweets.computeIfAbsent(userId, x->new PriorityQueue<>((a,b)->Integer.compare(a[0],b[0]))).add(new int[]{timestamp++,tweetId});
+        if(tweets.get(userId).size()>10) tweets.get(userId).poll();
     }
     
     public List<Integer> getNewsFeed(int userId) {
@@ -18,7 +19,7 @@ class Twitter {
         Set<Integer> followees = userAndFollowing.getOrDefault(userId, new HashSet<>());
         followees.add(userId);
         for (int followee : followees) {
-            Set<int[]> tweetList = tweets.getOrDefault(followee, new HashSet<>());
+            PriorityQueue<int[]> tweetList = tweets.getOrDefault(followee, new PriorityQueue<>());
             pq.addAll(tweetList);
         }
         List<Integer> res = new ArrayList<>();
