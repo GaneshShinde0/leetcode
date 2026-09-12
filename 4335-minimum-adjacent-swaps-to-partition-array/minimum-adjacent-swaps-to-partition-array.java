@@ -45,7 +45,7 @@ class Solution {
                 res+= i-negOnes; // i-negOnes gives ... how many zeros or 1s were on left.
                 negOnes++;
             }else if(arr[i]==0){
-                res+=ones;
+                res+=ones; // Ones need to go to right.
             }else{
                 ones++;
             }
