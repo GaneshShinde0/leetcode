@@ -42,7 +42,7 @@ class Solution {
         int negOnes = 0, ones = 0;
         for(int i=0;i<arr.length;i++){
             if(arr[i]==-1){
-                res+= i-negOnes;
+                res+= i-negOnes; // i-negOnes gives ... how many zeros or 1s were on left.
                 negOnes++;
             }else if(arr[i]==0){
                 res+=ones;
