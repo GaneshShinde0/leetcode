@@ -23,6 +23,7 @@ class Solution {
         for(int i=0;i<n;i++){
             int l = arr[i][0], weight = arr[i][2],idx = arr[i][3];
             //Use binary search to find intervals whose right endpoints are smaller than 1.
+            // Get index of element who are ending on or before current start.
             int k = binarySearch(arr, i, l);
             for(int j=1;j<5;j++){
                 long s1 = dp[i][j];
