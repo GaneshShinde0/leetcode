@@ -12,7 +12,7 @@ class Solution {
         for(int i=0;i<arr.length;i++){
             arr[i] = nums[i]>b?1:nums[i]<a?-1:0;
         }
-        System.out.println(Arrays.toString(arr));
+        // System.out.println(Arrays.toString(arr));
         // Now bascally we have to get this array sorted.. so that all 0's come in middle ones come to right, and -1s come to left.
         long res = 0;
         int zero = 0, ones = 0;
