@@ -2,7 +2,6 @@ class Solution {
     public int maxTastiness(int[] price, int[] tastiness, int maxAmount, int maxCoupons) {
         int n = price.length;
         int[][][] dp = new int[n+1][maxAmount+1][maxCoupons+1];
-        int res = 0;
         for(int i=0;i<n;i++){
             for(int j=0;j<=maxAmount;j++){
                 for(int k=0;k<=maxCoupons;k++){
