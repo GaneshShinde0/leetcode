@@ -13,7 +13,6 @@ class Solution {
     private int shiftCheck(int x, int y, int[][] img1, int[][] img2){
         int m = img1.length, n = img1[0].length;
         int leftShiftCount = 0, rightShiftCount=0;
-        int rowShift = 0;
         for(int i=x;i<m;i++){
             int colShift = 0;
             for(int j=y;j<n;j++){
@@ -21,7 +20,6 @@ class Solution {
                 if(img1[i][colShift]==1 && img1[i][colShift]==img2[i-x][j]) rightShiftCount++;
                 colShift++;
             }
-            rowShift++;
         }
         return Math.max(leftShiftCount, rightShiftCount);
     }
