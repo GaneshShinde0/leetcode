@@ -1,37 +1,28 @@
 class Solution {
-    /**
-     *  Shift the matrix M in up-left and up-right directions 
-     *    and count the ones in the overlapping zone.
-     */
-    protected int shiftAndCount(int xShift, int yShift, int[][] M, int[][] R) {
-        int leftShiftCount = 0, rightShiftCount = 0;
-        int rRow = 0;
-        // count the cells of ones in the overlapping zone.
-        for (int mRow = yShift; mRow < M.length; ++mRow) {
-            int rCol = 0;
-            for (int mCol = xShift; mCol < M.length; ++mCol) {
-                if (M[mRow][mCol] == 1 && M[mRow][mCol] == R[rRow][rCol])
-                    leftShiftCount += 1;
-                if (M[mRow][rCol] == 1 && M[mRow][rCol] == R[rRow][mCol])
-                    rightShiftCount += 1;
-                rCol += 1;
+    public int largestOverlap(int[][] img1, int[][] img2) {
+        int m = img1.length, n = img1[0].length;
+        int res = 0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                res = Math.max(res, shiftCheck(i,j,img1,img2));
+                res = Math.max(res, shiftCheck(i,j,img2,img1));
             }
-            rRow += 1;
+        }
+        return res;
+    }
+    private int shiftCheck(int x, int y, int[][] img1, int[][] img2){
+        int m = img1.length, n = img1[0].length;
+        int leftShiftCount = 0, rightShiftCount=0;
+        int rowShift = 0;
+        for(int i=x;i<m;i++){
+            int colShift = 0;
+            for(int j=y;j<n;j++){
+                if(img1[i][j]==1 && img1[i][j]==img2[i-x][j-y]) leftShiftCount++;
+                if(img1[i][colShift]==1 && img1[i][colShift]==img2[i-x][j]) rightShiftCount++;
+                colShift++;
+            }
+            rowShift++;
         }
         return Math.max(leftShiftCount, rightShiftCount);
-    }
-
-    public int largestOverlap(int[][] A, int[][] B) {
-        int maxOverlaps = 0;
-
-        for (int yShift = 0; yShift < A.length; ++yShift)
-            for (int xShift = 0; xShift < A.length; ++xShift) {
-                // move the matrix A to the up-right and up-left directions.
-                maxOverlaps = Math.max(maxOverlaps, shiftAndCount(xShift, yShift, A, B));
-                // move the matrix B to the up-right and up-left directions, which is equivalent to moving A to the down-right and down-left directions 
-                maxOverlaps = Math.max(maxOverlaps, shiftAndCount(xShift, yShift, B, A));
-            }
-
-        return maxOverlaps;
     }
 }
