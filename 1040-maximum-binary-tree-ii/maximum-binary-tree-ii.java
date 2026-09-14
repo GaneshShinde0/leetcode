@@ -32,12 +32,6 @@ class Solution {
             TreeNode node =new TreeNode(val);
             root.right = node;
             return root;
-        }else{
-            TreeNode temp = root.left;
-            TreeNode node =new TreeNode(val);
-            root.left = node;
-            node.left = temp;
-            return root;
         }
         return root;
     }
