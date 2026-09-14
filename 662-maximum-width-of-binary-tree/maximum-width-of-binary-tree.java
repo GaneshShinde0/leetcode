@@ -23,7 +23,7 @@ class Solution {
 
         queue.addLast(new Pair<>(root, 0));
         while (queue.size() > 0) {
-            Pair<TreeNode, Integer> head = queue.getFirst();
+            Pair<TreeNode, Integer> head = queue.peekFirst();
 
             // Iterate through the current level
             Integer currLevelSize = queue.size();
