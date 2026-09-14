@@ -17,7 +17,7 @@ class Solution {
         if(memo[curr][mode]!=null) return memo[curr][mode];
         long skip = 0, take = 0;
         for(int[] m: map[curr]){
-            skip += dfs(0, m[0],map, memo);
+            skip += dfs(0, m[0], map, memo);
         }
         if(mode == 0){
             for(int[] m:map[curr]){
