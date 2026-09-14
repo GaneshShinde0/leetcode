@@ -1,1 +1,1 @@
-<h2>choose-edges-to-maximize-score-in-a-tree Notes</h2><hr>[ Time taken: 3hrs 2m 32s ]
+<h2>choose-edges-to-maximize-score-in-a-tree Notes</h2><hr>[ Time taken: 2m 3s ]
