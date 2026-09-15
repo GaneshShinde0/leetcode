@@ -13,7 +13,7 @@ class Solution {
         for(int i=0;i<n;i++){
             if(i>0) dp[i]=Math.max(dp[i-1],dp[i]);
             for(int j=i+k-1;j<n;j++){
-                if(palindromeDP[i][j] && j-i+1>=k){
+                if(palindromeDP[i][j]){
                     dp[j] = Math.max(dp[j], dp[Math.max(i-1,0)]+1);
                 }
             }
