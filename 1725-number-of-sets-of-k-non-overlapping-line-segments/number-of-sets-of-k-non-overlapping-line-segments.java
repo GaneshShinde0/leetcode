@@ -13,7 +13,9 @@ class Solution {
         for(int j=1;j<=k;j++){
             int sum = 0;
             for(int i=1;i<n;i++){
+                // Add ways for j-1 segments.
                 sum = (sum+dp[i-1][j-1])%MOD;
+                // Don't use i or end a segment at i.
                 dp[i][j] = (dp[i-1][j] + sum)%MOD;
             }
         }
