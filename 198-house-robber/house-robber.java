@@ -20,6 +20,6 @@ class Solution {
             r1 = temp;
             i++;
         }
-        return Math.max(r1,r2);
+        return r2;
     }
 }
