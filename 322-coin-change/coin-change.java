@@ -6,7 +6,7 @@ class Solution {
         dp[0] = 0; // Number of coins to form 0 ammount;
         for(int i=1;i<MAX;i++){
             for(int coin:coins){
-                if(i-coin>=0 && dp[i-coin]!=MAX){
+                if(i-coin>=0 ){
                     dp[i] = Math.min(dp[i], dp[i-coin]+1);
                 }
             }
