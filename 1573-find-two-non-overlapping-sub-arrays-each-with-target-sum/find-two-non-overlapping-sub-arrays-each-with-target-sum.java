@@ -13,7 +13,7 @@ class Solution {
             }
             hm.put(sum, i);
         }
-        System.out.println(Arrays.toString(minLengthLeft));
+        // System.out.println(Arrays.toString(minLengthLeft));
         hm.clear();
         sum = 0;
         hm.put(0,n);
