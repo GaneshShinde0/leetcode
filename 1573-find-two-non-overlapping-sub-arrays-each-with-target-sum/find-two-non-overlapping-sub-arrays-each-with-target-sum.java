@@ -1,5 +1,22 @@
 class Solution {
+    
     public int minSumOfLengths(int[] arr, int target) {
+        int n = arr.length, sum = 0, res = Integer.MAX_VALUE, minLen=n;
+        int[] dp = new int[n+1];
+        Arrays.fill(dp,n);
+        for(int l=0, r = 0;r<n;r++){
+            sum+=arr[r];
+            while(sum>target) sum-=arr[l++];
+            dp[r+1]=dp[r];
+            if(sum==target){
+                res = Math.min(res, r-l+1+dp[l]);
+                dp[r + 1] = Math.min(dp[r], r - l + 1);
+            }
+        }
+        return res>n?-1:res;
+    }
+
+    public int minSumOfLengthsDP(int[] arr, int target) {
         int n = arr.length, sum = 0, res = Integer.MAX_VALUE, minLen=n;
         HashMap<Integer, Integer> hm = new HashMap<>();
         hm.put(0,-1);
