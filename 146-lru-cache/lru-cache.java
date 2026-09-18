@@ -22,7 +22,6 @@ class LRUCache {
         tail = new ListNode(-1,-1);
         head.next = tail;
         tail.prev = head;
-
     }
     
     public int get(int key) {
