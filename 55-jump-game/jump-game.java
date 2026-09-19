@@ -27,7 +27,7 @@ class Solution {
         int reachable = nums[0];
         for(int i=0;i<nums.length;i++){
             if(i>reachable) return false;
-            reachable = Math.max(nums[i]+i,reachable);
+            reachable = Math.max(reachable, i+nums[i]);
         }
         return true;
     }
