@@ -23,12 +23,11 @@ class Solution {
         for (int mask = 0; mask < (1 << n); mask++) {
             if (dp[mask] == Integer.MAX_VALUE) continue;
             int i = Integer.bitCount(mask); // next source index to place
-            if (i >= n) continue;
+            // if (i >= n) continue;
             
             for (int j = 0; j < n; j++) {
                 if ((mask & (1 << j)) != 0) continue; // target j already used
-                int dist = Math.abs(sources.get(i)[0] - targets.get(j)[0])
-                         + Math.abs(sources.get(i)[1] - targets.get(j)[1]);
+                int dist = Math.abs(sources.get(i)[0] - targets.get(j)[0]) + Math.abs(sources.get(i)[1] - targets.get(j)[1]);
                 int newMask = mask | (1 << j);
                 dp[newMask] = Math.min(dp[newMask], dp[mask] + dist);
             }
