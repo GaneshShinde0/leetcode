@@ -32,17 +32,31 @@ class Solution {
             productExceptSelf(new int[]{0, 0});
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static int[] productExceptSelf(int[] nums) {
-        int answer[] = new int[nums.length];
-        answer[0] = 1;
-        for(int i=1; i<nums.length; i++){
-            answer[i] = answer[i-1] * nums[i-1];
+        int n = nums.length;
+        int[] res = new int[n];
+        int prefixProd = 1,suffixProd = 1;
+        for(int i=0;i<nums.length;i++){
+            res[i]=prefixProd;
+            prefixProd*=nums[i];
         }
-        int suffixProduct = 1;
-        for(int i=nums.length-1; i>=0; i--){
-            answer[i] *= suffixProduct;
-            suffixProduct *= nums[i];
+        for(int j=n-1;j>=0;j--){
+            res[j]*=suffixProd;
+            suffixProd*=nums[j];
         }
-        return answer;
+        return res;
     }
 }
