@@ -1,5 +1,65 @@
 class Solution {
     public int maxProfit(int k, int[] prices) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         if(k==0) return 0;
 
         int[] profit = new int[k+1];
