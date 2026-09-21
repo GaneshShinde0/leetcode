@@ -46,7 +46,7 @@ class Solution {
             long[] ndp = new long[k]; // current layer state => Rolling Array
             ndp[nums[i]%k]++;
             for(int r=0;r<k;r++){
-                ndp[(int)(((long) r*nums[i])%k)] += dp[r];
+                ndp[(int)(((long) r*nums[i])%k)] += dp[r]; //After appending the element nums[i], the product of the new subarray modulo k becomes (r*nums[i]) mod k.
             }
             dp = ndp;
             for(int r=0;r<k;r++){
