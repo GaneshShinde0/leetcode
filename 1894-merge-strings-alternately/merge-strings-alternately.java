@@ -3,26 +3,17 @@ class Solution {
     // Time Complexity: O(n), where n = max(word1.length(), word2.length())
     // Space Complexity: O(n) for StringBuilder and char arrays.
     public String mergeAlternately(String word1, String word2) {
-        // Convert words to char arrays
-        char[] char1 = word1.toCharArray();
-        char[] char2 = word2.toCharArray();
+        int m = word1.length(), n = word2.length(), min = Math.min(m,n);
         StringBuilder sb = new StringBuilder();
-        int i = 0;
-        
-        // Merge characters from both words alternately
-        while (i < word1.length() && i < word2.length()) {
-            sb.append(char1[i]);
-            sb.append(char2[i]);
-            i++;
+        for(int i=0;i<min;i++){
+            sb.append(word1.charAt(i));
+            sb.append(word2.charAt(i));
         }
-        
-        // Append the remaining part of the longer word
-        if (word1.length() > word2.length()) {
-            sb.append(word1.substring(i));
-        } else {
-            sb.append(word2.substring(i));
+        if(word1.length()>word2.length()){
+            sb.append(word1.substring(min));
+        }else{
+            sb.append(word2.substring(min));
         }
-        
         return sb.toString();
     }
 
