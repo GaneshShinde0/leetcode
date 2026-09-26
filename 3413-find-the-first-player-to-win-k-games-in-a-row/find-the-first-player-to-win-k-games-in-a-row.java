@@ -3,7 +3,18 @@ skills = [11,9,12,2,20,1,8], k = 3
 k = 0
 */
 class Solution {
-    public int findWinningPlayer(int[] skills, int k) {
+    public int findWinningPlayer(int[] A, int k) {
+        int i = 0, cur = 0, n = A.length;
+        for (int j = 1; j < n; ++j) {
+            if (A[i] < A[j]) {
+                cur = 0;
+                i = j;
+            }
+            if (++cur == k) break;
+        }
+        return i;
+    }
+    public int findWinningPlayerInitial(int[] skills, int k) {
         HashMap<Integer,Integer> hm = new HashMap<>();
         HashMap<Integer,Integer> streak = new HashMap<>();
         Deque<Integer> queue = new ArrayDeque<>();
