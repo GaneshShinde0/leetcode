@@ -5,12 +5,13 @@ class Solution {
         for(int i = 0;i<n;i++){
             char c = seq.charAt(i);
             if(c=='('){
-                res[i] = curr%2;
+                res[i] = curr;
                 curr++;
             }else{
                 curr--;
-                res[i] = curr%2;
+                res[i] = curr;
             }
+            res[i] = res[i]%2;
         }
         return res;
     }
