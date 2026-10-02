@@ -1,45 +1,31 @@
 class Solution {
     public long countEvenlyGoodIntegers(long l, long r) {
-        return f(r)-f(l-1);
+        return countTillN(r)-countTillN(l-1);
     }
-    private long f(long n){
-        if(n<=0) return 0;
-        int pos = 0, digitLen = String.valueOf(n).length(), parity = 0;
-        int[] arr = new int[digitLen];
-        for(int i=0;i<digitLen;i++){
-            arr[i] = (int) ((n/(pow(10,digitLen-i-1)))%10);
+    private long countTillN(long n){
+        String s = String.valueOf(n);
+        long[][][] dp = new long[s.length()][2][2];
+        for(long[][] di:dp){
+            for(long[] d:di) Arrays.fill(d,-1);
         }
-        // System.out.println(Arrays.toString(arr));
-        long[][][] memo = new long[digitLen+1][2][2];
-        for(long[][] me:memo){
-            for(long[] m:me) Arrays.fill(m,-1l);
-        }
-        return helper(0, true, false, 0, arr, memo);
+        return f(dp,s, 0, false, true);
     }
-    private long helper(int pos, boolean tight, boolean started, int parity, int[] digits, long[][][] memo){
-        long count = 0;
-        if(pos==digits.length){
-           if(started && parity==0) return parity%2==0?1:0;
-        }else if (!tight && memo[pos][started?1:0][parity] != -1) {
-            return memo[pos][started?1:0][parity];
+    private long f(long[][][] dp, String s, int idx, boolean smaller, boolean parity){
+        if(idx == s.length()){
+            if(parity) return 1;
+            return 0;
+        }else if(dp[idx][smaller?0:1][parity?0:1]!=-1){
+            return dp[idx][smaller?0:1][parity?0:1];
         }else{
-            int limit = tight?digits[pos]:9;
+            int limit = smaller?9:(s.charAt(idx)-'0');
+            long count = 0;
             for(int d=0;d<=limit;d++){
-                boolean newTight = tight && (d==limit);
-                boolean newStarted = started || (d!=0);
-                boolean toggle = newStarted && (d%2==0);
-                int newParity = (parity+(toggle?1:0))%2;
-                count+= helper(pos+1, newTight, newStarted, newParity, digits, memo);
+                boolean newSmaller = smaller||(s.charAt(idx)-'0')>d;
+                boolean newParity = parity==(d%2==1);
+                count+=f(dp,s,idx+1,newSmaller, newParity);
             }
-            if(!tight) memo[pos][started?1:0][parity] = count;
+            dp[idx][smaller?0:1][parity?0:1] = count;
         }
-        return count;
-    }
-    private long pow(int base, int exponent) {
-        long result = 1;
-        for (int i = 0; i < exponent; i++) {
-            result *= base;
-        }
-        return result;
+        return dp[idx][smaller?0:1][parity?0:1];
     }
 }
