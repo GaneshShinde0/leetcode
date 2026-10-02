@@ -9,16 +9,17 @@ class Solution {
             result.add(sb.toString());
             return;
         }else{
-            if(open<n){
-                sb.append("(");
-                recurse(open+1,close,n,result,sb);
-                sb.deleteCharAt(sb.length()-1);
-            }
             if(open>close){
                 sb.append(")");
                 recurse(open,close+1,n,result,sb);
                 sb.deleteCharAt(sb.length()-1);
             }
+            if(open<n){
+                sb.append("(");
+                recurse(open+1,close,n,result,sb);
+                sb.deleteCharAt(sb.length()-1);
+            }
+            
             
         }
     }
