@@ -1,29 +1,27 @@
 class Solution {
-    int max;
+    int res;
     public int maxCompatibilitySum(int[][] students, int[][] mentors) {
-        int m = mentors.length, n = mentors[0].length;
+        int m = mentors.length;
         boolean[] visited = new boolean[m];
-        recurse(visited, students, mentors, 0,0);
-        return max;
+        recurse(students, mentors, visited, 0, 0);
+        return res;
     }
-
-    private void recurse(boolean[] visited, int[][] students, int[][] mentors, int pos, int score){
-        if(pos==students.length){
-            max = Math.max(max, score);
+    private void recurse(int[][] students, int[][] mentors, boolean[] visited, int pos, int score){
+        if(pos == students.length){
+            res = Math.max(res, score);
             return;
         }
         for(int i=0;i<students.length;i++){
             if(!visited[i]){
                 visited[i] = true;
-                recurse(visited, students, mentors, pos+1, score+score(students[pos], mentors[i]));
+                recurse(students, mentors, visited, pos+1, score+score(students[pos],mentors[i]));
                 visited[i] = false;
             }
         }
     }
-
     private int score(int[] a, int[] b){
-        int res = 0;
-        for(int i=0;i<b.length;i++) if(a[i]==b[i]) res++;
-        return res;
+        int score=0;
+        for(int i=0;i<a.length;i++) if(a[i]==b[i]) score++;
+        return score;
     }
 }
