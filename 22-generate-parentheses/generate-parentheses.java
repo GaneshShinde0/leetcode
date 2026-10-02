@@ -19,8 +19,6 @@ class Solution {
                 recurse(open+1,close,n,result,sb);
                 sb.deleteCharAt(sb.length()-1);
             }
-            
-            
         }
     }
 }
