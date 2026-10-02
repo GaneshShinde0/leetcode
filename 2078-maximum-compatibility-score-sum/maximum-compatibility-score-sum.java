@@ -14,7 +14,7 @@ class Solution {
         for(int i=0;i<students.length;i++){
             if(!visited[i]){
                 visited[i] = true;
-                recurse(students, mentors, visited, pos+1, score+score(students[pos],mentors[i]));
+                recurse(students, mentors, visited, pos+1, score+score(students[i],mentors[pos]));
                 visited[i] = false;
             }
         }
