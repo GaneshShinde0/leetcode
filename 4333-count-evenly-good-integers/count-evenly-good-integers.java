@@ -9,7 +9,7 @@ class Solution {
         for(int i=0;i<digitLen;i++){
             arr[i] = (int) ((n/(pow(10,digitLen-i-1)))%10);
         }
-        System.out.println(Arrays.toString(arr));
+        // System.out.println(Arrays.toString(arr));
         long[][][] memo = new long[digitLen+1][2][2];
         for(long[][] me:memo){
             for(long[] m:me) Arrays.fill(m,-1l);
