@@ -6,7 +6,11 @@ class Solution{
             sum+=m;
             max = Math.max(m,max);
         }
-        return Math.min(sum, 2*(sum-max)+1);
+        if(max>(sum/2)){
+            return 2*(sum-max)+1;
+        }else{
+            return sum;
+        }
     }
 }
 class SolutionOSumOfmilestonesXlogn{
