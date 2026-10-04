@@ -1,20 +1,20 @@
 class Solution {
     public boolean checkValidString(String s) {
-        int low = 0, high = 0, star = 0;
+        int maxOpen = 0, minOpen = 0;
         for(char c:s.toCharArray()){
             if(c=='('){
-                low++;
-                high++;
+                maxOpen++;
+                minOpen++;
             }else if(c==')'){
-                low--;
-                high--;
-            }else{
-                low--;
-                high++;
+                maxOpen--;
+                minOpen--;
+            }else if(c=='*'){
+                maxOpen++;
+                minOpen--;
             }
-            if(high<0) return false;
-            if(low<0) low = 0;
+            if(maxOpen<0) return false;
+            if(minOpen<0) minOpen = 0;
         }
-        return low == 0;
+        return minOpen==0;
     }
 }
