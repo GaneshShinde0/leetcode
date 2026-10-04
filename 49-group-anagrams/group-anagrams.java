@@ -21,13 +21,19 @@ class Solution {
     }
     
     public List<List<String>> groupAnagrams(String[] strs) {
-        HashMap<String, List<String>> map = new HashMap<>();
-        for(String s : strs){
-            char[] ch = s.toCharArray();
-            Arrays.sort(ch);
-            String key = new String(ch);
-            map.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+        HashMap<String, List<String>> hm = new HashMap<>();
+        for(String s:strs){
+            int[] freq = freq(s);
+            String key = Arrays.toString(freq);
+            hm.computeIfAbsent(key, x->new ArrayList<String>()).add(s);
         }
-        return new ArrayList<>(map.values());
+        return new ArrayList<>(hm.values());
+    }
+    int[] freq(String s){
+        int[] freq = new int[26];
+        for(char c:s.toCharArray()){
+            freq[c-'a']++;
+        }
+        return freq;
     }
 }
