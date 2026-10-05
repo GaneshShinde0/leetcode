@@ -16,16 +16,15 @@ For Example, when counting (()(())), our stack will look like this.
 
 class Solution {
     public int scoreOfParentheses(String s) {
-        int score = 0, depth = 0;
         Stack<Integer> stk = new Stack<>();
         stk.push(0);
         for(char c:s.toCharArray()){
             if(c=='('){
                 stk.push(0);
             }else{
-                int v = stk.pop();
-                int w = stk.pop();
-                stk.push(w+Math.max(2*v,1));
+                int inner = stk.pop();
+                int outer = stk.pop();
+                stk.push(Math.max(2*inner,1)+outer);
             }
         }
         return stk.peek();
