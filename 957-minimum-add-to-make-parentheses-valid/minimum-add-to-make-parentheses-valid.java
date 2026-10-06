@@ -4,16 +4,14 @@ class Solution {
         for(char c:s.toCharArray()){
             if(c=='('){
                 open++;
-                res += close;
-                close = 0;
             }else if (c==')'){
                 open--;
                 if(open<0){
                     res++;
-                    open=0;
+                    open = 0;
                 }
             }
         }
-        return res+Math.abs(open);
+        return res+open;
     }
 }
