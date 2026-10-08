@@ -3,6 +3,9 @@ Input: (()())(())
 depth = -1;
 sb = ""
 
+depth = 0;
+sb = ""
+
 depth = 1;
 sb = "("
 
@@ -29,8 +32,6 @@ sb = ()()()
 
 sb = ()()()
 depth = -1;
-
-
 
 */
 class Solution {
