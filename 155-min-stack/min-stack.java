@@ -29,10 +29,11 @@ class MinStack{
 
     public void push(int val){
         s.push(val);
-        if(st.isEmpty()||val<=st.peek())st.push(val);
+        if(st.isEmpty()||st.peek()>=val) st.push(val);
     }
     public void pop(){
-        if(s.peek().equals(st.peek()))st.pop();
+        if(s.isEmpty()) return;
+        if(s.peek().equals(st.peek())) st.pop();
         s.pop();
     }
     public int top(){
