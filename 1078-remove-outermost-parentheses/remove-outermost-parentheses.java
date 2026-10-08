@@ -1,25 +1,34 @@
 /*
 Input: (()())(())
-depth = 0;
+depth = -1;
 sb = ""
 
 depth = 1;
-sb = ""
-
-sb = (
-depth = 2
+sb = "("
 
 sb = ()
+depth = 0
+
 depth = 1
-
-
 sb = ()(
-depth = 2
 
 sb = ()()
-depth = 1
+depth = 0
 
-sb
+sb = ()()
+depth = -1
+
+sb = ()()
+depth = 0
+
+depth = 1
+sb = ()()(
+
+depth = 0;
+sb = ()()()
+
+sb = ()()()
+depth = -1;
 
 
 
