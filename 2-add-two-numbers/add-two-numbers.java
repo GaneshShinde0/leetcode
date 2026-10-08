@@ -9,55 +9,20 @@
  * }
  */
 class Solution {
-
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2){
-        ListNode dummyHead = new ListNode(0);
-        ListNode curr = dummyHead;
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(-1);
+        ListNode dummy = res;
         int carry = 0;
-        while(l1!=null||l2!=null||carry!=0){
-            int x = (l1!=null)?l1.val:0;
-            int y = (l2!=null)?l2.val:0;
-            int sum = carry+x+y;
+        while(l1!=null||l2!=null){
+            int val1 = l1==null?0:l1.val, val2 = l2==null?0:l2.val;
+            int sum = (val1+val2+carry);
             carry = sum/10;
-            curr.next = new ListNode(sum%10);
-            curr = curr.next;
-            if(l1!=null) l1 = l1.next;
-            if(l2!=null) l2 = l2.next;
+            dummy.next = new ListNode(sum%10);
+            if(l1!=null)l1 = l1.next;
+            if(l2!=null)l2 = l2.next;
+            dummy = dummy.next;
         }
-        return dummyHead.next;
-    }
-    public ListNode addTwoNumbersInitial(ListNode l1, ListNode l2) {
-        ListNode temp = new ListNode();
-        ListNode node = temp;
-        int carry = 0;
-        while(l1!=null && l2!=null){
-            int curr = l1.val+l2.val+carry;
-            if(curr>9){
-                carry= curr/10;
-                curr = curr%10;
-            }else{
-                carry=0;
-            }
-            node.next = new ListNode(curr);
-            node = node.next;
-            l1=l1.next;
-            l2=l2.next;
-        }
-        if(l1!=null) node.next =l1;
-        else node.next = l2;
-        if(node!=null)node=node.next;
-        ListNode prev = l1;
-        while(node!=null){
-            prev=node;
-          int curr= node.val+carry;
-          if(curr>9){
-                carry= curr/10;
-                curr = curr%10;
-            }
-            node.val=curr;
-            node=node.next;
-        }
-        if(carry!=0) prev.next=new ListNode(carry);
-        return temp.next;
+        if(carry!=0) dummy.next = new ListNode(carry);
+        return res.next;
     }
 }
