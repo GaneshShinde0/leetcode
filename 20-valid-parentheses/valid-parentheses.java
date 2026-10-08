@@ -3,15 +3,14 @@ class Solution {
         Stack<Character> stk = new Stack<>();
         for(char c:s.toCharArray()){
             if(!stk.isEmpty() && (
-                (stk.peek()=='(' && c==')')||
-                (stk.peek()=='{' && c=='}')||
-                (stk.peek()=='[' && c==']')
-                )
-            ){
+                (c==')' && stk.peek()=='(') ||
+                (c=='}' && stk.peek()=='{') ||
+                (c==']' && stk.peek()=='[')
+            )){
                 stk.pop();
-            }else if(c=='['||c=='{'||c=='('){
+            }else{
                 stk.push(c);
-            }else return false;
+            }
         }
         return stk.isEmpty();
     }
