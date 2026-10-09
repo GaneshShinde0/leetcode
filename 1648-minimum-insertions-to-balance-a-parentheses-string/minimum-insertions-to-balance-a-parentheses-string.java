@@ -3,6 +3,47 @@ class Solution {
         int res = 0, right = 0; // Result and Rights needed
         for(char c:s.toCharArray()){
             if(c=='('){
+                right+=2;
+                if(right%2==1){
+                    right--;
+                    res++;
+                }
+            }else{
+                right--;
+                if(right<0){
+                    right+=2;
+                    res++;
+                }
+            }
+        }
+        return res+right;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public int minInsertions1(String s) {
+        int res = 0, right = 0; // Result and Rights needed
+        for(char c:s.toCharArray()){
+            if(c=='('){
                 right+=2; // Every new '(' requires exactly two ')''
                 if(right%2==1){ //If there's an unmatched single ')', insert one ')' to complete the pair
                     right--; // Deduct one from needed ')' since we just inserted it
