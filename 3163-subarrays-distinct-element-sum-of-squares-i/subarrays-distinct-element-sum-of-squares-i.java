@@ -9,7 +9,7 @@ class Solution {
                 if(freq[nums.get(j)]==1){
                     distinct++;
                 }
-                System.out.println(distinct);
+                // System.out.println(distinct);
                 res  += distinct*distinct;
             }
         }
