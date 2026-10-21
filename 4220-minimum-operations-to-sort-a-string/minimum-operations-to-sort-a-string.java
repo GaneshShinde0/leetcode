@@ -16,15 +16,15 @@ class Solution {
         if(alreadySorted) return 0;
         if(firstChar == smallest || lastChar==biggest) return 1;
         if(firstChar == biggest && lastChar == smallest){
-            boolean containsMiddleBiggest = true;
-            boolean containsMiddleSmallest = true;
+            boolean containsMiddleBiggest = false;
+            boolean containsMiddleSmallest = false;
             for(int i=1;i<n;i++){
-                if(s.charAt(i)==biggest) containsMiddleBiggest = false;
+                if(s.charAt(i)==biggest) containsMiddleBiggest = true;
             }
             for(int i=0;i<n-1;i++){
-                if(s.charAt(i)==smallest) containsMiddleSmallest = false;
+                if(s.charAt(i)==smallest) containsMiddleSmallest = true;
             }
-            if(containsMiddleBiggest && containsMiddleSmallest) return 3;
+            if(!(containsMiddleBiggest || containsMiddleSmallest)) return 3;
         }
         return 2;
     }
