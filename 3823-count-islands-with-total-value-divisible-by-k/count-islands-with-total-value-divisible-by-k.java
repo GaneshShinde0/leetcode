@@ -10,7 +10,7 @@ class Solution {
                 if(grid[i][j]!=0){
                     long sum=dfs(grid,i,j);
                     if(sum%k==0) res++;
-                    System.out.println(sum);
+                    // System.out.println(sum);
                 }
             }
         }
