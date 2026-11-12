@@ -13,7 +13,7 @@ class Solution {
                 inc = 1;
                 dec = 1;
             }
-            System.out.println("INC: "+inc+", DSC: "+dec);
+            // System.out.println("INC: "+inc+", DSC: "+dec);
             res = Math.max(res, inc);
             res = Math.max(res, dec);
         }
